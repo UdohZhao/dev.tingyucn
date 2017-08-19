@@ -1,0 +1,25 @@
+p{
+    margin: 0;
+    font-size: 14px;
+  }
+  .weui-cells{
+    margin: 0;
+  }
+  .interestList{
+    height: 44px;
+  }
+  .interestList svg{
+    display: none;
+    color: #fd908f;
+  }
+  .weui-btn_primary{
+    margin-top: 20px;
+    background-color: #fd908f;
+  }
+  .pageName{
+    border-bottom: none;
+  }
+  .pageName p span{
+    font-size: 12px;
+    color: #aaaaaa;
+  }

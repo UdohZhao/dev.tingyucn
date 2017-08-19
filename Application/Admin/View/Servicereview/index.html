@@ -1,0 +1,123 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<link rel="stylesheet" type="text/css" href="/Application/Admin/View/Servicereview/css/index.css">
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">签约宝宝审核列表</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+            <div class="panel-body">
+                <form class="bs-example bs-example-form"  action="__APP__/Servicereview/index" method="get">
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">搜索</button>
+                            </span>
+                            <if condition='$s_type eq 1'>
+                                <input type="hidden" name="type" value="0"/>
+                               <elseif condition='$s_status neq null'/>
+                                <input type="hidden" name="status" value="{$s_status}"/>
+                            </if>
+
+                            <input type="text" name="keyword" class="form-control" placeholder="输入手机号码搜索">
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </form>
+                <div class="button_list" style="width: 100%;">
+                    <a class="button_one" <if condition='$s_type eq 1'>style="background-color:#e4eaec;"</if> href="__APP__/Servicereview/index?type=0">待审核</a>
+                    <a class="button_one" <if condition='$s_status neq null && $s_status eq 0'>style="background-color:#e4eaec;"</if> href="__APP__/Servicereview/index?status=0">上架</a>
+                    <a class="button_one" <if condition='$s_status eq 1'>style="background-color:#e4eaec;"</if> href="__APP__/Servicereview/index?status=1">下架</a>
+                </div>
+                <table class="table table-bordered">
+                    <caption>用户信息</caption>
+                    <thead>
+                    <tr>
+                        <th>用户名/手机号码</th>
+                        <th>关联服务</th>
+                        <th>封面</th>
+                        <th>说明</th>
+                        <th>标价</th>
+                        <th>申请时间</th>
+                        <th>审核状态</th>
+                        <th>上架状态</th>
+
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach  name="arr" item="v">
+                        <tr>
+                            <td>{$v.username}</td>
+
+                            <td>{$v.cname}</td>
+                            <td><img src="{$v.cover_path}" width="40" height="40"/></td>
+                            <td>{$v.explain}</td>
+                            <td>{$v.bid_price}</td>
+                            <td>{$v.ctime|date='Y-m-d H:i:s',###}</td>
+                            <if condition="$v.type eq 0">
+                                <td>待审核</td>
+                                <elseif condition="$v.type eq 1"/>
+                                <td>审核失败</td>
+                                <else/>
+                                <td>审核成功</td>
+                            </if>
+                            <if condition="$v.status eq 1">
+                                <td>下架</td>
+                                <else/>
+                                <td>上架</td>
+                            </if>
+
+                            <if condition="$v.type neq 0">
+                                <td><a href="#"><button><span style="color:#1DC116">已审</span></button></a> &nbsp; <if condition="$v.status eq 1"><button id="ybt" onclick="dongjie(0,this.value)" value="{$v.id}">上架</button><else/><button id="nbt" onclick="dongjie(1,this.value)" value="{$v.id}">下架</button></if>
+
+                               <else/>
+                                <td><a href="__APP__/Servicereview/reviews/id/{$v.id}" onclick="return isSetDiv()"><button>审核</button></a>
+                                </if>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                {$page}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    //是否设置分成
+    function isSetDiv(){
+        var divide='{$divide.sign_user}';
+        if(divide==''){
+            alert('检测到系统未设置默认分成，请设置');
+            return false;
+        }
+    }
+    function dongjie(status,id){    //status要改变的状态值   id
+        $.ajax({
+            url:'__APP__/Servicereview/dongjie',
+            data:'id='+id+'&status='+status,
+            dataType:'json',
+            type:'post',
+            success:function(re){
+                if(re.info==true){
+                    alert(re.msg)
+                    location.reload()
+                };
+            }
+        })
+    }
+
+
+</script>
+
+
+

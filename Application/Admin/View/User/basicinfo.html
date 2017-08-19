@@ -1,0 +1,117 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">签约用户基本资料列表</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+            <div class="panel-body">
+
+                <form class="bs-example bs-example-form"  action="__APP__/User/basicinfo" method="post">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">搜索</button>
+                            </span>
+                            <input type="text" name="keyword" class="form-control" placeholder="输入手机号码搜索">
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </form>
+                <a id="sh" style="display:none;text-decoration: none;color:#000;margin-left: 130px">
+                    修改用户几几开:<input type="number" id="jjk"/>
+                    <button id="xbt">确定</button>
+                    <button id="xcbt">取消</button>
+                </a>
+                <table class="table table-bordered">
+                    <caption>用户信息</caption>
+                    <thead>
+                    <tr>
+                        <th>用户名/手机号码</th>
+                        <th>用户类型</th>
+                        <th>头像路径</th>
+                        <th>昵称</th>
+                        <th>真实姓名</th>
+                        <th>签名</th>
+                        <th>余额</th>
+                        <th>收入</th>
+                        <th>所在城市</th>
+                        <th>绑定支付宝</th>
+                        <th>几几开</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach  name="arr" item="v">
+                        <tr>
+                            <td>{$v.username}</td>
+                            <if condition="$v.type eq 0">
+                                <td>普通用户</td>
+                                <else/>
+                                <td>签约用户</td>
+                            </if>
+                            <td><img width="40" height="30" src="{$v.head_portrait}"/></td>
+                             <td>{$v.nickname}</td>
+
+
+                            <td>{$v.real_name}</td>
+                            <td>{$v.signature}</td>
+                            <td>{$v.balance}</td>
+                            <td>{$v.earning}</td>
+                            <td>{$v.city}</td>
+                            <td>{$v.alipay}</td>
+                            <td>{$v.jjk}</td>
+                            <td><a><button class="abt" onclick="javascript:xg(this.value)" value="{$v.id}">修改分成</button></a></td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                {$page}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    function xg(id){
+        $('#sh').show()
+        sessionStorage.setItem('id',id);//页面临时存储数据id值
+    }
+    $('#xcbt').click(function(){
+        $('#sh').hide()
+    })
+    $('#xbt').click(function(){
+            var id=sessionStorage.getItem('id');
+
+            var jjk=$('#jjk').val();
+            if(jjk<0){
+                alert('不能小于零');
+            }else{
+                $.ajax({
+                    url:'__APP__/User/savejjk',
+                    data:'jjk='+jjk+'&id='+id,
+                    dataType:'json',
+                    type:'post',
+                    success:function(re){
+                        if(re===true){
+                            alert('保存成功');
+                            sessionStorage.clear();
+                            location.reload();
+                        }
+                    }
+                })
+            }
+    })
+</script>
+
+
+

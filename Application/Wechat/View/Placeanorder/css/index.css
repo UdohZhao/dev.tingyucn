@@ -1,0 +1,87 @@
+.avatar img{
+	width: 100%;
+	height: 100%;
+}
+.agenv{
+	padding: 3px 5px;
+	background-color: #fd908f;
+	color: #ffffff;
+	font-size: 12px;
+	border-radius: 5px;
+}
+.agenan{
+	padding: 3px 5px;
+	background-color: #64d1f5;
+	color: #ffffff;
+	font-size: 12px;
+	border-radius: 5px;
+}
+u{
+	text-decoration: none;
+}
+p{
+	margin: 0;s
+}
+.weui-cell__ft{
+	font-size: 12px;
+}
+.priceMsg .weui-cell__ft{
+	color: #fd908f;
+	font-size: 14px;
+}
+.priceMsg .offerBox{
+	font-size: 12px;
+}
+.weui-cell__bd p{
+	font-size: 14px;
+}
+#area{
+	font-size: 14px;
+}
+.weui-btn_primary{
+	background-color: #fd908f;
+	color: #ffffff;
+	text-decoration: none;
+}
+.weui-cell__ft input{
+	text-align: right;
+	border: none;
+	background-color: none;
+}
+.toolbar .title{
+	margin: 0;
+}
+.weui-dialog--visible span{
+	color: #3cc51f;
+}
+.weui-dialog--visible p{
+	text-align: justify;
+	text-indent: 2em;
+}
+.chiocePay p{
+	margin: 0;
+	font-weight: normal;
+}
+.dww{
+	min-width: 40px !important;
+}
+.dwsc{
+	margin: 0 auto !important;
+}
+.dwbg{
+	width: 260px;
+	left: 5%;
+}
+.dwwr{
+	width: 100% !important;
+}
+.android-ics .dwc{
+	padding: 0 !important;
+	padding-top: 30px !important;
+	float: left !important;
+}
+#selAddress{
+	outline: none;
+	background-color: transparent;
+	width: 200px;
+}

@@ -1,0 +1,107 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">职业兴趣添加</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">添加信息</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="example">
+                    <form class="form-horizontal" id="frm1">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">职业名称: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" name="cname"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">排序: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" name="sort"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="button" id="bt1" class="btn btn-primary">添加职业</button>
+                                <button id="cbt1" style="margin-left: 20px;" type="reset" class="btn btn-default btn-outline">重置信息</button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <form class="form-horizontal" id="frm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">兴趣名称: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" name="cname"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">排序: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" name="sort"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="button" id="bt" class="btn btn-primary">添加兴趣</button>
+                                <button id="cbt" style="margin-left: 20px;" type="reset" class="btn btn-default btn-outline">重置信息</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+
+    $(function() {
+        $("#bt").click(function () {
+                $.ajax({
+                    url: 'save',
+                    data: $("#frm").serialize()+"&status=1",//兴趣添加
+                    type: 'post',
+                    dataType: 'json',
+                    success: function (re) {
+                        if (re=== true) {
+                            alert('信息上传成功');
+                        }
+                    }
+                });
+        })
+
+        $("#bt1").click(function () {
+            $.ajax({
+                url: 'save',
+                data: $("#frm1").serialize()+"&status=2",//兴趣添加
+                type: 'post',
+                dataType: 'json',
+                success: function (re) {
+                    if (re === true) {
+                        alert('信息上传成功');
+                    }
+                }
+            });
+        })
+    })
+
+</script>
+
+<!--<script type="text/javascript" src="/Application/Admin/View/Layouts/assets/readimg.js"></script>-->

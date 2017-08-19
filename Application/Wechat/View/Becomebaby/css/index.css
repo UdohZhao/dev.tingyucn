@@ -1,0 +1,13 @@
+.weui-cells{
+	margin-top: 0;
+}
+.weui-cells p{
+	margin: 0px 0;
+	font-size: 14px;
+}
+.pageName{
+	border: none;
+}
+.pageName p{
+	font-size: 12px;
+}

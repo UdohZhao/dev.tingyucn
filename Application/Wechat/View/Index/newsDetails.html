@@ -1,0 +1,27 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Index/css/newsDetails.css">
+
+	<div class="row">
+	  <div class="pageName">
+        <div class="container">
+          <p>消息详情</p>
+        </div>
+      </div>
+	</div>
+	<div class="row newsContent">
+		<div class="newsTitle">
+			<p>{$info.title}</p>
+		</div>
+		<div class="col-sm-12 col-xs-12 newsDetails">
+			<!--<span>1.为什么我下了单，但进行时会有错误？</span>
+			<p>如果Flash是最新版本，可能是缓存出现问题，请先使用Ctrl+F5强制刷新，如果不能解决，请更换浏览器(推荐使用360安全浏览器)。</p>
+			<span>2.为什么我的显示错误?</span>
+			<p>请先使用Ctrl+F5强制刷新，如果不能解决请向班副报错。</p>
+			<span>3.手机收不到验证码怎么办?</span>
+			<p>请查看一下您的手机是否欠费，是否没有网络，开关一下飞行模式，还有可能是浏览器的问题，请您更换一个浏览器试一下(推荐使用360安全浏览器)。</p>
+		-->{$info.content}
+        </div>
+	</div>
+
+<include file="Layout/footer" />

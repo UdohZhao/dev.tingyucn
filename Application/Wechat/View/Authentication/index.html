@@ -1,0 +1,489 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Authentication/css/index.css">
+
+	<!-- 内容主体start -->
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>身份认证</p>
+          </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="weui-cells">
+		  <a class="weui-cell weui-cell_access" href="__APP__/Name/index/name/{$arr.real_name}">
+		    <div class="weui-cell__bd">
+		      <p>姓名</p>
+		    </div>
+		    <div class="weui-cell__ft">
+				<if condition="$arr.real_name neq null">
+					{$arr.real_name}
+					<else/>
+					真实姓名
+				</if>
+		    </div>
+		  </a>
+			<a class="weui-cell weui-cell_access" href="__APP__/Name/user_age?age={$arr.age}">
+				<div class="weui-cell__bd">
+					<p>年龄</p>
+				</div>
+				<div class="weui-cell__ft">
+					<if condition="$arr.real_name neq null">
+						{$arr.age}
+						<else/>
+						年龄
+					</if>
+				</div>
+			</a>
+		  <a class="weui-cell weui-cell_access" href="__APP__/Gender/index">
+		    <div class="weui-cell__bd">
+		      <p>性别</p>
+		    </div>
+		    <div class="weui-cell__ft">
+				<if condition="$arr.sex eq null">
+					请选择
+					<elseif condition="$arr.sex eq 0"/>
+					女
+					<elseif condition="$arr.sex eq 1"/>
+					男
+				</if>
+		    </div>
+		  </a>
+		  <a class="weui-cell weui-cell_access" href="__APP__/Idcard/index">
+		    <div class="weui-cell__bd">
+		      <p>身份证</p>
+		    </div>
+		    <div class="weui-cell__ft">
+				<if condition="$arr.id_card neq null">
+						{$arr.id_card}
+					<else/>
+					证件号码
+				</if>
+		    </div>
+		  </a>
+		</div>
+	</div>
+	<!-- 照片上传start -->
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-sm-12 col-xs-12">
+			<div class="row">
+				<div class="weui-cells weui-cells_form">
+				  <div class="weui-cell">
+				    <div class="weui-cell__bd">
+				      <div class="weui-uploader">
+				        <div class="weui-uploader__hd">
+				          <p class="weui-uploader__title">身份证正面照<span>(消息无遮盖，内容清晰)</span></p>
+				          <!-- <div class="weui-uploader__info">0/2</div> -->
+				        </div>
+				        <div class="weui-uploader__bd">
+				          <ul class="weui-uploader__files" id="uploaderFiles">
+							  <li class="weui-uploader__file" id="urlimg" name="front_path" style="background-image:url({$arr.front_path});"></li>
+				          </ul>
+				          <div class="weui-uploader__input-box">
+				            <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+				          </div>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="col-sm-12 col-xs-12">
+				    <div class="annotated">
+				    	<div class="annotatedList">
+							<svg class="icon categorie-icon" aria-hidden="true">
+				                <use xlink:href="#icon-xinghao"></use>
+				            </svg>
+				            <span>照片请勿进行任何软件处理</span>
+				        </div>
+				    	<div class="annotatedList">
+							<svg class="icon categorie-icon" aria-hidden="true">
+				                <use xlink:href="#icon-xinghao"></use>
+				            </svg>
+				            <span>身份证有效期需要在一个月以上</span>
+				        </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-sm-12 col-xs-12">
+			<div class="row">
+				<div class="weui-cells weui-cells_form">
+				  <div class="weui-cell">
+				    <div class="weui-cell__bd">
+				      <div class="weui-uploader">
+				        <div class="weui-uploader__hd">
+				          <p class="weui-uploader__title">身份证反面照<span>(消息无遮盖，内容清晰)</span></p>
+				          <!-- <div class="weui-uploader__info">0/2</div> -->
+				        </div>
+				        <div class="weui-uploader__bd">
+				          <ul class="weui-uploader__files" id="uploaderFiles1">
+							  <li class="weui-uploader__file" id="urlimg1" name="back_path" style="background-image:url({$arr.back_path});"></li>
+						  </ul>
+				          <div class="weui-uploader__input-box">
+				            <input id="uploaderInput1" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+				          </div>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="col-sm-12 col-xs-12">
+				    <div class="annotated">
+				    	<div class="annotatedList">
+							<svg class="icon categorie-icon" aria-hidden="true">
+				                <use xlink:href="#icon-xinghao"></use>
+				            </svg>
+				            <span>照片请勿进行任何软件处理</span>
+				        </div>
+				    	<div class="annotatedList">
+							<svg class="icon categorie-icon" aria-hidden="true">
+				                <use xlink:href="#icon-xinghao"></use>
+				            </svg>
+				            <span>身份证有效期需要在一个月以上</span>
+				        </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-sm-12 col-xs-12">
+			<div class="row">
+				<div class="weui-cells weui-cells_form">
+				  <div class="weui-cell">
+				    <div class="weui-cell__bd">
+				      <div class="weui-uploader">
+				        <div class="weui-uploader__hd">
+				          <p class="weui-uploader__title">本人形象照<span>(正面素颜，五官清晰)</span></p>
+				          <!-- <div class="weui-uploader__info">0/2</div> -->
+				        </div>
+				        <div class="weui-uploader__bd">
+				          <ul class="weui-uploader__files" id="uploaderFiles2">
+				          	<li class="weui-uploader__file" name="figure_path" id="urlimg2" style="background-image:url({$arr.figure_path});"></li>
+				          </ul>
+				          <div class="weui-uploader__input-box">
+				            <input id="uploaderInput2" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+				          </div>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="col-sm-12 col-xs-12">
+				    <div class="annotated">
+				    	<div class="annotatedList">
+							<svg class="icon categorie-icon" aria-hidden="true">
+				                <use xlink:href="#icon-xinghao"></use>
+				            </svg>
+				            <span>本人上半身照</span>
+				        </div>
+				    	<div class="annotatedList">
+							<svg class="icon categorie-icon" aria-hidden="true">
+				                <use xlink:href="#icon-xinghao"></use>
+				            </svg>
+				            <span>照片清晰便于快速认证</span>
+				        </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 照片上传end -->
+	<div class="row">
+		<div class="col-sm-12 col-xs-12 prompt">
+			<p>身份信息对应关联你提现银行卡，请务必填写本人真实姓名且与提现银行卡名字一致，否则将无法提现佣金哦！</p>
+		</div>
+	</div>
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-sm-12 col-xs-12">
+			<a href="javascript:;" id="abt" value="2" class="weui-btn weui-btn_primary">提交</a>
+		</div>
+	</div>
+	<!-- 内容主体end -->
+
+<include file="Layout/footer" />
+
+
+
+
+	<script type="text/javascript">
+
+
+	var
+			fileInput = document.getElementById('uploaderInput'),
+			preview = document.getElementById('urlimg'),  //身份证正面照对象
+			fileInput1 = document.getElementById('uploaderInput1'),
+			preview1 = document.getElementById('urlimg1'),  //身份证背面照对象
+			fileInput2 = document.getElementById('uploaderInput2'),
+			preview2 = document.getElementById('urlimg2');  //身份证个人形象照对象
+
+
+	// 监听change事件:
+	fileInput.addEventListener('change', function () {
+
+		sel(fileInput,preview)
+	});
+	// 监听change事件:
+	fileInput1.addEventListener('change', function () {
+
+		sel(fileInput1,preview1)
+	});
+	// 监听change事件:
+	fileInput2.addEventListener('change', function () {
+
+		sel(fileInput2,preview2)
+	});
+
+
+
+	function sel(fileInput,preview){
+		// 清除背景图片:
+		var urlname=preview.getAttribute('name');
+
+		if(urlname=='front_path'){
+			imgurl="{$arr.front_path}";
+		}else if(urlname=='back_path'){
+			imgurl="{$arr.back_path}";
+		}else if(urlname=='figure_path'){
+			imgurl="{$arr.figure_path}";
+		}
+		preview.style.backgroundImage = '';
+		// 检查文件是否选择:
+		/*if (!fileInput.value) {
+			info.innerHTML = '没有选择文件';
+			return;
+		}*/
+		// 获取File引用:
+		var file = fileInput.files[0];
+		// 获取File信息:
+		/*info.innerHTML = '文件: ' + file.name + '<br>' +
+				'大小: ' + file.size + '<br>' +
+				'修改: ' + file.lastModifiedDate;*/
+		if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+			// alert('图片文件格式不正确!');
+			$.toast('图片文件格式不正确!', 'cancel');
+			return;
+		}
+		// 读取文件:
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			if(file.size>5242880){
+				preview.style.backgroundImage = 'url(' + imgurl + ')';
+				$(fileInput).val('');
+				// alert('图片文件大小不正确!5M以内');
+				$.toast('图片文件大小不正确!5M以内', 'cancel');
+			}else{
+				var data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
+				preview.style.backgroundImage = 'url(' + data + ')';
+				preview.style.display='block'
+			}
+
+		};
+		// 以DataURL的形式读取文件:
+		reader.readAsDataURL(file);
+	}
+
+</script>
+
+<script type="text/javascript">
+$(function(){
+  $(".weui-btn_primary").click(function(){
+  	$(this).css("text-decoration","none");
+    $(this).css("background-color","#fd908f");
+    $(this).css("color","#ffffff");
+
+	  //获取当前背景图的url地址
+	  var urlimg=document.getElementById('urlimg').style.backgroundImage
+	  var pathname=$('#uploaderInput').val(); //是否选择照片
+
+	  //身份证背面照
+	  var urlimg1=document.getElementById('urlimg1').style.backgroundImage
+	  var pathname1=$('#uploaderInput1').val();
+
+	  //个人形象照
+	  var urlimg2=document.getElementById('urlimg2').style.backgroundImage
+	  var pathname2=$('#uploaderInput2').val();
+
+
+	  //实例化获取数据
+	  var datas=new FormData();
+	  if(pathname!=''  && urlimg!='' && urlimg!='{$arr.front_path}'){
+		  datas.append('front_path',$('#uploaderInput')[0].files[0]);
+	  }
+
+	  if(pathname1!=''  && urlimg1!='' && urlimg1!='{$arr.back_path}'){
+		  datas.append('back_path',$('#uploaderInput1')[0].files[0]);
+	  }
+
+	  if(pathname2!=''  && urlimg2!='' && urlimg2!='{$arr.figure_path}'){
+		  datas.append('figure_path',$('#uploaderInput2')[0].files[0]);
+	  }
+
+	  if(pathname=='' && '{$arr.front_path}'==''){ //是否已经认证过
+	  	$.toast('请上传身份证正面照片', 'cancel')
+	  }else if(pathname1=='' && '{$arr.back_path}'==''){
+		  $.toast('请上传身份证背面照片', 'cancel')
+	  }else if(pathname2=='' && '{$arr.figure_path}'==''){
+		  $.toast('请上传个人形象照片', 'cancel')
+	  }else{
+	  	$.ajax({
+	  		url:'__APP__/Authentication/saveimg',
+			data:datas,
+			dataType:'json',
+			processData:false,//提示JQ库不处理发送的数据
+			contentType:false,//提示JQ库不设置Content-Type请求头
+			type:'post',
+			success:function(re){
+	  			if(re===true){
+	  				// alert('上传成功,等待审核');
+	  				$.toast("上传成功,等待审核");
+	  				window.location.href='__APP__/Index/index'
+				}else if(re.info==2){
+					$.toast(re.msg)  //修改成功
+					window.location.href='__APP__/Index/index'
+				}
+			}
+		})
+	  }
+  })
+})
+/*window.onbeforeunload=function(){
+	var checkStatus=$('#abt').attr('value');
+	if(checkStatus==2){
+		return del();
+	}
+}
+function del(){
+	return '';
+}*/
+
+</script>
+
+
+<script>
+	$(function(){
+
+
+		//判断显示图片
+	if('{$arr.back_path}'==''){
+		document.getElementById('urlimg1').style.display='none';
+	}
+	if('{$arr.figure_path}'==''){
+		document.getElementById('urlimg2').style.display='none';
+	}
+	if('{$arr.front_path}'==''){
+		document.getElementById('urlimg').style.display='none';
+	}
+
+
+//	//身份证正面照
+//	$('#uploaderInput').change(function(){
+//		var datas=new FormData();
+//		datas.append('front_path',$('#uploaderInput')[0].files[0]);
+//		//console.log($('#uploaderInput')[0].files[0]);
+//		//判断是否更换
+//		var sobj=document.getElementById('urlimg');  //获取li对象
+//		var pathname=sobj.style.backgroundImage;  //更换前的照片地址
+//
+//		if(pathname!=""){
+//			datas.append('path',pathname);
+//		}
+//		$.ajax({
+//			url:'__APP__/Authentication/imgread',//当前控制器的方法名
+//			data:datas,
+//			dataType:'json',
+//			processData:false,//提示JQ库不处理发送的数据
+//			contentType:false,//提示JQ库不设置Content-Type请求头
+//			type:'post',
+//			success:function (re) {
+//				if(re.info===true){
+//					sobj.style.backgroundImage='url('+re.msg+')';
+//					$('#urlimg').show()
+//				}else if(re.info==4){
+//					alert(re.msg);
+//				}
+//
+//			},
+//			error:function () {
+//				alert("系统崩溃")
+//			}
+//		});
+//
+//	})
+//
+//	//身份证后面照
+//	$('#uploaderInput1').change(function(){
+//		var datas=new FormData();
+//		datas.append('back_path',$('#uploaderInput1')[0].files[0]);
+//		//判断是否更换
+//		var sobj=document.getElementById('urlimg1');  //获取li对象
+//		var pathname=sobj.style.backgroundImage;  //更换前的照片地址
+//
+//		if(pathname!=""){
+//			datas.append('path',pathname);
+//		}
+//		$.ajax({
+//			url:'__APP__/Authentication/imgread',//当前控制器的方法名
+//			data:datas,
+//			dataType:'json',
+//			processData:false,//提示JQ库不处理发送的数据
+//			contentType:false,//提示JQ库不设置Content-Type请求头
+//			type:'post',
+//			success:function (re) {
+//				if(re.info===true){
+//					sobj.style.backgroundImage='url('+re.msg+')';
+//					$('#urlimg').show()
+//				}else if(re.info==4){
+//					alert(re.msg);
+//				}
+//
+//			},
+//			error:function () {
+//				alert("系统崩溃")
+//			}
+//		});
+//
+//	})
+//
+//	//个人形象照
+//	$('#uploaderInput2').change(function(){
+//		var datas=new FormData();
+//		datas.append('figure_path',$('#uploaderInput2')[0].files[0]);
+//
+//		//判断是否更换
+//		var sobj=document.getElementById('urlimg2');  //获取li对象
+//		var pathname=sobj.style.backgroundImage;  //更换前的照片地址
+//
+//		if(pathname!=""){
+//			datas.append('path',pathname);
+//		}
+//		$.ajax({
+//			url:'__APP__/Authentication/imgread',//当前控制器的方法名
+//			data:datas,
+//			dataType:'json',
+//			processData:false,//提示JQ库不处理发送的数据
+//			contentType:false,//提示JQ库不设置Content-Type请求头
+//			type:'post',
+//			success:function (re) {
+//				if(re.info===true){
+//					sobj.style.backgroundImage='url('+re.msg+')';
+//					$('#urlimg').show()
+//				}else if(re.info==4){
+//					alert(re.msg);
+//				}
+//
+//			},
+//			error:function () {
+//				alert("系统崩溃")
+//			}
+//		});
+//
+//	})
+
+
+})
+
+</script>

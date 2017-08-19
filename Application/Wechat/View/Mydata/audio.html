@@ -1,0 +1,241 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Mydata/css/audio.css">
+<link rel="stylesheet" href="/Public/layui/css/layui.mobile.css"  media="all">
+<div class="row">
+  <div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <div class="weui-uploader">
+          <div class="weui-uploader__hd">
+            <p class="weui-uploader__title">音频上传</p>
+          </div>
+          <div class="weui-uploader__bd">
+            <ul class="weui-uploader__files">
+              <li class="weui-uploader__file">
+              </li>
+            </ul>
+              <video preload="auto" hidden="true" id="au" src="{$audioInfo.audio_path}">
+              </video>
+              <div class="audio_box">
+                <div class="audio_img">
+                  <img class="stop_img" src="/Application/Wechat/View/Babyinformation/img/index.png">
+                  <img class="move_img" src="/Application/Wechat/View/Babyinformation/img/index.gif">
+                  <i><span>5</span>秒</i>
+                </div>
+              </div>
+            <div class="weui-uploader__input-box" id="uploaderFiles">
+              <input id="audioInput" class="weui-uploader__input" type="file" name="audio_path"  multiple="">
+            </div>
+            <div id="delete_audio">
+              <a>删除</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" style="margin-top: 20px;">
+  <div class="weui-cells weui-cells_form">
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <div class="weui-uploader">
+          <div class="weui-uploader__hd">
+            <p class="weui-uploader__title">视频上传</p>
+          </div>
+          <div class="weui-uploader__bd">
+            <ul class="weui-uploader__files">
+              <li class="weui-uploader__file">
+              </li>
+            </ul>
+            <a class="video_box">
+              <div class="sanjiao"></div>
+            </a>
+            <div class="weui-uploader__input-box input_hidden">
+              <input id="videoInput" class="weui-uploader__input" type="file" name="video_path" multiple="">
+            </div>
+            <div id="delete_video">
+              <a>删除</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row audio_upload">
+  <div class="col-sm-12 col-xs-12">
+   <a href="__APP__/Mydata/index"><button id="goback">确定</button></a>
+  </div>
+</div>
+
+<div class="col-sm-12 col-xs-12 video_playing" id="uploaderFiles1">
+  <p class="close_vedio">关闭</p>
+  <video controls id="vi" src="{$audioInfo.video_path}">
+  </video>
+</div>
+<include file="Layout/footer" />
+
+<script type="text/javascript">
+ $(function(){
+   layui.use('upload', function(){
+      layui.upload({
+        url: '__APP__/Mydata/metaSave/type/1',
+        type:'audio',
+        method:'post',
+        unwrap: true,
+        ext: 'mp3|aac|ogg|m4a',
+        elem:$('#audioInput'),
+        success: function(res){
+          if(res.info===true){
+            $('#au').attr('src',res.url);
+            layer.msg('上传成功',function(){
+              $(".audio_box").css("display","block");
+              $("#uploaderFiles").css("display","none");
+              $("#delete_audio").css("display","block");
+              var Media = document.getElementById("au");
+              var miao=Media.duration;
+              var miaoZ=Math.round(miao);
+              $(".audio_img i span").html(miaoZ);
+            });
+          }else if(res.info==4){
+            layer.msg(res.msg);
+          }
+
+        }
+      });
+      if($("#au").attr("src")==''){
+        $(".audio_box").css("display","none");
+        $("#uploaderFiles").css("display","block");
+        $("#delete_audio").css("display","none");
+      }else{
+        $(".audio_box").css("display","block");
+        $("#uploaderFiles").css("display","none");
+        $("#delete_audio").css("display","block");
+      }
+      if($("#vi").attr("src")==''){
+        $(".video_box").css("display","none");
+        $("#videoInput").css("display","block");
+        $("#delete_video").css("display","none");
+      }else{
+        $(".video_box").css("display","block");
+        $(".input_hidden").css("display","none");
+        $("#delete_video").css("display","block");
+      }
+      //音频播放
+      function audioAutoPlay(){
+            var audio = document.getElementById("au");
+            var play = function() {
+                document.removeEventListener("WeixinJSBridgeReady", play);
+                document.removeEventListener("YixinJSBridgeReady", play);
+                // document.removeEventListener("touchstart", play, false);
+                audio.play();
+                };
+            audio.play();
+            //weixin  document.addEventListener("WeixinJSBridgeReady", play, false);
+            //yixin   document.addEventListener('YixinJSBridgeReady', play, false);
+            //touch   document.addEventListener("touchstart", play, false);
+        }
+      var Media = document.getElementById("au");
+      var miao=Media.duration;
+      if(isNaN(miao)){
+          Media.addEventListener("canplay", function(){
+              var miao=Media.duration;
+              var miaoZ=Math.round(miao);
+              $(".audio_img i span").html(miaoZ);
+              $(".audio_box").click(function(){
+                // Media.play();
+                audioAutoPlay();
+                $(".stop_img").css("display","none");
+                setTimeout(function(){
+                  $(".stop_img").css("display","block");
+                },miaoZ*1000);
+              })  
+          });
+      }else{
+          var miao=Media.duration;
+          var miaoZ=Math.round(miao);
+          $(".audio_img i span").html(miaoZ);
+          $(".audio_box").click(function(){
+            // Media.play();
+            audioAutoPlay();
+            $(".stop_img").css("display","none");
+            setTimeout(function(){
+              $(".stop_img").css("display","block");
+            },miaoZ*1000);
+          })
+          
+      }
+      //视频播放
+      var vi = document.getElementById("vi");
+      $(".video_box").click(function(){
+        $(".tanchu").css("display","block");
+        $(".video_playing").css("display","block");
+        vi.play();
+        $(".close_vedio").click(function(){
+          $(".tanchu").css("display","none");
+          $(".video_playing").css("display","none");
+          vi.pause();
+        })
+      })
+     layui.upload({
+        url: '__APP__/Mydata/metaSave/type/2',
+        type:'video',
+        unwrap: true,
+        ext: 'mp4',
+        elem:$('#videoInput'),
+        success: function(res){
+          if(res.info===true){
+            $('#vi').attr('src',res.url);
+            //$('#vi').html('<source id="urlvideo" src="'+res.url+'" >');
+            layer.msg('上传成功');
+            $(".video_box").css("display","block");
+            $(".input_hidden").css("display","none");
+            $("#delete_video").css("display","block");
+         }else if(res.info==4){
+            layer.msg(res.msg);
+          }
+          /*$('#vi').html(
+           ' <source  id="urlvideo" src="'+res+'">'
+           );*/
+        }
+      });
+    });
+
+  })
+
+</script>
+
+<script>
+  //删除
+  function del(sel,obj,selObj,addobj){
+    $.ajax({
+      url:'__APP__/Mydata/metaDel',
+      data:'type='+sel,
+      dataType:'json',
+      type:'post',
+      success:function(re){
+        if(re===true){
+          layer.msg('删除成功',{icon:1,time:2000})
+          $(obj).css("display","none");
+          $(selObj).css("display","none");
+          $(addobj).css("display","block");
+        }
+      }
+    })
+  }
+  $('#delete_audio').click(function(){
+    var sel=1;
+    var obj=$(".audio_box");
+    var audio_add=$("#uploaderFiles");
+    del(sel,this,obj,audio_add);
+   
+  })
+  $('#delete_video').click(function(){
+    var sel=2;
+    var obj=$(".video_box");
+    var audio_add=$(".input_hidden");
+    del(sel,this,obj,audio_add);
+  })
+</script>

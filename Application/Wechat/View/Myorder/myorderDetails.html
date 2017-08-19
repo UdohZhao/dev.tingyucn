@@ -1,0 +1,184 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Myorder/css/myorderDetails.css">
+
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>订单详情</p>
+          </div>
+        </div>
+	</div>
+	<div class="row orderDetails">
+		<div class="weui-cells">
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<p>下单用户电话</p>
+				</div>
+				<div class="weui-cell__ft">{$userInfo.username}</div>
+			</div>
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<p>下单用户真实姓名</p>
+				</div>
+				<div class="weui-cell__ft">{$userInfo.real_name}</div>
+			</div>
+			<if condition="$info.type egt 1">
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<p>签约用户电话</p>
+					</div>
+					<div class="weui-cell__ft">{$bbInfo.username}</div>
+				</div>
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<p>签约用户真实姓名</p>
+					</div>
+					<div class="weui-cell__ft">{$bbInfo.real_name}</div>
+				</div>
+			</if>
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>品类</p>
+		    </div>
+		    <div class="weui-cell__ft">{$info.cname}</div>
+		  </div>
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>开始时间</p>
+		    </div>
+		    <div class="weui-cell__ft">{$info.start_time|date='Y-m-d H:i',###}</div>
+		  </div>
+			<if condition="$info.sc_type eq 2">
+				<div class="weui-cell">
+					<div class="weui-cell__bd">
+						<p>服务地点</p>
+					</div>
+					<div class="weui-cell__ft">{$info.address}</div>
+				</div>
+			</if>
+
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>数量</p>
+		    </div>
+		    <div class="weui-cell__ft">{$info.charge_mode}</div>
+		  </div>
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>交易金额</p>
+		    </div>
+		    <div class="weui-cell__ft">￥{$info.payment_amount}</div>
+		  </div>
+		</div>
+		<div class="col-sm-12 col-xs-12 orderStatus">
+			<p>
+				<if condition="$info.reply_status eq 0">
+						待确认
+					<elseif condition="$info.reply_status eq 2"/>
+					已取消该订单
+					<elseif condition="$info.type eq 0 && $info.reply_status eq 1 && $needType eq 1 && $doubleId eq 1"/>
+					签约用户不能预约自己
+					<elseif condition="$info.type eq 0 && $info.reply_status eq 1 && $needType eq 1"/>
+					待对方付款
+					<elseif condition="$info.type eq 0 && $info.reply_status eq 1"/>
+					<a style="color: #ccc;">待付款</a><br />
+					<a id="gopay" href="__APP__/Placeanorder/paynow/orderId/{$info.id}">去付款</a>
+					<elseif condition="$info.type eq 1 && $needType eq 1 && $doubleId neq 1"/>
+					进行中
+					<div class="row">
+						<div class="col-sm-12 col-xs-12">
+							<button id="hasDone">完成该订单</button>
+						</div>
+					</div>
+					<elseif condition="$info.type eq 1"/>
+					进行中
+					<elseif condition="$info.type eq 2"/>
+					已完成
+				</if>
+			</p>
+		</div>
+		<!--若此订单用户为当前用户，表示是自己下的订单，需要等确认后付款-->
+		<!--若此订单用户为当前用户，表示是自己收到的订单，确认后让用户付款-->
+		<!--并且判断是否是自己的单子-->
+		<if condition="$userType.type eq 1 && $info.reply_status eq 0 && $needType eq 1">
+			<div class="row">
+				<div class="col-sm-12 col-xs-12" style="text-align: center;">
+					<button id="bt_s">确认接单</button>
+					<button id="cbt_s">取消该订单</button>
+				</div>
+			</div>
+		</if>
+	</div>
+
+<include file="Layout/footer" />
+<script>
+	$(function(){
+		$('#bt_s').click(function(){
+			var orderId='{$info.id}';
+			var name='{$userInfo.real_name}';
+			var phone='{$userInfo.username}';
+			$.ajax({
+				url:'__APP__/Myorder/sure',
+				data:'orderId='+orderId+'&realName='+name+'&phone='+phone,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					if(re===true){
+						// alert('已确认');
+						$.toast("已确认");
+						window.location.href='__APP__/Myorder/index'
+					}else if(re.info==2){
+						// alert(re.msg);
+						$.toast(re.msg,"text");
+						window.location.href='__APP__/Myorder/index'
+					}
+				}
+			})
+		})
+
+		$('#cbt_s').click(function(){
+			var orderId='{$info.id}';
+			$.ajax({
+				url:'__APP__/Myorder/csure',
+				data:'orderId='+orderId,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					if(re===true){
+						// alert('取消成功');
+						$.toast("取消成功");
+						window.location.href='__APP__/Myorder/index'
+					}else if(re.info==2){
+						// alert(re.msg);
+						$.toast(re.msg,"text");
+						window.location.href='__APP__/Myorder/index'
+					}
+				}
+			})
+		})
+
+		//点击完成
+		$('#hasDone').click(function(){
+			var orderId='{$info.id}';//订单id
+			var bbId='{$info.suid}';//签约用户id
+			$.ajax({
+				url:'__APP__/Myorder/hasDone',
+				data:'orderId='+orderId+'&bbId='+bbId,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					if(re===true){
+						// alert('订单完成,可查看收入');
+						$.toast("订单完成,可查看收入");
+						window.location.href='__APP__/Myorder/index'
+					}else if(re.info==2){
+						// alert(re.msg)
+						$.toast(re.msg,"text");
+						window.location.href='__APP__/Myorder/index'
+					}
+				}
+			})
+		})
+	})
+</script>

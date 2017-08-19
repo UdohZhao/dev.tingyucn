@@ -1,0 +1,59 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">分成列表</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-bordered">
+                    <caption>分成列表</caption>
+                    <thead>
+                    <tr>
+                        <th>平台分成</th>
+                        <th>签约用户分成</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach  name="info" item="v">
+                        <tr>
+                            <td>{$v.platform}</td>
+                            <td>{$v.sign_user}</td>
+                            <td><a href="__APP__/Divide/update/id/{$v.id}"><button>修改</button></a> | <button onclick="javascript:dele(this.value,1)" value="{$v.id}">删除</button></td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    function dele(id){
+        $.ajax({
+            url:'__APP__/Divide/del',
+            data:'id='+id,
+            dataType:'json',
+            type:'post',
+            success:function(re){
+                if(re==true){
+                    alert("删除成功");
+                    window.location.href='__APP__/Divide/oper';
+                };
+            }
+        })
+    }
+</script>

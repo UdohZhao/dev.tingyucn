@@ -1,0 +1,69 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Feedback/css/index.css">
+
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>意见反馈</p>
+          </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="weui-cells weui-cells_form" style="margin-top: 0;">
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <textarea id="area" class="weui-textarea"  placeholder="请在这儿提出你的意见" rows="3"></textarea>
+		      <div class="weui-textarea-counter"><span id="text-count">0</span>/50</div>
+		    </div>
+		  </div>
+		</div>
+		<div class="col-sm-12 col-xs-12 Sbutton">
+			<a href="javascript:;" id="bt" class="weui-btn weui-btn_primary">提交</a>
+		</div>
+	</div>
+
+<include file="Layout/footer" />
+<script type="text/javascript">
+$(function(){
+  $(".weui-btn_primary").click(function(){
+  	$(this).css("text-decoration","none");
+    $(this).css("background-color","#fd908f");
+    $(this).css("color","#ffffff");
+	  var ide=$('#area').val();
+	  if(ide=='') {
+		  // alert('不能为空')
+		  $.toast("不能为空", "cancel");
+	  }else{
+	  	$.ajax({
+	  		url:'save',
+			data:'content='+ide,
+			dataType:'json',
+			type:'post',
+			success:function(re){
+				if(re===true){
+					// alert('提交成功')
+					$.toast("提交成功");
+					window.location.href='__APP__/Setup/index'
+				}else if(re.info===2){
+					// alert(re.msg)
+					$.toast(re.msg);
+					window.location.href='__APP__/Setup/index'
+				}
+			}
+		})
+	  }
+  })
+})
+/*字数限制*/  
+    $("#area").on("input propertychange", function() {  
+        var $this = $(this),  
+            _val = $this.val(),  
+            count = "";  
+        if (_val.length > 50) {  
+            $this.val(_val.substring(0, 50));  
+        }  
+        count =$this.val().length;  
+        $("#text-count").html(count);  
+    });
+</script>

@@ -1,0 +1,470 @@
+.myselfBox{
+	background-color: #fff;
+	margin: 20px auto;
+	padding: 20px 10px;
+}
+.myselfBox .nav-tabs>li{
+	float: none;
+	border-bottom: 1px solid #ccc;
+}
+.myselfBox .nav-tabs{
+	background-color: #ededed;
+}
+.myselfBox .nav-tabs>li>a{
+	margin: 0;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+	background-color: #fd908f;
+	color: #fff;
+}
+.myselfBox .tab-content{
+	padding-left: 30px;
+	border-left: 1px dashed #ccc;
+}
+.loadingPic{
+	border-bottom: 1px solid #ccc;
+	margin: 0;
+	padding-bottom: 20px;s
+}
+.loadingPic .avatar{
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	overflow: hidden;
+}
+.loadingPic .avatar img{
+	width: 100%;
+	height: 100%;
+}
+.myselfBox .loadingPic .top{
+	position: relative;
+	height: 30px;
+	margin-top: 24px;
+}
+.myselfBox .loadingPic .top input{
+	background-color: #fd908f;
+	color: #fff;
+	border: none;
+	width: 100px;
+	height: 30px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+.myselfBox .loadingPic .top button{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100px;
+	height: 30px;
+	background-color: #fd908f;
+	border: none;
+	border-radius: 8px;
+	color: #fff;
+}
+.msgDetails .esBtn{
+	text-align: right;
+	position: relative;
+	height: 50px;
+	padding-top: 10px;
+}
+.msgDetails .esBtn button{
+	width: 100px;
+	height: 30px;
+	background-color: #fd908f;
+	border: none;
+	border-radius: 8px;
+	color: #fff;
+}
+.msgDetails .esBtn .editBtn{
+	position: absolute;
+	top: 10px;
+	right: 15px;
+}
+.msgList{
+	margin-bottom: 20px;
+}
+.msgList input{
+	margin-left: 20px;
+	border: none;
+}
+.msgList select{
+	margin-left: 16px;
+	border: none;
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	width: 100px;
+	background-color: #fff;
+}
+.msgList .textBox{
+	margin-left: 68px;
+	margin-top: -30px;
+	width: 400px;
+	height: 30px;
+	position: relative;
+}
+.msgList .textBox textarea{
+	resize: none;
+	border: none;
+	width: 400px;
+	height: 100px;
+	padding-bottom: 20px;
+}
+.msgList>a{
+	text-decoration: none;
+	color: #000;
+	margin-left: 20px;
+}
+/*2*/
+.becomeCon{
+	background-color: #ededed;
+	padding: 15px 15px;
+}
+.becomeCon>p{
+	font-weight: bolder;
+	font-size: 18px;
+}
+.serviceOne{
+	margin-bottom: 20px;
+}
+.becomeCon .serviceOne>p{
+	font-weight: bolder;
+	border-bottom: 1px solid #aaa;
+	line-height: 40px;
+}
+.becomeCon .serviceOne .oneList{
+	text-align: center;
+	margin-top:10px;
+}
+.becomeCon .serviceOne .oneList a{
+	display: block;
+	border:1px solid #fd908f;
+	color: #fd908f;
+	text-decoration: none;
+	line-height: 36px;
+	border-radius: 8px;
+}
+#serviceChioce textarea{
+	resize: none;
+	padding-bottom: 20px;
+	height: 150px;
+}
+#serviceChioce .theNumber{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding-right: 20px;
+	font-size: 14px;
+	color: #ccc;
+}
+#serviceChioce .modal-dialog{
+	width: 400px;
+}
+#myModalLabel>.row{
+	margin-bottom: 20px;
+}
+#myModalLabel span{
+	font-size: 14px;
+	color: #ccc;
+}
+#myModalLabel .uploadingBox{
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 10px 10px;
+}
+#myModalLabel .uploadingBox .uploadingPic{
+	width: 100px;
+	height: 100px;
+	float: left;
+}
+#myModalLabel .uploadingBox .uploadingPic img{
+	width: 100%;
+	height: 100%;
+}
+#myModalLabel .uploadingBox .uploadingBtn{
+	float: left;
+	position: relative;
+	padding-left: 20px;
+}
+#myModalLabel .uploadingBox .uploadingBtn a{
+	display: block;
+	width: 80px;
+	line-height: 35px;
+	border: 1px solid #fd908f;
+	color: #fd908f;
+	text-align: center;
+	border-radius: 6px;
+	font-size: 14px;
+}
+#myModalLabel .uploadingBox .uploadingBtn input{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 80px;
+	height: 35px;
+	opacity: 0;
+}
+.claim{
+	margin-top: 20px;
+}
+#myModalLabel svg{
+	color: #ccc;
+}
+.priceInput input{
+	border: none;
+	border-bottom: 1px solid #ccc;
+	width: 80%;
+	text-align: center;
+}
+.submitBtn{
+	background-color: #fd908f;
+	color: #fff;
+	margin: 10px auto;
+	width: 80%;
+	height: 35px;
+	border: none;
+	border-radius: 4px;
+}
+/*3*/
+.feedback,.blackCon{
+	background-color: #ededed;
+	padding: 10px 15px;
+}
+.blackCon>p{
+	border-bottom: 1px solid #aaa;
+	font-weight: bold;
+	line-height: 40px;
+}
+.blackList{
+	background-color: #fff;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+}
+.blackList .leftPic{
+	width:100px;
+	height: 100px;
+	float: left;
+	overflow: hidden;
+}
+.blackList .leftPic img{
+	width: 100%;
+	height: 100%;
+}
+.blackList .rightCon{
+	float: left;
+	padding-left: 10px;
+}
+.blackList .rightCon p{
+	margin: 0;
+	line-height: 30px;
+}
+.nv{
+	padding: 3px 5px;
+	background-color: #fd908f;
+	color: #ffffff;
+	font-size: 12px;
+	border-radius: 5px;
+}
+.nan{
+	padding: 3px 5px;
+	background-color: #64d1f5;
+	color: #ffffff;
+	font-size: 12px;
+	border-radius: 5px;
+}
+.nv:hover,.nan:hover{
+	text-decoration: none;
+	color: #fff;
+}
+.cancelBlack{
+	display: block;
+	border: 1px solid #fd908f;
+	color: #fd908f;
+	font-size: 14px;
+	padding: 3px 10px;
+	margin-top: 15px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.loadingMore:hover{
+	background-color: #aaa;
+}
+.loadingMore{
+	display: block;
+	margin: 20px auto;
+	background-color: #ccc;
+	color: #fff;
+	font-size: 14px;
+	width: 100px;
+	line-height: 35px;
+	border-radius: 4px;
+	text-align: center;
+	cursor: pointer;
+}
+/*4*/
+.feedback>p{
+	margin: 0;
+	line-height: 40px;
+	font-weight: bolder;
+	border-bottom: 1px solid #aaa;
+}
+.sutupBtn{
+	text-align: right;
+}
+.sutupBtn button{
+	background-color: #fd908f;
+	color: #fff;
+	width: 150px;
+	height: 35px;
+	border: none;
+	border-radius: 4px;
+	margin: 10px 0;
+}
+.feedback{
+	margin-top: 10px;
+}
+.feedback textarea{
+	padding-bottom: 20px;
+	resize: none;
+}
+.theNumber{
+	position: absolute;
+	bottom: 0;
+	right: 15px;
+	font-size: 14px;
+	color: #ccc;
+}
+.interestChioce .title{
+	text-align: center;
+	margin: 0;
+	font-weight: bolder;
+	font-size: 18px;
+}
+.interestChioce .more{
+	color: #ccc;
+	font-size: 12px;
+	text-align: center;
+}
+.interestChioce .lists{
+	width: 100%;
+	height: 35px;
+	border: 1px solid #fd908f;
+	color: #fd908f;
+	border-radius: 4px;
+	text-align: center;
+	line-height: 35px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+.errorsBox{
+	text-align: center;
+}
+.errorsBox .errors{
+	color: red;
+	font-size: 18px;
+	font-weight: bolder;
+	margin: 0;
+}
+.interestBtn{
+	text-align: center;
+	margin: 10px 0;
+}
+.interestBtn button{
+	background-color: #fd908f;
+	color: #fff;
+	border: 1px solid #fd908f;
+	width: 150px;
+	height: 35px;
+	border-radius: 4px;
+}
+.signNumber{
+	opacity: 0;
+}
+.audio video{
+	height: 50px;
+}
+.audio input{
+	margin-left: 0;
+	display: inline-block;
+}
+.video_box{
+	margin-top: -30px;
+	position: relative;
+	width: 500px;
+}
+.video_box video{
+	width: 100%;
+}
+.audio_box{
+	width: 100px;
+	border: 1px solid #fd908f;
+	border-radius: 4px;
+	text-align: right;
+	display: inline-block;
+	cursor: pointer;
+}
+.audio_box .audio_img{
+	width: 100%;
+	height: 30px;
+	position: relative;
+}
+.audio_box .audio_img img{
+	width: 20px;
+	position: absolute;
+	top: 15%;
+	left: 15%;
+	height: 65%;
+}
+.audio_box .audio_img i{
+	font-style: normal;
+	font-size: 14px; 
+	color: #fd908f;
+	line-height: 30px;
+	margin-right: 15%;
+}
+.vedio_none,.noUpload{
+	margin-left: 20px;
+}
+.videoInput,.audioInput{
+	display: none;
+	width: 100px;
+	height: 30px;
+	background-color: #fd908f;
+	text-align: center;
+	border-radius: 4px;
+	position: relative;
+	margin-top: 5px;
+}
+.videoInput span,.audioInput span{
+	color: #fff;
+	font-size: 14px;
+	line-height: 30px;
+}
+.videoInput input,.audioInput input{
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.video_delete,.audio_delete{
+	width: 100px;
+	height: 30px;
+	background-color: #fd908f;
+	text-align: center;
+	border-radius: 4px;
+	margin-top: 5px;
+	display: none; 
+}
+.video_delete span,.audio_delete span{
+	color: #fff;
+	font-size: 14px;
+	line-height: 30px;
+}
+#video_delete{
+	margin-left: 68px;
+}

@@ -1,0 +1,681 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Index/css/index.css">
+<div class="row">
+	<div class="weui-tab" >
+    <div class="weui-tab__bd">
+      <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+          
+          <!-- <div class="swiper-container" data-space-between='10' data-pagination='.swiper-pagination' data-autoplay="1000">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="/Application/Wechat/View/Index/img/banner1.png" alt=""></div>
+              <div class="swiper-slide"><img src="/Application/Wechat/View/Index/img/banner2.png" alt=""></div>
+              <div class="swiper-slide"><img src="/Application/Wechat/View/Index/img/banner3.png" alt=""></div>
+            </div>
+          </div> -->
+          <div class="topBox">
+            <!-- 轮播start -->
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+              <!-- Indicators -->
+              <ol class="carousel-indicators">
+                <foreach name="bannerImg" key="ko" item="v">
+                    <if condition="$ko eq 0">
+                      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                      <else/>
+                      <li data-target="#carousel-example-generic" data-slide-to="{$ko}"></li>
+                    </if>
+                </foreach>
+              </ol>
+
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner" role="listbox">
+                <foreach name="bannerImg" key="k" item="v">
+                  <if condition="$k eq 0">
+                    <div class="item active">
+                      <img src="{$v.banner_path}" alt="...">
+                    </div>
+                    <else/>
+                    <div class="item">
+                      <img src="{$v.banner_path}" alt="...">
+                    </div>
+                  </if>
+                </foreach>
+              </div>
+
+              <!-- Controls -->
+              <!-- <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a> -->
+            </div>
+            <!-- 轮播end -->
+            <div class="position">
+              <svg class="icon categorie-icon" aria-hidden="true">
+                  <use xlink:href="#icon-dingwei" id="map"></use>
+              </svg>
+              <span id="city">全国</span>
+              <if condition="$Think.session.userinfo.uid eq null">
+                <!-- <a href="" onclick="return false" data-toggle="modal" data-target="#myModal">登录/注册</a> -->
+              </if>
+            </div>
+          </div>
+          <!-- 服务类型start -->
+          <div class="weui-grids shouye">
+            <foreach name="typeInfo" item="vo" key="k">
+              <a href="__APP__/Eachclass/index/id/{$vo.id}" class="weui-grid js_grid">
+                <div class="weui-grid__icon">
+                  <img src="{$vo.icon_path}" alt="">
+                </div>
+                <p class="weui-grid__label">
+                  {$vo.cname}
+                </p>
+              </a>
+            </foreach>
+            <a href="__APP__/Allclass/index" class="weui-grid js_grid">
+              <div class="weui-grid__icon">
+                <img src="/Application/Wechat/View/Index/img/wuxing.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                全部
+              </p>
+            </a>
+          </div>
+          <!-- 服务类型end -->
+          <!-- 服务列表start -->
+        <foreach name="needInfo" item="v" key="k">
+          <div class="container-fluid serviceList">
+            <div class="row serviceList_top">
+              <img class="bcg_pic" src="/Application/Wechat/View/Index/img/三角形.png">
+              <div class="col-sm-12 col-xs-12 serviceName">
+                <p>{$v.typename}</p>
+                <a class="morePeople" href="__APP__/Eachclass/index/id/{$v.typeid}">查看更多>></a>
+              </div>
+            </div>
+
+            <div class="row" style="padding: 5px 10px;">
+              <foreach name="v['detail']" item="vo">
+                <div class="col-sm-4 col-xs-4 peopleList">
+                  <a href="__APP__/Babyinformation/index/id/{$vo.uid}/scid/{$vo.scid}/sid/{$vo.id}">
+                    <div class="row peoplePic">
+                      <img src="{$vo.cover_path}">
+                      <if condition="$vo.nickname neq null">
+                        <p>{$vo.nickname}</p>
+                        <else/>
+                        <p>{$vo.real_name}</p>
+                      </if>
+
+                    </div>
+                    <span>￥{$vo.bid_price}/{$vo.charge_mode}</span>
+                  </a>
+                </div>
+              </foreach>
+            </div>
+          </div>
+        </foreach>
+          <!--<div class="container-fluid serviceList">
+            <div class="row">
+              <div class="col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 serviceName">
+                  <p>{$typeInfo.0.cname}</p>
+              </div>
+              <div class="col-sm-4 col-xs-4 morePeople">
+                <a href="">查看更多>></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid serviceList">
+            <div class="row">
+              <div class="col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 serviceName">
+                  <p>{$typeInfo.1.cname}</p>
+              </div>
+              <div class="col-sm-4 col-xs-4 morePeople">
+                <a href="">查看更多>></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid serviceList">
+            <div class="row">
+              <div class="col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 serviceName">
+                  <p>{$typeInfo.2.cname}</p>
+              </div>
+              <div class="col-sm-4 col-xs-4 morePeople">
+                <a href="">查看更多>></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid serviceList">
+            <div class="row">
+              <div class="col-sm-4 col-sm-offset-4 col-xs-4 col-xs-offset-4 serviceName">
+                  <p>{$typeInfo.3.cname}</p>
+              </div>
+              <div class="col-sm-4 col-xs-4 morePeople">
+                <a href="">查看更多>></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+              <div class="col-sm-4 col-xs-4 peopleList">
+                <div class="row peoplePic">
+                  <img src="/Application/Wechat/View/Index/img/banner2.png">
+                  <p>宝宝名字</p>
+                </div>
+                <span>￥40/小时</span>
+              </div>
+            </div>
+          </div>-->
+          <!-- 服务列表end -->
+      </div>
+      <div id="tab2" class="weui-tab__bd-item">
+        <div class="pageName" style="display: none">
+          <div class="container">
+            <p>我的排行榜</p>
+          </div>
+        </div>
+        <!-- 宝宝收入排行榜start -->
+        <!-- 自己收入start -->
+        <div class="weui-cells" style="display: none">
+          <div class="weui-cell">
+            <div class="weui-cell__hd">
+              <div class="rankingNum"></div>
+              <a class="Rnumber">11</a>
+              <img src="/Application/Wechat/View/Index/img/女1.png">
+            </div>
+            <div class="weui-cell__bd">
+              <p>宝宝名字</p>
+              <div class="myMsg">
+                <!-- 性别女start -->
+                <a class="agenv">
+                  <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                      <use xlink:href="#icon-xingbienv"></use>
+                  </svg>
+                  <span>22</span>
+                </a>
+                <!-- 性别女end -->
+                <!-- 性别男start -->
+                <!-- <a class="agenan">
+                  <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                      <use xlink:href="#icon-xingbienan"></use>
+                  </svg>
+                  <span>22</span>
+                </a> -->
+                <!-- 性别男end -->
+              </div>
+            </div>
+            <div class="weui-cell__ft">
+              <p>2000.0</p>
+              <span>收入总额</span>
+            </div>
+          </div>
+        </div>
+        <!-- 自己收入start -->
+        <div class="pageName">
+          <div class="container">
+            <p>前十宝宝排行榜</p>
+          </div>
+        </div>
+        <!-- 宝宝收入start -->
+        <div class="weui-cells">
+
+          <foreach name="sortMoney" key="k" item="val">
+            <div class="weui-cell">
+              <div class="weui-cell__hd">
+                <a class="onclickA" href="__APP__/Babyinformation/index/id/{$val.uid}/scid/{$val.scid}/sid/{$val.need_id}">
+                  <img src="{$val.cover_path}">
+                </a>
+                <div class="rankingNum"></div>
+
+                <a class="Rnumber">{$k+1}</a>
+              </div>
+              <div class="weui-cell__bd">
+                <p>{$val.nickname}</p>
+                <div class="myMsg">
+                  <!-- 性别女start -->
+                  <if condition="$val.sex eq 1">
+                    <a class="agenan">
+                      <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                        <use xlink:href="#icon-xingbienan"></use>
+                      </svg>
+                      <span style="display: none" class="ageMore"></span>
+                      <span>{$val.age}</span>
+                      <input class="idNumber" value="{$val.id_card}" type="hidden" />
+                    </a>
+                    <else/>
+                    <a class="agenv">
+                      <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                        <use xlink:href="#icon-xingbienv"></use>
+                      </svg>
+                      <span style="display: none" class="ageMore"></span>
+                      <span>{$val.age}</span>
+                      <input class="idNumber" value="{$val.id_card}" type="hidden" />
+                    </a>
+                  </if>
+
+                  <!-- 性别女end -->
+                  <!-- 性别男start -->
+                  <!-- <a class="agenan">
+                    <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                        <use xlink:href="#icon-xingbienan"></use>
+                    </svg>
+                    <span>22</span>
+                  </a> -->
+                  <!-- 性别男end -->
+                </div>
+              </div>
+              <div class="weui-cell__ft">
+                <p>{$val.earning}</p>
+                <span>收入总额</span>
+              </div>
+            </div>
+          </foreach>
+        </div>
+        <!-- 宝宝收入start -->
+        <!-- 宝宝收入排行榜end -->
+      </div>
+      <div id="tab3" class="weui-tab__bd-item">
+        <div class="pageName">
+          <div class="container">
+            <p>消息</p>
+          </div>
+        </div>
+        <foreach name="newSys" item="sval">
+          <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__bd">
+              <a href="__APP__/Index/newsDetails/id/{$sval.id}" class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd" style="display: none">
+                  <img class="weui-media-box__thumb" src="/Application/Wechat/View/Index/img/banner2.png">
+                </div>
+                <div class="weui-media-box__bd msgCon">
+                  <h4 class="weui-media-box__title">{$sval.title}</h4>
+                  <p class="weui-media-box__desc msgcontent">{$sval.content}</p>
+                </div>
+                <div class="weui-media-box__bd msgTime">
+                  <span>{$sval.ctime|date='Y-m-d H:i:s',###}</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </foreach>
+
+
+      </div>
+      <div id="tab4" class="weui-tab__bd-item">
+        <div class="col-sm-12 col-xs-12 setUp">
+          <a href="__APP__/Setup/index">
+            <svg class="icon categorie-icon" aria-hidden="true">
+                <use xlink:href="#icon-shezhi"></use>
+            </svg>
+          </a>
+        </div>
+        <div class="col-sm-12 col-xs-12 avatar">
+          <a href="__APP__/Mydata/index" class="avatarPic">
+          <if condition='$userInfo.head_portrait eq null'>
+          
+          <img src="/Application/Wechat/View/Mydata/img/未标题-1.png">
+          <else/>
+          <img src="{$userInfo.head_portrait}">
+          </if>
+           
+            <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                <use xlink:href="#icon-bianji"></use>
+            </svg>
+          </a>
+          <div class="myMsg">
+            <p class="myName">{$userInfo.nickname}</p>
+            <!-- 性别女start -->
+            <if condition="$userInfo.sex eq 0">
+               <a class="agenv">
+                  <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                      <use xlink:href="#icon-xingbienv"></use>
+                  </svg>
+              <else/>
+                <a class="agenan">
+                    <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                        <use xlink:href="#icon-xingbienan"></use>
+                    </svg>
+            </if>
+              <if condition="$userInfo.id_card neq null">
+                <span class="ageMore" id="age"></span>
+                <else/>
+                未认证
+              </if>
+            </a>
+            <input class="idNumber" id="Numid" value="{$userInfo.id_card}" type="hidden" />
+            <if condition="$userInfo.istatus eq 2">
+              <a class="agenan">
+                <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                  <use xlink:href="#icon-1"></use>
+                  <span>已认证</span>
+                </svg>
+              </a>
+              <elseif condition="$userInfo.istatus eq 1"/>
+              <a class="agenan">
+                <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                  <use xlink:href="#icon-1"></use>
+                  <span>认证未通过</span>
+                </svg>
+              </a>
+              <elseif condition="$userInfo.istatus eq null"/>
+              <a class="agenan">
+                <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                  <use xlink:href="#icon-1"></use>
+                  <span>未认证</span>
+
+                </svg>
+              </a>
+              <elseif condition="$userInfo.istatus eq 0"/>
+              <a class="agenan">
+                <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                  <use xlink:href="#icon-1"></use>
+                  <span>审核认证中</span>
+
+                </svg>
+              </a>
+            </if>
+            <!-- 性别女end -->
+            <!-- 性别男start -->
+            <!-- <a class="agenan">
+              <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+                  <use xlink:href="#icon-xingbienan"></use>
+              </svg>
+              <span>22</span>
+            </a> -->
+            <!-- 性别男end -->
+          </div>
+        </div>
+        <div class="weui-grids myWallet">
+          <a class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+              <img src="/Application/Wechat/View/Index/img/钱包.png" alt="">
+            </div>
+            <p class="weui-grid__label">
+              我的钱包
+            </p>
+          </a>
+          <a class="weui-grid js_grid number" href="__APP__/Balance/index">
+            <div class="weui-grid__icon">
+              <span>{$userInfo.balance}</span>
+            </div>
+            <p class="weui-grid__label">
+              账户余额
+            </p>
+          </a>
+          <a class="weui-grid js_grid number coupon" href="__APP__/Coupon/index/all/{$CouponId}">
+            <div class="weui-grid__icon">
+              <span>{$num}</span>
+            </div>
+            <p class="weui-grid__label">
+              优惠券
+            </p>
+          </a>
+          <a class="weui-grid js_grid number" href="__APP__/Balance/index">
+            <div class="weui-grid__icon">
+              <span>{$userInfo.earning}</span>
+            </div>
+            <p class="weui-grid__label">
+              我的收入
+            </p>
+          </a>
+        </div>
+        <div class="weui-cells myList">
+          <a class="weui-cell weui-cell_access" href="__APP__/Myorder/index">
+            <div class="weui-cell__hd">
+              <svg class="icon categorie-icon" aria-hidden="true" style="color: #0dbca6;">
+                  <use xlink:href="#icon-order"></use>
+              </svg>
+            </div>
+            <div class="weui-cell__bd">
+              <p>我的订单</p>
+            </div>
+            <div class="weui-cell__ft">
+            </div>
+          </a>
+          <a class="weui-cell weui-cell_access" href="/Wechat/Becomebaby/index">
+            <div class="weui-cell__hd">
+              <svg class="icon categorie-icon" aria-hidden="true" style="color: #7969e2;">
+                  <use xlink:href="#icon-baobao"></use>
+              </svg>
+            </div>
+            <div class="weui-cell__bd">
+              <p>成为宝宝</p>
+            </div>
+            <div class="weui-cell__ft">
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="dam-board" style="height: 70px;"></div>
+    <div class="weui-tabbar weui-footer_fixed-bottom">
+      <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
+        <svg class="icon categorie-icon" aria-hidden="true">
+            <use xlink:href="#icon-shouye"></use>
+        </svg>
+        <p class="weui-tabbar__label">首页</p>
+      </a>
+      <a href="#tab2" class="weui-tabbar__item">
+        <svg class="icon categorie-icon" aria-hidden="true">
+            <use xlink:href="#icon-ds"></use>
+        </svg>
+        <p class="weui-tabbar__label">排行榜</p>
+      </a>
+      <a href="#tab3" class="weui-tabbar__item">
+        <svg class="icon categorie-icon" aria-hidden="true">
+            <use xlink:href="#icon-xiaoxi"></use>
+        </svg>
+        <p class="weui-tabbar__label">消息</p>
+      </a>
+      <if condition="$Think.session.userinfo.uid neq null">
+      <a href="#tab4" class="weui-tabbar__item">
+        <svg class="icon categorie-icon" aria-hidden="true">
+            <use xlink:href="#icon-wode"></use>
+        </svg>
+        <p class="weui-tabbar__label">我</p>
+      </a>
+      <else/>
+        <a class="weui-tabbar__item" id="mylogin">
+          <svg class="icon categorie-icon" aria-hidden="true">
+              <use xlink:href="#icon-wode"></use>
+          </svg>
+          <p class="weui-tabbar__label">登录</p>
+        </a>
+      </if> 
+    </div>
+  </div>
+</div>
+
+<include file="Layout/footer" />
+<script type="text/javascript" src="/Application/Wechat/View/Index/js/index.js"></script>
+
+<!--获取当前定位城市-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=QvCZFSofVXQlv2blYx71RUoYM7WiWlnT"></script>
+<script type="text/javascript">
+    var geolocation = new BMap.Geolocation();
+    geolocation.getCurrentPosition(function(r){
+        if(this.getStatus() == BMAP_STATUS_SUCCESS){
+            var mk = new BMap.Marker(r.point);
+            map.addOverlay(mk);
+            //获取当前位置坐标
+            map.panTo(r.point);
+            //alert('您的位置：'+r.point.lng+','+r.point.lat);
+            //解析当前位置
+            var geoc = new BMap.Geocoder();
+            var pt = new BMap.Point(r.point.lng,r.point.lat);//实例化这两个点
+            geoc.getLocation(pt, function (rs) {
+                var addComp = rs.addressComponents;
+                //$('.its-place').html(addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber)
+                 //alert("您当前所在位置 : "+addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+                    $('#city').html(addComp.city)
+              $.ajax({
+                url:'__APP__/Index/city',
+                data:'city='+addComp.city,
+                dataType:'json',
+                type:'post',
+                success:function(re){
+
+                }
+              })
+                //对应的省市区、县街道，街道号
+            });
+            //alert('您的位置：'+r.point.lng+','+r.point.lat);
+        }
+        else {
+            alert('failed'+this.getStatus());
+        }
+    },{enableHighAccuracy: true})
+
+    /*var geolocation = new BMap.Geolocation();
+     geolocation.getCurrentPosition(function(r){
+     if(this.getStatus() == BMAP_STATUS_SUCCESS){
+     //表示获取成功那么 r 这个参数就包含有当前的地理位置经纬度
+     //逆地址解析，就是要把当前的经纬度转为当前具体地理位置
+     //逆地址解析
+     var geoc = new BMap.Geocoder();
+     var pt = new BMap.Point(106.53063501,29.54460611);//实例化这两个点
+     geoc.getLocation(pt, function (rs) {
+     var addComp = rs.addressComponents;
+     $('.its-place').html(addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber)
+     alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+
+     //对应的省市区、县街道，街道号
+     });
+
+     }else {
+     alert('failed'+this.getStatus());
+     }
+     },{enableHighAccuracy: true})*/
+
+    //创建和初始化地图函数：
+    function initMap(){
+        map = new BMap.Map("map");
+    }
+    var map;
+    initMap();
+
+    //年龄换算
+    var idNumberLen=$(".idNumber").length;
+    for(var i=0;i<idNumberLen;i++){
+        var dateStrA = $(".idNumber").eq(i).val();
+        var year = dateStrA.substring(6,10);
+        var month = Number(dateStrA.substring(10,12));
+        var date = Number(dateStrA.substring(12,14));
+        var oDate = new Date(); //实例一个时间对象；
+        var nowyear=oDate.getFullYear();   //获取系统的年；
+        var nowmonth=oDate.getMonth()+1;   //获取系统月份，由于月份是从0开始计算，所以要加1
+        var nowdate=oDate.getDate(); // 获取系统日，
+        if(nowyear == year){  
+            $(".ageMore").eq(i).html("0");//同年 则为0岁  
+        }else{  
+            var ageDiff = nowyear - year ; //年之差  
+            if(ageDiff > 0){  
+                if(nowmonth == month){  
+                    var dayDiff = nowdate - date;//日之差  
+                    if(dayDiff < 0){  
+                        var returnAge = ageDiff - 1;
+                        $(".ageMore").eq(i).html(returnAge);
+                    }else{  
+                        var returnAge = ageDiff ;
+                        $("#ageMore").eq(i).html(returnAge);
+                    }  
+                }else{  
+                    var monthDiff = nowmonth - month;//月之差  
+                    if(monthDiff < 0){  
+                        var returnAge = ageDiff - 1;
+                        $(".ageMore").eq(i).html(returnAge);
+                    }else{  
+                        var returnAge = ageDiff ;
+                        $(".ageMore").eq(i).html(returnAge);
+                    }  
+                }  
+            }else{  
+                $(".ageMore").eq(i).html("");//返回-1 表示出生日期输入错误 晚于今天  
+            }  
+        }
+    }
+    
+
+</script>

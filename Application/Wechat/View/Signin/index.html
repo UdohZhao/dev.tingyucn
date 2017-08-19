@@ -1,0 +1,142 @@
+
+
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Login/css/index.css">
+<div class="row">
+  <form>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" type="number" id="phone" name="username" pattern="[0-9]*" placeholder="请输入手机号">
+    </div>
+  </div>
+      <div class="weui-cell weui-cell_vcode">
+    <div class="weui-cell__hd">
+      <label class="weui-label">验证码</label>
+    </div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" type="tel" id="verify" name="verify" placeholder="请输入验证码">
+    </div>
+    <div class="weui-cell__ft">
+      <a class="weui-vcode-btn" id="getverify">获取验证码</a>
+    </div>
+  </div>
+      <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label">登录密码</label></div>
+    <div class="weui-cell__bd">
+      <input class="weui-input" id="pwd" type="password"  placeholder="请输入密码">
+    </div>
+  </div>
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">确认密码</label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" id="pwdcomfire" type="password"  placeholder="请输入确认密码">
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-xs-12 loginBtn">
+	<a href="javascript:;" class="weui-btn weui-btn_primary" id="bt">注册
+	</a>
+    </div>
+  </form>
+</div>
+
+<include file="Layout/footer" />
+<script type="text/javascript">
+$(function(){
+  $(".weui-btn_primary").click(function(){
+    $(this).css("background-color","#fd908f");
+  })
+
+  $('#getverify').click(function(){
+    var phone = document.getElementById('phone').value;  //手机号码
+    if(!(/^1[34578]\d{9}$/.test(phone))){
+      // alert("手机号码有误，请重填");
+      $.toast("手机号码有误，请重填", "cancel");
+      return false;
+    }
+    $.ajax({
+      url:'__APP__/Signin/getVerify',
+      data:'phone='+phone,
+      dataType:'json',
+      type:'post',
+      success:function(re){
+        if(re===true){
+          // alert('验证码发送成功,注意接收短信');
+          $.toast("验证码发送成功,注意接收短信");
+        }else if(re.info==3){
+          $.toast(re.msg, "cancel");
+        }else{
+          // alert('验证码发送失败');
+          $.toast("验证码发送失败", "cancel");
+        }
+      }
+    })
+  })
+})
+</script>
+
+<script>
+
+
+
+
+  function checkPhone(){ //验证手机号码正则函数  ，以及密码长度 ，确认密码是否一致
+    var phone = document.getElementById('phone').value;  //手机号码
+    if(!(/^1[34578]\d{9}$/.test(phone))){
+      // alert("手机号码有误，请重填");
+      $.toast("手机号码有误，请重填", "cancel");
+      return false;
+    }
+    //验证密码
+    var pattern=new RegExp(/^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$/);
+    var pwd=$('#pwd').val();                  //密码
+    if(!pattern.test(pwd)){
+      // alert('密码格式不正确，格式：字母+数字或者字符')
+      $.toast("密码格式不正确，格式：字母+数字或者字符", "cancel");
+      return false;
+    }else if(pwd.length<6 || pwd.length>20){
+      // alert('密码位数在6到20位之间');
+      $.toast("密码位数在6到20位之间", "cancel");
+      return false;
+    }
+    var conpwd=$('#pwdcomfire').val();
+    if(pwd!==conpwd){
+      // alert('两次密码不一致')
+      $.toast("两次密码不一致", "cancel");
+      return false;
+    }
+    return true;
+  }
+
+  $(function(){
+    $('#bt').click(function(){
+      var phone = document.getElementById('phone').value;  //手机号码
+      var pwd=$('#pwd').val();                  //密码
+      var verify=$('#verify').val();
+        if(checkPhone()){ //验证正确
+          $.ajax({
+              url:'__APP__/Signin/save',
+              data:'username='+phone+'&password='+pwd+'&verify='+verify,
+              dataType:'json',
+              type:'post',
+              success:function(re){
+                if(re.info==2){  //短信验证码不正确
+                  // alert(re.msg)
+                  $.toast(re.msg, "cancel");
+                }else if(re===true){
+                  // alert('注册成功');
+                  $.toast('注册成功');
+                  window.location.href='__APP__/Login/index'
+                }else if(re.info==3){
+                  // alert(re.msg);
+                  $.toast(re.msg, "cancel");
+                }
+              }
+          })
+        }
+    })
+  })
+</script>

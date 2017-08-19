@@ -1,0 +1,451 @@
+<include file="./Public/Bootstrap/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Layouts/css/common.css">
+	<!-- 顶部菜单 start-->
+	<div class="container-fluid bodyColor" style="position: relative;">
+		<div style="height: 90px;"></div>
+		<div class="row topMenu">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 logoPic">
+						<img src="{$siteInfo.logo_path}">
+					</div>
+					<div class="col-md-9 bigMenu">
+						<ul class="menu">
+						  <li role="presentation"><a href="__APP__/Index/index"  <eq name="Index" value="1">class="active"</eq> >首页</a></li>
+						  <li role="presentation"><a href="__APP__/Eachclass/index/type/0"  <eq name="Eachclass" value="0">class="active"</eq> >线上游戏</a></li>
+						  <li role="presentation"><a href="__APP__/Eachclass/index/type/1" <eq name="Eachclass" value="1">class="active"</eq>>线上娱乐</a></li>
+						  <li role="presentation"><a href="__APP__/Eachclass/index/type/2" <eq name="Eachclass" value="2">class="active"</eq>>线下娱乐</a></li>
+						  <li role="presentation"><a href="__APP__/Ranking/index" <eq name="Ranking" value="1">class="active"</eq>>排行</a></li>
+						  <!-- <li role="presentation"><a href="__APP__/Eachclass/index/type/4" <eq name="Eachclass" value="4">class="active"</eq>>旅游</a></li> -->
+						  <!--<li role="presentation"><a href="#" data-toggle="modal" data-target="#myModal" id="loginorsignin">登录/注册</a></li>-->
+						  <if condition="$Think.session.userinfo.uid neq null">
+							  <li id="afterLogin" role="presentation">
+								  <div class="Lleft">
+									  <if condition="$userInfo.head_portrait neq null">
+										  <a target="iframe2" href="__APP__/Myself/index"><img src="{$userInfo.head_portrait}"></a>
+										  <else/>
+										  <a target="iframe2" href="__APP__/Myself/index"><img src="/Application/Wechat/View/Mydata/img/未标题-1.png"></a>
+									  </if>
+
+								  </div>
+								  <div class="Lright">
+									  <if condition="$userInfo.nickname neq null">
+										  <p>{$userInfo.nickname}</p>
+										  <else/>
+										  <p>昵称</p>
+									  </if>
+
+									  <span>性别： {$userInfo.sex}</span>
+								  </div>
+								  <div style="clear: both;"></div>
+								  <div class="Ldown">
+									  <svg class="icon categorie-icon" aria-hidden="true">
+										  <use xlink:href="#icon-xiangxiajiantou"></use>
+									  </svg>
+								  </div>
+								  <div class="myLmsg">
+									  <div class="Lcontent">
+										  <div class="Lbtn">
+											  <a href="__APP__/Mynews/index">系统消息</a>
+										  </div>
+										  <div class="Lbtn">
+											  <a href="__APP__/Myorder/index">我的订单</a>
+										  </div>
+										  <div style="clear: both;"></div>
+									  </div>
+									  <div class="Lmymoney">
+										  <a class="balance" href="__APP__/Mybalance/index">我的余额：<b>{$userInfo.balance}</b></a>
+										  <a class="rechargebtn" href="__APP__/Recharge/index">充值</a>
+									  </div>
+									  <div class="exitLogin">
+										  <a href="__APP__/Login/loginout">退出登录</a>
+									  </div>
+								  </div>
+							  </li>
+							  <else/>
+							  <li role="presentation"><a href="#" data-toggle="modal" data-target="#myModal" id="loginorsignin">登录/注册</a></li>
+						  </if>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade mylogin" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="row">
+		      		<div class="col-sm-12">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        	<span aria-hidden="true" id="cancleIt">&times;</span>
+				        </button>
+			        </div>
+		        </div>
+		        <div class="modal-title" id="myModalLabel">
+					<ul class="nav nav-tabs ulLogin" role="tablist">
+					    <li role="presentation" id="s1" class="active"><a href="#Login" aria-controls="Login" id="a1" role="tab" data-toggle="tab">登录</a></li>
+					    <li role="presentation" id="s2"><a href="#signin" aria-controls="signin" id="a2" role="tab" data-toggle="tab">注册</a></li>
+					</ul>
+					<div class="tab-content loginSignin">
+					    <div role="tabpanel" class="tab-pane active" id="Login">
+							<form class="form-horizontal">
+							  <div class="form-group">
+							    <label for="inputEmail3" class="col-sm-3 control-label">手机账号</label>
+							    <div class="col-sm-9">
+							      <input type="number" name="username" class="form-control" id="inputEmail3" placeholder="请输入手机号">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label for="inputPassword3" class="col-sm-3 control-label">登录密码</label>
+							    <div class="col-sm-9">
+							      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="请输入密码">
+							    </div>
+							  </div>
+							  <div class="form-group" style="margin-bottom: 0;">
+							    <div class="col-sm-offset-3 col-sm-6">
+							      <button type="button" id="Lbt" class="btn btn-default loginBtn">登录</button>
+							    </div>
+							  </div>
+							  <div class="forget">
+							  	<a id="forgetMy" data-toggle="modal" data-target="#forgetModal" data-dismiss="modal" aria-label="Close">忘记密码</a>
+							  </div>
+							</form>
+					    </div>
+					    <div role="tabpanel" class="tab-pane"  id="signin">
+							<form class="form-horizontal">
+							  <div class="form-group">
+							    <label for="Snumber" class="col-sm-3 control-label">手机号码</label>
+							    <div class="col-sm-9">
+							      <input type="number"  class="form-control" id="Snumber" placeholder="请输入手机号">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label for="Syanzheng" class="col-sm-3 control-label">验证码</label>
+							    <div class="col-sm-6">
+							      <input type="text" class="form-control" id="Syanzheng" placeholder="请输入验证码">
+							    </div>
+							    <div class="col-sm-3 yzmBtn">
+									<button id="getverify">获取验证码</button>
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label for="Spassword" class="col-sm-3 control-label">设置密码</label>
+							    <div class="col-sm-9">
+							      <input type="password" class="form-control" id="Spassword" placeholder="请设置密码">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label for="Spasswordagain" class="col-sm-3 control-label">确认密码</label>
+							    <div class="col-sm-9">
+							      <input type="password" class="form-control" id="Spasswordagain" placeholder="请再次输入密码">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <div class="col-sm-offset-3 col-sm-6">
+							      <button type="button" id="Sbt" class="btn btn-default loginBtn">注册</button>
+							    </div>
+							  </div>
+							</form>
+						</div>
+					</div>
+
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<div class="modal fade" id="forgetModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="row">
+		      		<div class="col-sm-12">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        	<span aria-hidden="true" id="cancleIt">&times;</span>
+				        </button>
+			        </div>
+		        </div>
+		        <div class="modal-title" id="myModalLabel">
+		        	<div class="forgetModal_title">重置密码</div>
+				  <div role="tabpanel" class="tab-pane" style="display: none"  id="fsignin">
+					  <form class="form-horizontal">
+						  <div class="form-group">
+							  <label for="Snumber" class="col-sm-3 control-label">手机号码</label>
+							  <div class="col-sm-9">
+								  <input type="number"  class="form-control" id="Snumber1" placeholder="请输入手机号">
+							  </div>
+						  </div>
+						  <div class="form-group">
+							  <label for="Syanzheng" class="col-sm-3 control-label">验证码</label>
+							  <div class="col-sm-6">
+								  <input type="text" class="form-control" id="Syanzheng1" placeholder="请输入验证码">
+							  </div>
+							  <div class="col-sm-3 yzmBtn">
+								  <button id="getverify1">获取验证码</button>
+							  </div>
+						  </div>
+						  <div class="form-group">
+							  <label for="Spassword" class="col-sm-3 control-label">设置密码</label>
+							  <div class="col-sm-9">
+								  <input type="password" class="form-control" id="Spassword1" placeholder="请设置密码">
+							  </div>
+						  </div>
+						  <div class="form-group">
+							  <label for="Spasswordagain" class="col-sm-3 control-label">确认密码</label>
+							  <div class="col-sm-9">
+								  <input type="password" class="form-control" id="Spasswordagain1" placeholder="请再次输入密码">
+							  </div>
+						  </div>
+						  <div class="form-group">
+							  <div class="col-sm-offset-3 col-sm-6">
+								  <button type="button" id="Sbt1" class="btn btn-default loginBtn" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#myModal">确认重设</button>
+							  </div>
+						  </div>
+					  </form>
+				  </div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<script>
+			//登录
+			$(function(){
+				$('#Lbt').click(function(){
+					var name=$('#inputEmail3').val();
+					var pswd=$('#inputPassword3').val();
+					if(name.length>20 || name==''){
+						layer.alert('输入正确手机号，不能为空');
+						 //alert('输入正确手机号，不能为空')
+						return false;
+						//$.toast("输入正确手机号，不能为空", "cancel");
+					}else if(pswd.length>20 || pswd==''){
+						//alert('密码不能超过20位,不能为空')
+						layer.alert('密码不能超过20位,不能为空');
+						return false;
+						// $.toast("密码不能超过20位,不能为空", "cancel");
+					}else{
+						$.ajax({
+							url:'__APP__/Login/check',
+							data:{
+								username:name,
+								password:pswd
+							},
+							dataType:'json',
+							type:'post',
+							success:function(re){
+								if(re.info===4){
+									 //alert('该用户已被冻结，请联系网站负责人')
+									layer.alert('该用户已被冻结，请联系网站负责人');
+									//$.toast("该用户已被冻结，请联系网站负责人", "cancel");
+								}else if(re===false){
+									// alert('用户名或密码错误');
+									layer.alert('用户名或密码错误');
+									//$.toast("用户名或密码错误", "cancel");
+								}else if(re===true){
+									window.location.href='__APP__/Index/index'
+								}
+							}
+						})
+					}
+
+				})
+
+				//获取验证码
+				$('#getverify').click(function(){
+
+					var phone = document.getElementById('Snumber').value;  //手机号码
+					if(!(/^1[34578]\d{9}$/.test(phone))){
+
+						layer.alert('手机号码有误，请重填');
+						//$.toast("手机号码有误，请重填", "cancel");
+						return false;
+					}
+					$.ajax({
+						url:'__APP__/Signin/getVerify',
+						data:'phone='+phone,
+						dataType:'json',
+						type:'post',
+						success:function(re){
+							if(re===true){
+								//alert('验证码发送成功,注意接收短信');
+								layer.alert('验证码发送成功,注意接收短信');
+								//$.toast("验证码发送成功,注意接收短信");
+							}else if(re.info==3){
+								layer.alert(re.msg)
+								//$.toast(re.msg, "cancel");
+							}else{
+								layer.alert('验证码发送失败');
+								//$.toast("验证码发送失败", "cancel");
+							}
+						}
+					})
+					return false
+				})
+				//注册
+				$('#Sbt').click(function(){
+					var pobj = document.getElementById('Snumber');
+					var phone=$(pobj).val()
+					var pwd=$('#Spassword').val();                  //密码
+					var verify=$('#Syanzheng').val();
+					if(checkPhone()){ //验证正确
+						$.ajax({
+							url:'__APP__/Signin/save',
+							data:'username='+phone+'&password='+pwd+'&verify='+verify,
+							dataType:'json',
+							type:'post',
+							success:function(re){
+								if(re.info==2){  //短信验证码不正确
+									// alert(re.msg)
+									layer.alert(re.msg);
+								}else if(re===true){
+									// alert('注册成功');
+									layer.alert('注册成功,请登录');
+									$('#s1').addClass('active');
+									$('#s2').removeClass('active');
+									$('#Login').addClass('active');
+									$('#signin').removeClass('active');
+									$('#a1').attr('aria-expanded',true);
+									$('#a2').attr('aria-expanded',false);
+								}else if(re.info==3){
+									// alert(re.msg);
+									layer.alert(re.msg);
+								}
+							}
+						})
+					}
+				})
+
+			})
+			function checkPhone(){ //验证手机号码正则函数  ，以及密码长度 ，确认密码是否一致
+				var pobj = document.getElementById('Snumber');
+				var phone=$(pobj).val()  //手机号码
+				if(!(/^1[34578]\d{9}$/.test(phone))){
+					// alert("手机号码有误，请重填");
+					layer.alert("手机号码有误，请重填");
+					return false;
+				}
+				//验证密码
+				var pattern=/^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$/;
+				var pwd=$('#Spassword').val();                  //密码
+				if(!pattern.test(pwd)){
+					// alert('密码格式不正确，格式：字母+数字或者字符')
+					layer.alert("密码格式不正确，格式：字母+数字或者字符");
+					return false;
+				}else if(pwd.length<6 || pwd.length>20){
+					// alert('密码位数在6到20位之间');
+					layer.alert("密码位数在6到20位之间");
+					return false;
+				}
+				var conpwd=$('#Spasswordagain').val();
+				if(pwd!==conpwd){
+					// alert('两次密码不一致')
+					layer.alert("两次密码不一致");
+					return false;
+				}
+				return true;
+			}
+		</script>
+
+		<script>
+			//点击忘记密码
+			$('#forgetMy').click(function(){
+					$('#fsignin').css('display','block')
+			})
+			$('#s2').click(function(){
+				$('#fsignin').css('display','none')
+			})
+			$('#cancleIt').click(function(){
+				$('#fsignin').css('display','none')
+			})
+			//获取验证码
+			$('#getverify1').click(function(){
+
+				var phone = document.getElementById('Snumber1').value;  //手机号码
+				if(!(/^1[34578]\d{9}$/.test(phone))){
+
+					layer.alert("手机号码有误，请重填");
+					//$.toast("手机号码有误，请重填", "cancel");
+					return false;
+				}
+				$.ajax({
+					url:'__APP__/Signin/getVerify',
+					data:'phone='+phone+'&myOper=1',
+					dataType:'json',
+					type:'post',
+					success:function(re){
+						if(re===true){
+							layer.alert('验证码发送成功,注意接收短信');
+							//$.toast("验证码发送成功,注意接收短信");
+						}else if(re.info==3){
+							layer.alert(re.msg)
+							//$.toast(re.msg, "cancel");
+						}else{
+							layer.alert('验证码发送失败');
+							//$.toast("验证码发送失败", "cancel");
+						}
+					}
+				})
+				return false
+			})
+			//修改密码
+			$('#Sbt1').click(function(){
+				var pobj = document.getElementById('Snumber1');
+				var phone=$(pobj).val()
+				var pwd=$('#Spassword1').val();                  //密码
+				var verify=$('#Syanzheng1').val();
+				if(checkPhone1()){ //验证正确
+					$.ajax({
+						url:'__APP__/Signin/fsave',
+						data:'username='+phone+'&password='+pwd+'&verify='+verify,
+						dataType:'json',
+						type:'post',
+						success:function(re){
+							if(re.info==2){  //短信验证码不正确
+								layer.alert(re.msg)
+								//$.toast(re.msg, "cancel");
+							}else if(re===true){
+								layer.alert('修改成功');
+								//$.toast('注册成功,请登录');
+								// $('#fsignin').css('display','none')
+							}else if(re.info==3){
+								layer.alert(re.msg);
+								//$.toast(re.msg, "cancel");
+							}
+						}
+					})
+				}
+			})
+
+			function checkPhone1(){ //验证手机号码正则函数  ，以及密码长度 ，确认密码是否一致
+				var pobj = document.getElementById('Snumber1');
+				var phone=$(pobj).val()  //手机号码
+				if(!(/^1[34578]\d{9}$/.test(phone))){
+					// alert("手机号码有误，请重填");
+					layer.alert("手机号码有误，请重填");
+					return false;
+				}
+				//验证密码
+				var pattern=/^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$/;
+				var pwd=$('#Spassword1').val();                  //密码
+				if(!pattern.test(pwd)){
+					layer.alert('密码格式不正确，格式：字母+数字或者字符')
+					//$.toast("密码格式不正确，格式：字母+数字或者字符", "cancel");
+					return false;
+				}else if(pwd.length<6 || pwd.length>20){
+					layer.alert('密码位数在6到20位之间');
+					//$.toast("密码位数在6到20位之间", "cancel");
+					return false;
+				}
+				var conpwd=$('#Spasswordagain1').val();
+				if(pwd!==conpwd){
+					layer.alert('两次密码不一致')
+					//$.toast("两次密码不一致", "cancel");
+					return false;
+				}
+				return true;
+			}
+
+		</script>

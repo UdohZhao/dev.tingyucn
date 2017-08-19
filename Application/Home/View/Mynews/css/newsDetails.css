@@ -1,0 +1,38 @@
+.newsDetails{
+	margin: 20px auto;
+	background-color: #fff;
+	padding-bottom: 40px;
+	position: relative;
+}
+.newsDTitle>p{
+	line-height: 40px;
+	font-weight: bolder;
+	border-bottom: 1px solid #aaa;
+	margin: 0;
+}
+.newsDetailsCon{
+	padding: 20px 20px;
+}
+.newsDetailsCon p{
+	margin: 0;
+}
+.newsDetailsCon p.newslistTitle{
+	text-align: center;
+	font-size: 18px;
+	line-height: 60px;
+}
+.newsDetailsCon p.newslistCon{
+	text-indent: 2em;
+	line-height: 22px;
+	text-align: justify;
+}
+.newsTime{
+	position: absolute;
+	bottom: 10px;
+	right: 35px;
+}
+.newsTime p{
+	margin: 0;
+	font-size: 14px;
+	color: #ccc;
+}

@@ -1,0 +1,56 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Blacklist/css/index.css">
+
+	<!-- 内容主体start -->
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>黑名单</p>
+          </div>
+        </div>
+	</div>
+	<div class="row blackList">
+		<!-- 黑名单循环start -->
+		<foreach name="arrInfo" item="v">
+			<div class="weui-cells">
+				<div class="weui-cell">
+					<div class="weui-cell__hd"><img src="{$v.cover_path}"></div>
+					<div class="weui-cell__bd">
+						<p>{$v.nickname}</p>
+						<p class="blackTime"></p><!--数据库无存拉黑时间-->
+					</div>
+					<div class="weui-cell__ft" value="{$v.uid}" id="cbt">
+						<button>取消拉黑</button>
+					</div>
+				</div>
+			</div>
+		</foreach>
+
+		<!-- 黑名单循环end -->
+	</div>
+	<!-- 内容主体end -->
+
+<include file="Layout/footer" />
+
+<script>
+	$(function(){
+		$('#cbt').click(function(){
+			var bbId=$(this).attr('value');
+
+			$.ajax({
+				url:'__APP__/Babyinformation/cblack',
+				data:'bbId='+bbId,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					if(re===true){
+						// alert('取消成功')
+						$.toast("取消成功");
+						location.reload();
+					}
+				}
+			})
+		})
+	})
+</script>

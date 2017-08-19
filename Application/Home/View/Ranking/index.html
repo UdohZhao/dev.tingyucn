@@ -1,0 +1,152 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Ranking/css/index.css">
+
+	<!-- 内容主体 start-->
+	
+		<div class="row recommendSer">
+			<!-- <img src="/Application/Home/View/Eachclass/img/8.png"> -->
+			<h4>排行</h4>
+		</div>
+	<div class="container ranking_bcg">
+		<div class="row ranking_income">
+			<div class="col-md-12 col-sm-12" style="margin-bottom: 20px;">
+				<div class="row">
+					<img src="/Application/Home/View/Ranking/img/收入.png">
+				</div>
+			</div>
+			<foreach name="sortMoney" key="k" item="val">
+			<div class="col-md-6 col-sm-6">
+				<div class="rankingBox">
+					<!-- 收入排行start -->
+
+					<div class="rankingDown">
+						<div class="row">
+							<div class="col-md-12 rankingList">
+								<div class="listLeft">
+									<a class="listImg" href="__APP__/Babyinformation/index/id/{$val.uid}/scid/{$val.scid}/sid/{$val.need_id}"><img src="{$val.cover_path}"></a>
+									<div class="sanjiao"></div>
+									<a class="rankingNum">{$k+1}</a>
+								</div>
+								<div class="listCenter">
+									<if condition="$val.nickname neq null">
+										<p>{$val.nickname}</p>
+										<else/>
+										<p>昵称</p>
+									</if>
+									<!-- 男strat -->
+									<if condition="$val.sex eq 1">
+										<a class="nan">
+											<svg class="icon categorie-icon" aria-hidden="true">
+												<use xlink:href="#icon-xingbienan"></use>
+											</svg>
+											<span style="display: none" class="age">{$val.id_card}</span>
+											<span>{$val.age}</span>
+											<input class="idNumber" value="{$val.id_card}" type="hidden" />
+										</a>
+										<else/>
+										<a class="nv">
+											<svg class="icon categorie-icon" aria-hidden="true">
+												<use xlink:href="#icon-xingbienv"></use>
+											</svg>
+											<span style="display: none" class="age">{$val.id_card}</span>
+											<span>{$val.age}</span>
+											<input class="idNumber" value="{$val.id_card}" type="hidden" />
+										</a>
+									</if>
+										<!-- 已认证 -->
+										<a class="nan">
+											<svg class="icon categorie-icon" aria-hidden="true">
+												<use xlink:href="#icon-1"></use>
+											</svg>
+											<span>已认证</span>
+										</a>
+								</div>
+								<div class="rankingIncome">
+									<p>{$val.earning}</p>
+									<span>收入</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 收入排行end -->
+				</div>
+			</div>
+			</foreach>
+		</div>
+
+		<div class="row ranking_newperson">
+			<div class="col-md-12 col-sm-12" style="margin-bottom: 20px;">
+				<div class="row">
+					<img src="/Application/Home/View/Ranking/img/新人.png">
+				</div>
+			</div>
+			<foreach name="newInfo" key="ko" item="valo">
+				<div class="col-md-6 col-sm-6">
+				<div class="rankingBox">
+					<!-- 收入排行start -->
+					<div class="rankingDown">
+						<div class="row">
+							<div class="col-md-12 rankingList">
+								<div class="listLeft">
+									<a class="listImg" href="__APP__/Babyinformation/index/id/{$valo.uid}/scid/{$valo.scid}/sid/{$valo.need_id}"><img src="{$valo.cover_path}"></a>
+									<div class="sanjiao"></div>
+									<a class="rankingNum">{$ko+1}</a>
+								</div>
+								<div class="listCenter">
+									<if condition="$val.nickname neq null">
+										<p>{$valo.nickname}</p>
+										<else/>
+										<p>昵称</p>
+									</if>
+									<!-- 男strat -->
+									<if condition="$valo.sex eq 1">
+										<a class="nan">
+											<svg class="icon categorie-icon" aria-hidden="true">
+												<use xlink:href="#icon-xingbienan"></use>
+											</svg>
+											<span style="display: none" class="age">{$valo.id_card}</span>
+											<span>{$valo.age}</span>
+											<input class="idNumber" value="{$val.id_card}" type="hidden" />
+										</a>
+										<else/>
+										<a class="nv">
+											<svg class="icon categorie-icon" aria-hidden="true">
+												<use xlink:href="#icon-xingbienv"></use>
+											</svg>
+											<span style="display: none" class="age">{$valo.id_card}</span>
+											<span>{$valo.age}</span>
+											<input class="idNumber" value="{$val.id_card}" type="hidden" />
+										</a>
+									</if>
+
+										
+
+
+										<!-- 已认证 -->
+										<a class="nan">
+											<svg class="icon categorie-icon" aria-hidden="true">
+												<use xlink:href="#icon-1"></use>
+											</svg>
+											<span>已认证</span>
+										</a>
+								</div>
+								<div class="rankingIncome">
+									<p>{$valo.earning}</p>
+									<span>收入</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 收入排行end -->
+				</div>
+			</div>
+			</foreach>
+		</div>
+	</div>
+	<!-- 内容主体 end-->
+
+<include file="./Application/Home/View/Layouts/footer.html" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Application/Home/View/Layouts/js/age.js"></script>

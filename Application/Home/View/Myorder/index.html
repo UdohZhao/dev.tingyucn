@@ -1,0 +1,767 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Myorder/css/index.css">
+
+	<!-- 内容主体start -->
+	
+	<div class="container oerderBox">
+
+			<!-- <div class="row">
+				<div class="col-md-12 orderAll"> 
+					<p>我的订单</p>
+					
+					<foreach name='finalInfo' item="vo">
+					<div class="row orderCon">
+
+						<div class="col-md-12 orderTime">
+							<p>{$vo.statusName}</p>
+						</div>
+						
+						<foreach name="vo['orderDetail']" item="v">
+							<div class="col-md-6 order_list">
+								<div class="orderList">
+									<p>
+										<if condition="$v.status eq 2 && $v.type eq 2">
+											已完成
+											<elseif condition="$v.status eq 1"/>
+											进行中
+											<elseif condition="$v.reply_status eq 0"/>
+											待确认
+											<elseif condition="$v.reply_status eq 2"/>
+											已取消订单
+											<elseif condition="$v.status eq 0"/>
+											待付款
+										</if>
+										<svg class="icon categorie-icon" aria-hidden="true">
+											<use xlink:href="#icon-shanchu"></use>
+										</svg>
+									</p>
+									<a class="orderMsg" role="button" data-toggle="collapse" href="#collapseExample{$v.id}" aria-expanded="false" aria-controls="collapseExample">
+										<div class="msgImg">
+											<img src="{$v.cover_path}" />
+										</div>
+										<div class="masDetails">
+											<p>{$v.nickname}</p>
+											<p>
+												<svg class="icon categorie-icon" aria-hidden="true">
+													<use xlink:href="#icon-yudingshijian"></use>
+												</svg>
+												<span>下单时间:{$v.ctime|date='Y-m-d H:i:s',###}</span>
+											</p>
+										</div>
+										<div class="orderRight">
+											<svg class="icon categorie-icon" aria-hidden="true">
+												<use xlink:href="#icon-youjiantou"></use>
+											</svg>
+										</div>
+										<div style="clear: both;"></div>
+									</a>
+									<div class="collapse" id="collapseExample{$v.id}">
+										<div class="detailsBox">
+											<p>下单用户电话:{$v.username}</p>
+											<p>下单用户姓名:{$v.real_name}</p>
+											<if condition="$v.type egt 1">
+												<p>签约用户电话:{$v.babyPhone}</p>
+												<p>签约用户姓名:{$v.babyName}</p>
+											</if>
+											<p>品类：{$v.cname}</p>
+											<p>开始时间：{$v.start_time|date='Y-m-d H:i:s',###}</p>
+											<p>数量：{$v.charge_mode}</p>
+											<p>总金额:￥{$v.payment_amount}</p>
+											<p>状态：
+												<if condition="$userType.type eq 1 && $v.reply_status eq 0 && $v.myOrder eq 1">
+													<div class="row">
+														<div class="col-sm-12 col-xs-12" style="text-align: center;">
+															<span class="comfirm_button" onclick="javascript:promiseIt('{$v.id}')">确认接单</span>
+															<span class="cancel_button" onclick="javascript:cancelIt('{$v.id}')">取消该订单</span>
+														</div>
+													</div>
+													<elseif condition="$userType.type eq 0 && $v.reply_status eq 0 && $v.isSelf eq 1"/>
+													待对方确认
+													<elseif condition="$userType.type eq 1 && $v.reply_status eq 0 && $v.isSelf eq 1"/>
+													待对方确认
+													<elseif condition="$userType.type eq 0 && $v.reply_status eq 1 && $v.isSelf eq 1 && $v.type eq 0"/>
+													待付款<button data-toggle="modal" data-target="#orderpaynow" onclick="javascript:selOrder('{$v.id}')">立即付款</button>
+													<elseif condition="$userType.type eq 1 && $v.reply_status eq 1 && $v.isSelf eq 1 && $v.myOrder eq 1"/>
+													签约用户能对自己下单
+													<elseif condition="$userType.type eq 1 && $v.reply_status eq 1 && $v.isSelf eq 1 && $v.type eq 0"/>
+													待付款<button data-toggle="modal" data-target="#orderpaynow" onclick="javascript:selOrder('{$v.id}')">立即付款</button>
+													<elseif condition="$userType.type eq 1 && $v.reply_status eq 1 && $v.isSelf neq 1 && $v.myOrder eq 1 && $v.type eq 0"/>
+													待对方付款
+													<elseif condition="$userType.type eq 1 && $v.type eq 1 && $v.myOrder eq 1"/>
+													进行中 <button onclick="javascript:hasDone('{$v.id}','{$v.suid}')">完成该订单</button>
+													<elseif condition="$userType.type eq 1 && $v.type eq 1 && $v.isSelf eq 1"/>
+													进行中
+													<elseif condition="$userType.type eq 0 && $v.type eq 1"/>
+													进行中
+													<elseif condition="$v.type eq 2 && $v.isSelf eq 1 && $v.grade eq null"/>
+													待评价<button data-toggle="modal" data-target="#orderevaluation" onclick="javascript:evaluteIt('{$v.id}','{$v.sid}')">立即评价</button>
+													<elseif condition="$userType.type eq 1 && $v.type eq 2 && $v.grade eq null"/>
+													待用户评价
+													<elseif condition="$userType.type eq 1 && $v.type eq 2 && $v.grade neq null"/>
+													已评价
+													<elseif condition="$userType.type eq 0 && $v.type eq 2 && $v.grade neq null"/>
+													已评价
+													<elseif condition="$v.reply_status eq 2"/>
+													已取消
+												</if>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</foreach>
+						
+						<div class="col-md-4">
+                            <div class="orderList">
+                                <p>已完成
+                                    <svg class="icon categorie-icon" aria-hidden="true">
+                                          <use xlink:href="#icon-shanchu"></use>
+                                      </svg>
+                                </p>
+                                <a class="orderMsg" role="button" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
+                                    <div class="msgImg">
+                                        <img src="/Application/Home/View/Index/img/女2.png" />
+                                    </div>
+                                    <div class="masDetails">
+                                        <p>某某某</p>
+                                        <p>
+                                            <svg class="icon categorie-icon" aria-hidden="true">
+                                                  <use xlink:href="#icon-yudingshijian"></use>
+                                              </svg>
+                                              <span>2017-06-21 15:29</span>
+                                        </p>
+                                    </div>
+                                    <div class="orderRight">
+                                        <svg class="icon categorie-icon" aria-hidden="true">
+                                              <use xlink:href="#icon-youjiantou"></use>
+                                          </svg>
+                                    </div>
+                                    <div style="clear: both;"></div>
+                                </a>
+                                <div class="collapse" id="collapseExample1">
+                                    <div class="detailsBox">
+                                        <p>品类：约聊天</p>
+                                        <p>开始时间：2017-06-21 15:56</p>
+                                        <p>数量：1小时</p>
+                                        <p>交易金额：50.0元</p>
+                                        <p>状态：已完成</p>
+                                        <button data-toggle="modal" data-target="#orderevaluation">立即评价</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="orderList">
+                                <p>待付款
+                                    <svg class="icon categorie-icon" aria-hidden="true">
+                                          <use xlink:href="#icon-shanchu"></use>
+                                      </svg>
+                                </p>
+                                <a class="orderMsg" role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">
+                                    <div class="msgImg">
+                                        <img src="/Application/Home/View/Index/img/女3.png" />
+                                    </div>
+                                    <div class="masDetails">
+                                        <p>某某某</p>
+                                        <p>
+                                            <svg class="icon categorie-icon" aria-hidden="true">
+                                                  <use xlink:href="#icon-yudingshijian"></use>
+                                              </svg>
+                                              <span>2017-06-21 15:29</span>
+                                        </p>
+                                    </div>
+                                    <div class="orderRight">
+                                        <svg class="icon categorie-icon" aria-hidden="true">
+                                              <use xlink:href="#icon-youjiantou"></use>
+                                          </svg>
+                                    </div>
+                                    <div style="clear: both;"></div>
+                                </a>
+                                <div class="collapse" id="collapseExample2">
+                                    <div class="detailsBox">
+                                        <p>品类：约聊天</p>
+                                        <p>开始时间：2017-06-21 15:56</p>
+                                        <p>数量：1小时</p>
+                                        <p>状态：待付款</p>
+                                        <button data-toggle="modal" data-target="#orderpaynow">立即付款</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+					</div>
+					</foreach>
+					</div>-->
+
+
+				<!-- 订单大循环end-->
+				<!--<div class="row orderCon">
+					<div class="col-md-12 orderTime">
+						<p>2017-06-21 15:22</p>
+					</div>
+					&lt;!&ndash; 订单内循环start&ndash;&gt;
+					<div class="col-md-4">
+						<div class="orderList">
+							<p>已取消
+								<svg class="icon categorie-icon" aria-hidden="true">
+				                  	<use xlink:href="#icon-shanchu"></use>
+				              	</svg>
+							</p>
+							<a class="orderMsg" role="button" data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample">
+								<div class="msgImg">
+									<img src="/Application/Home/View/Index/img/女4.png" />
+								</div>
+								<div class="masDetails">
+									<p>某某某</p>
+									<p>
+										<svg class="icon categorie-icon" aria-hidden="true">
+						                  	<use xlink:href="#icon-yudingshijian"></use>
+						              	</svg>
+						              	<span>2017-06-21 15:29</span>
+									</p>
+								</div>
+								<div class="orderRight">
+									<svg class="icon categorie-icon" aria-hidden="true">
+					                  	<use xlink:href="#icon-youjiantou"></use>
+					              	</svg>
+						        </div>
+						        <div style="clear: both;"></div>
+							</a>
+							<div class="collapse" id="collapseExample3">
+								<div class="detailsBox">
+									<p>品类：约聊天</p>
+									<p>开始时间：2017-06-21 15:56</p>
+									<p>数量：1小时</p>
+									<p>状态：已取消</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					&lt;!&ndash; 订单内循环end&ndash;&gt;
+					<div class="col-md-4">
+						<div class="orderList">
+							<p>已完成
+								<svg class="icon categorie-icon" aria-hidden="true">
+				                  	<use xlink:href="#icon-shanchu"></use>
+				              	</svg>
+							</p>
+							<a class="orderMsg" role="button" data-toggle="collapse" href="#collapseExample4" aria-expanded="false" aria-controls="collapseExample">
+								<div class="msgImg">
+									<img src="/Application/Home/View/Index/img/女5.png" />
+								</div>
+								<div class="masDetails">
+									<p>某某某</p>
+									<p>
+										<svg class="icon categorie-icon" aria-hidden="true">
+						                  	<use xlink:href="#icon-yudingshijian"></use>
+						              	</svg>
+						              	<span>2017-06-21 15:29</span>
+									</p>
+								</div>
+								<div class="orderRight">
+									<svg class="icon categorie-icon" aria-hidden="true">
+					                  	<use xlink:href="#icon-youjiantou"></use>
+					              	</svg>
+						        </div>
+						        <div style="clear: both;"></div>
+							</a>
+							<div class="collapse" id="collapseExample4">
+								<div class="detailsBox">
+									<p>品类：约聊天</p>
+									<p>开始时间：2017-06-21 15:56</p>
+									<p>数量：1小时</p>
+									<p>交易金额：50.0元</p>
+									<p>状态：已完成</p>
+									<button>立即评价</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="orderList">
+							<p>待付款
+								<svg class="icon categorie-icon" aria-hidden="true">
+				                  	<use xlink:href="#icon-shanchu"></use>
+				              	</svg>
+							</p>
+							<a class="orderMsg" role="button" data-toggle="collapse" href="#collapseExample5" aria-expanded="false" aria-controls="collapseExample">
+								<div class="msgImg">
+									<img src="/Application/Home/View/Index/img/女6.png" />
+								</div>
+								<div class="masDetails">
+									<p>某某某</p>
+									<p>
+										<svg class="icon categorie-icon" aria-hidden="true">
+						                  	<use xlink:href="#icon-yudingshijian"></use>
+						              	</svg>
+						              	<span>2017-06-21 15:29</span>
+									</p>
+								</div>
+								<div class="orderRight">
+									<svg class="icon categorie-icon" aria-hidden="true">
+					                  	<use xlink:href="#icon-youjiantou"></use>
+					              	</svg>
+						        </div>
+						        <div style="clear: both;"></div>
+							</a>
+							<div class="collapse" id="collapseExample5">
+								<div class="detailsBox">
+									<p>品类：约聊天</p>
+									<p>开始时间：2017-06-21 15:56</p>
+									<p>数量：1小时</p>
+									<p>状态：待付款</p>
+									<button data-toggle="modal" data-target="#orderpaynow">立即付款</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>-->
+			<!-- </div> -->
+			<div class="row my_order">
+			  <!-- Nav tabs -->
+			  <ul class="nav nav-tabs" role="tablist">
+				  <foreach name="finalInfo" item="vo" key="k">
+					  <if condition="$k eq 0">
+						  <li role="presentation" class="active"><a href="#finish{$k}" aria-controls="finish" role="tab" data-toggle="tab">{$vo.statusName}</a></li>
+						  <else/>
+						  <li role="presentation"><a href="#finish{$k}" aria-controls="finish" role="tab" data-toggle="tab">{$vo.statusName}</a></li>
+					  </if>
+				  </foreach>
+
+			   <!-- <li role="presentation"><a href="#payment" aria-controls="payment" role="tab" data-toggle="tab">待付款</a></li>
+			    <li role="presentation"><a href="#evaluate" aria-controls="evaluate" role="tab" data-toggle="tab">待评价</a></li>
+			    <li role="presentation"><a href="#canceled" aria-controls="canceled" role="tab" data-toggle="tab">已取消</a></li>
+			 --> </ul>
+
+			  <!-- Tab panes -->
+			  <div class="tab-content">
+				  <foreach name="finalInfo" item="vo" key="k">
+					  <if condition="$k eq 0">
+						  <div role="tabpanel" class="tab-pane active" id="finish{$k}">
+							  <else/>
+							  <div role="tabpanel" class="tab-pane" id="finish{$k}">
+					  </if>
+					  <foreach name="vo['orderDetail']" item="v">
+						  <div class="col-md-4">
+							  <div class="orderList">
+								  <p>{$vo.statusName}</p>
+								  <a class="orderMsg" role="button" data-toggle="collapse" href="#collapseExample3{$v.id}" aria-expanded="false" aria-controls="collapseExample">
+									  <div class="msgImg">
+										  <img src="{$v.cover_path}" />
+									  </div>
+									  <div class="masDetails">
+										  <p>{$v.nickname}</p>
+										  <p>
+											  <svg class="icon categorie-icon" aria-hidden="true">
+												  <use xlink:href="#icon-yudingshijian"></use>
+											  </svg>
+											  <span>{$v.ctime|date='Y-m-d H:i:s',###}</span>
+										  </p>
+									  </div>
+									  <div class="orderRight">
+										  <svg class="icon categorie-icon" aria-hidden="true">
+											  <use xlink:href="#icon-youjiantou"></use>
+										  </svg>
+									  </div>
+									  <div style="clear: both;"></div>
+								  </a>
+								  <div class="collapse" id="collapseExample3{$v.id}">
+									  <div class="detailsBox">
+										  <p>下单用户电话:{$v.username}</p>
+										  <p>下单用户姓名:{$v.real_name}</p>
+										  <if condition="$v.type egt 1">
+											  <p>签约用户电话:{$v.babyPhone}</p>
+											  <p>签约用户姓名:{$v.babyName}</p>
+										  </if>
+										  <p>品类：{$v.cname}</p>
+										  <p>开始时间：{$v.start_time|date='Y-m-d H:i:s',###}</p>
+										  <p>数量：{$v.charge_mode}</p>
+
+										  <if condition="$v.sc_type eq 2 ">
+											  <p>地址：{$v.address}</p>
+										  </if>
+
+										  <p>总金额:￥{$v.payment_amount}</p>
+										  <p>状态：
+											  <if condition="$userType.type eq 1 && $v.reply_status eq 0 && $v.myOrder eq 1">
+												  <div class="row">
+													  <div class="col-sm-12 col-xs-12" style="text-align: center;">
+														  <span class="comfirm_button" onclick="javascript:promiseIt('{$v.id}','{$v.username}','{$v.real_name}')">确认接单</span>
+														  <span class="cancel_button" onclick="javascript:cancelIt('{$v.id}')">取消该订单</span>
+													  </div>
+												  </div>
+												  <elseif condition="$userType.type eq 0 && $v.reply_status eq 0 && $v.isSelf eq 1"/>
+												  待对方确认
+												  <elseif condition="$userType.type eq 1 && $v.reply_status eq 0 && $v.isSelf eq 1"/>
+												  待对方确认
+												  <elseif condition="$userType.type eq 0 && $v.reply_status eq 1 && $v.isSelf eq 1 && $v.type eq 0"/>
+												  待付款<button data-toggle="modal" data-target="#orderpaynow" onclick="javascript:selOrder('{$v.id}')">立即付款</button>
+												  <elseif condition="$userType.type eq 1 && $v.reply_status eq 1 && $v.isSelf eq 1 && $v.myOrder eq 1"/>
+												  签约用户能对自己下单
+												  <elseif condition="$userType.type eq 1 && $v.reply_status eq 1 && $v.isSelf eq 1 && $v.type eq 0"/>
+												  待付款<button data-toggle="modal" data-target="#orderpaynow" onclick="javascript:selOrder('{$v.id}')">立即付款</button>
+												  <elseif condition="$userType.type eq 1 && $v.reply_status eq 1 && $v.isSelf neq 1 && $v.myOrder eq 1 && $v.type eq 0"/>
+												  待对方付款
+												  <elseif condition="$userType.type eq 1 && $v.type eq 1 && $v.myOrder eq 1"/>
+												  进行中 <button onclick="javascript:hasDone('{$v.id}','{$v.suid}')">完成该订单</button>
+												  <elseif condition="$userType.type eq 1 && $v.type eq 1 && $v.isSelf eq 1"/>
+												  进行中
+												  <elseif condition="$userType.type eq 0 && $v.type eq 1"/>
+												  进行中
+												  <elseif condition="$v.type eq 2 && $v.isSelf eq 1 && $v.grade eq null"/>
+												  待评价<button data-toggle="modal" data-target="#orderevaluation" onclick="javascript:evaluteIt('{$v.id}','{$v.sid}')">立即评价</button>
+												  <elseif condition="$userType.type eq 1 && $v.type eq 2 && $v.grade eq null"/>
+												  待用户评价
+												  <elseif condition="$userType.type eq 1 && $v.type eq 2 && $v.grade neq null"/>
+												  已评价
+												  <elseif condition="$userType.type eq 0 && $v.type eq 2 && $v.grade neq null"/>
+												  已评价
+												  <elseif condition="$v.reply_status eq 2"/>
+												  已取消
+											  </if>
+										  </p>
+									  </div>
+								  </div>
+							  </div>
+						  </div>
+					  </foreach>
+
+					  </div>
+				  </foreach>
+			   <!-- <div role="tabpanel" class="tab-pane" id="payment">2</div>
+			    <div role="tabpanel" class="tab-pane" id="evaluate">3</div>
+			    <div role="tabpanel" class="tab-pane" id="canceled">4</div>-->
+			  </div>
+			</div>
+
+	</div>
+	<!-- 付款弹出框 -->
+	<div class="modal fade myplaorder" id="orderpaynow" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="row">
+		      		<div class="col-sm-12">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        	<span aria-hidden="true" id="cha">&times;</span>
+				        </button>
+			        </div>
+		        </div>
+		        <div class="modal-title" id="myModalLabel">
+					<div class="mytitle">平台条款</div>
+					<div class="mycontent">
+						<p>1、红尘浅遇，缘来缘去。一切都只是匆匆过往，在岁月的沉淀中。在时光的洗礼与打磨，一场曾经深记的刻苦铭心。终在时光的流逝中，慢慢退去原本属于自己的颜色。流年浅遇散去一季花开，留下的故事。与红尘花开朝朝暮暮，共度写进昔日的浅遇。想你始终是一种无奈的思念，这与时间无关。却与岁月相昔，曾经执过流年静好。</p>
+						<p>2、走过千山万水，跨过沿江日夜。来到一个叫做有你的地方，缘分是那么的微妙，人海是那么的茫然。执着是那么的无奈。寂静的时光，似乎定格在那一刻。让生命的旅途不再流浪，让漂泊的心不再迷离。让时光的缝隙，填满所有想要的结局。美好的事物总要付出昂贵的代价，青春的路过。曾经的结尾，总有一段感情。是以失败而告终</p>
+					</div>
+					<div class="myBtn">
+						<span style="color: #aa1111;">选择支付方式:</span>
+						 <input type="radio" name="alyType" value="1" checked/> 余额支付
+						 <input type="radio" name="alyType" value="2"/> 支付宝支付
+						 <input type="radio" name="alyType" value="3"/> 微信扫码支付
+						<br/>
+						<a class="cancel" data-dismiss="modal" aria-label="Close" id="quxiao">取消</a>
+						<a data-toggle="modal" data-target="#erweima" class="agree" id="myAgree">同意</a>
+					</div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	<!-- 评价弹出框 -->
+	<div class="modal fade myplaorder" id="orderevaluation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="row">
+		      		<div class="col-sm-12">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        	<span aria-hidden="true" id="cha1">&times;</span>
+				        </button>
+			        </div>
+		        </div>
+		        <div class="modal-title evaluationnow" id="myModalLabel">
+					<div class="evaluationCon">
+						<p>请选择评价：
+							<select class="selected" id="sel" name="grade">
+								<option value="0">好评</option>
+								<option value="1">中评</option>
+								<option value="2">差评</option>
+						    </select>
+					    </p>
+					    <div class="evaluationWord">
+					    	<p>评价内容：</p>
+							<textarea id="evaluation" class="weui-textarea" placeholder="请输入您想说的" rows="3"></textarea>
+		      				<div class="weui-textarea-counter evaluationNum"><span id="evaluation-count">0</span>/20</div>
+					    </div>
+					</div>
+					<div class="myBtn">
+						<a id="evaluationsubmit">提交</a>
+					</div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	<!-- 二维码弹出框 -->
+	<div class="modal fade" id="erweima" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="row">
+		      		<div class="col-sm-12">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        	<span aria-hidden="true" id="cha1" onclick="location.reload()">&times;</span>
+				        </button>
+			        </div>
+		        </div>
+		        <div class="modal-title evaluationnow" id="myModalLabel" style="text-align: center; padding-bottom:20px;">
+					<img height="150" id="indent_code" width="150" src=""/>
+					<p>微信扫码支付</p>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	<!-- 内容主体end -->
+
+<include file="./Application/Home/View/Layouts/footer.html" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Application/Home/View/Myorder/js/index.js"></script>
+<script type="text/javascript">
+	// 刷新页面清除sessionStorage
+	sessionStorage.clear();
+$(function(){
+	$(".orderMsg").click(function(){
+		$(".orderMsg").siblings(".collapse").removeClass("in");
+		$(".orderMsg").find(".orderRight").children("svg").css({"transform":"rotate(0deg)","-ms-transform":"rotate(0deg)","-moz-transform":"rotate(0deg)","-webkit-transform":"rotate(0deg)","-o-transform":"rotate(0deg)","color":"#aaa"});
+		if($(this).find(".orderRight").children("svg").css('color')=="rgb(170, 170, 170)"){
+			$(this).find(".orderRight").children("svg").css('color',"#fd908f");
+			$(this).find(".orderRight").children("svg").css({"transform":"rotate(90deg)","-ms-transform":"rotate(90deg)","-moz-transform":"rotate(90deg)","-webkit-transform":"rotate(90deg)","-o-transform":"rotate(90deg)"});
+			$(this).siblings(".collapse").removeClass("in");
+		}else{
+			$(this).find(".orderRight").children("svg").css('color',"#aaa");
+			$(this).find(".orderRight").children("svg").css({"transform":"rotate(0deg)","-ms-transform":"rotate(0deg)","-moz-transform":"rotate(0deg)","-webkit-transform":"rotate(0deg)","-o-transform":"rotate(0deg)"});
+			$(this).siblings(".collapse").addClass("in");
+		}
+	});
+
+
+	var bodycolorH=$(".bodyColor").height();
+	var myselfH=bodycolorH-90-40-251;
+	$(".oerderBox").css("min-height",myselfH+'px');
+
+	/*字数限制*/  
+    $("#evaluation").on("input propertychange", function() {  
+        var $this = $(this),  
+            _val = $this.val(),  
+            count = "";  
+        if (_val.length > 20) {  
+            $this.val(_val.substring(0, 20));  
+        }  
+        count =$this.val().length;  
+        $("#evaluation-count").html(count);  
+    });
+    // textarea内容判断
+    $("#evaluationsubmit").click(function(){
+    	var textareaVal=$("#evaluation").val();
+    	console.log(textareaVal);
+    	var arr = new Array();
+		arr = textareaVal.split(" ");
+		if(textareaVal==""){
+			//alert("不能为空");
+			layer.msg('评价不能为空', {icon: 2,time:2000});
+			return false
+		}else if(arr.length != 1){
+				//alert("提交信息不能有空格")
+			layer.msg('提交信息不能有空格', {icon: 2,time:2000});
+			return false;
+		}else{
+
+			if(sessionStorage.getItem('sid')){
+				var sid=sessionStorage.getItem('sid');
+			}
+			if(sessionStorage.getItem('EvalorderId')){
+				var orderId=sessionStorage.getItem('EvalorderId');
+			}
+			var grade=$('#sel').val();
+			var content=$('#evaluation').val();
+			$.ajax({
+				url:'__APP__/Myorder/saveEvaluate',
+				data:'bbId='+sid+'&grade='+grade+'&content='+content+'&orderId='+orderId,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					sessionStorage.clear();
+					if(re===true){
+						//alert('评价成功')
+						layer.alert('评价成功',function(){
+							window.location.href='__APP__/Myorder/index'
+						})
+						//window.location.href='__APP__/Myorder/index'
+					}else if(re.info==2){
+						//alert(re.msg);
+						//$.toast(re.msg, "text");
+						layer.alert(re.msg,function(){
+							window.location.href='__APP__/Myorder/index'
+						})
+						//window.location.href='__APP__/Myorder/index'
+					}
+				}
+			})
+		};
+    })
+})
+</script>
+
+<script>
+
+	//确认接单  函数  id订单的主键id
+	function promiseIt(id,user_telphone,user_name){
+		$.ajax({
+			url:'__APP__/Myorder/sure',
+			data:'orderId='+id+'&phone='+user_telphone+'&realName='+user_name,
+			dataType:'json',
+			type:'post',
+			success:function(re){
+				if(re===true){
+					layer.alert('订单已接，待对方付款',function(){
+						window.location.href='__APP__/Myorder/index'
+					})
+				}else if(re.info==2){
+					// alert(re.msg);
+					layer.alert(re.msg,function(){
+						window.location.href='__APP__/Myorder/index'
+					})
+				}
+			}
+		})
+	}
+
+	//取消接单 函数  id订单主键
+	function cancelIt(id){
+		$.ajax({
+			url:'__APP__/Myorder/csure',
+			data:'orderId='+id,
+			dataType:'json',
+			type:'post',
+			success:function(re){
+				if(re===true){
+					// alert('取消成功');
+					layer.alert('取消成功',function(){
+						window.location.href='__APP__/Myorder/index'
+					})
+					//window.location.href='__APP__/Myorder/index'
+				}else if(re.info==2){
+					// alert(re.msg);
+
+					layer.alert(re.msg,function(){
+						window.location.href='__APP__/Myorder/index'
+					})
+					//window.location.href='__APP__/Myorder/index'
+				}
+			}
+		})
+	}
+
+//立即付款函数  id  订单主键id
+	function selOrder(id){
+		//记录session
+		sessionStorage.setItem('orderId',id);
+		//支付成功后清除，获取点击取消清除，点击叉也清除,刷新页面也清除
+	}
+
+	$('#quxiao').click(function(){
+		sessionStorage.clear();
+	})
+	$('#cha').click(function(){
+		sessionStorage.clear();
+	})
+
+	//点击同意付款
+	$('#myAgree').click(function(){
+
+		//获取选择的支付方式  1为余额支付  2 为微信支付
+		var selType=$('input[name="alyType"]:checked').val();
+
+		//需要付款的id
+		var payId=sessionStorage.getItem('orderId')
+		if(selType==2){
+			window.location.href='__APP__/Myorder/pc?id='+payId;
+			return false;
+		}
+		if(selType==3){
+			$('#indent_code').attr('src','__APP__/Wechatpay/native?orderId='+payId+'&indent=1');
+			// $('#indent_code').css('display','block')
+		}
+		$.ajax({
+			url:'__APP__/Myorder/paymoney',
+			data:'id='+payId+'&myType='+selType,
+			type:'post',
+			dataType:'json',
+			success:function(re){
+				if(re===true){
+					//alert('支付成功')
+					layer.alert('支付成功',function(){
+						window.location.href='__APP__/Myorder/index'
+					})
+					//window.location.href='__APP__/Myorder/index'
+				}else if(re===false){
+					//alert('支付失败,重新支付')
+					layer.msg('支付失败,重新支付', {icon: 5,time:2000});
+					// $.toast("支付失败,重新支付","cancel");
+				}else if(re.info==2){
+					 //alert(re.msg)
+					layer.msg(re.msg, {icon: 5,time:2000});
+					//$.toast(re.msg,"text");
+				}else if(re.info==7){
+					//alert(re.msg)
+					layer.msg(re.msg, {icon: 5,time:2000});
+					//$.toast(re.msg,"cancel");
+				}
+			}
+		})
+	})
+
+	//完成订单函数 id 订单主键id suid 该订单关联的签约用户id
+	function hasDone(id,suid){
+		$.ajax({
+			url:'__APP__/Myorder/hasDone',
+			data:'orderId='+id+'&bbId='+suid,
+			dataType:'json',
+			type:'post',
+			success:function(re){
+				if(re===true){
+					//alert('订单完成,可查看收入');
+					layer.alert('订单完成,可查看收入',function(){
+						window.location.href='__APP__/Myorder/index'
+					})
+					//window.location.href='__APP__/Myorder/index'
+				}else if(re.info==2){
+					 //alert(re.msg)
+					layer.alert(re.msg,function(){
+						window.location.href='__APP__/Myorder/index'
+					})
+					//$.toast(re.msg,"text");
+					//window.location.href='__APP__/Myorder/index'
+				}
+			}
+		})
+	}
+//店家评价订单函数 orerId 订单id主键  sid  服务表id主键
+	function evaluteIt(orderId,sid){
+
+		sessionStorage.setItem('EvalorderId',orderId);
+		sessionStorage.setItem('sid',sid);
+
+	}
+
+	//点击评价提交
+
+
+	$('#cha1').click(function(){
+		sessionStorage.clear();
+	})
+
+	//点击删除函数
+</script>

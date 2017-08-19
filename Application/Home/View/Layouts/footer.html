@@ -1,0 +1,43 @@
+	<!-- 底部 start-->
+	<div class="row downMsg">
+		<div class="container">
+			<div class="col-md-2 QRcode">
+				<img src="{$siteInfo.weblogo}">
+				<p>关注微信公众号</p>
+			</div>
+			<div class="col-md-4 serviceMsg">
+				<ul>
+					<li><a>客服邮箱：</a><span>{$siteInfo.email}</span></li>
+
+					<li><a>客服QQ：</a><span>{$siteInfo.qq}</span></li>
+				</ul>
+			</div>
+			<div class="col-md-4 serviceMsg">
+				<ul>
+					<li><a>客服电话：</a><span>{$siteInfo.telphones}</span></li>
+					<li><a>客服服务时间：</a><span>{$siteInfo.worktime}</span></li>
+
+				</ul>
+			</div>
+			<!--<div class="col-md-2 downLogo">
+				<img src="/Application/Home/View/Index/img/领渡二维码.png">
+			</div>-->
+			<div class="col-md-12 copyrightMsg">
+				<p>Copyright {$siteInfo.copyright}</p>
+				<p>技术支持：重庆存己科技有限公司</p>
+			</div>
+		</div>
+	</div>
+	<!-- 底部 end-->
+	<div class="bottomHeight"></div>
+
+	</div>
+	
+<include file="./Public/Bootstrap/footer.html" />
+<!-- body最小高度 -->
+<script type="text/javascript" src="/Application/Home/View/Layouts/js/common.js"></script>
+<script type="text/javascript">
+	$("a").click(function(){
+		$(this).css("text-decoration","none");
+	})
+</script>

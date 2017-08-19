@@ -1,0 +1,100 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">用户注册信息审核</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">审核图片</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="example">
+                    <form class="form-horizontal" id="frm">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">身份证号码: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;margin-left: -15px" readonly type="text" class="form-control" value="{$info.id_card}" name="id_card"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">身份证正面图片: </label>
+                            <div class="input-group input-group-file">
+                                <img style="height:200px;width:200px;"   src="{$info.front_path}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">身份证背面图片: </label>
+                            <div class="input-group input-group-file">
+                                <img style="height:200px;width:200px;"   src="{$info.back_path}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">个人形象照图片: </label>
+                            <div class="input-group input-group-file">
+                                <img style="height:200px;width:200px;"  src="{$info.figure_path}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="button" id="bt" class="btn btn-primary">审核通过</button>
+                                <button id="cbt" style="margin-left: 20px;" type="button" class="btn btn-default btn-outline">拒绝通过</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    var phone='{$info.phoneNum}'; //电话号码
+    var trueName='{$info.real_name}'; //真实姓名
+    $(function(){
+        $("#bt").click(function(){   //审核通过
+            var url='{$url}';
+            var id='{$info.id}';
+                $.ajax({
+                    url:'__APP__/User/rsave',
+                    data:'status=2'+'&id='+id+'&phoneNum='+phone+'&real_name='+trueName,
+                    type:'post',
+                    dataType:'json',
+                    success:function(re){
+                        if(re.info===true){
+                            alert(re.msg);
+                            window.location.href=url;
+                        }
+                    }
+                });
+        })
+
+        $("#cbt").click(function(){   //审核不通过
+            var url='{$url}';
+            var id='{$info.id}';
+            $.ajax({
+                url:'__APP__/User/rsave',
+                data:'status=1'+'&id='+id+'&phoneNum='+phone+'&real_name='+trueName,
+                type:'post',
+                dataType:'json',
+                success:function(re){
+                    if(re.info===true){
+                        alert(re.msg);
+                        window.location.href=url;
+                    }
+                }
+            });
+        })
+    })
+</script>
+
+<!--<script type="text/javascript" src="/Application/Admin/View/Layouts/assets/readimg.js"></script>-->

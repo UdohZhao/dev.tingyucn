@@ -1,0 +1,13 @@
+p{
+	margin: 0;
+	font-size: 14px;
+}
+.weui-btn_primary{
+	background-color: #fd908f;
+}
+.pageName{
+	border-bottom: none;
+}
+.weui-cells{
+	margin-top: 0;
+}

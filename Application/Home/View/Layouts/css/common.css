@@ -1,0 +1,304 @@
+.topMenu{
+	background-color: #eb4188;
+	height: 90px;
+	position:fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	margin: 0;
+	z-index: 999;
+}
+.bodyColor{
+	/*background-color: #ededed;*/
+	padding: 0;
+}
+.topMenu>.container{
+	height: 90px;
+}
+.logoPic{
+	height: 90px;
+	padding: 5px 0;
+}
+.logoPic img{
+	height: 100%;
+}
+.bigMenu{
+	padding-right:0;
+}
+.bigMenu .menu{
+	height: 90px;
+	list-style: none;
+	clear: both;
+	float: right;
+}
+.bigMenu .menu>li{
+	float: left;
+	margin-top: 34px;
+	margin-left: 20px;
+}
+.menu{
+	padding-left: 0;
+	margin-bottom: 0;
+}
+.menu>li>a{
+	padding:5px 10px;
+	font-size: 16px;
+	color: #fff;
+}
+.menu>li>a:hover{
+	text-decoration: none;
+	background-color: #eb4188;
+}
+.menu>li>a.active{
+	background-color: #eb4188;
+	color: #fff;
+	border-bottom: 2px solid #fff;
+	border-radius: 0;
+	font-size: 16px;
+}
+.downMsg{
+	background-color: #535353;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	margin: 0;
+}
+.downMsg{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.QRcode{
+	text-align: center;
+}
+.QRcode img{
+	width: 70%;
+}
+.QRcode p{
+	color: #bec3c4;
+	line-height: 30px;
+}
+.downLogo{
+	text-align: center;
+}
+.downLogo img{
+	width: 80%;
+}
+.serviceMsg ul{
+	list-style: none;
+}
+.serviceMsg ul li a{
+	text-decoration: none;
+	margin-right: 10px;
+}
+.serviceMsg ul li a,.serviceMsg ul li span{
+	color: #bec3c4;
+	line-height: 40px;
+}
+.copyrightMsg{
+	text-align: center;
+}
+.copyrightMsg p{
+	margin-bottom: 0;
+	line-height: 30px;
+	color: #bec3c4;
+}
+#loginorsignin:focus{
+	box-sizing: border-box;
+	outline:0px auto -webkit-focus-ring-color;
+	text-decoration: none;
+	outline-offset:0;
+}
+.ulLogin li{
+	width: 50%;
+	text-align: center;
+}
+.ulLogin>li.active>a, .ulLogin>li.active>a:focus, .ulLogin>li.active>a:hover{
+	background-color: #fff !important;
+	color: #000;
+}
+.ulLogin>li>a:focus, .ulLogin>li>a:hover{
+	background-color: #fff;
+	border: none;
+}
+.nav-tabs>li>a{
+	color: #000;
+	box-sizing: border-box;
+	border: 0px solid #fff;
+}
+.mylogin .modal-dialog{
+	width: 420px;
+	margin: 15% auto;
+}
+.mylogin .loginBtn{
+	width: 100%;
+	background-color: #fd908f;
+	color: #fff;
+	border: 1px solid #fd908f;
+}
+.yzmBtn{
+	padding-left: 0;
+}
+.yzmBtn button{
+	width: 100%;
+	border-radius: 4px;
+	background-color: #fff;
+	border: 1px solid #fd908f;
+	color: #fd908f;
+	line-height: 32px;
+}
+#afterLogin{
+	height: 100%;
+	width: 200px;
+	background-color: #f581b1;
+	margin: 0;
+	margin-left: 20px;
+	position: relative;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+#afterLogin .Lleft{
+	float: left;
+	width: 30%;
+	border-radius: 100%;
+	overflow: hidden;
+}
+#afterLogin .Lleft img{
+	width: 100%;
+	height: 100%;
+}
+#afterLogin .Lright{
+	width: 70%;
+	float: left;
+	padding-left: 10px;
+}
+#afterLogin .Lright p{
+	margin: 0;
+	color: #fff;
+	font-size: 14px;
+}
+#afterLogin .Lright span{
+	color: #fff;
+	font-size: 14px;
+}
+#afterLogin .Ldown{
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	overflow: hidden;
+	transition: all 2s;
+}
+#afterLogin:hover .Ldown{
+	display: none;
+}
+#afterLogin .myLmsg{
+	position: absolute;
+	top: 80px;
+	left: 0;
+	width: 100%;
+	background-color: #f581b1;
+	height: 0px;
+	transition: all 1s;
+	overflow: hidden;
+}
+#afterLogin:hover .myLmsg{
+	height: 151px;
+}
+#afterLogin .myLmsg .Lcontent{
+	width: 100%;
+	border-top: 1px dashed #fff;
+}
+#afterLogin .myLmsg .Lcontent .Lbtn{
+	float: left;
+	width: 50%;
+	padding: 15px 10px;
+	text-align: center;
+}
+#afterLogin .myLmsg .Lcontent .Lbtn a{
+	display: block;
+	width: 100%;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	text-align: center;
+	border: 1px dashed #000;
+	font-size: 14px;
+	color: #000;
+	text-decoration: none;
+}
+#afterLogin .Lmymoney{
+	background-color: #f5dde7;
+	padding: 10px 10px;
+}
+#afterLogin .Lmymoney .balance{
+	text-decoration: none;
+	font-size: 14px;
+	color: #000;
+}
+#afterLogin .Lmymoney .balance:hover{
+	text-decoration: none;
+	color: #000;
+}
+#afterLogin .Lmymoney .balance b{
+	color: #fd908f;
+}
+#afterLogin .Lmymoney .rechargebtn{
+	color: #000;
+	padding: 3px 10px;
+	border: 1px solid #000;
+	border-radius: 3px;
+	font-size: 14px;
+	float: right;
+	text-decoration: none;
+	margin-top: -2px;
+}
+#afterLogin .exitLogin{
+	background-color: #f5dde7;
+	text-align: center;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	margin-top: 8px;
+}
+#afterLogin .exitLogin a{
+	text-decoration: none;
+	font-size: 14px;
+	color: #000;
+}
+
+#myModalLabel .nav-tabs>li.active>a, #myModalLabel .nav-tabs>li.active>a:focus, #myModalLabel .nav-tabs>li.active>a:hover{
+	background-color: #ededed;
+	border: none;
+	color: #fd908f;
+	border-bottom: 2px solid #fd908f;
+}
+#myModalLabel .tab-content{
+	padding-top: 20px;
+}
+.forget{
+	text-align: center;
+}
+.forget #forgetMy,.go_signin{
+	text-decoration: none;
+	font-size: 14px;
+	line-height: 30px;
+	cursor: pointer;
+}
+.go_signin:hover{
+	text-decoration: none;
+}
+.forgetModal_title{
+	text-align: center;
+	margin-bottom: 20px;
+}
+#forgetModal .modal-dialog{
+	width: 420px;
+	margin: 15% auto;
+}
+#Sbt1{
+	width: 100%;
+	background-color: #fd908f;
+	color: #fff;
+	border: 1px solid #fd908f;
+}
+.container{
+	width: 1000px;
+}

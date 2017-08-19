@@ -1,0 +1,89 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<link rel="stylesheet" type="text/css" href="/Application/Admin/View/Servicereview/css/index.css">
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">订单列表</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+            <div class="panel-body">
+                <form class="bs-example bs-example-form"  action="__APP__/Indent/oper" method="get">
+                    <div class="col-lg-12">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">搜索</button>
+                            </span>
+                            <input type="text" name="keyword" class="form-control" placeholder="输入手机号码搜索">
+                            <input type="hidden"  name="<?php echo  key($arr);?>" value="<?php echo $arr[key($arr)]?>" class="form-control" placeholder="输入手机号码搜索">
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </form>
+                <div class="button_list" style="width: 100%;">
+                    <a class="button_one" <if condition='$arr.reply_status heq 0'>style="background-color:#e4eaec;"</if>  href="__APP__/Indent/oper?reply_status=0">待确定</a>
+                    <a class="button_one" <if condition='$arr.type heq 0'>style="background-color:#e4eaec;"</if> href="__APP__/Indent/oper?type=0">待付款</a>
+                    <a class="button_one" <if condition='$arr.reply_status heq 2'>style="background-color:#e4eaec;"</if> href="__APP__/Indent/oper?reply_status=2">已取消订单</a>
+                    <a class="button_one" <if condition='$arr.status heq 1'>style="background-color:#e4eaec;"</if> href="__APP__/Indent/oper?status=1">进行中</a>
+                    <a class="button_one" <if condition='$arr.status heq 2'>style="background-color:#e4eaec;"</if> href="__APP__/Indent/oper?status=2">已结束</a>
+                </div>
+                <table class="table table-bordered">
+                    <caption>订单列表</caption>
+                    <thead>
+                    <tr>
+                        <th>下单用户电话</th>
+                        <th>下单用户姓名</th>
+                        <th>服务用户电话</th>
+                        <th>选择服务名</th>
+                        <th>下单时间</th>
+                        <th>订单编号</th>
+                        <th>服务地点（选填）</th>
+                        <th>订单状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <foreach  name="orderInfo" item="v">
+                        <tr>
+                            <td>{$v.username}</td>
+                            <td>{$v.real_name}</td>
+                            <td>{$v.babyPhone}</td>
+                            <td>{$v.cname}</td>
+                            <td>{$v.ctime|date='Y-m-d H:i:s',###}</td>
+                            <td>{$v.serial_number}</td>
+                            <if condition="$v.address neq null">
+                                <td>{$v.address}</td>
+                                <else/>
+                                <td style="color: #c2ccd1">非线下娱乐</td>
+                            </if>
+                            <td>
+                                <if condition="$v.reply_status eq 0">
+                                    待确认
+                                    <elseif condition="$v.reply_status eq 2"/>
+                                    订单已取消
+                                    <elseif condition="$v.type eq 0"/>
+                                    待付款
+                                    <elseif condition="$v.type eq 1 && $v.status eq 1"/>
+                                    进行中
+                                    <elseif condition="$v.status eq 2"/>
+                                    订单结束
+                                </if>
+                            </td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                {$page}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+

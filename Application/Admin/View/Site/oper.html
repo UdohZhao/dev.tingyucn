@@ -1,0 +1,83 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">站点列表</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-bordered">
+                    <caption>边框表格布局</caption>
+                    <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>lolo图标路径</th>
+                        <th>微信二维码图片</th>
+                        <th>百度关键字</th>
+                        <th>百度简介</th>
+                        <th>客服邮箱</th>
+                        <th>客服电话</th>
+                        <th>客服qq</th>
+                        <th>工作时间</th>
+                        <th>版权所有</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach  name="arr" item="v">
+                        <tr>
+                            <td>{$v.cname}</td>
+                            <td><img width="50" height="50" src="{$v.logo_path}"/></td>
+                            <td><img width="50" height="50" src="{$v.weblogo}"/></td>
+                            <td>{$v.baidu_keyword}</td>
+                            <td>{$v.baidu_intro}</td>
+                            <td>{$v.email}</td>
+                            <td>{$v.telphones}</td>
+                            <td>{$v.qq}</td>
+                            <td>{$v.worktime}</td>
+                            <td>{$v.copyright}</td>
+                            <if condition="$v.status eq 0">
+                                <td>开启</td>
+                                <else/>
+                                <td>关闭</td>
+                            </if>
+                            <td><a href="__APP__/Site/update/id/{$v.id}"><button>修改</button></a> | <button onclick="javascript:dele(this.value)" value="{$v.id}">删除</button></td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                {$page}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    function dele(id){
+
+        $.ajax({
+            url:'__APP__/Site/del',
+            data:'id='+id,
+            dataType:'json',
+            type:'post',
+            success:function(re){
+                if(re==1){
+                    alert("删除成功");
+                    window.location.href='__APP__/Site/oper';
+                };
+            }
+        })
+    }
+</script>

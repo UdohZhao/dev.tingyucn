@@ -1,0 +1,308 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Authentication/css/index.css">
+
+	<div class="container authenBox">
+		<div class="row">
+			<div class="col-md-12 authenTitle">
+				<p>身份认证</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="setupBox">
+					<form id="frm">
+					<div class="setupCon">
+						<p>姓名：<input id="realName" type="text" name="real_name" value="{$arr.real_name}" placeholder="请填写真实姓名"></p>
+						<p>年龄：<input id="user_age" type="text" name="age" value="{$arr.age}" placeholder="请填写真实年龄"></p>
+						<p>性别：
+							<label class="radio-inline">
+							  <input type="radio" name="sex" id="inlineRadio2" value="1"> 男
+							</label>
+							<label class="radio-inline">
+							  <input type="radio" name="sex" id="inlineRadio3" value="0"> 女
+							</label>
+						</p>
+						<script>
+							if('{$arr.sex}'==1){
+								$('#inlineRadio2').attr('checked',true);
+							}else{
+								$('#inlineRadio3').attr('checked',true);
+							}
+						</script>
+						<p>身份证：<input maxlength="20" type="text" id="idcard" value="{$arr.id_card}" placeholder="请填写身份证号码" /></p>
+						<div class="row">
+							<div class="col-md-6 col-sm-6">
+								<p>身份证正面照<span>(消息无遮盖，内容清晰)</span></p>
+								<div class="imgBox">
+									<img id="urlimg" name="front_path" src="{$arr.front_path}">
+								</div>
+								<div class="uploadingImg">
+									<button>上传图片</button>
+									<input type="file" name="front_path" id="uploaderInput"/>
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<p>身份证反面照<span>(消息无遮盖，内容清晰)</span></p>
+								<div class="imgBox">
+									<img id="urlimg1" name="back_path" src="{$arr.back_path}">
+								</div>
+								<div class="uploadingImg">
+									<button>上传图片</button>
+									<input type="file" name="back_path" id="uploaderInput1" />
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-6">
+								<p>个人形象照<span>(消息无遮盖，内容清晰)</span></p>
+								<div class="imgBox">
+									<img id="urlimg2" name="figure_path" src="{$arr.figure_path}">
+								</div>
+								<div class="uploadingImg">
+									<button>上传图片</button>
+									<input type="file" name="figure_path" id="uploaderInput2" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 sutupBtn">
+								<a id="bt">提交</a>
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<include file="./Application/Home/View/Layouts/footer.html" />
+<script type="text/javascript">
+	$(function(){
+	    /*字数限制*/  
+	    $("#feedback").on("input propertychange", function() {  
+	        var $this = $(this),  
+	            _val = $this.val(),  
+	            count = "";  
+	        if (_val.length > 50) {  
+	            $this.val(_val.substring(0, 50));  
+	        }  
+	        count =$this.val().length;  
+	        $("#feedback-count").html(count);  
+	    });
+
+	    var bodycolorH=$(".bodyColor").height();
+		var myselfH=bodycolorH-90-40-251;
+		$(".authenBox").css("min-height",myselfH+'px');
+	})
+</script>
+
+<script type="text/javascript">
+
+
+
+	var
+			fileInput = document.getElementById('uploaderInput'),
+			preview = document.getElementById('urlimg'),  //身份证正面照对象
+			fileInput1 = document.getElementById('uploaderInput1'),
+			preview1 = document.getElementById('urlimg1'),  //身份证背面照对象
+			fileInput2 = document.getElementById('uploaderInput2'),
+			preview2 = document.getElementById('urlimg2');  //身份证个人形象照对象
+	//若没有照片,显示默认照片
+	if(!'{$arr.front_path}'){
+		$(preview).attr('src','/Application/Wechat/View/Mydata/img/未标题-1.png')
+	}
+	if(!'{$arr.back_path}'){
+		$(preview1).attr('src','/Application/Wechat/View/Mydata/img/未标题-1.png')
+	}
+	if(!'{$arr.figure_path}'){
+		$(preview2).attr('src','/Application/Wechat/View/Mydata/img/未标题-1.png')
+	}
+	// 监听change事件:
+	fileInput.addEventListener('change', function () {
+
+		sel(fileInput,preview)
+	});
+	// 监听change事件:
+	fileInput1.addEventListener('change', function () {
+
+		sel(fileInput1,preview1)
+	});
+	// 监听change事件:
+	fileInput2.addEventListener('change', function () {
+
+		sel(fileInput2,preview2)
+	});
+
+
+
+	function sel(fileInput,preview){
+		// 清除背景图片:
+		var urlname=preview.getAttribute('name');
+
+		if(urlname=='front_path'){
+			imgurl="{$arr.front_path}";
+		}else if(urlname=='back_path'){
+			imgurl="{$arr.back_path}";
+		}else if(urlname=='figure_path'){
+			imgurl="{$arr.figure_path}";
+		}
+		preview.setAttribute('src','')
+		// 检查文件是否选择:
+		/*if (!fileInput.value) {
+		 info.innerHTML = '没有选择文件';
+		 return;
+		 }*/
+		// 获取File引用:
+		var file = fileInput.files[0];
+		// 获取File信息:
+		/*info.innerHTML = '文件: ' + file.name + '<br>' +
+		 '大小: ' + file.size + '<br>' +
+		 '修改: ' + file.lastModifiedDate;*/
+		if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+			// alert('图片文件格式不正确!');
+			// alert('图片文件格式不正确!', 'cancel');
+			layer.open({
+				title: '认证提示',
+				content: '图片文件格式不正确!'
+			});
+			$(fileInput).val('');
+			preview.setAttribute('src',imgurl)
+			return;
+		}
+		// 读取文件:
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			if(file.size>5242880){
+
+				preview.setAttribute('src',imgurl)
+				$(fileInput).val('');
+				// alert('图片文件大小不正确!5M以内');
+				//alert('图片文件大小不正确!5M以内', 'cancel');
+				layer.open({
+					title: '认证提示',
+					content: '图片文件大小不正确!5M以内'
+				});
+			}else{
+				var data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
+				preview.setAttribute('src',data)
+				preview.style.display='block'
+			}
+
+		};
+		// 以DataURL的形式读取文件:
+		reader.readAsDataURL(file);
+	}
+
+</script>
+
+<script>
+	//提交保存信息
+	$('#bt').click(function(){
+		//获取当前背景图的url地址
+		var urlimg=document.getElementById('urlimg').getAttribute('src')
+		var pathname=$('#uploaderInput').val(); //是否选择照片
+
+		//身份证背面照
+		var urlimg1=document.getElementById('urlimg1').getAttribute('src')
+		var pathname1=$('#uploaderInput1').val();
+
+		//个人形象照
+		var urlimg2=document.getElementById('urlimg2').getAttribute('src')
+		var pathname2=$('#uploaderInput2').val();
+
+
+		//实例化获取数据
+		var datas=new FormData();
+		if(pathname!=''  && urlimg!='' && urlimg!='{$arr.front_path}'){
+			datas.append('front_path',$('#uploaderInput')[0].files[0]);
+		}
+
+		if(pathname1!=''  && urlimg1!='' && urlimg1!='{$arr.back_path}'){
+			datas.append('back_path',$('#uploaderInput1')[0].files[0]);
+		}
+
+		if(pathname2!=''  && urlimg2!='' && urlimg2!='{$arr.figure_path}'){
+			datas.append('figure_path',$('#uploaderInput2')[0].files[0]);
+		}
+
+		//被选中的性别
+			var sex=$('input:radio[name="sex"]:checked').val()
+
+		datas.append('id_card',$('#idcard').val());
+		datas.append('sex',sex);
+		datas.append('real_name',$('#realName').val());
+		datas.append('user_age',$('#user_age').val());
+		if($('#realName').val().replace(/\s/g,"")==''){
+			//alert('请填写真实姓名')
+			layer.open({
+				title: '认证提示',
+				content: '请填写真实姓名'
+			});
+			return false;
+		}
+		if($('#user_age').val().replace(/\s/g,"")==''){
+			//alert('请填写真实姓名')
+			layer.open({
+				title: '认证提示',
+				content: '请填写真实年龄'
+			});
+			return false;
+		}
+		if($('#idcard').val().replace(/\s/g,"")==''){
+			//alert('请填写身份证号码')
+			layer.open({
+				title: '认证提示',
+				content: '请填写身份证号码'
+			});
+			return false;
+		}
+
+		if(pathname=='' && '{$arr.front_path}'==''){ //是否已经认证过
+			//alert('请上传身份证正面照片', 'cancel')
+			layer.open({
+				title: '认证提示',
+				content: '请上传身份证正面照片'
+			});
+			return false;
+		}else if(pathname1=='' && '{$arr.back_path}'==''){
+			//alert('请上传身份证背面照片', 'cancel')
+			layer.open({
+				title: '认证提示',
+				content: '请上传身份证背面照片'
+			});
+			return false;
+		}else if(pathname2=='' && '{$arr.figure_path}'==''){
+			//alert('请上传个人形象照片', 'cancel')
+			layer.open({
+				title: '认证提示',
+				content: '请上传个人形象照片'
+			});
+			return false;
+		}else{
+			$.ajax({
+				url:'__APP__/Authentication/save',
+				data:datas,
+				dataType:'json',
+				processData:false,//提示JQ库不处理发送的数据
+				contentType:false,//提示JQ库不设置Content-Type请求头
+				type:'post',
+				success:function(re){
+					if(re===true){
+						layer.alert('上传成功,等待审核',function(){
+							window.location.href='__APP__/Index/index'
+						})
+
+					}else if(re.info==2){
+						// alert(re.msg)  //修改成功
+						layer.alert(re.msg,function(){
+							window.location.href='__APP__/Index/index'
+						})
+						//window.location.href='__APP__/Index/index'
+					}
+				}
+			})
+		}
+	})
+
+</script>

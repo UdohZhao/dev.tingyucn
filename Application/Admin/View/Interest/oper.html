@@ -1,0 +1,83 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">职业兴趣列表</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-bordered">
+                    <caption>兴趣列表</caption>
+                    <thead>
+                    <tr>
+                        <th width="350">兴趣名称</th>
+                        <th>排序</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach  name="arr" item="v">
+                        <tr>
+                            <td>{$v.cname}</td>
+                            <td>{$v.sort}</td>
+                            <td><a href="__APP__/Interest/update/id/{$v.id}"><button>修改</button></a> | <button onclick="javascript:dele(this.value,1)" value="{$v.id}">删除</button></td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+
+
+
+                <table class="table table-bordered">
+                    <caption>职业列表</caption>
+                    <thead>
+                    <tr>
+                        <th width="350">职业名称</th>
+                        <th>排序</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach  name="arr1" item="v">
+                        <tr>
+                            <td>{$v.cname}</td>
+                            <td>{$v.sort}</td>
+                            <td><a href="__APP__/Interest/update/pid/{$v.id}"><button>修改</button></a> | <button onclick="javascript:dele(this.value,2)" value="{$v.id}">删除</button></td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    function dele(id,type){
+        $.ajax({
+            url:'__APP__/Interest/del',
+            data:'id='+id+'&type='+type,
+            dataType:'json',
+            type:'post',
+            success:function(re){
+                if(re==true){
+                    alert("删除成功");
+                    location.reload();
+                };
+            }
+        })
+    }
+
+</script>

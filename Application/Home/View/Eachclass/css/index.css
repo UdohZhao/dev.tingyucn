@@ -1,0 +1,34 @@
+@font-face{
+    font-family: 'myfont';
+    src : url('../fonts/myfont.TTF');
+}
+.recommendSer{
+	background-image: url("/Application/Home/View/Eachclass/img/8.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	margin: 0;
+	z-index: 999;
+	height: 245px; 
+	padding-bottom: 2px;
+	box-shadow: inset 0 0 3px 3px #ccc;
+}
+.recommendSer h4{
+	font-family: myfont;
+	font-size: 80px;
+	line-height: 240px;
+	letter-spacing: 30px;
+}
+.recommendSer img{
+	width: 100%;
+	height: 100%;
+}
+.recommendSer h2{
+	line-height: 140px;
+	font-size: 40px;
+	letter-spacing: 20px;
+}
+.eachclass_bcg{
+	background-color: #ededed;
+	padding-top: 10px;
+	z-index: -1;
+}

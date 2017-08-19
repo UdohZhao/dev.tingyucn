@@ -1,0 +1,137 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">用户注册信息审核</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">审核宝宝</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="example">
+                    <form class="form-horizontal" id="frm">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">用户号码: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;margin-left: -15px" readonly type="text" class="form-control" value="{$info.username}" name="id_card"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">服务名称: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;margin-left: -15px" readonly type="text" class="form-control" value="{$info.cname}" name="id_card"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">封面图片: </label>
+                            <div class="input-group input-group-file">
+                                <img style="height:400px;width:400px;"   src="{$info.cover_path}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">技能说明: </label>
+                            <div class="col-sm-9">
+
+                                <textarea style="margin-left: -15px;width:500px" readonly class="form-control">{$info.explain}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="button" id="bt" class="btn btn-primary">审核通过</button>
+                                <button id="cbt" style="margin-left: 20px;" type="button" class="btn btn-default btn-outline">拒绝通过</button>
+                                <button type="button" style="margin-left: 20px;" id="sbt" class="btn btn-primary">上架</button>
+                                <button id="scbt" style="margin-left: 20px;" type="button" class="btn btn-default btn-outline">下架</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    $(function(){
+        $("#bt").click(function(){   //审核通过
+            var url='{$url}';  //上页的url
+            var id='{$info.id}';
+
+            $.ajax({
+                url:'__APP__/Servicereview/rsave',
+                data:'type=2'+'&id='+id,
+                type:'post',
+                dataType:'json',
+                success:function(re){
+                    if(re.info===true){
+                        alert(re.msg);
+                        window.location.href=url;
+                    }
+                }
+            });
+        })
+
+        $("#cbt").click(function(){   //审核不通过
+            var url='{$url}';
+            var id='{$info.id}';
+            $.ajax({
+                url:'__APP__/Servicereview/rsave',
+                data:'type=1'+'&id='+id,
+                type:'post',
+                dataType:'json',
+                success:function(re){
+                    if(re.info===true){
+                        alert(re.msg);
+                        window.location.href=url;
+                    }
+                }
+            });
+        })
+
+        $("#sbt").click(function(){   //上架
+            var url='{$url}';
+            var id='{$info.id}';
+            $.ajax({
+                url:'__APP__/Servicereview/ssave',
+                data:'status=0'+'&id='+id,
+                type:'post',
+                dataType:'json',
+                success:function(re){
+                    if(re.info===true){
+                        alert(re.msg);
+                        window.location.href=url;
+                    }
+                }
+            });
+        })
+        $("#scbt").click(function(){   //下架
+            var url='{$url}';
+            var id='{$info.id}';
+            $.ajax({
+                url:'__APP__/Servicereview/ssave',
+                data:'status=1'+'&id='+id,
+                type:'post',
+                dataType:'json',
+                success:function(re){
+                    if(re.info===true){
+                        alert(re.msg);
+                        window.location.href=url;
+                    }
+                }
+            });
+        })
+    })
+</script>
+
+<!--<script type="text/javascript" src="/Application/Admin/View/Layouts/assets/readimg.js"></script>-->

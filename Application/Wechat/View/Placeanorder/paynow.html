@@ -1,0 +1,230 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Placeanorder/css/index.css">
+
+	<!-- 内容主体start -->
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>支付</p>
+          </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="weui-panel weui-panel_access">
+		  <div class="weui-panel__bd">
+		    <a class="weui-media-box weui-media-box_appmsg">
+		      <div class="weui-media-box__hd avatar">
+		        <img class="weui-media-box__thumb" src="{$serviceInfo.head_portrait}">
+		      </div>
+		      <div class="weui-media-box__bd">
+		        <h4 class="weui-media-box__title">{$serviceInfo.nickname}</h4>
+		        <p class="weui-media-box__desc">
+					<!-- 性别女start -->
+					<if condition="$serviceInfo.sex eq 1">
+						<u class="agenan">
+							<svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+								<use xlink:href="#icon-xingbienan"></use>
+							</svg>
+							<!-- <span>{$serviceInfo.id_card}</span>
+						</u> -->
+						<else/>
+						<u class="agenv">
+							<svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+								<use xlink:href="#icon-xingbienv"></use>
+							</svg>
+					</if>
+							<span id="age" style="display: none"></span>
+							<span>{$serviceInfo.age}</span>
+						</u>
+					<input class="idNumber" id="Numid" value="{$serviceInfo.id_card}" type="hidden" />
+		            <!-- 性别女end -->
+		        </p>
+		      </div>
+		    </a>
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="weui-cells">
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>品类</p>
+		    </div>
+		    <div class="weui-cell__ft">{$serviceInfo.cname}</div>
+		  </div>
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>开始时间</p>
+		    </div>
+		    <div class="weui-cell__ft">{$orderInfo.start_time|date='Y-m-d H:i',###}</div>
+		  </div>
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>数量</p>
+		    </div>
+		    <div class="weui-cell__ft">{$orderInfo.charge_mode}</div>
+		  </div>
+		</div>
+	</div>
+	<div class="row priceMsg">
+		<div class="weui-cells">
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>单价</p>
+		    </div>
+		    <div class="weui-cell__ft">￥{$serviceInfo.bid_price}</div>
+		  </div>
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>优惠</p>
+		    </div>
+		    <div class="weui-cell__ft">￥{$isCoupon}</div>
+		  </div>
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>合计</p>
+		    </div>
+		    <div class="weui-cell__ft">￥{$orderInfo.payment_amount}</div>
+		  </div>
+		</div>
+	</div>
+	<!-- <div class="row">
+		<div class="weui-cells weui-cells_form">
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		    	<p style="text-indent: 2em; text-align: justify; font-size: 12px; line-height: 22px;">我的要求内容在这儿我的要求内容在这儿我的要求内容在这儿我的要求内容在这儿我的要求内容在这儿我的要求内容在这儿我的要求内容在这儿</p>
+		    </div>
+		  </div>
+		</div>
+	</div> -->
+	<if condition="$orderInfo.reply_status eq 1 && $orderInfo.type eq 0">
+	<div class="row chiocePay">
+		<div class="weui-cells weui-cells_radio">
+		  <label class="weui-cell weui-check__label" for="x11">
+		    <div class="weui-cell__bd">
+		      <p>余额支付</p>
+		    </div>
+		    <div class="weui-cell__ft">
+		      <input type="radio" class="weui-check" name="radio1" id="x11" checked="checked" value="1">
+		      <span class="weui-icon-checked"></span>
+		    </div>
+		  </label>
+		  <label style="display: none;" class="weui-cell weui-check__label" for="x12">
+		    <div class="weui-cell__bd">
+		      <p>支付宝支付</p>
+		    </div>
+		    <div class="weui-cell__ft">
+		      <input type="radio" name="radio1" class="weui-check" id="x12"  >
+		      <span class="weui-icon-checked"></span>
+		    </div>
+		  </label>
+			<label class="weui-cell weui-check__label" for="x13">
+				<div class="weui-cell__bd">
+					<p>微信支付</p>
+				</div>
+				<div class="weui-cell__ft">
+					<input type="radio" name="radio1" class="weui-check" id="x13"  value="3">
+					<span class="weui-icon-checked"></span>
+				</div>
+			</label>
+		</div>
+	</div>
+	</if>
+<!-- <if condition="$orderInfo.reply_status eq 1 && $orderInfo.type eq 0">
+	<input type="radio" name="payType" id="type1" value="1" checked/>余额支付
+	<input type="radio" name="payType" id="type2" value="2"/>微信支付
+</if> -->
+	<div class="row">
+		<div class="col-sm-12 col-xs-12" style="margin-top: 20px; margin-bottom: 30px;">
+			<if condition="$orderInfo.reply_status eq 0">
+				<a href="javascript:;" class="weui-btn weui-btn_primary">待签约用户确认</a>
+				<elseif condition="$orderInfo.reply_status eq 1 && $orderInfo.type eq 0"/>
+				<a href="javascript:;" class="weui-btn weui-btn_primary" id="orderOne">立即支付</a>
+				<elseif condition="$orderInfo.reply_status eq 1 && $orderInfo.type neq 0"/>
+				<a href="javascript:;" class="weui-btn weui-btn_primary">已支付</a>
+				<elseif condition="$orderInfo.reply_status eq 2"/>
+				<a href="javascript:;" class="weui-btn weui-btn_primary">已取消</a>
+			</if>
+		</div>
+	</div>
+	<!-- 内容主体end -->
+<include file="Layout/footer" />
+
+<script>
+	$(function(){
+		//获取支付订单方式,扣除账户余额，微信支付
+		$('#orderOne').click(function(){
+			//获取选中的支付方式
+			var selType=$('input[name="radio1"]:checked').val();
+			var id='{$orderInfo.id}';//订单id值
+			if(selType==2){
+				window.location.href='__APP__/Placeanorder/pc?id='+id;
+				return false;
+			}
+			if(selType==3){
+				window.location.href='/Wechatpay/jsapi?orderId='+id+'&indent=1';
+			}
+			return false;
+			$.ajax({
+				url:'__APP__/Placeanorder/paymoney',
+				data:'id='+id+'&myType='+selType,
+				type:'post',
+				dataType:'json',
+				success:function(re){
+					if(re===true){
+						// alert('支付成功')
+						$.toast("支付成功");
+						window.location.href='__APP__/Myorder/index'
+					}else if(re===false){
+						// alert('支付失败,重新支付')
+						$.toast("支付失败,重新支付","cancel");
+					}else if(re.info==2){
+						// alert(re.msg)
+						$.toast(re.msg,"text");
+					}else if(re.info==7){
+						$.toast(re.msg,"cancel");
+					}
+				}
+			})
+		})
+	})
+</script>
+<script type="text/javascript">
+	var dateStrA = $(".idNumber").val();
+    var year = dateStrA.substring(6,10);
+    var month = Number(dateStrA.substring(10,12));
+    var date = Number(dateStrA.substring(12,14));
+    var oDate = new Date(); //实例一个时间对象；
+    var nowyear=oDate.getFullYear();   //获取系统的年；
+    var nowmonth=oDate.getMonth()+1;   //获取系统月份，由于月份是从0开始计算，所以要加1
+    var nowdate=oDate.getDate(); // 获取系统日，
+    if(nowyear == year){  
+        $("#age").html("0");//同年 则为0岁  
+    }else{  
+        var ageDiff = nowyear - year ; //年之差  
+        if(ageDiff > 0){  
+            if(nowmonth == month){  
+                var dayDiff = nowdate - date;//日之差  
+                if(dayDiff < 0){  
+                    var returnAge = ageDiff - 1;
+                    $("#age").html(returnAge);
+                }else{  
+                    var returnAge = ageDiff ;
+                    $("#age").html(returnAge);
+                }  
+            }else{  
+                var monthDiff = nowmonth - month;//月之差  
+                if(monthDiff < 0){  
+                    var returnAge = ageDiff - 1;
+                    $("#age").html(returnAge);
+                }else{  
+                    var returnAge = ageDiff ;
+                    $("#age").html(returnAge);
+                }  
+            }  
+        }else{  
+            $("#age").html("");//返回-1 表示出生日期输入错误 晚于今天  
+        }  
+    }
+</script>

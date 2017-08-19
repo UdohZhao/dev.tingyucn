@@ -1,0 +1,86 @@
+.authenBox{
+	margin: 20px auto;
+	background-color: #fff;
+	padding-bottom: 20px;
+	position: relative;
+}
+.authenTitle>p{
+	line-height: 40px;
+	font-weight: bolder;
+	border-bottom: 1px solid #aaa;
+	margin: 0;
+}
+.setupBox{
+	padding-top: 20px;
+}
+.setupCon{
+	padding: 10px 0;
+}
+.setupCon p>input{
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	padding-left: 3px;
+	font-size: 14px;
+}
+.setupCon p span{
+	color: #ccc;
+	font-size: 12px;
+	margin-left: 5px;
+}
+.imgBox{
+	width: 80%;
+	height: 150px;
+	text-align: center;
+}
+.imgBox img{
+	max-width: 100%;
+	height: 100%;
+}
+.uploadingImg{
+	position: relative;
+}
+.uploadingImg>button{
+	background-color: #fd908f;
+	color: #fff;
+	margin: 10px auto;
+	width: 100px;
+	height: 35px;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+}
+.uploadingImg>input{
+	position: absolute;
+	top: 10px;
+	left: 0;
+	width: 100px;
+	height: 35px;
+	opacity: 0;
+	cursor: pointer;
+}
+.sutupBtn{
+	text-align: center;
+}
+.sutupBtn button{
+	background-color: #fd908f;
+	color: #fff;
+	width: 300px;
+	height: 40px;
+	border: none;
+	border-radius: 4px;
+	margin: 10px 0;
+	margin-top: 30px;
+}
+#bt{
+	background-color: #fd908f;
+	color: #fff;
+	width: 220px;
+	line-height: 40px;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+	border-radius: 4px;
+	text-decoration: none;
+	cursor: pointer;
+	margin-top:30px;
+}

@@ -1,0 +1,238 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">站点</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">站点修改</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="example">
+                    <form class="form-horizontal" id="frm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">名称: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" value="{$info.cname}" class="form-control" name="cname"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">百度关键字: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" value="{$info.baidu_keyword}" class="form-control" name="baidu_keyword"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">百度简介: </label>
+                            <div class="col-sm-9">
+                                <textarea style="width:500px;" type="text" name="baidu_intro">{$info.baidu_intro}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">版权所有: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" value="{$info.copyright}" class="form-control" name="copyright"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">客服邮箱: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" value="{$info.email}" name="email"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">客服电话: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" value="{$info.telphones}" name="telphones"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">客服qq: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" value="{$info.qq}" name="qq"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">客服工作时间: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" value="{$info.worktime}"  name="worktime"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">状态: </label>
+                            <div class="col-sm-9">
+                                <input  type="radio"  name="status" value="0"
+                                />开启&nbsp;&nbsp;
+                                <input  type="radio"  name="status" value="1"
+                                />关闭
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">logo图标: </label>
+                            <div class="input-group input-group-file">
+                                <input id="path" style="width:500px; margin-left:12px;" type="file"   name="logo_path"  autocomplete="off"
+                                /><img style="height:100px;width:100px;"  id="img" src="{$info.logo_path}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">微信二维码图标: </label>
+                            <div class="input-group input-group-file">
+                                <input id="path1" style="width:500px; margin-left:12px;" type="file"   name="weblogo"  autocomplete="off"
+                                /><img style="height:100px;width:100px;"  id="img1" src="{$info.weblogo}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="button" id="bt" class="btn btn-primary">确认添加</button>
+                                <button id="cbt" style="margin-left: 20px;" type="reset" class="btn btn-default btn-outline">取消添加</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+<script>
+    var tobj=document.getElementsByName('status');
+    for(var i=0;i<tobj.length;i++){
+        if('{$info.status}'==i){
+            tobj[i].setAttribute("checked",true);
+        }
+    }
+</script>
+<script>
+    $(function(){
+
+        $("#path").change(function(){
+
+            var datas=new FormData();
+            datas.append("icon_path",$("#path")[0].files[0]);
+
+            var imgid='{$info.id}';//修改的id值
+            var pathname=$("#img").attr("src");  //更换前的照片地址
+
+            datas.append('icon_path',pathname);  //对比原图后再作替换删图处理
+            datas.append('id',imgid);
+
+            $.ajax({
+                url:'__APP__/Site/imgread',
+                data:datas,
+                dataType:'json',
+                processData:false,//提示JQ库不处理发送的数据
+                contentType:false,//提示JQ库不设置Content-Type请求头
+                type:'post',
+                success:function (re) {
+                        $("#img").attr("src",re.msg);
+                        $("#img").show();
+                },
+                error:function () {
+                    alert("系统崩溃")
+                }
+            });
+        })
+
+        $("#path1").change(function(){
+
+            var datas=new FormData();
+            datas.append("icon_path",$("#path1")[0].files[0]);
+
+            var imgid='{$info.id}';//修改的id值
+            var pathname=$("#img1").attr("src");  //更换前的照片地址
+
+            datas.append('icon_path',pathname);  //对比原图后再作替换删图处理
+            datas.append('id',imgid);
+
+            $.ajax({
+                url:'__APP__/Site/imgread',
+                data:datas,
+                dataType:'json',
+                processData:false,//提示JQ库不处理发送的数据
+                contentType:false,//提示JQ库不设置Content-Type请求头
+                type:'post',
+                success:function (re) {
+                    $("#img1").attr("src",re.msg);
+                    $("#img1").show();
+                },
+                error:function () {
+                    alert("系统崩溃")
+                }
+            });
+        })
+        $("#bt").click(function(){
+            var id='{$info.id}'
+            var needpath=$("#img").attr("src");
+            var pathname=$("#path").val();
+            var needpath1=$("#img1").attr("src");
+            var pathname1=$("#path1").val();
+            if(needpath==""){
+                alert("请选择图片");
+            }else{
+                $.ajax({
+                    url:'__APP__/Site/usave',
+                    data:$("#frm").serialize()+"&logo_path="+needpath+"&pathname="+pathname+"&id="+id+"&weblogo="+needpath1+"&pathname1="+pathname1,
+                    type:'post',
+                    dataType:'json',
+                    success:function(re){
+                        if(re.info===true){
+                            alert('信息上传成功');
+                            window.location.href='__APP__/Site/oper';
+                        }
+                    }
+                });
+            }
+        })
+
+        $("#cbt").click(function(){
+
+            var id='{$info.id}';
+            var pathname=$("#path").val();
+            var pathname1=$("#path1").val();
+            if(pathname!=""){
+                var needpath=$("#img").attr("src");
+            }else{
+                var needpath='';
+            }
+
+            if(pathname1!=""){
+                var needpath1=$("#img1").attr("src");
+            }else{
+                var needpath1='';
+            }
+            if(needpath!="" || needpath1!=''){
+                $.ajax({
+                    url:'__APP__/Site/csave',
+                    data:"icoimg="+needpath+"&id="+id+"&icoimg1="+needpath1,
+                    type:'post',
+                    dataType:'json',
+                    success:function(re){
+                        if(re.info===true){
+                            alert("取消成功");
+                            $("#img").attr("src",re.img);
+                            $("#img1").attr("src",re.img1);
+                        }
+                    }
+                });
+            }
+        })
+    })
+</script>

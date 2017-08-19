@@ -1,0 +1,225 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Balance/css/index.css">
+
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>我的钱包</p>
+          </div>
+        </div>
+	</div>
+
+    <div class="row balanceBox">
+		<div class="weui-tab">
+		  <div class="weui-navbar">
+		    <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+		      <span>账户余额</span>
+		    </a>
+			  <if condition="$userType.type eq 1"><!--签约用户才显示-->
+				<a class="weui-navbar__item" href="#tab2">
+				  <span>我的收入</span>
+				</a>
+			  </if>
+		  </div>
+		  <div class="weui-tab__bd">
+		    <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+		    	<div class="container">
+					<p>账户余额:</p>
+					<div class="balanceNum">
+						<span id="myAllMoney">￥{$info.balance}</span>
+					</div>
+					<div class="Details">
+						<a href="__APP__/Balance/rechargeDetails">充值明细</a>
+					</div>
+		    	</div>
+		    	<div style="height: 20px; background-color: #ededed;"></div>
+		    	<div class="col-sm-12 col-xs-12 moenyNum">
+					<div class="row moneyChioce">
+						<div class="col-sm-4 col-xs-4">
+							<div class="moneyList">
+								￥0.01
+							</div>
+						</div>
+						<div class="col-sm-4 col-xs-4">
+							<div class="moneyList">
+								￥28
+							</div>
+						</div>
+						<div class="col-sm-4 col-xs-4">
+							<div class="moneyList">
+								￥68
+							</div>
+						</div>
+						<div class="col-sm-4 col-xs-4">
+							<div class="moneyList">
+								￥199
+							</div>
+						</div>
+						<div class="col-sm-4 col-xs-4">
+							<div class="moneyList">
+								￥328
+							</div>
+						</div>
+						<div class="col-sm-4 col-xs-4">
+							<div class="moneyList">
+								￥698
+							</div>
+						</div>
+					</div>
+		    	</div>
+		    	<div class="col-sm-12 col-xs-12 payWay">
+					<div class="weui-cells weui-cells_radio">
+					  <label class="weui-cell weui-check__label" for="x12">
+					  	<div class="weui-cell__hd">
+							<svg class="icon categorie-icon" aria-hidden="true">
+				                <use xlink:href="#icon-weixinzhifu"></use>
+				            </svg>
+					  	</div>
+					    <div class="weui-cell__bd">
+					      <p>微信支付</p>
+					    </div>
+					    <div class="weui-cell__ft">
+					      <input type="radio" value="1" name="radio1" class="weui-check" id="x12" checked="checked">
+					      <span class="weui-icon-checked"></span>
+					    </div>
+					  </label>
+					</div>
+		    	</div>
+				<div style="display: none;" class="col-sm-12 col-xs-12 payWay">
+					<div class="weui-cells weui-cells_radio">
+						<label class="weui-cell weui-check__label" for="x13">
+							<div class="weui-cell__hd">
+								<svg class="icon categorie-icon" aria-hidden="true">
+									<use xlink:href="#icon-weixinzhifu"></use>
+								</svg>
+							</div>
+							<div class="weui-cell__bd">
+								<p>支付宝充值</p>
+							</div>
+							<div class="weui-cell__ft">
+								<input type="radio" name="radio1" class="weui-check" id="x13">
+								<span class="weui-icon-checked"></span>
+							</div>
+						</label>
+					</div>
+				</div>
+		    	<div class="col-sm-12 col-xs-12 moneyBtn">
+					<a href="javascript:;"  class="weui-btn weui-btn_primary">充值</a>
+		    	</div>
+				<div class="col-sm-12 col-xs-12 payWay" style="display: none;"  id="lingqu">
+					<p>赠送优惠券选择</p>
+					<select name="scid" id="needScid">
+						<foreach name="TypeInfo" item="v">
+							<optgroup label="{$v.type}">
+								<foreach name="v['typeDetail']" item="vo">
+									<option value="{$vo.id}">{$vo.cname}</option>
+								</foreach>
+							</optgroup>
+						</foreach>
+					</select>
+					<button id="btGet">确认</button>
+				</div>
+		    </div>
+			  <if condition="$userType.type eq 1">
+		    <div id="tab2" class="weui-tab__bd-item">
+		      	<div class="container">
+					<p>收入余额:</p>
+					<div class="balanceNum">
+						<span>￥{$info.earning}</span>
+					</div>
+					<div class="Details">
+						<a class="aLeft" href="__APP__/Balance/withdraw">金额提现</a>
+						<a class="aRight" href="incomeDetails">收入明细</a>
+						<div style="clear: both;"></div>
+					</div>
+		    	</div>
+		    </div>
+			  </if>
+		  </div>
+		</div>
+	</div>
+<input type="number" value="" id="shop" style="display: none"/>
+<include file="Layout/footer" />
+<script type="text/javascript">
+	$(function(){
+	  $(".weui-btn_primary").click(function(){
+	  	$(this).css("text-decoration","none");
+	    $(this).css("background-color","#fd908f");
+	    $(this).css("color","#ffffff");
+			var shopMoney=$('#shop').val();
+		  if(shopMoney==''){
+		  	// alert('请选择金额')
+		  	$.toast("请选择金额", "text");
+		  }else{
+			  var selType=$('input[name="radio1"]:checked').val();
+
+			  if(selType==2){
+				  //进入支付宝支付
+				  window.location.href='__APP__/Balance/pc?money='+shopMoney;
+				  return false;
+			  }
+			  var uid='{$uid}';
+			  window.location.href='/Wechatpay/jsapi?money='+shopMoney+'&recharge=1'+'&uid='+uid;
+			  return false;
+		  	$.ajax({
+		  		url:'__APP__/Balance/shop',
+				data:'money='+shopMoney,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+						if(re.info===true && re.msg==1){
+							// alert('充值成功');
+							$.toast("充值成功,充值金额满100，赠送20优惠券，下方选择，及时领哦");
+							$('#lingqu').css('display','block')
+							$('#myAllMoney').html('￥'+re.finalMoney);
+						}else if(re.info===true){
+							// alert('充值失败');
+							$.toast("充值成功");
+							$('#myAllMoney').html('￥'+re.finalMoney);
+						}else if(re===false){
+							// alert('充值失败');
+							$.toast("充值失败","cancel");
+						}
+				}
+			})
+		  }
+	  })
+	});
+	if('{$gift}'==1){
+		// alert('充值成功');
+		$.toast("充值成功,充值金额满100，赠送20优惠券，下方选择，及时领哦");
+		$('#lingqu').css('display','block')
+	}
+	$(".moneyList").click(function(){
+		$(".moneyList").css({"border":"1px solid #aaaaaa","color":"#aaaaaa"});
+		$(this).css({"border":"1px solid #fd908f","color":"#fd908f"});
+
+
+		//正则匹配取得数字部分
+		var pattern=/\d+(\.\d+)?/g;
+		var money=$(this).html().match(pattern);
+		$('#shop').attr('value',money)
+
+	});
+	$("#balanceInput").click(function(){
+		$(".moneyList").css({"border":"1px solid #aaaaaa","color":"#aaaaaa"});
+	})
+
+
+	$('#btGet').click(function(){
+		var scid=$('#needScid').val();
+		$.ajax({
+			url:'__APP__/Balance/gift',
+			data:'scid='+scid,
+			dataType:'json',
+			type:'post',
+			success:function(re){
+				if(re===true){
+					$.toast('领取成功');
+					$('#lingqu').css('display','none');
+				}
+			}
+		})
+	})
+</script>

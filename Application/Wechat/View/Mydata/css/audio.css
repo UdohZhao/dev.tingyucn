@@ -1,0 +1,109 @@
+.audio_upload button{
+	width: 100%;
+	height: 35px;
+	background-color: #fd908f;
+	color: #fff;
+	border-radius: 4px;
+	margin-top: 30px;
+	border: none;
+}
+.audio_box{
+	width: 100%;
+	border: 1px solid #fd908f;
+	border-radius: 4px;
+	text-align: right;
+	margin-top: 22px;
+	display: none;
+}
+.audio_box .audio_img{
+	width: 100%;
+	height: 30px;
+	position: relative;
+}
+.audio_box .audio_img img{
+	width: 20px;
+	position: absolute;
+	top: 15%;
+	left: 15%;
+	height: 65%;
+}
+.audio_box .audio_img i{
+	font-style: normal;
+	font-size: 14px; 
+	color: #fd908f;
+	line-height: 30px;
+	margin-right: 15%;
+}
+#au{
+	width: 100px;
+	height: 20px;
+}
+.video_box{
+	border: 2px solid #fd908f;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	position: relative;
+	cursor: pointer;
+	display: block;
+	margin: 19px 19px;
+}
+.sanjiao{
+	width:0;
+    height:0;
+    border-width:10px 0 10px 15px;
+    border-style:solid;
+    border-color:transparent transparent transparent #fd908f;/*透明 透明 透明 灰*/
+    opacity: .8;
+    position: absolute;
+    top: 8px;
+    left: 12.5px;
+}
+.video_playing{
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	z-index: 1000;
+}
+.video_playing .close_vedio{
+	line-height: 40px;
+	color: #fff;
+	text-align: center;
+}
+.video_playing video{
+	width: 100%;
+}
+.audio_box{
+	float: left;
+    position: relative;
+    margin-right: 9px;
+    margin-bottom: 9px;
+    width: 77px;
+    height: 30px;
+}
+.video_box{
+	float: left;
+    position: relative;
+    margin-right: 9px;
+    margin-bottom: 9px;
+}
+.weui-uploader__bd{
+	position: relative;
+}
+#delete_video,#delete_audio{
+	width: 70px;
+	height: 30px;
+	border-radius: 6px;
+	background-color: #fd908f;
+	font-size: 14px;
+	text-align: center;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+#delete_video a,#delete_audio a{
+	line-height: 30px;
+	color: #fff;
+}

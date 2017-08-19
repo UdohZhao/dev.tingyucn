@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="bootstrap admin template">
+    <meta name="author" content="">
+
+    <title>{$Think.config.ADMIN_TITLE} | 登录</title>
+
+    <link rel="apple-touch-icon" href="/Application/Admin/View/Layouts/assets/images/apple-touch-icon.png">
+    <link rel="shortcut icon" href="/Application/Admin/View/Layouts/assets/images/favicon.ico">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/css/bootstrap-extend.min.css">
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/css/site.min.css">
+
+    <!-- Plugins -->
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/vendor/animsition/animsition.css">
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/vendor/asscrollable/asScrollable.css">
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/vendor/switchery/switchery.css">
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/vendor/intro-js/introjs.css">
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/vendor/slidepanel/slidePanel.css">
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/vendor/flag-icon-css/flag-icon.css">
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/fonts/web-icons/web-icons.min.css">
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/fonts/brand-icons/brand-icons.min.css">
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+    <!-- Inline -->
+    <link rel="stylesheet" href="/Application/Admin/View/Layouts/assets/examples/css/pages/login-v2.css">
+
+    <!-- SweetAlert插件 -->
+    <link rel="stylesheet" href="/Public/SweetAlert/css/sweet-alert.css">
+
+    <!--[if lt IE 9]>
+    <script src="/Application/Admin/View/Layouts/assets/vendor/html5shiv/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!--[if lt IE 10]>
+    <script src="/Application/Admin/View/Layouts/assets/vendor/media-match/media.match.min.js"></script>
+    <script src="/Application/Admin/View/Layouts/assets/vendor/respond/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Scripts -->
+    <script src="/Application/Admin/View/Layouts/assets/vendor/modernizr/modernizr.js"></script>
+    <script src="/Application/Admin/View/Layouts/assets/vendor/breakpoints/breakpoints.js"></script>
+    <script>
+        Breakpoints();
+    </script>
+</head>
+<body class="page-login-v2 layout-full page-dark">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<!-- Page -->
+<div class="page animsition" data-animsition-in="fade-in" data-animsition-out="fade-out">
+    <div class="page-content">
+        <div class="page-brand-info">
+            <div class="brand">
+
+                <img class="brand-img" src="{$logo.logo_path}" style="width: 30px;height: 30px" alt="...">
+                <h2 class="brand-text font-size-40">{$Think.config.ADMIN_TITLE}|{$logo.cname}</h2>
+            </div>
+            <p class="font-size-30">{$Think.config.ADMIN_SLOGAN}{$logo.copyright}</p>
+        </div>
+
+        <div class="page-login-main">
+            <!-- <div class="brand visible-xs">
+              <img class="brand-img" src="./Apps/Admin/View/Layouts/assets/images/logo-blue@2x.png" alt="...">
+              <h3 class="brand-text font-size-40">Remark</h3>
+            </div> -->
+            <h3 class="font-size-24" style="text-align: center;">登 录</h3>
+            <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p> -->
+
+            <form id="loginForm" method="post" action="">
+                <div class="form-group">
+                    <label class="sr-only" for="inputEmail">用户名</label>
+                    <input type="text" class="form-control" name="username" placeholder="请输入用户名" value="{$Think.cookie.username}">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="inputPassword">密码</label>
+                    <input type="password" class="form-control" name="password" placeholder="请输入确认密码">
+                </div>
+                <div style="" class="form-group">
+                    <input type="text" class="form-control" id="code" name="code" placeholder="请输入验证码" style="width: 50%; display: inline;">
+                    <img style="width: 49%; height: 40px;cursor: pointer;" src="__APP__/Login/verifyCode" onclick="this.src=this.src+'?'+Math.random();" />
+                </div>
+                <div class="form-group clearfix">
+                    <div class="checkbox-custom checkbox-inline checkbox-primary pull-left">
+                        <input type="checkbox" id="remember" name="remember" value="1">
+                        <label for="inputCheckbox">记住账号</label>
+                    </div>
+                    <a class="pull-right" href="javascript:;" onclick="javascript:swal('# 请自行联系网站运营人员', '', 'error');">忘记密码？</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">点 击 登 录</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- End Page -->
+
+
+<!-- Core  -->
+<script src="/Application/Admin/View/Layouts/assets/vendor/jquery/jquery.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/vendor/bootstrap/bootstrap.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/vendor/animsition/jquery.animsition.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/vendor/asscroll/jquery-asScroll.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/vendor/mousewheel/jquery.mousewheel.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/vendor/asscrollable/jquery.asScrollable.all.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+
+<!-- Plugins -->
+<script src="/Application/Admin/View/Layouts/assets/vendor/switchery/switchery.min.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/vendor/intro-js/intro.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/vendor/screenfull/screenfull.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/vendor/slidepanel/jquery-slidePanel.js"></script>
+
+<!-- Plugins For This Page -->
+<script src="/Application/Admin/View/Layouts/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+<!-- Scripts -->
+<script src="/Application/Admin/View/Layouts/assets/js/core.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/js/site.js"></script>
+
+<script src="/Application/Admin/View/Layouts/assets/js/sections/menu.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/js/sections/menubar.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/js/sections/gridmenu.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/js/sections/sidebar.js"></script>
+
+<script src="/Application/Admin/View/Layouts/assets/js/configs/config-colors.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/js/configs/config-tour.js"></script>
+
+<script src="/Application/Admin/View/Layouts/assets/js/components/asscrollable.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/js/components/animsition.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/js/components/slidepanel.js"></script>
+<script src="/Application/Admin/View/Layouts/assets/js/components/switchery.js"></script>
+
+<!-- Scripts For This Page -->
+<script src="/Application/Admin/View/Layouts/assets/js/components/jquery-placeholder.js"></script>
+
+<!-- 引入前端验证插件 -->
+<script src="/Public/jquery-validation-1-2/dist/jquery.validate.min.js"></script>
+<script src="/Public/jquery-validation-1-2/lib/jquery.form.js"></script>
+<!-- SweetAlert插件 -->
+<script src="/Public/SweetAlert/js/sweet-alert.js"></script>
+<!-- 当前页面js -->
+<script src="/Application/Admin/View/Login/js/index.js"></script>
+
+<script>
+    (function(document, window, $) {
+        'use strict';
+
+        var Site = window.Site;
+        $(document).ready(function() {
+            Site.run();
+        });
+    })(document, window, jQuery);
+</script>
+
+
+</body>
+
+</html>
+
+

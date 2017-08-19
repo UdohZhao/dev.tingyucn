@@ -1,0 +1,48 @@
+.rechargeTime{
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.rechargeTime a{
+	font-size: 12px;
+	padding: 5px 10px;
+	background-color: #aaaaaa;
+	color: #ffffff;
+	border-radius: 5px;
+}
+.rechargeDetails{
+	border: 1px solid #aaaaaa;
+	padding: 10px 15px;
+	background-color: #ffffff;
+	margin-bottom: 10px;
+}
+.rechargeDetails p{
+	margin: 0;
+}
+.rechargeDetails>p{
+	font-weight: bold;
+}
+.rechargeNum{
+	text-align: center;
+	padding-top: 6px;
+	padding-bottom: 10px;
+	border-bottom: 1px dashed #aaaaaa;
+	margin-bottom: 10px;
+}
+.rechargeDetails .timeL,.rechargeNum p{
+	font-size: 14px;
+	color: #aaaaaa;
+}
+.rechargeNum .moneyNum{
+	font-size: 20px;
+	color: #000000;
+	font-weight: bolder;
+}
+.rechargeDetails .lastP{
+	font-size: 14px;
+}
+.rechargeDetails .lastP span{
+	color: #aaaaaa;
+}

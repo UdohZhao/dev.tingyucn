@@ -1,0 +1,16 @@
+.pageName{
+	border-bottom: none;
+}
+.weui-cells{
+	margin-top: 0;
+}
+label{
+	margin-bottom: 0;
+	font-size: 14px;
+}
+.weui-input{
+	font-size: 14px;
+}
+.weui-btn_primary{
+	background-color: #fd908f;
+}

@@ -1,0 +1,119 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">首页顶部图片</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">添加图片信息</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="example">
+                    <if condition="$status eq 2">
+                        <form class="form-horizontal" id="frm1">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" style="color:black;">职业名称: </label>
+                                <div class="col-sm-9">
+                                    <input style="width:500px;" value="{$info.cname}" type="text" class="form-control" name="cname"  autocomplete="off"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" style="color:black;">排序: </label>
+                                <div class="col-sm-9">
+                                    <input style="width:500px;" value="{$info.sort}" type="text" class="form-control" name="sort"  autocomplete="off"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button type="button" id="bt1" class="btn btn-primary">修改信息</button>
+                                    <button id="cbt1" style="margin-left: 20px;" type="reset" class="btn btn-default btn-outline">重置信息</button>
+                                </div>
+                            </div>
+
+                        </form>
+                        <else/>
+
+                        <form class="form-horizontal" id="frm">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" style="color:black;">兴趣名称: </label>
+                                <div class="col-sm-9">
+                                    <input style="width:500px;" value="{$info.cname}" type="text" class="form-control" name="cname"  autocomplete="off"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" style="color:black;">排序: </label>
+                                <div class="col-sm-9">
+                                    <input style="width:500px;" value="{$info.sort}" type="text" class="form-control" name="sort"  autocomplete="off"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <button type="button" id="bt" class="btn btn-primary">修改信息</button>
+                                    <button id="cbt" style="margin-left: 20px;" type="reset" class="btn btn-default btn-outline">重置信息</button>
+                                </div>
+                            </div>
+                        </form>
+                    </if>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+
+    $(function() {
+        $("#bt").click(function () {
+            var id='{$info.id}';
+            var url='{$iurl}';
+            $.ajax({
+                url: '__APP__/Interest/usave',
+                data: $("#frm").serialize()+"&status=1"+'&id='+id,//兴趣添加
+                type: 'post',
+                dataType: 'json',
+                success: function (re) {
+                    if (re=== true) {
+                        alert('信息修改成功');
+                        window.location.href=url
+                    }
+                }
+            });
+        })
+
+        $("#bt1").click(function () {
+            var id='{$info.id}';
+            var url='{$purl}';
+            $.ajax({
+                url: '__APP__/Interest/usave',
+                data: $("#frm1").serialize()+"&status=2"+'&id='+id,//职业添加
+                type: 'post',
+                dataType: 'json',
+                success: function (re) {
+                    if (re === true) {
+                        alert('信息上传成功');
+                        window.location.href=url
+                    }
+                }
+            });
+        })
+    })
+
+</script>
+
+<!--<script type="text/javascript" src="/Application/Admin/View/Layouts/assets/readimg.js"></script>-->

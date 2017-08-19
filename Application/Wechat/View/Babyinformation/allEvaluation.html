@@ -1,0 +1,96 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Babyinformation/css/index.css">
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Babyinformation/css/dropload.css">
+
+
+	<!-- <div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>全部评价</p>
+          </div>
+        </div>
+	</div> -->
+	<div class="row khfxWarp" style="margin-bottom: 20px;">
+		<div class="weui-cells khfxPane" style="margin:0;">
+		  <div class="weui-cell">
+	        <div class="weui-cell__bd serviseNum">
+	          <!-- <p class="babyService">评价</p> -->
+	          <span class="name1">全部评价</span>
+		      	<!-- <span class="numbers"><b>3.5</b>分</span> -->
+		      	<div class="starBox">
+					<!-- <svg class="icon categorie-icon" aria-hidden="true">
+	                    <use xlink:href="#icon-wuxing"></use>
+	                </svg>
+					<div class="starImg">
+						<svg class="icon categorie-icon" aria-hidden="true">
+		                    <use xlink:href="#icon-wuxing1"></use>
+		                </svg>
+					</div> -->
+				</div>
+	        </div>
+		  </div>
+			<foreach name="evaluate" item="eval">
+				<div class="weui-cell evaluation">
+					<div class="weui-cell__hd">
+					<if condition='$eval.head_portrait eq null'>
+      					<img src="/Application/Wechat/View/Mydata/img/未标题-1.png">
+			        <else/>
+			            <img src="{$eval.head_portrait}">
+			        </if>
+					<!-- <img src="{$eval.head_portrait}"> -->
+					</div>
+					<div class="weui-cell__bd">
+						<div class="peopleName">
+							<span class="name1">{$eval.nickname}</span>
+							<!-- <span class="numbers"><b>4.0</b>分</span> -->
+							<div class="starBox">
+								<if condition="$eval.grade eq 0">
+									<span>好评</span>
+									<elseif condition="$eval.grade eq 1"/>
+									<span>中评</span>
+									<elseif condition="$eval.grade eq 2"/>
+									<span>差评</span>
+								</if>
+							</div>
+						</div>
+						<p class="peopleCon">{$eval.estimate}</p>
+						<p class="peopleTime">{$eval.ctime|date='Y-m-d H:i:s',###}</p>
+					</div>
+				</div>
+			</foreach>
+
+		</div>
+	</div>
+
+
+<include file="Layout/footer" />
+<script type="text/javascript" src="/Application/Wechat/View/Babyinformation/js/dropload.js"></script>
+<script type="text/javascript" src="/Application/Wechat/View/Babyinformation/js/khData.js"></script>
+<script type="text/javascript">
+	sid='{$sid}'
+
+$(function(){
+
+
+	// var len=$(".numbers").length;
+	// for(var i=0;i<len;i++){
+	// 	var fen=$(".numbers").eq(i).children("b").html();
+	// 	var wuH=fen*12;
+	// 	$(".numbers").eq(i).siblings(".starBox").children(".starImg").css("width",wuH+"px");
+	// }
+	var starBoxLen=$(".starBox").children("span").length;
+	for(var i=0;i<starBoxLen;i++){
+		var starBoxHtml=$(".starBox").children("span").eq(i).html();
+		if(starBoxHtml=="好评"){
+			$(".starBox").children("span").eq(i).css("color","red");
+		}else if(starBoxHtml=="中评"){
+				$(".starBox").children("span").eq(i).css("color","#f88e4b");
+		}else{
+			$(".starBox").children("span").eq(i).css("color","#ccc");
+		}
+	}
+	
+	
+})
+</script>

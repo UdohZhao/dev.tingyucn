@@ -1,0 +1,89 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">服务类型列表</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-bordered">
+                    <caption>边框表格布局</caption>
+                    <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>注册时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach  name="arr" item="v">
+                        <tr>
+
+                            <td>{$v.username}</td>
+                            <td>{$v.ctime|date='Y-m-d H:i:s',###}</td>
+                            <if condition="$v.status eq 0">
+                                <td>正常</td>
+                                <else/>
+                                <td>冻结</td>
+                            </if>
+                            <if condition="$v.status eq 0">
+                                <td><button onclick="javascript:dongjie('{$v.id}',1)">冻结</button> | <button onclick="javascript:dele(this.value)" value="{$v.id}">删除</button></td>
+                                <else/>
+                                <td><button onclick="javascript:dongjie('{$v.id}',0)">解冻</button> | <button onclick="javascript:dele(this.value)" value="{$v.id}">删除</button></td>
+                            </if>
+
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                {$page}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    function dele(id){
+
+        $.ajax({
+            url:'__APP__/Admin/del',
+            data:'id='+id,
+            dataType:'json',
+            type:'post',
+            success:function(re){
+                if(re===true){
+                    alert("删除成功");
+                    window.location.href='__APP__/Admin/oper';
+                };
+            }
+        })
+    }
+
+    function dongjie(id,status){
+        $.ajax({
+            url:'__APP__/Admin/dongjie',
+            data:'id='+id+"&status="+status,
+            dataType:'json',
+            type:'post',
+            success:function(re){
+
+
+                    alert(re.info);
+                    window.location.href='__APP__/Admin/oper';
+
+            }
+        })
+    }
+</script>

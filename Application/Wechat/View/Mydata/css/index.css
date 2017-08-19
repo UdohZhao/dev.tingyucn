@@ -1,0 +1,70 @@
+.topBox{
+	background-color: #ffffff;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	background-image: url("/Application/Wechat/View/Mydata/img/beijing.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+.myAvatar{
+	display: block;
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	border-radius: 100px;
+	overflow: hidden;
+}
+.myAvatar img{
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+}
+p{
+	margin-bottom: 0;
+}
+.weui-cells{
+	margin: 0;
+}
+.weui-cell__ft input,.weui-cell__bd p{
+	font-size: 14px;
+}
+.weui-cell__ft{
+	font-size:14px;
+}
+.weui-cell__ft input{
+	border: none;
+	background-color: none;
+	text-align: right;
+}
+h1{
+	margin: 0;
+}
+.picker-item{
+	font-size: 14px;
+}
+.zhezhao{
+	width: 375px;
+	height: 667px; 
+	background-color: rgba(0,0,0,.5); 
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+}
+.weui-btn_primary{
+	background-color: #fd908f;
+}
+#avatarUpload{
+	position: relative;
+}
+#avatarUpload input{
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+	border: none;
+	position:absolute;
+    right:0;
+    top:0;
+	opacity: 0;
+	filter:alpha(opacity=0);
+}

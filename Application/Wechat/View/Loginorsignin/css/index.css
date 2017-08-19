@@ -1,0 +1,14 @@
+.logoPic{
+	text-align: center;
+	margin-top: 40%;
+}
+.logoPic img{
+	width: 100%;
+	height: 100%
+}
+.LSbutton{
+	margin-top: 60%;
+}
+.signinBtn{
+	background-color: #f88e4b;
+}

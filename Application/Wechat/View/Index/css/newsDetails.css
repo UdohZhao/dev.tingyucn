@@ -1,0 +1,22 @@
+.newsContent{
+	background-color: #ffffff;
+	padding-bottom: 10px;
+}
+.newsContent .newsTitle{
+	text-align: center;
+}
+.newsContent .newsTitle p{
+	line-height: 40px;
+}
+.newsContent .newsDetails p{
+	text-indent: 2em;
+	font-size: 14px;
+	text-align: justify;
+}
+.newsDetails span{
+	font-size: 14px;
+	font-weight: bold;
+}
+.newsDetails p{
+	font-size: 12px;
+}

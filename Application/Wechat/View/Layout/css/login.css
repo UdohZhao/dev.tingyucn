@@ -1,0 +1,100 @@
+/*#forgetPsw .modal-dialog,#myModal .modal-dialog{
+	width: 90%;
+	margin: 10% auto;
+}*/
+#myModal .weui-navbar__item.weui-bar__item--on{
+	background-color: #fff;
+	color: #fd908f;
+	border-bottom: 2px solid #fd908f;
+}
+#myModal .weui-navbar__item{
+	background-color: #fff;
+}
+#myModal .weui-navbar__item:after{
+	border: none;
+}
+#myModal .weui-cells:before{
+	border: none;
+}
+#forgetPsw .weui-cells,#myModal .weui-cells{
+	font-size: 14px;
+}
+#forgetPsw label,#myModal label{
+	font-weight: normal;
+	margin: 0;
+}
+#forgetPsw .weui-cell__hd,#myModal .weui-cell__hd{
+	width: 30%;
+}
+#forgetPsw .loginBtn,#myModal .loginBtn{
+	text-align: center;
+}
+#myModal .loginBtn .forgetPsw{
+	font-size: 12px;
+	line-height: 35px;
+	text-decoration: none;
+	color: #ccc;
+}
+#forgetPsw #bt1,#myModal #bt2,#myModal #bt{
+	background-color: #fd908f;
+	color: #fff;
+	height: 40px;
+	line-height: 40px;
+}
+#myModal #getverify,#forgetPsw #getverify1{
+	font-size: 12px;
+}
+.resetPsw{
+	text-align: center;
+}
+.tanchu{
+	background-color: rgba(0,0,0,.5);
+	position: fixed;
+	top: 0;
+	left: 15px;
+	display: none;
+	z-index: 999;
+}
+#forgetPsw,#myModal{
+	width: 80%;
+	position: fixed;
+	top: 10px;
+	left: 10%;
+	display: none;
+	background-color: #fff;
+	padding-bottom: 10px;
+	padding:5px 5px;
+	z-index: 1000;
+}
+#getverify1,#getverify{
+	padding: 0 0;
+	padding-left: 2px;
+}
+#bt1,#bt2{
+	margin-top: 3px;
+}
+p{
+	margin: 0;
+}
+#forgetPsw .weui-cells,#myModal .weui-cells{
+	margin: 0;
+}
+#forgetPsw .weui-navbar__item,#myModal .weui-navbar__item{
+	padding: 5px 0;
+}
+#forgetPsw .weui-navbar+.weui-tab__bd,#myModal .weui-navbar+.weui-tab__bd{
+	padding-top: 40px;
+}
+.shanchu{
+	position: absolute;
+	top: 0px;
+	right: 10px;
+	z-index: 999;
+	display: block;
+	width: 10px;
+	height: 25px;
+}
+.shanchu svg{
+	width: 10px;
+	height: 10px;
+}

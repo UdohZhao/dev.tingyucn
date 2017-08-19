@@ -1,0 +1,73 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Coupon/css/index.css">
+	
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>优惠券</p>
+          </div>
+        </div>
+	</div>
+<if condition="(!$arr)">
+	该品类暂无优惠券可用
+	<else/>
+	<foreach name="arr" item="v">
+		<div class="row">
+			<div class="col-sm-12 col-xs-12">
+				<div class="couponBox">
+					<div class="couponLeft">
+						<p>￥{$v.price}</p>
+					</div>
+					<div class="couponCenter">
+						<p class="couponTitle">{$v.cname}</p>
+						<p class="couponDetails">{$v.explain}</p>
+						<p class="couponDetails">有效期至{$v.end_time|date='Y-m-d H:i:s',###}</p>
+					</div>
+					<div class="couponRight">
+						<a href="__APP__/Allclass/index" avg="{$v.id}" value="{$v.price}" class="hrefCou">立即使用</a>
+					</div>
+					<div style="clear: both;"></div>
+				</div>
+			</div>
+		</div>
+	</foreach>
+</if>
+
+	<!--<div class="row">
+		<div class="col-sm-12 col-xs-12">
+			<div class="couponBox">
+				<div class="couponLeft">
+					<p>￥20.0</p>
+				</div>
+				<div class="couponCenter">
+					<p class="couponTitle">充值礼包</p>
+					<p class="couponDetails">一次充值满100送20</p>
+					<p class="couponDetails">有效期至2017-07-01 16:21</p>
+				</div>
+				<div class="couponRight">
+					<a href="__APP__/Allclass/index">立即使用</a>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+	</div>-->
+
+<include file="Layout/footer" />
+<script type="text/javascript">
+	var couponBoxH=$(".couponBox").height();
+	console.log(couponBoxH);
+	$(".couponLeft").children("p").css("line-height",couponBoxH+"px")
+	$(".couponRight").children("a").css("line-height",couponBoxH+"px")
+
+	if('{$couponId}'!=''){
+		$('.hrefCou').removeAttr('href');
+		$('.hrefCou').click(function(){
+			var price=$(this).attr('value');
+			sessionStorage.setItem('Coupon',price);//优惠券单价
+			var cid=$(this).attr('avg')
+			sessionStorage.setItem('cid',cid);//优惠券id值
+				window.location.href='{$url}';
+		})
+	}
+</script>

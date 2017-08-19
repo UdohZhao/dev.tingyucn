@@ -1,0 +1,75 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Setup/css/index.css">
+
+	<!-- 内容主体start -->
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>设置</p>
+          </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="weui-cells">
+		  <a class="weui-cell weui-cell_access" href="__APP__/Authentication/index">
+		    <div class="weui-cell__bd">
+		      <p>身份认证</p>
+		    </div>
+		    <div class="weui-cell__ft">
+		    </div>
+		  </a>
+		  <a class="weui-cell weui-cell_access" href="__APP__/Feedback/index">
+		    <div class="weui-cell__bd">
+		      <p>意见反馈</p>
+		    </div>
+		    <div class="weui-cell__ft">
+		    </div>
+		  </a>
+		  <a class="weui-cell weui-cell_access" href="__APP__/Blacklist/index">
+		    <div class="weui-cell__bd">
+		      <p>黑名单</p>
+		    </div>
+		    <div class="weui-cell__ft">
+		    </div>
+		  </a>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 50%;">
+		<div class="col-sm-12 col-xs-12">
+			<a href="javascript:;" class="weui-btn weui-btn_primary" id="signOut">退出登录</a>
+		</div>
+	</div>
+	<!-- 内容主体end -->
+
+<include file="Layout/footer" />
+<script type="text/javascript">
+$(function(){
+  $(".weui-btn_primary").click(function(){
+  	$(this).css("text-decoration","none");
+    $(this).css("background-color","#fd908f");
+    $(this).css("color","#ffffff");
+  });
+  $("#signOut").click(function(){
+  	$.confirm({
+	  title: '',
+	  text: '确定要退出登录吗？',
+	  onOK: function () {
+	  	$.ajax({
+	  		url:'__APP__/Login/loginout',
+			type:'post',
+			dataType:'json',
+			success:function(re){
+					if(re===true){
+						window.location.href='__APP__/Index/index'
+					}
+			}
+		})
+	    //点击确认
+	  },
+	  onCancel: function () {
+	  }
+});
+  })
+})
+</script>

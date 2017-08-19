@@ -1,0 +1,280 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Skill/css/index.css">
+
+	<!-- 内容主体start -->
+	<div class="row">
+		<div class="pageName">
+        <div class="container">
+          <p>技能说明</p>
+        </div>
+      </div>
+	</div>
+<form>
+	<div class="row">
+		<div class="weui-cells weui-cells_form" style="margin-top: 0;">
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <textarea id="area" class="weui-textarea"  placeholder="请在这儿介绍你自己的技能" rows="3">{$babyInfo.explain}</textarea>
+		      <div class="weui-textarea-counter"><span id="text-count">0</span>/50</div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-sm-12 col-xs-12">
+      <div class="row">
+        <div class="weui-cells weui-cells_form">
+          <div class="weui-cell">
+            <div class="weui-cell__bd">
+              <div class="weui-uploader">
+                <div class="weui-uploader__hd">
+                  <p class="weui-uploader__title">封面照<span>(消息无遮盖，内容清晰)</span></p>
+                  <div class="weui-uploader__info"></div>
+                </div>
+                <div class="weui-uploader__bd">
+                  <ul class="weui-uploader__files" id="uploaderFiles">
+                    <li id="urlimg"  class="weui-uploader__file" name="cover_path" style="background-image:url({$babyInfo.cover_path});"></li>
+                  </ul>
+                  <div class="weui-uploader__input-box">
+                    <input id="uploaderInput" class="weui-uploader__input" type="file" accept="image/*" multiple="">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-xs-12">
+            <div class="annotated">
+              <div class="annotatedList">
+              <svg class="icon categorie-icon" aria-hidden="true">
+                        <use xlink:href="#icon-xinghao"></use>
+                    </svg>
+                    <span>照片请勿进行任何软件处理</span>
+                </div>
+              <div class="annotatedList">
+              <svg class="icon categorie-icon" aria-hidden="true">
+                        <use xlink:href="#icon-xinghao"></use>
+                    </svg>
+                    <span>身份证有效期需要在一个月以上</span>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row unitPrice">
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">单价</label></div>
+        <div class="weui-cell__bd">
+          <input id="input" class="weui-input" value="{$babyInfo.bid_price}" type="number" placeholder="请输入单价">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-xs-12">
+      <span id="priceError"></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-xs-12 Sbutton">
+      <a href="javascript:;" id="btt" class="weui-btn weui-btn_primary">提交</a>
+    </div>
+  </div>
+	<!-- 内容主体end -->
+</form>
+<include file="Layout/footer" />
+<script type="text/javascript">
+$(function(){
+  $(".weui-btn_primary").click(function(){
+  	$(this).css("text-decoration","none");
+    $(this).css("background-color","#fd908f");
+    $(this).css("color","#ffffff");
+  })
+})
+/*字数限制*/  
+    $("#area").on("input propertychange", function() {  
+        var $this = $(this),  
+            _val = $this.val(),  
+            count = "";  
+        if (_val.length > 50) {  
+            $this.val(_val.substring(0, 50));  
+        }  
+        count =$this.val().length;  
+        $("#text-count").html(count);  
+    });
+    var input=document.getElementById("input");
+    function AddEventInput(i){
+        //这里就不做兼容了
+        i.addEventListener("blur",function(){
+            var value=i.value;
+            var reg=/(^[1-9]{1}[0-9]*$)|(^[0-9]*\.[0-9]{2}$)/
+            if(!reg.test(value)){
+              $("#priceError").html("单价输入不正确")
+            }else{
+                console.log("输入正确");
+            };
+        });
+    }
+    AddEventInput(input);
+</script>
+
+<script>
+	$(function(){
+
+	    if('{$babyInfo.cover_path}'=='' || '{$babyInfo.cover_path}'==null){
+            document.getElementById('urlimg').style.display='none';
+        }
+		$('#btt').click(function(){
+			var content=$('#area').val();
+            var price=$('#input').val();
+            if(price==""||price<=0){
+                $("#priceError").html("单价输入不正确")
+                return false;
+            }
+			var id='{$id}';//选择的服务id
+            var path=document.getElementById('urlimg').style.backgroundImage;
+			var fileup=$('#uploaderInput').val();
+
+            var datas=new FormData();
+            if(fileup!=''  && path!='' && path!='{$babyInfo.cover_path}'){
+                datas.append('cover_path',$('#uploaderInput')[0].files[0]);
+            }
+            datas.append('scid',id);
+            datas.append('bid_price',price);
+            datas.append('explain',content);
+
+
+            if(content=='' || path==''){
+				// alert('技能描述和封面照不能为空');
+        $.toast("技能描述和封面照不能为空", "cancel");
+			}else{
+				$.ajax({
+					url:'__APP__/Skill/save',
+					data:datas,
+					dataType:'json',
+                    processData:false,//提示JQ库不处理发送的数据
+                    contentType:false,//提示JQ库不设置Content-Type请求头
+					type:'post',
+					success:function(re){
+                      if(re.status==4){
+                        $.toast(re.msg,{'time':2000}, function(){
+                          window.location.href='__APP__/'+re.url+'/index'
+                        })
+                        window.location.href='__APP__/'+re.url+'/index'
+                      }
+                        if(re.info==1){
+                            // alert('信息上传成功,进入实名认证') ;
+                            if(re.checkStatus==2){
+                                $.toast("信息上传成功");
+                            }else{
+                                $.toast("信息上传成功,检测到审核未通过，进入身份认证");
+                            }
+                            //$.toast("信息上传成功,进入实名认证");
+                            window.location.href='__APP__/'+re.url+'/index'
+                        }else if(re.info==2){
+                            // alert(re.msg);
+                            $.toast(re.msg);
+                            window.location.href='__APP__/'+re.url+'/index'
+                        }else if(re.info==3){
+                            // alert(re.msg)
+                            $.toast(re.msg);
+                            window.location.href='__APP__/'+re.url+'/index'
+                        }
+					}
+				})
+			}
+		})
+
+      /*$('#uploaderInput').change(function(){
+           var datas=new FormData();
+           datas.append('cover_path',$('#uploaderInput')[0].files[0]);
+           //console.log($('#uploaderInput')[0].files[0]);
+       //判断是否更换
+           var sobj=document.getElementById('urlimg');  //获取li对象
+           var pathname=sobj.style.backgroundImage;  //更换前的照片地址
+
+           if(pathname!=""){
+               datas.append('path',pathname);
+           }
+           $.ajax({
+               url:'__APP__/Skill/imgread',//当前控制器的方法名
+               data:datas,
+               dataType:'json',
+               processData:false,//提示JQ库不处理发送的数据
+               contentType:false,//提示JQ库不设置Content-Type请求头
+               type:'post',
+               success:function (re) {
+                   if(re.info===true){
+                       sobj.style.backgroundImage='url('+re.msg+')';
+                       $('#urlimg').show()
+                   }else if(re.info==4){
+                       alert(re.msg);
+                   }
+               },
+               error:function () {
+                   alert("系统崩溃")
+               }
+           });
+
+       })*/
+
+	})
+</script>
+
+
+
+<script type="text/javascript">
+
+
+    var
+            fileInput = document.getElementById('uploaderInput'),
+            preview = document.getElementById('urlimg');  //身份证正面照对象
+
+
+
+    // 监听change事件:
+    fileInput.addEventListener('change', function () {
+
+        sel(fileInput,preview)
+    });
+
+    function sel(fileInput,preview){
+
+        var urlname=preview.getAttribute('name');
+        if(urlname=='cover_path'){
+            imgurl="{$babyInfo.cover_path}";
+        }
+        // 清除背景图片:
+        preview.style.backgroundImage = '';
+
+        var file = fileInput.files[0];
+
+        if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+            // alert('图片文件格式不正确!');
+            $.toast("图片文件格式不正确!", "cancel");
+            return;
+        }
+        // 读取文件:
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            if(file.size>5242880){
+                preview.style.backgroundImage = 'url(' + imgurl + ')';
+                $(fileInput).val('');
+                // alert('图片文件大小不正确!5M以内');
+                $.toast("图片文件大小不正确!5M以内", "cancel");
+            }else{
+                var data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
+                preview.style.backgroundImage = 'url(' + data + ')';
+                preview.style.display='block'
+            }
+
+        };
+        // 以DataURL的形式读取文件:
+        reader.readAsDataURL(file);
+    }
+
+</script>

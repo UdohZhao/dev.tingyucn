@@ -1,0 +1,75 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Index/css/index.css">
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Eachclass/css/index.css">
+
+	<!-- 内容主体 start-->
+	
+		<div class="row recommendSer">
+			<input class="eachclass_input" type="hidden" value="{$typeName}">
+			<h4>{$typeName}</h4>
+		</div>
+	<div class="container eachclass_bcg">
+		<div class="row">
+				<div class="tabHot">
+				  <!-- Nav tabs -->
+				  <ul class="nav nav-tabs" role="tablist">
+					  <foreach name="serviceName" item="v" key="k">
+						  <if condition="$k eq 0">
+							  <li role="presentation" class="active"><a href="#home{$v.scid}" aria-controls="home{$v.scid}" role="tab" data-toggle="tab">{$v.cname}</a></li>
+						  	<else/>
+							  <li role="presentation"><a href="#profile{$v.scid}" aria-controls="profile{$v.scid}" role="tab" data-toggle="tab">{$v.cname}</a></li>
+						  </if>
+					  </foreach>
+				  </ul>
+				  <!-- Tab panes -->
+				  <div class="tab-content">
+					  <foreach name="needInfo" item="vo" key="key">
+						  <if condition="$key eq 0">
+							  <div role="tabpanel" class="tab-pane active" id="home{$vo.scid}">
+								  <div class="row">
+									  <foreach name="vo['detail']" item="val">
+										  <div class="col-md-3 babyList">
+											  <a href="__APP__/Babyinformation/index/id/{$val.uid}/scid/{$val.scid}/sid/{$val.id}" class="babyBcg">
+												  <div class="babyImg">
+													  <img src="{$val.cover_path}">
+												  </div>
+												  <div class="babyMsg">
+													  <p class="babyName">{$val.nickname}</p>
+													  <span class="babyPrice">￥{$val.bid_price}/{$val.charge_mode}</span>
+												  </div>
+											  </a>
+										  </div>
+									  </foreach>
+								  </div>
+							  </div>
+							  <else/>
+							  <div role="tabpanel" class="tab-pane" id="profile{$vo.scid}">
+								  <div class="row">
+									  <foreach name="vo['detail']" item="val">
+										  <div class="col-md-3 babyList">
+											  <a href="__APP__/Babyinformation/index/id/{$val.uid}/scid/{$val.scid}/sid/{$val.id}" class="babyBcg">
+												  <div class="babyImg">
+													  <img src="{$val.cover_path}">
+												  </div>
+												  <div class="babyMsg">
+													  <p class="babyName">{$val.nickname}</p>
+													  <span class="babyPrice">￥{$val.bid_price}/{$val.charge_mode}</span>
+												  </div>
+											  </a>
+										  </div>
+									  </foreach>
+								  </div>
+							  </div>
+						  </if>
+					  </foreach>
+				  </div>
+				</div>
+		</div>
+	</div>
+	<!-- 内容主体 end-->
+
+<include file="./Application/Home/View/Layouts/footer.html" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Application/Home/View/Index/js/index.js"></script>
+<script type="text/javascript" src="/Application/Home/View/Eachclass/js/index.js"></script>

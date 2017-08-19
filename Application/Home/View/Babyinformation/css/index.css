@@ -1,0 +1,269 @@
+.topBcg{
+	background-image: url("/Application/Home/View/Babyinformation/img/bcg.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	height: 200px;
+}
+.babyImg{
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+.topBcg .container{
+	text-align: center;
+}
+.topBcg .container p{
+	margin: 0;
+	line-height: 40px;
+}
+.babyImg img{
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+}
+.nv{
+	padding: 3px 5px;
+	background-color: #fd908f;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 14px;
+	margin: 0 5px;
+	text-decoration: none;
+}
+.nan{
+	padding: 3px 5px;
+	background-color: #64d1f5;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 14px;
+	margin: 0 5px;
+	text-decoration: none;
+}
+.nan:hover,.nv:hover{
+	text-decoration: none;
+	color: #fff;
+}
+.taService{
+	margin-top: 180px;
+	background-color: #fff;
+}
+.title p{
+	border-bottom: 1px solid #ccc;
+	margin: 0;
+	line-height: 40px;
+	font-size: 18px;
+	font-weight: bolder;
+}
+.title p span{
+	font-size: 14px;
+	font-weight: normal;
+}
+.serviceList{
+	margin-bottom: 15px;
+}
+.serviceList span{
+	color: #fd908f;
+	border: 1px solid #fd908f;
+	border-radius: 8px;
+	display: block;
+	width: 100%;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	text-align: center;
+}
+.rightBtn{
+	padding: 20px 15px;
+}
+.placeOrder{
+	height: 100%;
+	width: 100%;
+	border-left: 1px solid #ccc;
+	padding: 0 20px;
+	position: relative;
+}
+.placeOrder a{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 150px;
+	height: 40px;
+	margin-left: -75px;
+	margin-top: -20px;
+	text-decoration: none;
+	display: block;
+	background-color: #fd908f;
+	color: #fff;
+	text-align: center;
+	padding: 5px 0;
+	border-radius: 8px;
+}
+.allEvaluation,.selfMsg{
+	background-color:#fff;
+	margin-top: 20px; 
+}
+.allEvaluation{
+	margin-bottom: 40px;
+}
+.selfMsg .informationCon{
+	padding-top: 10px;
+}
+.allEvaluation .title{
+	position: relative;
+}
+.evaluationNum{
+	position: absolute;
+	top: 0;
+	right: 130px;
+}
+.evaluationNum span{
+	line-height: 43px;
+}
+.fiveStar{
+	position: absolute;
+	top: 0;
+	right: 15px;
+}
+.fiveStar svg{
+	width: 100px;
+	height: 42px;
+}
+.starImg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 46px;
+	overflow: hidden;
+}
+.starImg>svg{
+	color: red;
+}
+.evaluationList{
+	padding-top: 20px;
+	display: none;
+}
+.evaluationList>div{
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+.EpeopleImg{
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	overflow: hidden;
+	float: left;
+}
+.EpeopleImg img{
+	width: 100%;
+	height: 100%;
+}
+.evaluationCenter{
+	float: left;
+	padding-left: 20px;
+	position: relative;
+	width: 70%;
+	padding-bottom: 25px;
+	min-height: 100px;
+	padding-top: 5px;
+}
+.evaluationCenter .peopleTime{
+	position: absolute;
+	bottom: 5px;
+	left: 20px;
+	font-size: 14px;
+	color: #ccc;
+}
+.evaluationCenter p{
+	margin: 0;
+}
+.evaluationRight{
+	position: relative;
+	float: right;
+	/*width: 200px;*/
+	height: 46px;
+}
+.evaluationList .evaluationNum{
+	right:115px;
+}
+.evaluationList .fiveStar{
+	right: 0;
+}
+.loadingMore{
+	display: block;
+	margin: 0 auto;
+	width: 100px;
+	text-align: center;
+	color: #fff;
+	background-color: #ccc;
+	border-radius: 8px;
+	line-height: 35px;
+	cursor: pointer;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+.loadingMore:hover{
+	background-color: #aaa;
+}
+.starBox>span{
+	font-weight: bolder;
+	font-size: 16px;
+}
+.blackBtn,.careBtn{
+	padding: 3px 10px;
+	border: 1px solid #aaa;
+	color: #aaa;
+	text-decoration: none;
+	border-radius: 4px;
+	margin: 5px;
+	background-color: #fff;
+	font-size: 14px;
+	cursor: pointer;
+}
+.careBtn>svg{
+	font-size: 18px;
+}
+.blackBtn:hover,.careBtn:hover{
+	text-decoration: none;
+}
+a.actived{
+	color: #fd908f;
+	border: 1px solid #fd908f;
+}
+.audio_box{
+	width: 100px;
+	border: 1px solid #fd908f;
+	border-radius: 4px;
+	text-align: right;
+	display: inline-block;
+	cursor: pointer;
+}
+.audio_box .audio_img{
+	width: 100%;
+	height: 30px;
+	position: relative;
+}
+.audio_box .audio_img img{
+	width: 20px;
+	position: absolute;
+	top: 15%;
+	left: 15%;
+	height: 65%;
+}
+.audio_box .audio_img i{
+	font-style: normal;
+	font-size: 14px; 
+	color: #fd908f;
+	line-height: 30px;
+	margin-right: 15%;
+}
+.my_video{
+	text-align: center;
+}
+.my_video video{
+	width: 60%;
+	margin: 0 auto;
+	margin-top: 10px;
+}

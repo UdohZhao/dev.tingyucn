@@ -1,0 +1,156 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Allclass/css/index.css">
+
+	<!-- 内容主体start -->
+	<!-- 线上娱乐start -->
+	<div class="row">
+		<foreach name="needInfo" item="v">
+			<div class="pageName">
+				<div class="container">
+					<p>
+						<if condition="$v.type eq 0">
+							线上游戏
+							<elseif condition="$v.type eq 1"/>
+							线上娱乐
+							<elseif condition="$v.type eq 2"/>
+							线下娱乐
+						</if>
+					</p>
+				</div>
+			</div>
+
+				<div class="weui-grids shouye">
+					<foreach name="v['detail']" item="vo">
+					<a href="__APP__/Eachclass/index/id/{$vo.id}" class="weui-grid js_grid">
+						<div class="weui-grid__icon">
+							<img src="{$vo.icon_path}" alt="">
+						</div>
+						<p class="weui-grid__label">
+							{$vo.cname}
+						</p>
+					</a>
+					</foreach>
+				</div>
+
+
+		</foreach>
+	</div>
+	<!-- 线上娱乐end -->
+	<!-- 线下娱乐start -->
+	<!--<div class="row">
+        <div class="pageName">
+          <div class="container">
+            <p>线下娱乐</p>
+          </div>
+        </div>
+        <div class="weui-grids shouye">
+		  <a href="" class="weui-grid js_grid">
+		    <div class="weui-grid__icon">
+		      <img src="/Application/Wechat/View/Index/img/banner2.png" alt="">
+		    </div>
+		    <p class="weui-grid__label">
+		      恋爱指导
+		    </p>
+		  </a>
+		  <a href="" class="weui-grid js_grid">
+		    <div class="weui-grid__icon">
+		      <img src="/Application/Wechat/View/Index/img/banner2.png" alt="">
+		    </div>
+		    <p class="weui-grid__label">
+		      王者荣耀
+		    </p>
+		  </a>
+		  <a href="" class="weui-grid js_grid">
+		    <div class="weui-grid__icon">
+		      <img src="/Application/Wechat/View/Index/img/banner2.png" alt="">
+		    </div>
+		    <p class="weui-grid__label">
+		      约LOL
+		    </p>
+		  </a>
+		  <a href="" class="weui-grid js_grid">
+		    <div class="weui-grid__icon">
+		      <img src="/Application/Wechat/View/Index/img/banner2.png" alt="">
+		    </div>
+		    <p class="weui-grid__label">
+		      约聊天
+		    </p>
+		  </a>
+		</div>
+	</div>
+	&lt;!&ndash; 线下娱乐end &ndash;&gt;
+	&lt;!&ndash; 线上游戏start &ndash;&gt;
+	<div class="row">
+        <div class="pageName">
+          <div class="container">
+            <p>线上游戏</p>
+          </div>
+        </div>
+        <div class="weui-grids shouye">
+		  <a href="" class="weui-grid js_grid">
+		    <div class="weui-grid__icon">
+		      <img src="/Application/Wechat/View/Index/img/banner2.png" alt="">
+		    </div>
+		    <p class="weui-grid__label">
+		      恋爱指导
+		    </p>
+		  </a>
+		  <a href="" class="weui-grid js_grid">
+		    <div class="weui-grid__icon">
+		      <img src="/Application/Wechat/View/Index/img/banner2.png" alt="">
+		    </div>
+		    <p class="weui-grid__label">
+		      王者荣耀
+		    </p>
+		  </a>
+		  <a href="" class="weui-grid js_grid">
+		    <div class="weui-grid__icon">
+		      <img src="/Application/Wechat/View/Index/img/banner2.png" alt="">
+		    </div>
+		    <p class="weui-grid__label">
+		      约LOL
+		    </p>
+		  </a>
+		</div>
+	</div>
+	&lt;!&ndash; 线上游戏end &ndash;&gt;
+	&lt;!&ndash; 线下游戏start &ndash;&gt;
+	<div class="row">
+        <div class="pageName">
+          <div class="container">
+            <p>线下游戏</p>
+          </div>
+        </div>
+        <div class="weui-grids shouye">
+		  <a href="" class="weui-grid js_grid">
+		    <div class="weui-grid__icon">
+		      <img src="/Application/Wechat/View/Index/img/banner2.png" alt="">
+		    </div>
+		    <p class="weui-grid__label">
+		      恋爱指导
+		    </p>
+		  </a>
+		  <a href="" class="weui-grid js_grid">
+		    <div class="weui-grid__icon">
+		      <img src="/Application/Wechat/View/Index/img/banner2.png" alt="">
+		    </div>
+		    <p class="weui-grid__label">
+		      王者荣耀
+		    </p>
+		  </a>
+		  <a href="" class="weui-grid js_grid">
+		    <div class="weui-grid__icon">
+		      <img src="/Application/Wechat/View/Index/img/banner2.png" alt="">
+		    </div>
+		    <p class="weui-grid__label">
+		      约LOL
+		    </p>
+		  </a>
+		</div>
+	</div>-->
+	<!-- 线下游戏end -->
+	<div style="height: 30px;"></div>
+	<!-- 内容主体end -->
+
+<include file="Layout/footer" />

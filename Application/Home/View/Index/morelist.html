@@ -1,0 +1,125 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Index/css/index.css">
+
+	<!-- 最新热门 start-->
+	<div class="container">
+		<div class="row recommendSer">
+			<h2>{$scname}</h2>
+		</div>
+		<div class="row">
+				<div class="tabHot">
+				  <!-- Nav tabs -->
+				  <!-- <ul class="nav nav-tabs" role="tablist">
+				    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">恋爱指导</a></li>
+				  </ul> -->
+				  <!-- Tab panes -->
+				  <div class="tab-content">
+				    <div role="tabpanel" class="tab-pane active" id="home">
+						<div class="row">
+							<foreach name="hotDetail" item="v">
+								<div class="col-md-3 babyList">
+									<a target="frame1" href="__APP__/Babyinformation/index/id/{$v.uid}/scid/{$v.scid}/sid/{$v.id}" class="babyBcg">
+										<div class="babyImg">
+											<img src="{$v.cover_path}">
+										</div>
+										<div class="babyMsg">
+											<if condition="$v.nickname neq null">
+												<p class="babyName">{$v.nickname}</p>
+												<else/>
+												<p class="babyName">{$v.real_name}</p>
+											</if>
+											<span class="babyPrice">￥40/小时</span>
+										</div>
+									</a>
+								</div>
+							</foreach>
+
+							<!--<div class="col-md-3 babyList">
+								<a target="frame1" href="__APP__/Babyinformation/index" class="babyBcg">
+									<div class="babyImg">
+										<img src="/Application/Home/View/Index/img/女2.png">
+									</div>
+									<div class="babyMsg">
+										<p class="babyName">某某某</p>
+										<span class="babyPrice">￥40/小时</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 babyList">
+								<a target="frame1" href="__APP__/Babyinformation/index" class="babyBcg">
+									<div class="babyImg">
+										<img src="/Application/Home/View/Index/img/女3.png">
+									</div>
+									<div class="babyMsg">
+										<p class="babyName">某某某</p>
+										<span class="babyPrice">￥40/小时</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 babyList">
+								<a target="frame1" href="__APP__/Babyinformation/index" class="babyBcg">
+									<div class="babyImg">
+										<img src="/Application/Home/View/Index/img/女4.png">
+									</div>
+									<div class="babyMsg">
+										<p class="babyName">某某某</p>
+										<span class="babyPrice">￥40/小时</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 babyList">
+								<a target="frame1" href="__APP__/Babyinformation/index" class="babyBcg">
+									<div class="babyImg">
+										<img src="/Application/Home/View/Index/img/男1.png">
+									</div>
+									<div class="babyMsg">
+										<p class="babyName">某某某</p>
+										<span class="babyPrice">￥40/小时</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 babyList">
+								<a target="frame1" href="__APP__/Babyinformation/index" class="babyBcg">
+									<div class="babyImg">
+										<img src="/Application/Home/View/Index/img/男2.png">
+									</div>
+									<div class="babyMsg">
+										<p class="babyName">某某某</p>
+										<span class="babyPrice">￥40/小时</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 babyList">
+								<a target="frame1" href="__APP__/Babyinformation/index" class="babyBcg">
+									<div class="babyImg">
+										<img src="/Application/Home/View/Index/img/男3.png">
+									</div>
+									<div class="babyMsg">
+										<p class="babyName">某某某</p>
+										<span class="babyPrice">￥40/小时</span>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-3 babyList">
+								<a target="frame1" href="__APP__/Babyinformation/index" class="babyBcg">
+									<div class="babyImg">
+										<img src="/Application/Home/View/Index/img/女5.png">
+									</div>
+									<div class="babyMsg">
+										<p class="babyName">某某某</p>
+										<span class="babyPrice">￥40/小时</span>
+									</div>
+								</a>
+							</div>-->
+						</div>
+				    </div>
+				  </div>
+				</div>
+		</div>
+	</div>
+	<!-- 最新热门 end-->
+
+<include file="./Application/Home/View/Layouts/footer.html" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Application/Home/View/Index/js/index.js"></script>

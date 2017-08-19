@@ -1,0 +1,31 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Becomebaby/css/index.css">
+
+	<!-- 内容主体start -->
+	<!-- 线上娱乐start -->
+	<foreach name="needInfo" item="v" key="k">
+		<div class="row">
+			<div class="pageName">
+			  <div class="container">
+				<p>{$v.typename}</p>
+			  </div>
+			</div>
+			<div class="weui-cells">
+				<foreach name="v['detail']" item="vo" key="ko">
+					  <a class="weui-cell weui-cell_access" href="__APP__/Skill/index/id/{$vo.id}">
+						<div class="weui-cell__bd">
+						  <p>{$vo.cname}</p>
+						</div>
+						<div class="weui-cell__ft">
+						</div>
+					  </a>
+				</foreach>
+			</div>
+		</div>
+	</foreach>
+	<!-- 线上娱乐end -->
+	<div style="height: 20px;"></div>
+	<!-- 内容主体end -->
+
+<include file="Layout/footer" />

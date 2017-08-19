@@ -1,0 +1,20 @@
+.weui-cells__title{
+	color: #000;
+}
+.weui-cells__title span{
+	font-size: 12px;
+	color: #fd908f;
+}
+.weui-btn_primary{
+	background-color: #fd908f;
+	text-decoration: none;
+	margin-top: 40px;
+}
+.selected{
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+.selected:focus{
+	border: none;
+}

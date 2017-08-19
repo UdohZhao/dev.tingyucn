@@ -1,0 +1,190 @@
+.mybalanceBox{
+	background-color: #fff;
+	margin: 20px auto;
+	padding: 20px 10px;
+}
+.mybalanceBox .nav-tabs>li{
+	float: none;
+	border-bottom: 1px solid #ccc;
+}
+.mybalanceBox .nav-tabs{
+	background-color: #ededed;
+}
+.mybalanceBox .nav-tabs>li>a{
+	margin: 0;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+	background-color: #fd908f;
+	color: #fff;
+}
+.mybalanceBox .tab-content{
+	padding-left: 30px;
+	border-left: 1px dashed #ccc;
+}
+#mybalane>p,#myincome>p{
+	text-align: center;
+	line-height: 60px;
+	margin: 0;
+	border-bottom: 1px solid #ccc;
+}
+#mybalane>p>span,#myincome>p>span{
+	font-size: 18px;
+	font-weight: bolder;
+	color: #fd908f;
+	margin-left: 20px;
+}
+#mybalane>p>a,#myincome>p>a{
+	float: right;
+	text-decoration: none;
+	width: 80px;
+	background-color: #fd908f;
+	color: #fff;
+	border-radius: 4px;
+	line-height: 24px;
+	margin-top: 18px;
+}
+.balanceTitle{
+	margin: 0;
+	line-height: 40px;
+	font-weight: bold;
+}
+.content{
+	background-color: #ededed;
+	border-radius: 8px;
+	padding: 10px 15px;
+}
+#mybalane .content>p>span{
+	float: right;
+}
+.content>p>svg{
+	float: right;
+	font-size: 14px;
+	color: #ccc;
+	cursor: pointer;
+}
+#mybalane .content .Stime{
+	font-size: 14px;
+	color: #ccc;
+}
+#mybalane .content .rechargeMoney{
+	line-height: 40px;
+	text-align: center;
+}
+#mybalane .content .rechargeMoney b{
+	font-size: 20px;
+	color: #fd908f;
+}
+#mybalane .content .receipt{
+	margin: 0;
+	color: #ccc;
+}
+.moreList{
+	display: block;
+	width: 100px;
+	line-height: 35px;
+	height: 35px;
+	background-color: #fd908f;
+	color: #fff;
+	border-radius: 4px;
+	margin: 0 auto;
+	margin-top: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+.moreList:hover{
+	text-decoration: none;
+	color: #fff;
+	background-color: #f87574;
+}
+#myincome .content{
+	position: relative;
+}
+#myincome .content .myincomeNum{
+	position: absolute;
+	bottom: 20px;
+	right: 15px;
+	text-align: right;
+}
+#myincome .content .myincomeNum p{
+	margin: 0;
+	line-height: 24px;
+}
+#myincome .content .myincomeNum p.money{
+	color: #fd908f;
+	font-size: 20px;
+	font-weight: bolder;
+	margin-right: 12px;
+}
+.alipayBtn{
+	text-align: center;
+}
+.alipayBtn button{
+	background-color: #fd908f;
+	color: #fff;
+	border: 1px solid #fd908f;
+	border-radius: 4px;
+	width: 200px;
+	height: 35px;
+}
+.alipayBtn button:hover{
+	background-color: #fd908f;
+	border: 1px solid #fd908f;
+	color: #fff;
+}
+.couponList{
+	background-color: #ededed;
+	border-radius: 8px;
+}
+.couponList .couponL{
+	text-align: center;
+	width: 80px;
+	float: left;
+	padding: 5px 0;
+	box-sizing: border-box;
+}
+.couponList .couponL span{
+	line-height: 75px;
+	display: block;
+	border-right: 1px solid #ccc;
+	color: #fd908f;
+	font-size: 18px;
+}
+.couponList .couponC{
+	float: left;
+	padding: 5px 5px;
+}
+.couponList .couponC p{
+	margin: 0;
+	width: 200px;
+	overflow: hidden;
+	white-space:nowrap;
+   text-overflow:ellipsis;
+}
+.couponList .couponC .couponCt{
+	font-size: 18px;
+	font-weight: bold;
+}
+.couponList .couponC .couponCyou{
+	color: #ccc;
+	font-size: 14px;
+}
+.couponList .couponR{
+	float: right;
+	margin-top: 30px;
+	margin-right: 10px;
+}
+.couponList .couponR a{
+	padding: 3px 10px;
+	height: 35px;
+	background-color: #fd908f;
+	color: #fff;
+	border-radius: 4px;
+	text-align: center;
+	line-height: 35px;
+}
+.couponList .couponR a:hover{
+	text-decoration: none;
+}
+.coupouOne{
+	margin-bottom: 10px;
+}

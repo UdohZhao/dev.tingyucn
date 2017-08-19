@@ -1,0 +1,122 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Mydata/css/interest.css">
+	<div class="row">
+		<div class="pageName">
+        <div class="container">
+          <p>兴趣<span>(最多选择3个)</span></p>
+        </div>
+      </div>
+	</div>
+  <div class="row">
+    <div class="weui-cells">
+      <foreach name="info" item="v">
+        <div class="weui-cell interestList">
+          <div class="weui-cell__bd">
+            <p value="{$v.id}" avg="{$v.status}">{$v.cname}</p>
+          </div>
+          <div class="weui-cell__ft">
+            <svg name='need' class="icon categorie-icon" aria-hidden="true">
+              <use xlink:href="#icon-duigou"></use>
+            </svg>
+          </div>
+        </div>
+      </foreach>
+
+    </div>
+  </div>
+  <a href="javascript:;" class="weui-btn weui-btn_primary">确定</a>
+
+<include file="Layout/footer" />
+<script type="text/javascript">
+$(function(){
+  $(".weui-btn_primary").click(function(){
+  	$(this).css("text-decoration","none");
+    $(this).css("background-color","#fd908f");
+    $(this).css("color","#ffffff");
+
+      var nobj=document.getElementsByName('need');
+      var interest='';
+      var interestName='';
+      for(var i=0;i<nobj.length;i++){
+        if(nobj[i].style.display=='inline'){
+           interest+=$(nobj[i]).parent().siblings().children('p').attr('value')+',';
+          interestName+=$(nobj[i]).parent().siblings().children('p').html()+'/';
+      }
+    }
+    if(interest==''){
+      // alert('至少选择一个')
+      $.toast("至少选择一个", "text");
+    }
+    if(interest.length>0){
+      interest=interest.substr(0,interest.length-1);//得到兴趣id值
+      interestName=interestName.substr(0,interestName.length-1);//得到兴趣名字
+     // alert(interest)
+      window.location.href='__APP__/Mydata/index'
+      sessionStorage.setItem('interest',interest);
+      sessionStorage.setItem('interestName',interestName);
+    }
+
+  })
+/*字数限制*/  
+    $("#area").on("input propertychange", function() {  
+        var $this = $(this),  
+            _val = $this.val(),  
+            count = "";  
+        if (_val.length > 10) {  
+            $this.val(_val.substring(0, 10));  
+        }  
+        count =$this.val().length;  
+        $("#text-count").html(count);  
+    });
+
+ if(sessionStorage.getItem('interestName')){
+  var str=sessionStorage.getItem('interestName'); //这是一字符串
+   var strs= new Array(); //定义一数组
+   strs=str.split("/"); //字符分割得到数组
+
+  // console.log(strs)
+   var nobj=document.getElementsByName('need');
+
+   for(var i=0;i<nobj.length;i++){
+     var val=$(nobj[i]).parent().siblings().children('p').html()
+     if($.inArray(val,strs)>=0){
+       nobj[i].style.display='inline';
+     }
+   }
+ }else{
+   var nobj=document.getElementsByName('need');
+
+   for(var i=0;i<nobj.length;i++){
+     var val=$(nobj[i]).parent().siblings().children('p').attr('avg')
+     if(val==1){
+       nobj[i].style.display='inline';
+     }
+   }
+ }
+
+    $(".interestList").click(function(){
+      //$(this).find("svg").toggle();
+
+      var nobj=document.getElementsByName('need');
+      var index=0;
+      for(var i=0;i<nobj.length;i++){
+        if(nobj[i].style.display=='inline'){
+          index++;
+      }
+     }
+      if(index<3){
+      
+        $(this).find("svg").toggle();
+      }else{
+        if($(this).find("svg").css('display')=='inline'){
+          $(this).find("svg").toggle();
+        }else{
+          // alert('最多只能选择3个 ');
+          $.toast("最多只能选择3个", "text");
+        }
+      }
+
+    })
+})
+</script>

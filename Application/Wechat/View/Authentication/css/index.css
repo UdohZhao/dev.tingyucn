@@ -1,0 +1,42 @@
+.pageName{
+	border-bottom: none;
+}
+.weui-cells{
+	margin-top: 0;
+}
+p{
+	margin-bottom: 0;
+	font-size: 14px;
+}
+.weui-cell__ft{
+	font-size: 12px;
+}
+p span{
+	font-size: 12px;
+	color: #aaaaaa;
+}
+.annotated{
+	padding-bottom: 5px;
+}
+.annotated .annotatedList svg,.annotated .annotatedList span{
+	color: #aaaaaa;
+	font-size: 12px;
+}
+.prompt{
+	padding-left: 30px;
+	padding-right: 30px;
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+.prompt p{
+	font-size: 12px;
+	color: #aaaaaa;
+}
+.weui-btn_primary{
+	background-color: #fd908f;
+}
+.weui-uploader__file{
+	margin-top: 9px;
+	margin-bottom: 0;
+}

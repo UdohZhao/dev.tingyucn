@@ -1,0 +1,20 @@
+.button_one{
+	display: inline-block;
+	width: 80px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	text-decoration: none;
+	background-color: #f3f7f9;
+	border-radius: 4px;
+	color: #76838f;
+}
+.button_one:hover{
+	text-decoration: none;
+}
+.input-group{
+	width: 50%;
+}
+.button_list{
+	margin-top: 65px;
+}

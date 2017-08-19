@@ -1,0 +1,66 @@
+<include file="./Public/Bootstrap/header.html" />
+
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Signin/css/index.css">
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+					<div class="signin_box">
+				        <p>听娱神游约玩注册</p>
+						<form class="form-horizontal">
+						  <div class="form-group">
+						    <label for="Snumber" class="col-sm-3 control-label">手机号码</label>
+						    <div class="col-sm-9">
+						      <input type="number"  class="form-control" id="Snumber" placeholder="请输入手机号">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="Syanzheng" class="col-sm-3 control-label">手机验证码</label>
+						    <div class="col-sm-6">
+						      <input type="text" class="form-control" id="Syanzheng" placeholder="请输入手机短信验证码">
+						    </div>
+						    <div class="col-sm-3 yzmBtn">
+								<button id="getverify">获取验证码</button>
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="Spassword" class="col-sm-3 control-label">设置密码</label>
+						    <div class="col-sm-9">
+						      <input type="password" class="form-control" id="Spassword" placeholder="请设置密码">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="Spasswordagain" class="col-sm-3 control-label">确认密码</label>
+						    <div class="col-sm-9">
+						      <input type="password" class="form-control" id="Spasswordagain" placeholder="请再次输入密码">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="Syanzheng3" class="col-sm-3 control-label">验证码</label>
+						    <div class="col-sm-6">
+						      <input type="text" class="form-control" id="code_input" placeholder="请输入验证码">
+						    </div>
+						    <div class="col-sm-3 yzmBtn3">
+								<div id="v_container" style="width: 100%;height: 34px;"></div>
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <div class="col-sm-offset-3 col-sm-6">
+						      <button type="button" id="Sbt" class="btn btn-default loginBtn">注册</button>
+						    </div>
+						  </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<include file="./Public/Bootstrap/footer.html" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Application/Home/View/Signin/js/index.js"></script>
+<!-- 图形验证码js -->
+<script type="text/javascript" src="/Application/Home/View/Signin/js/gVerify.js"></script>

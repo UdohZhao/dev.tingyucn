@@ -1,0 +1,241 @@
+.hotting{
+	width: 1000px;
+	background-color: #ededed;
+}
+.bannerBackimg{
+	width: 100%;
+	height: 400px;
+	/*background-image: url("/Application/Home/View/Index/img/bannerback.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;*/
+	margin: 0;
+}
+.bannerBackimg .container{
+	padding: 0;
+}
+.bannerBox{
+	/*margin-top: 70px;*/
+	width: 100%;
+	height: 100%;
+}
+.bannerBox>.carousel-inner>.item,.bannerBox>.carousel-inner{
+	height: 100%;
+}
+.bannerBox>.carousel-inner>.item>img{
+	width: 100%;
+	height:100%;
+}
+.carousel-indicators{
+	bottom: -5px;
+}
+.carousel-indicators li{
+	border: 1px solid #fd908f;
+	margin: 4px;
+	width: 12px;
+	height: 12px;
+	border-radius: 12px;
+}
+.carousel-indicators .active{
+	background-color: #fd908f;
+	margin: 3px;
+	width: 14px;
+	height: 14px;
+	border-radius: 14px;
+}
+.recommendSer{
+	text-align: center;
+}
+.recommendSer img{
+	width: 100%;
+}
+.tabHot ul li{
+	text-align: center;
+}
+.tabHot ul li a{
+	color: #000000;
+	padding:10px 0;
+}
+.tab-content{
+	padding: 0 10px;
+	padding-top: 20px;
+}
+.tabHot .nav-tabs>li.active>a, .tabHot .nav-tabs>li.active>a:focus, .tabHot .nav-tabs>li.active>a:hover{
+	background-color: #ededed;
+	border: none;
+	color: #fd908f;
+	border-bottom: 2px solid #fd908f;
+}
+.babyList{
+	margin-bottom: 20px;
+}
+.babyBcg{
+	background-color: #ffffff;
+	display: block;
+	text-decoration: none;
+	color: #000;
+}
+.babyBcg:hover{
+	text-decoration: none;
+	color: #000;
+}
+.babyBcg:hover{
+	box-shadow: 3px 3px 5px #aaa;
+}
+.babyImg{
+	width: 100%;
+	height: 200px;
+}
+.babyImg img{
+	width: 100%;
+	height: 100%;
+}
+.babyMsg{
+	width: 100%;
+	padding-left: 5px;
+	background-color: #fff;
+}
+.babyMsg p,.babyMsg span{
+	margin: 0;
+	line-height: 30px;
+}
+.babyMsg span{
+	color: #fd908f;
+}
+.moreBtn{
+	display: block;
+	margin: 20px auto;
+	background-color: #9f9f9f;
+	width: 80px;
+	line-height: 30px;
+	border-radius: 12px;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	font-size: 18px;
+	letter-spacing: 3px;
+	cursor: pointer;
+	margin-bottom: 40px;
+	float: right;
+	margin-right: 15px;
+	font-size: 14px;
+}
+.moreBtn:hover{
+	text-decoration: none;
+	color: #fff;
+	background-color: #787878;
+}
+.ranking{
+	padding-bottom: 40px;
+	width: 1000px;
+}
+.ranking img{
+	width: 100%;
+}
+.rankingBox{
+	background-color: #ededed;
+	padding: 15px 30px;
+}
+.rankingTitle{
+	text-align: center;
+	margin-bottom: 20px;
+}
+.rankingTitle svg,.rankingTitle span{
+	color: #fd908f;
+	font-size: 20px;
+}
+.rankingTitle span{
+	font-weight: bolder;
+}
+.rankingTitle .icon{
+	width: 30px;
+	height: 30px;
+}
+.rankingDown{
+	background-color: #fff;
+	padding: 5px 15px;
+	margin-bottom: 10px;
+}
+.listLeft{
+	float: left;
+	width: 100px;
+	height: 100px;
+	position: relative;
+	overflow: hidden;
+}
+.listImg:hover img{
+	transform:scale(1.5);
+	-ms-transform:scale(1.5);	/* IE 9 */
+	-moz-transform:scale(1.5); 	/* Firefox */
+	-webkit-transform:scale(1.5); /* Safari 和 Chrome */
+	-o-transform:scale(1.5); 	/* Opera */
+}
+.sanjiao{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+    height: 0;
+    border-top: 50px solid #fd908f;
+    border-right: 50px solid transparent;
+    opacity: .6;
+    text-align: left;
+}
+.rankingNum{
+	display: block;
+	position: absolute;
+	top: 2px;
+	left: 8px;
+	color: #fff;
+}
+.listLeft img{
+	width: 100%;
+	height: 100%;
+	transition: all 2s;
+}
+.listCenter{
+	float: left;
+	padding-left: 20px;
+	padding-top: 10px;
+}
+.listCenter p{
+	line-height: 40px;
+	margin: 0;
+	font-size: 18px;
+}
+.listCenter .nv{
+	padding: 3px 5px;
+	background-color: #fd908f;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 14px;
+}
+.listCenter .nan{
+	padding: 3px 5px;
+	background-color: #64d1f5;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 14px;
+}
+.rankingIncome{
+	float: right;
+	text-align: right;
+	padding-top: 10px;
+}
+.rankingIncome p{
+	margin: 0;
+	font-size: 20px;
+	line-height: 40px;
+	color: #fd908f;
+}
+.rankingIncome span{
+	font-size: 14px;
+	color: #aaa;
+}
+.rangking_left_bcg{
+	padding-left: 0;
+	padding-right: 5px;
+}
+.rangking_right_bcg{
+	padding-left: 5px;
+	padding-right: 0;
+}

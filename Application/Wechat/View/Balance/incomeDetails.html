@@ -1,0 +1,37 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Balance/css/incomeDetails.css">
+
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>收入明细</p>
+          </div>
+        </div>
+	</div>
+<foreach name="arr" item="v">
+	<div class="row">
+		<div class="col-sm-12 col-xs-12">
+			<div class="rechargeTime">
+				<a>{$v.end_time|date='Y-m-d',###}</a>
+			</div>
+		</div>
+		<div class="col-sm-12 col-xs-12">
+			<div class="incomeDetails">
+				<div class="incomeD">
+					<p>服务类型：{$v.cname}</p>
+					<p>开始时间：{$v.start_time|date='Y-m-d H:i',###}</p>
+					<p>服务数量：{$v.charge_mode}</p>
+					<p>单价金额：{$v.bid_price}元</p>
+				</div>
+				<div class="incomeNum">
+					<p>收入金额：</p><span>{$v.getMoney}元</span>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+	</div>
+</foreach>
+
+
+<include file="Layout/footer" />

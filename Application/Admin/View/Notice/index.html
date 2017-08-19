@@ -1,0 +1,76 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">站点管理</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">添加站点信息</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="example">
+                    <form class="form-horizontal" id="frm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">标题: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" id="ti" type="text" class="form-control" name="title"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">内容: </label>
+                            <div class="col-sm-9">
+                                <textarea style="width:500px;" id="con" type="text" class="form-control" name="content"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="button" id="bt" class="btn btn-primary">确认添加</button>
+                                <button id="cbt" style="margin-left: 20px;" type="reset" class="btn btn-default btn-outline">取消添加</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+
+    $(function(){
+        $("#bt").click(function(){
+            if($("#ti").val()=="" || $("#con").val()==""){
+                alert('不能为空')
+            }else{
+                $.ajax({
+                    url:'save',
+                    data:$("#frm").serialize(),
+                    type:'post',
+                    dataType:'json',
+                    success:function(re){
+                        if(re===true){
+                            alert('信息上传成功');
+                            window.location.href='oper';
+                        }
+                    }
+                });
+            }
+
+        })
+
+
+    })
+</script>
+
+<!--<script type="text/javascript" src="/Application/Admin/View/Layouts/assets/readimg.js"></script>-->

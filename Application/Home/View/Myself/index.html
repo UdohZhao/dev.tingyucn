@@ -1,0 +1,923 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Myself/css/index.css">
+<link rel="stylesheet" href="/Public/layui/css/layui.mobile.css"  media="all">
+
+	<!-- 内容主体start -->
+	<div class="container myselfBox">
+		<div class="col-md-3">
+			<ul class="nav nav-tabs" role="tablist">
+			    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">个人资料</a></li>
+			    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">成为宝宝</a></li>
+			    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">黑名单</a></li>
+			    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">意见反馈</a></li>
+			    <li role="presentation"><a target="iframe5" href="__APP__/Authentication/index">身份认证</a></li>
+			  </ul>
+		</div>
+		<div class="col-md-9">
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="home">
+					<div class="row loadingPic">
+						<div class="col-md-2 col-sm-2" style="padding-left: 0;">
+							<div class="avatar">
+                                <if condition="$info.head_portrait neq null">
+                                    <img name="head_portrait" src="{$info.head_portrait}" id="img">
+                                    <input type="file" name="head_portrait" id="fileupload"/>
+                                    <else/><!--  src="/Application/Wechat/View/Index/img/banner1.png"  -->
+                                    <img name="head_portrait" src="/Application/Wechat/View/Mydata/img/未标题-1.png" id="img">
+                                    <input type="file" name="head_portrait" id="fileupload"/>
+                                </if>
+                            </div>
+						</div>
+						<div class="col-md-9 col-sm-9">
+							<div class="top">
+								<button>上传头像</button>
+								<input type="file" id="uploadFile"/>
+							</div>
+							<div class="down">
+								<span>支持jpg、gif、或png格式的图片，文件必须小于5M</span>
+							</div>
+						</div>
+					</div>
+					<div class="row msgDetails">
+						<div class="col-md-12 col-sm-12 esBtn">
+							<button class="editBtn">编辑</button>
+							<button class="saveBtn"  id="btInfo">保存</button>
+						</div>
+						<div class="col-md-12 col-sm-12 msgList">
+							昵称：<input id="userName" type="text"  value="{$info.nickname}" readonly="readonly">
+						</div>
+						<div class="col-md-12 col-sm-12 msgList">
+							性别：
+							<select disabled="disabled" name="sex" id="selSex">
+								<option value="0">女</option>
+								<option value="1">男</option>
+							</select>
+                            <script>
+                                if('{$info.sex}'==1){
+                                    $('#selSex').val(1)
+                                }
+                            </script>
+						</div>
+						<div class="col-md-12 col-sm-12 msgList">
+							年龄：<span class="age" style="margin-left: 20px;">{$info.id_card}</span>
+							<input class="idNumber" value="{$info.id_card}" type="hidden" />
+						</div>
+						<div class="col-md-12 col-sm-12 msgList">
+							兴趣：
+							<a href="#" data-toggle="modal" data-target="#myinterest" id="interest">
+                                <if condition="$info.iid eq null">
+                                    <span class="add_interest"></span>
+                                    <else/>
+                                    {$info.iid}
+                                </if>
+
+                            </a>
+						</div>
+						<div class="col-md-12 col-sm-12 msgList">
+							职业：
+							<select disabled="disabled" name="pid" id="selPii">
+                                <foreach name="jobname" item="v">
+                                    <option name="opt" value="{$v.id}">{$v.cname}</option>
+                                </foreach>
+							</select>
+                            <script>
+                                var obj=document.getElementById('selPii').value='{$info.pid}';
+                            </script>
+						</div>
+						<div class="col-md-12 col-sm-12 msgList">
+							<p>音频：<span class="noUpload"></span></p>
+							<div class="textBox audio">
+								<video hidden="true" id="au" controls src="{$info.audio_path}"></video>
+				                <div class="audio_box">
+				                  <div class="audio_img">
+				                    <img class="stop_img" src="/Application/Wechat/View/Babyinformation/img/index.png">
+				                    <img class="move_img" src="/Application/Wechat/View/Babyinformation/img/index.gif">
+				                    <i><span>5</span>秒</i>
+				                  </div>
+				                </div>
+				                <div class="audioInput">
+				                	<span>音频上传</span>
+									<input id="audioInput" type="file" name="audio_path">
+				                </div>
+				                <div class="audio_delete" id='audio_delete'>
+									<span>删除</span>
+				                </div>
+							</div>
+						</div>
+						<div class="col-md-12 col-sm-12 msgList mymsgList">
+							<p>视频：<span class="vedio_none"></span></p>
+							<div style="position: relative; margin-left: 68px;">
+								<div class="video_box">
+									<video id="vi" controls src="{$info.video_path}"></video>
+								</div>
+								<div class="videoInput">
+									<span>视频上传</span>
+									<input id="videoInput" type="file" name="video_path">
+								</div>
+							</div>
+			                <div class="video_delete" id='video_delete'>
+								<span>删除</span>
+			                </div>
+						</div>
+						<div class="col-md-12 col-sm-12 msgList" style="margin-top: 20px;">
+							<p>签名：</p>
+							<div class="textBox" style="height: 100px;">
+								<textarea id="signCon" type="text" name="" readonly="readonly">{$info.signature}</textarea>
+								<div class="theNumber signNumber"><span id="signCon-count">0</span>/20</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			    <div role="tabpanel" class="tab-pane" id="profile">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="becomeCon">
+								<p>请选择你能提供的服务：</p>
+                                <foreach name="needInfo" item="v">
+                                    <div class="serviceOne">
+                                        <p>{$v.typename}</p>
+                                        <div class="row">
+                                            <foreach name="v['detail']" item="vo">
+                                                <div class="col-md-3 col-sm-3 oneList">
+                                                    <a href="" onclick="javascript:selService(this.getAttribute('value'))"  name="skillName" value="{$vo.id}" data-toggle="modal" selStatus="{$vo.selStatus}" data-target="#serviceChioce" >{$vo.cname}</a>
+                                                </div>
+                                            </foreach>
+                                        </div>
+                                    </div>
+                                </foreach>
+                                <script>
+                                    var sobj=document.getElementsByName('skillName');
+                                    for(var i=0;i<sobj.length;i++){
+                                        if($(sobj).eq(i).attr('selStatus')==1){
+                                            $(sobj).eq(i).css('color','#fff');
+											$(sobj).eq(i).css("background-color","#fd908f")
+                                        }
+                                    }
+                                </script>
+							</div>
+						</div>
+					</div>
+			    </div>
+			    <div role="tabpanel" class="tab-pane" id="messages">
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<div class="blackCon">
+								<p>黑名单列表</p>
+								<div class="row">
+									<foreach name="arrInfoArr" item="vob">
+										<div class="col-md-4 col-sm-4">
+											<div class="blackList">
+												<div class="leftPic">
+													<img src="{$vob.cover_path}">
+												</div>
+												<div class="rightCon">
+													<p>{$vob.nickname}</p>
+													<!-- 女strat -->
+													<if condition="$vob.sex eq 1">
+														<a class="nan">
+															<svg class="icon categorie-icon" aria-hidden="true">
+																<use xlink:href="#icon-xingbienan"></use>
+															</svg>
+															<span>{$vob.id_card}</span>
+														</a>
+														<else/>
+														<a class="nv">
+															<svg class="icon categorie-icon" aria-hidden="true">
+																<use xlink:href="#icon-xingbienv"></use>
+															</svg>
+															<span>{$vob.id_card}</span>
+														</a>
+													</if>
+
+													<!-- 女end -->
+													<!-- 男 start-->
+
+													<!-- 男 end-->
+													<b value="{$vob.uid}" class="cancelBlack" onclick="javascript:cblack(this)">取消拉黑</b>
+												</div>
+												<div style="clear: both;"></div>
+											</div>
+										</div>
+									</foreach>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<span class="loadingMore"><!--查看更多--></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			    </div>
+			    <div role="tabpanel" class="tab-pane" id="settings">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="feedback">
+								<p>意见反馈</p>
+								<div style="position: relative; padding-top: 10px;">
+									<textarea id="feedback" resize="none" class="form-control" rows="3" placeholder="请在这儿提出您的意见"></textarea>
+									<div class="theNumber"><span id="feedback-count">0</span>/50</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 sutupBtn">
+										<button id="ideaBt">提交</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			    </div>
+			</div>
+		</div>
+	</div>
+
+		<div class="modal fade" id="serviceChioce" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="row">
+		      		<div class="col-sm-12">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        	<span aria-hidden="true">&times;</span>
+				        </button>
+			        </div>
+		        </div>
+		        <div class="modal-title" id="myModalLabel">
+		        	<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12" style="position: relative;">
+							<p>技能说明</p>
+							<textarea id="area" resize="none" class="form-control" rows="3"></textarea>
+							<div class="theNumber"><span id="text-count">0</span>/50</div>
+						</div>
+		        	</div>
+		        	<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12" style="position: relative;">
+							<p>技能封面照<span>(消息无遮盖，内容清晰)</span></p>
+							<div class="uploadingBox">
+								<div class="uploadingPic">
+									<img id="coverImg" src="/Application/Wechat/View/Mydata/img/未标题-1.png">
+								</div>
+								<div class="uploadingBtn">
+									<input type="file" id="skillUpload" />
+									<a>图片上传</a>
+									<div class="claim">
+										<svg class="icon categorie-icon" aria-hidden="true">
+						                  	<use xlink:href="#icon-xinghao"></use>
+						              	</svg>
+						              	<span>照片请勿进行任何软件处理</span><br />
+						              	<svg class="icon categorie-icon" aria-hidden="true">
+						                  	<use xlink:href="#icon-xinghao"></use>
+						              	</svg>
+						              	<span>身份证有效期需要在一个月以上</span>
+									</div>
+								</div>
+								<div style="clear: both;"></div>
+							</div>
+						</div>
+		        	</div>
+		        	<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<p>单价填写</p>
+							<p class="priceInput">单价：<input id="thePrice" type="number" name="" /></p>
+						</div>
+		        	</div>
+		        	<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+							<button class="submitBtn" id="skillBt">提交</button>
+						</div>
+					</div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+		<div class="modal fade" id="myinterest" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="row">
+		      		<div class="col-sm-12">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        	<span aria-hidden="true">&times;</span>
+				        </button>
+			        </div>
+		        </div>
+		        <div class="modal-title interestChioce" id="myModalLabel">
+		        	<p class="title">兴趣选择</p>
+		        	<p class="more">(最多选择3个)</p>
+		        	<div class="row">
+                        <foreach name="interestInfo" item="inval">
+                            <div class="col-md-3 col-sm-3">
+                                <div name="need" class="lists" avg="{$inval.id}" statu="{$inval.status}">{$inval.cname}</div>
+                            </div>
+                        </foreach>
+		        	</div>
+		        	<div class="row errorsBox">
+						<div class="col-md-12 col-sm-12">
+							<p class="errors"></p>
+						</div>
+		        	</div>
+		        	<div class="row interestBtn">
+						<div class="col-md-12 col-sm-12">
+							<button data-dismiss="modal" aria-label="Close" id="interSel">确定</button>
+						</div>
+		        	</div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	<!-- 内容主体end -->
+
+<include file="./Application/Home/View/Layouts/footer.html" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Application/Home/View/Layouts/js/age.js"></script>
+<script type="text/javascript">
+	$(function(){
+		// 编辑、保存
+		$(".editBtn").click(function(){
+			$(this).css("display","none");
+			$(".msgList").children("input").removeAttr("readOnly");
+			$(".msgList").children("input").css("border","1px solid #ccc");
+			$(".msgList").children("select").attr("disabled",false);
+			$(".msgList").children("select").css("border","1px solid #ccc");
+			$(".msgList").children(".textBox").children("textarea").removeAttr("readOnly");
+			$(".msgList").children(".textBox").children("textarea").css("border","1px solid #ccc");
+			$(".signNumber").css("opacity","1");
+			$("#interest").attr("data-target","#myinterest");
+			$("textarea").attr("placeholder","编辑签名");
+			$(".add_interest").html("点击添加兴趣");
+			$(".mymsgList").css("margin-top","30px");
+			if($("#au").attr("src")==''){
+				$(".audioInput").css("display","block");
+			}else{
+				$(".audio_delete").css("display","block");
+			}
+			if($("#vi").attr("src")==''){
+				$(".videoInput").css("display","block");
+			}else{
+				$(".video_delete").css("display","block");
+			}
+
+
+			$(".saveBtn").click(function(){
+				var userName=$("#userName").val();
+				var selPii=$("#selPii").val();
+				var signCon=$("#signCon").val();
+				if(userName==''||selPii==''||signCon==''){
+					return false;
+				}else{
+					$(".editBtn").css("display","block");
+					$(".msgList").children("input").attr("readonly","readonly");				
+					$(".msgList").children("input").css("border","none");
+					$(".msgList").children(".textBox").children("textarea").attr("readonly","readonly");
+					$(".msgList").children(".textBox").children("textarea").css("border","none");
+					$(".signNumber").css("opacity","0");
+					$(".msgList").children("select").attr("disabled",true);
+					$(".msgList").children("select").css("border","none");
+					$("#interest").removeAttr("data-target");
+					$(".audioInput").css("display","none");
+					$(".videoInput").css("display","none");
+				}
+			})
+		});
+
+
+		var bodycolorH=$(".bodyColor").height();
+		var myselfH=bodycolorH-90-40-251;
+		$(".myselfBox").css("min-height",myselfH+'px');
+		$(".tab-content").css("min-height",myselfH-40+'px');
+
+		/*字数限制*/  
+	    $("#area").on("input propertychange", function() {  
+	        var $this = $(this),  
+	            _val = $this.val(),  
+	            count = "";  
+	        if (_val.length > 50) {  
+	            $this.val(_val.substring(0, 50));  
+	        }  
+	        count =$this.val().length;  
+	        $("#text-count").html(count);  
+	    });
+
+	    /*字数限制*/  
+	    $("#signCon").on("input propertychange", function() {  
+	        var $this = $(this),  
+	            _val = $this.val(),  
+	            count = "";  
+	        if (_val.length > 20) {  
+	            $this.val(_val.substring(0, 20));  
+	        }  
+	        count =$this.val().length;  
+	        $("#signCon-count").html(count);  
+	    });
+
+	    //最多只能选择3个
+	    $(".interestChioce .lists").click(function(){
+	    	if ($(this).css("color")=="rgb(253, 144, 143)") {
+	    		$(this).css({"color":"#fff","background-color":"#fd908f"});
+	    	}else{
+	    		$(this).css({"color":"#fd908f","background-color":"#fff"});
+	    	}
+	        var nobj=document.getElementsByName('need');
+	        var index=0;
+	        for(var i=0;i<nobj.length;i++){
+	            if(nobj[i].style.color=="rgb(255, 255, 255)"){
+	            	index++;
+	            	if(index>3){
+	            		if ($(this).css("color")=="rgb(253, 144, 143)") {
+				    		$(this).css({"color":"#fff","background-color":"#fd908f"});
+				    	}else{
+				    		$(this).css({"color":"#fd908f","background-color":"#fff"});
+				    		$(".errors").html("最多只能选择3个");
+				    	}
+	            	}else{
+	            		$(".errors").html("");
+	            	}
+	     	    }
+	        }
+	    })
+	})
+</script>
+
+<script>
+	//上传头像
+	var fileInput=document.getElementById('uploadFile');
+	var preview=document.getElementById('img')
+	fileInput.addEventListener('change', function () {
+
+		//sel(fileInput,preview)
+		var imgdata=new FormData();
+		imgdata.append('head_portrait',$('#uploadFile')[0].files[0])
+		$.ajax({
+			url:'__APP__/Myself/saveImg',
+			data:imgdata,
+			type:'post',
+			processData:false,//提示JQ库不处理发送的数据
+			contentType:false,//提示JQ库不设置Content-Type请求头
+			dataType:'json',
+			success:function(re){
+				if(re.info===true){
+					$(preview).attr('src',re.msg)
+				}else if(re.info==3){
+					// alert(re.msg+'小于5M')
+					layer.alert(re.msg+'小于5M', {
+					  icon: 2,
+					  skin: 'layer-ext-moon'
+					})
+					// $.toast(re.msg+'小于5M', "text");
+				}
+			}
+		})
+
+	});
+
+    //获取兴趣
+    $('#interSel').click(function(){
+        var nobj=document.getElementsByName('need');
+        var str='';
+        var iid='';
+        for(var i=0;i<nobj.length;i++){
+            if($(nobj).eq(i).css('background-color')=='rgb(253, 144, 143)'){
+                str+=$(nobj).eq(i).html()+'/';
+                iid+=$(nobj).eq(i).attr('avg')+',';
+            }
+        }
+        var needstr=str.substring(0,str.length-1);
+        $('#interest').html(needstr)
+        iid=iid.substring(0,iid.length-1)
+        //记录选取的兴趣id字符串
+        sessionStorage.setItem('iid',iid);
+    })
+    //兴趣起始样式
+    var nobj=document.getElementsByName('need');
+    for(var i=0;i<nobj.length;i++){
+        if($(nobj).eq(i).attr('statu')==1){
+            $(nobj).eq(i).css({"color":"#fff","background-color":"#fd908f"});
+        }
+    }
+    //保存基本信息
+    $('#btInfo').click(function(){
+        if($('#interest').html()==''){
+            // alert('选择兴趣')
+            // alert("请选择兴趣", "text");
+			layer.alert("请选择兴趣", {
+			  icon: 2,
+			  skin: 'layer-ext-moon'
+			})
+            return false
+        }
+        if($('#userName').val().replace(/\s/g, "")==''){
+            // alert('签名不能为空')
+            // alert("昵称不能为空", "cancel");
+			layer.alert("昵称不能为空", {
+			  icon: 2,
+			  skin: 'layer-ext-moon'
+			})
+            return false
+        }
+        if($('#signCon').val().replace(/\s/g, "")==''){
+            // alert('签名不能为空')
+            // alert("签名不能为空", "cancel");
+			layer.alert("签名不能为空", {
+			  icon: 2,
+			  skin: 'layer-ext-moon'
+			})
+            return false
+        }
+        //整理需要的数据
+        //兴趣
+        if(sessionStorage.getItem('iid')){
+            var needIid=sessionStorage.getItem('iid');
+        }else{
+            var needIid='{$needStr}';
+        }
+        //昵称
+        var nick=$('#userName').val().replace(/\s/g, "");
+        //性别
+        var sex=$('#selSex').val();
+        //签名
+        var Mysign=$('#signCon').val().replace(/\s/g, "");
+        //职业
+        var pid=$('#selPii').val();
+        $.ajax({
+            url:'__APP__/Myself/saveInfo',
+            data:{
+                nickname:nick,
+                sex:sex,
+                signature:Mysign,
+                pid:pid,
+                iid:needIid
+            },
+            dataType:'json',
+            type:'post',
+            success:function(re){
+                // alert('保存成功')
+				layer.alert('保存成功', {
+				  icon: 1,
+				  skin: 'layer-ext-moon'
+				})
+				$(".audio_delete").css("display","none");
+				$(".video_delete").css("display","none");
+            }
+        })
+    })
+</script>
+
+<script>
+    //成为签约用户
+    //点击获取该条服务的id值,执行函数
+function selService(id){
+    $.ajax({
+        url:'__APP__/Myself/serviceDetail',
+        data:'id='+id,
+        dataType:'json',
+        type:'post',
+        success:function(re){
+            //技能说明
+
+            if(re.lengthArr>1){
+                $('#area').val(re.explain);
+                //封面图片
+                $('#coverImg').attr('src',re.cover_path);
+                //标价
+                $('#thePrice').val(re.bid_price);
+				//给提交键赋值当前选择的服务类型id
+				$('#skillBt').attr('value',re.selId)
+            }else{
+                $('#area').val('');
+                //封面图片
+                $('#coverImg').attr('src','/Application/Wechat/View/Mydata/img/未标题-1.png');
+                //标价
+                $('#thePrice').val('')
+				//给提交键赋值当前选择的服务类型id
+				$('#skillBt').attr('value',re.selId)
+            }
+
+        }
+    })
+}
+
+//成为签约用户
+    $('#skillBt').click(function(){
+
+        var content=$('#area').val();
+        var price=$('#thePrice').val();
+        if(price==""||price<=0){
+            $("#priceError").html("单价输入不正确")
+            return false;
+        }
+        var id=$('#skillBt').attr('value');//选择的服务id
+        var path=document.getElementById('coverImg').getAttribute('src');
+        var fileup=$('#skillUpload').val();
+
+        var datas=new FormData();
+        if(fileup!=''  && path!=''){
+            datas.append('cover_path',$('#skillUpload')[0].files[0]);
+        }
+        datas.append('scid',id);
+        datas.append('bid_price',price);
+        datas.append('explain',content);
+
+
+        if(content=='' || path==''){
+            // alert('技能描述和封面照不能为空');
+            // $.toast("技能描述和封面照不能为空", "cancel");
+			layer.alert("技能描述和封面照不能为空", {
+			  icon: 2,
+			  skin: 'layer-ext-moon'
+			})
+        }else{
+            $.ajax({
+                url:'__APP__/Myself/save',
+                data:datas,
+                dataType:'json',
+                processData:false,//提示JQ库不处理发送的数据
+                contentType:false,//提示JQ库不设置Content-Type请求头
+                type:'post',
+                success:function(re){
+                	if(re.status==4){
+						layer.alert(re.msg, function(){
+							window.location.href='__APP__/'+re.url+'/index'
+						})
+					}
+                    if(re.info==1){
+                        // alert('信息上传成功,进入实名认证') ;
+                        if(re.checkStatus==2){
+                            // $.toast("信息上传成功");
+							layer.alert("信息上传成功", function(){
+								window.location.href='__APP__/'+re.url+'/index'
+							})
+                        }else{
+                            // $.toast("信息上传成功,检测到审核未通过，进入身份认证");
+							layer.alert("信息上传成功,待审核，检测到审核未通过，进入身份认证", function(){
+								window.location.href='__APP__/'+re.url+'/index'
+							})
+                        }
+                        //$.toast("信息上传成功,进入实名认证");
+
+                    }else if(re.info==2){
+						layer.alert(re.msg+',若身份认证未通过则将进入身份认证页面', function(){
+							window.location.href='__APP__/'+re.url+'/index'
+						})
+                    }else if(re.info==3){
+						layer.alert(re.msg, function(){
+							window.location.href='__APP__/'+re.url+'/index'
+						})
+
+                    }
+                }
+            })
+        }
+    })
+</script>
+
+
+<script type="text/javascript">
+    // 监听change事件:
+    $('#skillUpload').change(function () {
+        var       fileInput = document.getElementById('skillUpload');
+        var       preview = document.getElementById('coverImg');  //照片预览对象
+        //sel(fileInput,preview)
+        var imgurl=preview.getAttribute('src');
+        // 清除背景图片:
+        preview.setAttribute('src','');
+        var file = fileInput.files[0];
+        if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+            // alert('图片文件格式不正确!');
+            // $.toast("图片文件格式不正确!", "cancel");
+			layer.alert("图片文件格式不正确!", {
+			  icon: 2,
+			  skin: 'layer-ext-moon'
+			})
+            return;
+        }
+        // 读取文件:
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            if(file.size>5242880){
+                preview.setAttribute('src',imgurl);
+                $(fileInput).val('');
+                // alert('图片文件大小不正确!5M以内');
+                // $.toast("图片文件大小不正确!5M以内", "cancel");
+				layer.alert("图片文件大小不正确!5M以内", {
+				  icon: 2,
+				  skin: 'layer-ext-moon'
+				})
+            }else{
+                var data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
+                preview.setAttribute('src',data);
+                preview.style.display='block'
+            }
+        };
+        // 以DataURL的形式读取文件:
+        reader.readAsDataURL(file);
+    });
+    function sel(fileInput,preview){
+        //原来的图片
+
+    }
+</script>
+
+
+<script>
+	//意见反馈
+	$('#ideaBt').click(function(){
+		var ide=$('#feedback').val().replace(/\s/g,"");
+		if(ide=='') {
+			 // alert('不能为空')
+			layer.alert('不能为空', {
+			  icon: 2,
+			  skin: 'layer-ext-moon'
+			})
+			//$.toast("不能为空", "cancel");
+		}else{
+			$.ajax({
+				url:'__APP__/Myself/ideaSave',
+				data:'content='+ide,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					if(re===true){
+						 // alert('提交成功')
+						layer.alert('提交成功', {
+						  icon: 1,
+						  skin: 'layer-ext-moon'
+						})
+						//$.toast("提交成功");
+						//window.location.href='__APP__/Setup/index'
+					}else if(re.info===2){
+						 // alert(re.msg)
+						layer.alert(re.msg, {
+						  icon: 2,
+						  skin: 'layer-ext-moon'
+						})
+						//$.toast(re.msg);
+						//window.location.href='__APP__/Setup/index'
+					}
+				}
+			})
+		}
+	})
+</script>
+
+<script>
+	//取消拉黑
+	function cblack(obj){
+		var bbId=$(obj).attr('value');//被拉黑的签约用户id
+		//alert(bbId)
+		$.ajax({
+			url:'__APP__/Babyinformation/cblack',
+			data:'bbId='+bbId,
+			dataType:'json',
+			type:'post',
+			success:function(re){
+				if(re==true){
+					// alert('取消成功')
+					layer.alert('取消成功',function(){
+						location.reload();
+					})
+					//location.hash='#messages';
+				}
+			}
+		})
+	}
+</script>
+
+<script type="text/javascript">
+	//上传视频音频
+	$(function(){
+		layui.use('upload', function(){
+			layui.upload({
+				url: '__APP__/Myself/metaSave/type/1',
+				type:'audio',
+				method:'post',
+				unwrap: true,
+				ext: 'mp3|aac|ogg|m4a',
+				elem:$('#audioInput'),
+				success: function(res){
+					if(res.info===true){
+						$('#au').attr('src',res.url);
+						layer.msg('上传成功',function(){
+							var Media = document.getElementById("au");
+		        			var miao=Media.duration;
+					        var miaoZ=Math.round(miao);
+					        $(".audio_img i span").html(miaoZ);
+						});
+						$(".noUpload").css("display","none");
+						$(".audio_box").css("display","block");
+					}else if(res.info==4){
+						//layer.msg(res.msg);
+						layer.msg(res.msg, {
+							icon: 2,
+							time:2000
+						})
+					}
+
+				}
+			});
+			if($("#au").attr("src")==''){
+				$(".audio_box").css("display","none");
+				$(".noUpload").html("未上传");
+			}else{
+			    var Media = document.getElementById("au");
+		        var miao=Media.duration;
+		        if(isNaN(miao)){
+		            Media.addEventListener("canplay", function(){
+		                var miao=Media.duration;
+		                var miaoZ=Math.round(miao);
+		                $(".audio_img i span").html(miaoZ);
+		                $(".audio_box").click(function(){
+		                  Media.play();
+		                  $(".stop_img").css("display","none");
+		                  setTimeout(function(){
+		                    $(".stop_img").css("display","block");
+		                  },miaoZ*1000);
+		                })  
+		            });
+		        }else{
+		            var miao=Media.duration;
+		            var miaoZ=Math.round(miao);
+		            $(".audio_img i span").html(miaoZ);
+		            $(".audio_box").click(function(){
+		              Media.play();
+		              $(".stop_img").css("display","none");
+		              setTimeout(function(){
+		                $(".stop_img").css("display","block");
+		              },miaoZ*1000);
+		            })
+		            
+		        }
+				$(".audioInput").css("margin-left","0px");
+				$(".videoInput").css("margin-left","0px");
+	    	}
+
+			layui.upload({
+				url: '__APP__/Myself/metaSave/type/2',
+				type:'video',
+				unwrap: true,
+				ext: 'mp4',
+				elem:$('#videoInput'),
+				success: function(res){
+					if(res.info===true){
+						$('#vi').attr('src',res.url);
+						//$('#vi').html('<source id="urlvideo" src="'+res.url+'" >');
+						layer.msg('上传成功');
+						$(".vedio_none").css("display","none");
+						$(".video_box").css("display","block");
+						$("#vi").css("display","block");
+					}else if(res.info==4){
+					    //layer.msg(res.msg);
+                        layer.msg(res.msg, {
+                            icon: 2,
+                            time:2000
+                        })
+                    }
+				}
+			});
+			if($("#vi").attr("src")==''){
+				$(".video_box").find("video").css("display","none");
+				$(".vedio_none").html("未上传");
+			}
+		});
+
+	})
+
+</script>
+
+
+<script>
+	//删除
+	function del(sel,obj,selObj,addobj){
+		$.ajax({
+			url:'__APP__/Myself/metaDel',
+			data:'type='+sel,
+			dataType:'json',
+			type:'post',
+			success:function(re){
+				if(re===true){
+					layer.msg('删除成功',{icon:1,time:2000})
+					$(obj).css("display","none");
+					$(selObj).css("display","none");
+					$(addobj).css("display","block");
+				}
+			}
+		})
+	}
+	$('#audio_delete').click(function(){
+		var sel=1;
+		var obj=$(".audio_box");
+		var audio_add=$(".audioInput");
+		del(sel,this,obj,audio_add);
+
+	})
+	$('#video_delete').click(function(){
+		var sel=2;
+		var obj=$(".video_box");
+		var audio_add=$(".videoInput");
+		del(sel,this,obj,audio_add);
+	})
+</script>

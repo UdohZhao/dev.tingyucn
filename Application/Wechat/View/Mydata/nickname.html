@@ -1,0 +1,46 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Name/css/index.css">
+
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>昵称修改</p>
+          </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="weui-cells weui-cells_form">
+		  <div class="weui-cell">
+		    <div class="weui-cell__hd"><label class="weui-label">昵称</label></div>
+		    <div class="weui-cell__bd">
+		      <input class="weui-input" id="nc" value="{$nickname}" type="text" placeholder="请输入名字">
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 50%;">
+		<div class="col-sm-12 col-xs-12">
+			<a href="javascript:;" class="weui-btn weui-btn_primary">确定</a>
+		</div>
+	</div>
+
+<include file="Layout/footer" />
+<script type="text/javascript">
+$(function(){
+  $(".weui-btn_primary").click(function(){
+  	$(this).css("text-decoration","none");
+    $(this).css("background-color","#fd908f");
+    $(this).css("color","#ffffff");
+
+	  var name=$('#nc').val();
+	  if(name==''){
+	  	// alert('不能为空')
+	  	$.toast("不能为空", "cancel");
+	  }else{
+		  sessionStorage.setItem('username',name);
+		  window.location.href='__APP__/Mydata/index'
+	  }
+  })
+})
+</script>

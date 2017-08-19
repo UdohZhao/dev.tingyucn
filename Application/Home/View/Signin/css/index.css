@@ -1,0 +1,42 @@
+.signin_box{
+	width: 450px;
+	margin: 0 auto;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	box-shadow: 2px 3px 3px #ccc;
+	margin-top: 15%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 4px;
+}
+.signin_box>p{
+	font-size: 26px;
+	text-align: center;
+	line-height: 50px;
+}
+.signin_box>form{
+	padding-right: 10px;
+}
+#Sbt{
+	width: 100%;
+	height: 40px;
+	background-color: #fd908f;
+	color: #fff;
+	border: none;
+	font-size: 18px;
+}
+.yzmBtn{
+	padding-left: 0;
+}
+#getverify{
+	background-color: #fff;
+	color: #fd908f;
+	border: 1px solid #fd908f;
+	height: 34px;
+	padding: 0;
+	border-radius: 4px;
+	width: 100%;
+}
+.yzmBtn3{
+	padding-left: 0;
+}

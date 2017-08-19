@@ -1,0 +1,383 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Myorder/css/index.css">
+
+	<!-- <div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>我的订单</p>
+          </div>
+        </div>
+	</div> -->
+<!-- <foreach name="orderInfo" item="v">
+	<div class="row">
+		<div class="col-sm-12 col-xs-12 orderTime">
+			<p>下单时间:{$v.ctime|date='Y-m-d H:i:s',###}</p>
+		</div>
+		<div class="col-sm-12 col-xs-12">
+			<div class="orderBox">
+				<div class="topName">
+
+						<p>
+							<if condition="$v.status eq 2 && $v.type eq 2">
+								已完成
+								<elseif condition="$v.status eq 1"/>
+								进行中
+								<elseif condition="$v.reply_status eq 0"/>
+								待确认
+								<elseif condition="$v.reply_status eq 2"/>
+								已取消订单
+								<elseif condition="$v.status eq 0"/>
+								待付款
+							</if>
+
+								<if condition="$v.status eq 2 && $v.grade eq null && $v.isSelf eq 1">
+									<a href="__APP__/Myorder/evaluation/sid/{$v.sid}/orderId/{$v.id}">
+									去评价
+									</a>
+									<elseif condition="$v.status eq 2 && $v.grade eq null && $v.isSelf neq 1"/>
+									<a>
+										待评价
+									</a>
+									<elseif condition="$v.status eq 2 && $v.grade neq null"/>
+									<a>
+										已评价
+									</a>
+								</if>
+
+						</p>
+				</div>
+				<div class="weui-cells">
+					<a class="weui-cell weui-cell_access" href="__APP__/Myorder/myorderDetails/id/{$v.id}">
+						<div class="weui-cell__hd"><img src="{$v.cover_path}"></div>
+						<div class="weui-cell__bd">
+							<p>{$v.cname}</p>
+							<svg class="icon categorie-icon" aria-hidden="true">
+								<use xlink:href="#icon-yudingshijian" id="map"></use>
+							</svg>
+							<span id="city">开始时间：{$v.start_time|date='Y-m-d H:i:s',###}</span><br/>
+						</div>
+						<div class="weui-cell__ft">
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</foreach> -->
+
+<!--<foreach name="MyorderInfo" item="v">
+	<div class="row">
+		<div class="col-sm-12 col-xs-12 orderTime">
+			<p>下单时间:{$v.ctime|date='Y-m-d H:i:s',###}</p>
+		</div>
+		<div class="col-sm-12 col-xs-12">
+			<div class="orderBox">
+				<div class="topName">
+					<p>
+						<if condition="$v.status eq 2 && $v.type eq 2">
+							已完成
+							<elseif condition="$v.status eq 1"/>
+							进行中
+							<elseif condition="$v.reply_status eq 0"/>
+							待确认
+							<elseif condition="$v.status eq 0"/>
+							待付款
+						</if>
+						<a href="__APP__/Myorder/evaluation">
+							<if condition="$v.status eq 2 && $v.grade eq null">
+								去评价
+								<elseif condition="$v.grade neq null"/>
+							</if>
+						</a>
+					</p>
+				</div>
+				<div class="weui-cells">
+					<a class="weui-cell weui-cell_access" href="myorderDetails.html">
+						<div class="weui-cell__hd"><img src="/Application/Wechat/View/Index/img/banner2.png"></div>
+						<div class="weui-cell__bd">
+							<p>{$v.cname}</p>
+							<svg class="icon categorie-icon" aria-hidden="true">
+								<use xlink:href="#icon-yudingshijian" id="map"></use>
+							</svg>
+							<span id="city">开始时间：{$v.start_time|date='Y-m-d H:i:s',###}</span><br/>
+							<span id="city">{$v.charge_mode}</span>
+						</div>
+						<div class="weui-cell__ft">
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</foreach>-->
+	<!--<div class="row">
+		<div class="col-sm-12 col-xs-12 orderTime">
+			<p>2017-06-14 16:46</p>
+		</div>
+		<div class="col-sm-12 col-xs-12">
+			<div class="orderBox">
+				<div class="topName">
+					<p>已完成<a href="__APP__/Myorder/evaluation">去评价</a></p>
+				</div>
+				<div class="weui-cells">
+				  <a class="weui-cell weui-cell_access" href="myorderDetails.html">
+				  	<div class="weui-cell__hd"><img src="/Application/Wechat/View/Index/img/banner2.png"></div>
+				    <div class="weui-cell__bd">
+				      <p>恋爱指导</p>
+				      <svg class="icon categorie-icon" aria-hidden="true">
+		                  <use xlink:href="#icon-yudingshijian" id="map"></use>
+		              </svg>
+		              <span id="city">2017-07-01 10:00</span>
+		              <span id="city">1小时</span>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-xs-12 orderTime">
+			<p>2017-06-15 16:46</p>
+		</div>
+		<div class="col-sm-12 col-xs-12">
+			<div class="orderBox">
+				<div class="topName">
+					<p>待付款<a href="__APP__/Placeanorder/paynow">去付款</a></p>
+				</div>
+				<div class="weui-cells">
+				  <a class="weui-cell weui-cell_access" href="myorderDetails.html">
+				  	<div class="weui-cell__hd"><img src="/Application/Wechat/View/Index/img/banner2.png"></div>
+				    <div class="weui-cell__bd">
+				      <p>恋爱指导</p>
+				      <svg class="icon categorie-icon" aria-hidden="true">
+		                  <use xlink:href="#icon-yudingshijian" id="map"></use>
+		              </svg>
+		              <span id="city">2017-07-01 10:00</span>
+		              <span id="city">1小时</span>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-12 col-xs-12">
+			<div class="orderBox">
+				<div class="topName">
+					<p>已取消</p>
+				</div>
+				<div class="weui-cells">
+				  <a class="weui-cell weui-cell_access" href="javascript:;">
+				  	<div class="weui-cell__hd"><img src="/Application/Wechat/View/Index/img/banner2.png"></div>
+				    <div class="weui-cell__bd">
+				      <p>恋爱指导</p>
+				      <svg class="icon categorie-icon" aria-hidden="true">
+		                  <use xlink:href="#icon-yudingshijian" id="map"></use>
+		              </svg>
+		              <span id="city">2017-07-01 10:00</span>
+		              <span id="city">1小时</span>
+				    </div>
+				    <div class="weui-cell__ft">
+				    </div>
+				  </a>
+				</div>
+			</div>
+		</div>
+	</div>-->
+
+  <div class="row">
+	<div class="weui-tab">
+	  <div class="weui-tab__bd">
+		<foreach name="finalInfo" item="v" key="k">
+			<if condition="$k eq 0">
+				<div id="tab{$k+1}" class="weui-tab__bd-item weui-tab__bd-item--active">
+					<else/>
+				<div id="tab{$k+1}" class="weui-tab__bd-item weui-tab__bd-item">
+			</if>
+			<div class="col-sm-12 col-xs-12 orderTime">
+				<p>订单类型:{$v.statusName}</p>
+			</div>
+			<foreach name="v['orderDetail']" item="vo">
+				<div class="col-sm-12 col-xs-12">
+					<div class="order_time">
+						<span>下单时间:{$vo.ctime|date='Y-m-d H:i:s',###}</span>
+					</div>
+					<div class="orderBox">
+						<div class="topName">
+							<if condition="$vo.status eq 2 && $v.type eq 2">
+								已完成
+								<elseif condition="$vo.status eq 1"/>
+								进行中
+								<elseif condition="$vo.reply_status eq 0"/>
+								待确认
+								<elseif condition="$vo.reply_status eq 2"/>
+								已取消订单
+								<elseif condition="$vo.status eq 0"/>
+								待付款
+							</if>
+							<if condition="$vo.status eq 2 && $vo.grade eq null && $vo.isSelf eq 1">
+								<a href="__APP__/Myorder/evaluation/sid/{$vo.sid}/orderId/{$vo.id}">
+									去评价
+								</a>
+								<elseif condition="$vo.status eq 2 && $vo.grade eq null && $vo.isSelf neq 1"/>
+								<a>
+									待对方评价
+								</a>
+								<elseif condition="$vo.status eq 2 && $vo.grade neq null"/>
+								<a>
+									已评价
+								</a>
+							</if>
+						</div>
+						<div class="weui-cells">
+							<a class="weui-cell weui-cell_access" href="__APP__/Myorder/myorderDetails/id/{$vo.id}">
+								<div class="weui-cell__hd"><img src="{$vo.cover_path}"></div>
+								<div class="weui-cell__bd">
+									<p>{$vo.cname}</p>
+									
+									<span id="city">开始时间：{$vo.start_time|date='Y-m-d H:i:s',###}</span><br/>
+									<span id="city">数量：{$vo.charge_mode}</span>
+								</div>
+								<div class="weui-cell__ft">
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</foreach>
+
+	    </div>
+		</foreach>
+	    <!--<div id="tab2" class="weui-tab__bd-item">
+	      	<div class="col-sm-12 col-xs-12 orderTime">
+				<p>下单时间:{$v.ctime|date='Y-m-d H:i:s',###}</p>
+			</div>
+			<div class="col-sm-12 col-xs-12">
+				<div class="orderBox">
+					<div class="topName">
+						<p>
+							待付款
+							<a href="__APP__/Placeanorder/paynow">
+								去付款
+							</a>
+						</p>
+					</div>
+					<div class="weui-cells">
+						<a class="weui-cell weui-cell_access" href="myorderDetails.html">
+							<div class="weui-cell__hd"><img src="/Application/Wechat/View/Index/img/banner2.png"></div>
+							<div class="weui-cell__bd">
+								<p>{$v.cname}</p>
+								<span id="city">开始时间：{$v.start_time|date='Y-m-d H:i:s',###}</span><br/>
+								<span id="city">数量：{$v.charge_mode}</span>
+							</div>
+							<div class="weui-cell__ft">
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+	    </div>
+	    <div id="tab3" class="weui-tab__bd-item">
+	      	<div class="col-sm-12 col-xs-12 orderTime">
+				<p>下单时间:{$v.ctime|date='Y-m-d H:i:s',###}</p>
+			</div>
+			<div class="col-sm-12 col-xs-12">
+				<div class="orderBox">
+					<div class="topName">
+						<p>
+							待评价
+							<a href="__APP__/Myorder/evaluation">
+								去评价
+							</a>
+						</p>
+					</div>
+					<div class="weui-cells">
+						<a class="weui-cell weui-cell_access" href="myorderDetails.html">
+							<div class="weui-cell__hd"><img src="/Application/Wechat/View/Index/img/banner2.png"></div>
+							<div class="weui-cell__bd">
+								<p>{$v.cname}</p>
+								<span id="city">开始时间：{$v.start_time|date='Y-m-d H:i:s',###}</span><br/>
+								<span id="city">数量：{$v.charge_mode}</span>
+							</div>
+							<div class="weui-cell__ft">
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+	    </div>
+	    <div id="tab4" class="weui-tab__bd-item">
+	      	<div class="col-sm-12 col-xs-12 orderTime">
+				<p>下单时间:{$v.ctime|date='Y-m-d H:i:s',###}</p>
+			</div>
+			<div class="col-sm-12 col-xs-12">
+				<div class="orderBox">
+					<div class="topName">
+						<p>
+							已取消
+						</p>
+					</div>
+					<div class="weui-cells">
+						<a class="weui-cell weui-cell_access" href="myorderDetails.html">
+							<div class="weui-cell__hd"><img src="/Application/Wechat/View/Index/img/banner2.png"></div>
+							<div class="weui-cell__bd">
+								<p>{$v.cname}</p>
+								<span id="city">开始时间：{$v.start_time|date='Y-m-d H:i:s',###}</span><br/>
+								<span id="city">数量：{$v.charge_mode}</span>
+							</div>
+							<div class="weui-cell__ft">
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+	    </div>-->
+	  </div>
+
+	  <div class="weui-tabbar">
+		  <foreach name="finalInfo" item="val" key="keys">
+			  <if condition="$keys eq 0">
+				  <a href="#tab{$keys+1}" class="weui-tabbar__item weui-bar__item--on">
+					  <svg class="icon categorie-icon" aria-hidden="true">
+						  <use class="bottom_pic" value='{$keys}' xlink:href="#icon-shouye{$keys}"></use>
+					  </svg>
+					  <p class="weui-tabbar__label">{$val.statusName}</p>
+				  </a>
+				  <else/>
+				  <a href="#tab{$keys+1}" class="weui-tabbar__item">
+					  <svg class="icon categorie-icon" aria-hidden="true">
+						  <use class="bottom_pic" value='{$keys}' xlink:href="#icon-shouye{$keys}"></use>
+					  </svg>
+					  <p class="weui-tabbar__label">{$val.statusName}</p>
+				  </a>
+			  </if>
+		  </foreach>
+<!--
+	    <a href="#tab2" class="weui-tabbar__item">
+	    	<svg class="icon categorie-icon" aria-hidden="true">
+	            <use xlink:href="#icon-shouye"></use>
+	        </svg>
+	        <p class="weui-tabbar__label">待付款</p>
+	    </a>
+	    <a href="#tab3" class="weui-tabbar__item">
+	    	<svg class="icon categorie-icon" aria-hidden="true">
+	            <use xlink:href="#icon-shouye"></use>
+	        </svg>
+	        <p class="weui-tabbar__label">待评价</p>
+	    </a>
+	    <a href="#tab4" class="weui-tabbar__item">
+	    	<svg class="icon categorie-icon" aria-hidden="true">
+	            <use xlink:href="#icon-shouye"></use>
+	        </svg>
+	        <p class="weui-tabbar__label">已取消</p></a>-->
+	  </div>
+	</div>
+  </div>
+	<div style="height: 60px;"></div>
+<include file="Layout/footer" />
+
+<script type="text/javascript" src="/Application/Wechat/View/Myorder/js/index.js"></script>
+

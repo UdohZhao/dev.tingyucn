@@ -1,0 +1,44 @@
+.pageName{
+	border: none;
+}
+.weui-btn_primary{
+	background-color: #fd908f;
+	color: #ffffff;
+	text-decoration: none;
+}
+.Sbutton{
+	width: 100%;
+	margin-top: 20px;
+}
+label,.weui-cells,p{
+	margin: 0;
+}
+p span{
+	font-size: 12px;
+	color: #aaaaaa;
+}
+.annotated{
+	padding-bottom: 5px;
+}
+.annotated .annotatedList svg,.annotated .annotatedList span{
+	color: #aaaaaa;
+	font-size: 12px;
+}
+.weui-uploader__file{
+	margin-top: 9px;
+	margin-bottom: 0;
+}
+.unitPrice{
+	margin-top: 20px;
+}
+.unitPrice label{
+	margin: 0;
+	font-size: 14px;
+}
+.unitPrice .weui-cell__bd input{
+	font-size: 14px;
+}
+#priceError{
+	font-size:12px;
+	color: red;
+}

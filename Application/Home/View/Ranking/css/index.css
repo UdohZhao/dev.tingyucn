@@ -1,0 +1,143 @@
+@font-face{
+    font-family: 'myfont';
+    src : url('../fonts/myfont.TTF');
+}
+.recommendSer{
+	background-image: url("/Application/Home/View/Eachclass/img/8.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	margin: 0;
+	z-index: 999;
+	height: 245px; 
+	padding-bottom: 2px;
+	box-shadow: inset 0 0 3px 3px #ccc;
+	text-align: center;
+}
+.recommendSer h4{
+	font-family: myfont;
+	font-size: 80px;
+	line-height: 240px;
+	letter-spacing: 30px;
+	color:#ec4088;
+}
+.ranking_bcg{
+	width: 1000px;
+	background-color: #ededed;
+}
+.ranking_newperson,.ranking_income{
+	padding-bottom: 20px;
+}
+.ranking_newperson{
+	margin-top: 50px;
+}
+.ranking_newperson img,.ranking_income img{
+	width: 100%;
+}
+.rankingBox{
+	background-color: #ededed;
+}
+.rankingTitle{
+	text-align: center;
+}
+.rankingTitle svg,.rankingTitle span{
+	color: #fd908f;
+	font-size: 20px;
+}
+.rankingTitle span{
+	font-weight: bolder;
+}
+.rankingTitle .icon{
+	width: 30px;
+	height: 30px;
+}
+.rankingDown{
+	background-color: #fff;
+	padding: 5px 15px;
+	margin-bottom: 10px;
+}
+.listLeft{
+	float: left;
+	width: 100px;
+	height: 100px;
+	position: relative;
+	overflow: hidden;
+}
+.listImg:hover img{
+	transform:scale(1.5);
+	-ms-transform:scale(1.5);	/* IE 9 */
+	-moz-transform:scale(1.5); 	/* Firefox */
+	-webkit-transform:scale(1.5); /* Safari 和 Chrome */
+	-o-transform:scale(1.5); 	/* Opera */
+}
+.sanjiao{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+    height: 0;
+    border-top: 50px solid #fd908f;
+    border-right: 50px solid transparent;
+    opacity: .6;
+    text-align: left;
+}
+.rankingNum{
+	display: block;
+	position: absolute;
+	top: 2px;
+	left: 8px;
+	color: #fff;
+}
+.listLeft img{
+	width: 100%;
+	height: 100%;
+	transition: all 2s;
+}
+.listCenter{
+	float: left;
+	padding-left: 20px;
+	padding-top: 10px;
+}
+.listCenter p{
+	line-height: 40px;
+	margin: 0;
+	font-size: 18px;
+}
+.listCenter .nv{
+	padding: 3px 5px;
+	background-color: #fd908f;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 14px;
+	margin-right: 5px;
+}
+.listCenter .nan{
+	padding: 3px 5px;
+	background-color: #64d1f5;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 14px;
+	margin-right: 5px;
+}
+.rankingIncome{
+	float: right;
+	text-align: right;
+	padding-top: 10px;
+}
+.rankingIncome p{
+	margin: 0;
+	font-size: 20px;
+	line-height: 40px;
+	color: #fd908f;
+}
+.rankingIncome span{
+	font-size: 14px;
+	color: #aaa;
+}
+.rangking_left_bcg{
+	padding-left: 0;
+	padding-right: 5px;
+}
+.rangking_right_bcg{
+	padding-left: 5px;
+	padding-right: 0;
+}

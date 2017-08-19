@@ -1,0 +1,118 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Balance/css/index.css">
+<style type="text/css">
+	label{
+		margin: 0;
+		font-size: 14px;
+	}
+	p{
+		margin: 0;
+	}
+	.weui-input{
+		font-size: 14px;
+	}
+	.weui-btn_primary{
+		background-color: #fd908f;
+		margin-top: 30%;
+	}
+</style>
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>支付宝信息</p>
+          </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="weui-cells weui-cells_form">
+			<div class="weui-cell">
+				<div class="weui-cell__hd"><label class="weui-label">当前收入</label></div>
+				<div class="weui-cell__bd">
+					<p class="weui-input" id="shouru" type="text">￥{$isWith.earning}</p>
+				</div>
+			</div>
+		  <div class="weui-cell">
+		    <div class="weui-cell__hd"><label class="weui-label">提现金额</label></div>
+		    <div class="weui-cell__bd">
+		      <input class="weui-input" id="tixian" type="number" placeholder="请输入提现金额">
+		    </div>
+		  </div>
+		  <div class="weui-cell">
+		    <div class="weui-cell__hd"><label class="weui-label">支付宝账号</label></div>
+		    <div class="weui-cell__bd">
+		      <input class="weui-input" type="text" id="zhanghao" value="{$isWith.alipay}" placeholder="首次提现绑定后无法更改">
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-xs-12">
+			<a href="javascript:;" class="weui-btn weui-btn_primary">确定</a>
+		</div>
+	</div>
+
+<include file="Layout/footer" />
+<script type="text/javascript">
+	$(function(){
+	  $(".weui-btn_primary").click(function(){
+	  	$(this).css("text-decoration","none");
+	    $(this).css("background-color","#fd908f");
+	    $(this).css("color","#ffffff");
+		  var alipay=$('#zhanghao').val();//支付宝账号
+		  var needMoney=$('#tixian').val().replace(/\s/g, "");//提现金额
+		  var allMoney=$('#shouru').html();//当前收入
+
+		  var pattern=/[0-9]+(.[0-9]{1,3})?/g;//匹配到两位小数
+		  var money=allMoney.match(pattern);
+		  //转为浮点型数字
+		    var moneyFloat=parseFloat(money);
+		    var needFloat=parseFloat(needMoney);
+		  if(needMoney==''){
+		  	// alert('请输入提现金额');
+		  	$.toast("请输入提现金额","text");
+			  return false;
+		  }
+			if(needFloat==parseFloat(0)){
+				// alert('金额不能为0');
+		  		$.toast("金额不能为0","cancel");
+				return false
+			}
+		  if(alipay.replace(/\s/g, "")==''){
+              $.toast('填写支付宝账',"text");
+			  return false;
+		  }
+		  if(needFloat>moneyFloat){
+		  	// alert('提现金额不能大于当前收入');
+		  	$.toast("提现金额不能大于当前收入","cancel");
+			  return false;
+		  }else{
+			  $.ajax({
+			  	url:'__APP__/Balance/getMoney',
+				data:'money='+needFloat+'&applyNum='+alipay,
+				 dataType:'json',
+				  type:'post',
+				  success:function(re){
+						if(re.info==1){
+							// alert(re.msg)
+		  					$.toast(re.msg,"text");
+							$('#shouru').html('￥'+re.myMoney)
+						}else if(re.info==4){
+							// alert(re.msg);
+		  					$.toast(re.msg,"text");
+						}else if(re===false){
+							// alert('提现失败');
+		  					$.toast("提现失败","cancel");
+						}
+				  }
+			  })
+		  }
+
+	  })
+
+		//判断是否为首次绑定支付宝账号
+		if('{$isWith.alipay}'!==''){
+			$('#zhanghao').attr('readonly','');
+		}
+	})
+</script>

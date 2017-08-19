@@ -1,0 +1,32 @@
+.shouye{
+	padding-top: 20px;
+}
+.shouye .weui-grid{
+	padding-top: 0;
+}
+.weui-grids{
+	background-color: #ffffff;
+}
+.weui-grid{
+	width:25%;
+}
+.weui-grid:after,.weui-grid:before,.weui-grids:after, .weui-grids:before{
+	border: none;
+}
+.weui-grid__label{
+	margin-bottom: 0;
+}
+.weui-grid__icon{
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+}
+.weui-grid__label{
+	font-size: 12px;
+}
+.weui-grid__icon img{
+	border-radius: 100%;
+}
+.pageName p{
+	font-size: 12px;
+}

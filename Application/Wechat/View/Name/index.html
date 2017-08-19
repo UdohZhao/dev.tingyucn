@@ -1,0 +1,60 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Name/css/index.css">
+<form>
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>姓名</p>
+          </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="weui-cells weui-cells_form">
+		  <div class="weui-cell">
+		    <div class="weui-cell__hd"><label class="weui-label">名字</label></div>
+		    <div class="weui-cell__bd">
+		      <input class="weui-input" maxlength="20" value="{$name}" id="name" type="text" placeholder="请输入名字">
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 50%;">
+		<div class="col-sm-12 col-xs-12">
+			<a href="javascript:auth();" class="weui-btn weui-btn_primary">保存</a>
+		</div>
+	</div>
+</form>
+<include file="Layout/footer" />
+<script type="text/javascript">
+$(function(){
+  $(".weui-btn_primary").click(function(){
+  	$(this).css("text-decoration","none");
+    $(this).css("background-color","#fd908f");
+    $(this).css("color","#ffffff");
+  })
+})
+</script>
+<script>
+	function auth(){
+		var name=$('#name').val();
+		if(name!=''){
+			$.ajax({
+				url:'__APP__/Name/save',
+				data:'real_name='+name,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					if(re===true){
+						window.location.href='__APP__/Authentication/index';
+					}
+				}
+			})
+
+		}else{
+			// alert('请输入正确的姓名')
+			$.toast("请输入正确的姓名","cancel");
+		}
+
+	}
+</script>

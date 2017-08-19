@@ -1,0 +1,290 @@
+
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Mydata/css/index.css">
+
+
+	<div class="row topBox">
+		<div class="container">
+			<a id="avatarUpload" class="myAvatar">
+				<if condition="$info.head_portrait neq null">
+					<img name="head_portrait" src="{$info.head_portrait}" id="img">
+					<input type="file" name="head_portrait" id="fileupload"/>
+					<else/><!--  src="/Application/Wechat/View/Index/img/banner1.png"  -->
+					<input type="file" name="head_portrait" id="fileupload"/>
+					<img name="head_portrait" src="/Application/Wechat/View/Mydata/img/未标题-1.png" id="img">
+				</if>
+			</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="weui-cells">
+		  <a class="weui-cell weui-cell_access" href="/Wechat/Mydata/nickname">
+		    <div class="weui-cell__bd">
+		      <p>昵称</p>
+		    </div>
+		    <div class="weui-cell__ft" id="nameUser">
+				<if condition="($info.nickname neq null)">
+					{$info.nickname}
+					<else/>
+					昵称
+				</if>
+		    </div>
+		  </a>
+		  <a class="weui-cell weui-cell_access" href="__APP__/Gender/index/url/1">
+		    <div class="weui-cell__bd">
+		      <p>性别</p>
+		    </div>
+		    <div class="weui-cell__ft" id="sexUser" value="$info.sex">
+
+		    </div>
+
+		  </a>
+		  <a class="weui-cell weui-cell_access" style="display:none;">
+		    <div class="weui-cell__bd">
+		      <p>年龄</p>
+		    </div>
+		    <div class="weui-cell__ft">
+		    	未认证
+		    </div>
+		  </a>
+		  <a class="weui-cell weui-cell_access" href="/Wechat/Mydata/interest">
+		    <div class="weui-cell__bd">
+		      <p>兴趣</p>
+		    </div>
+		    <div class="weui-cell__ft" id="interUser">
+		    {$info.iid}
+		    </div>
+		  </a>
+		  <a class="weui-cell weui-cell_access" href="/Wechat/Mydata/signature">
+		    <div class="weui-cell__bd">
+		      <p>签名</p>
+		    </div>
+		    <div class="weui-cell__ft" id="signUser">
+				<if condition="$info.signature neq null">
+					{$info.signature}
+					<else/>
+				</if>
+		    </div>
+		  </a>
+		  <a class="weui-cell weui-cell_access" href="javascript:;">
+		    <div class="weui-cell__bd">
+		      <p>职业</p>
+		    </div>
+		    <div class="weui-cell__ft" id="s">
+		    	<input type="text" id='picker' value="{$info.prof}" />
+		    </div>
+		  </a>
+		  <a class="weui-cell weui-cell_access" href="__APP__/Mydata/audio">
+		    <div class="weui-cell__bd">
+		      <p>音频、视频</p>
+		    </div>
+		    <div class="weui-cell__ft">
+		    	<if condition="$info.video_path eq null || $info.audio_path eq null">
+					未完善
+					<else/>
+					已上传
+				</if>
+		    </div>
+		  </a>
+		</div>
+	</div>
+
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-sm-12 col-xs-12">
+			<a href="javascript:;" class="weui-btn weui-btn_primary">保存</a>
+		</div>
+	</div>
+
+<include file="Layout/footer" />
+
+<script>
+
+	if('{$info.sex}'=='1'){
+		$('#sexUser').html('男')
+	}else{
+		$('#sexUser').html('女')
+	}
+</script>
+<script type="text/javascript">
+
+	$(function(){
+		if(sessionStorage.getItem('username')){
+			$('#nameUser').html(sessionStorage.getItem('username'));
+		}
+		if(sessionStorage.getItem('interestName')){
+			$('#interUser').html(sessionStorage.getItem('interestName'));
+		}
+		if(sessionStorage.getItem('signature')){
+			$('#signUser').html(sessionStorage.getItem('signature'));
+		}
+		if(sessionStorage.getItem('jobName')){
+			$('#picker').val(sessionStorage.getItem('jobName'));
+		}
+		if(sessionStorage.getItem('sex')==0){
+			$('#sexUser').html('女');
+		}else if(sessionStorage.getItem('sex')==1){
+			$('#sexUser').html('男');
+		}
+
+	  $(".weui-btn_primary").click(function(){
+	  	$(this).css("text-decoration","none");
+	    $(this).css("background-color","#fd908f");
+	    $(this).css("color","#ffffff");
+		  //alert($('#interUser').html())
+
+		  if($('#interUser').html().replace(/\s/g, "")==''){
+			  // alert('选择兴趣')
+			  $.toast("请选择兴趣", "text");
+			  return false
+		  }
+		  if($('#signUser').html().replace(/\s/g, "")===''){
+			  // alert('签名不能为空')
+			  $.toast("签名不能为空", "cancel");
+			  return false
+		  }
+		  var datas=new FormData();
+
+
+
+			//alert($('#picker').val())
+		  if($('#picker').val()=='请选择'){
+		  	// alert('请选择职业')
+		  	$.toast("请选择职业", "text");
+		  }else{
+
+			 // datas.append('head_portrait',$('#fileupload')[0].files[0])
+		  	datas.append('nickname',$('#nameUser').html().replace(/\s/g, ""));//昵称
+		  	datas.append('sex',$('#sexUser').html());//性别
+		  	datas.append('signature',$('#signUser').html().replace(/\s/g, ""));//签名
+			  if(sessionStorage.getItem('interest')){
+				  datas.append('iid',sessionStorage.getItem('interest'));//所选兴趣id
+			  }else{
+				  datas.append('iid','{$info.id}')
+			  }
+
+			datas.append('pid',$('#picker').val());//职业
+		  	$.ajax({
+		  		url:'__APP__/Mydata/saveInfo',
+				data:datas,
+				type:'post',
+				processData:false,//提示JQ库不处理发送的数据
+				contentType:false,//提示JQ库不设置Content-Type请求头
+				dataType:'json',
+				success:function(re){
+						sessionStorage.clear()
+					window.location.href='__APP__/Index/index'
+				}
+			})
+		  }
+
+
+
+	  })
+	})
+
+	$(function(){
+
+
+			$("#picker").picker({
+
+				title: "请选择您的职业",
+				cols: [
+					{
+						textAlign: 'center',
+						values: [{$jobStr}]
+					}
+				]
+			});
+			$("#picker").click(function(){
+				var aa=$(".picker-button");
+				aa.click(function(){
+					var jobname=$('#picker').val()
+					sessionStorage.setItem('jobName',jobname);
+				})
+			})
+	})
+
+
+	//年龄选择
+	
+</script>
+<script>
+	var fileInput=document.getElementById('fileupload');
+	var preview=document.getElementById('img')
+
+
+	fileInput.addEventListener('change', function () {
+
+		//sel(fileInput,preview)
+		var imgdata=new FormData();
+		imgdata.append('head_portrait',$('#fileupload')[0].files[0])
+		$.ajax({
+			url:'__APP__/Mydata/saveImg',
+			data:imgdata,
+			type:'post',
+			processData:false,//提示JQ库不处理发送的数据
+			contentType:false,//提示JQ库不设置Content-Type请求头
+			dataType:'json',
+			success:function(re){
+				if(re.info===true){
+					$(preview).attr('src',re.msg)
+				}else if(re.info==3){
+					// alert(re.msg+'小于5M')
+					$.toast(re.msg+'小于5M', "text");
+				}
+			}
+		})
+
+	});
+
+
+	var oldImg=$('#img').attr('src');//最初初始的图片
+	/*function sel(fileInput,preview){
+		// 清除背景图片:
+		//var urlname=preview.getAttribute('name');
+
+		var imgurl=oldImg;
+		/!*if(urlname=='head_portrait'){
+				if("{$info.head_portrait}"!=''){
+					imgurl="{$info.head_portrait}";
+				}else{
+				imgurl=oldImg;
+			}
+		}*!/
+		preview.style.backgroundImage = '';
+		// 检查文件是否选择:
+		/!*if (!fileInput.value) {
+		 info.innerHTML = '没有选择文件';
+		 return;
+		 }*!/
+		// 获取File引用:
+		var file = fileInput.files[0];
+		// 获取File信息:
+		/!*info.innerHTML = '文件: ' + file.name + '<br>' +
+		 '大小: ' + file.size + '<br>' +
+		 '修改: ' + file.lastModifiedDate;*!/
+		if (file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
+			alert('图片文件格式不正确!');
+			return;
+		}
+		// 读取文件:
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			if(file.size>5242880){
+				//preview.style.backgroundImage = 'url(' + imgurl + ')';
+				$(preview).attr('src',imgurl);//不符合要求则换为原来的图片
+				$(fileInput).val('');
+				alert('图片文件大小不正确!5M以内');
+			}else{
+				var data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
+				//preview.style.backgroundImage = 'url(' + data + ')';
+				$(preview).attr('src',data);
+				preview.style.display='block'
+			}
+
+		};
+		// 以DataURL的形式读取文件:
+		reader.readAsDataURL(file);
+	}*/
+</script>

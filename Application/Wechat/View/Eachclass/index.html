@@ -1,0 +1,102 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Eachclass/css/index.css">
+
+	<!-- 内容主体 start-->
+	<div class="row">
+		<div class="pageName">
+	        <div class="container">
+	          <p>{$name.cname}</p>
+	        </div>
+	    </div>
+    </div>
+    <!-- 容器 -->
+    <div class="row">
+		<div class="weui-tab">
+		  <div class="weui-navbar">
+		    <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+		      <span>全部</span>
+		    </a>
+		    <a class="weui-navbar__item" href="#tab2">
+		      <span>关注</span>
+		    </a>
+		  </div>
+		  <div class="weui-tab__bd">
+		    <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+		    	<!-- 全部宝宝列表循环 start-->
+				<foreach name="arr" item="vo">
+					<div class="col-sm-6 col-xs-6 babyBox">
+					  <a href="/Wechat/Babyinformation/index/id/{$vo.uid}/scid/{$vo.scid}/sid/{$vo.id}" class="babyList">
+						<div class="babyPic">
+						  <img src="{$vo.cover_path}">
+						</div>
+						  <if condition="$vo.nickname neq null">
+							  <p class="babyName">{$vo.nickname}</p>
+							  <else/>
+							  <p class="babyName">昵称</p>
+						  </if>
+
+						<p class="babyPrice">￥{$vo.bid_price}/{$vo.charge_mode}</p>
+					  </a>
+					</div>
+				</foreach>
+		    	<!-- 全部宝宝列表循环 end-->
+			    <!--<div class="col-sm-6 col-xs-6 babyBox">
+			      <div class="babyList">
+					<div class="babyPic">
+					  <img src="/Application/Wechat/View/Index/img/banner2.png">
+					</div>
+					<p class="babyName">宝宝名字</p>
+					<p class="babyPrice">￥40/小时</p>
+			      </div>
+			    </div>
+			    <div class="col-sm-6 col-xs-6 babyBox">
+			      <div class="babyList">
+					<div class="babyPic">
+					  <img src="/Application/Wechat/View/Index/img/banner2.png">
+					</div>
+					<p class="babyName">宝宝名字</p>
+					<p class="babyPrice">￥40/小时</p>
+			      </div>
+			    </div>
+			    <div class="col-sm-6 col-xs-6 babyBox">
+			      <div class="babyList">
+					<div class="babyPic">
+					  <img src="/Application/Wechat/View/Index/img/banner2.png">
+					</div>
+					<p class="babyName">宝宝名字</p>
+					<p class="babyPrice">￥40/小时</p>
+			      </div>
+			    </div>
+			    <div class="col-sm-6 col-xs-6 babyBox">
+			      <div class="babyList">
+					<div class="babyPic">
+					  <img src="/Application/Wechat/View/Index/img/banner2.png">
+					</div>
+					<p class="babyName">宝宝名字</p>
+					<p class="babyPrice">￥40/小时</p>
+			      </div>
+			    </div>-->
+		    </div>
+		    <div id="tab2" class="weui-tab__bd-item">
+		      	<!-- 关注宝宝列表循环 start-->
+				<foreach name="arrInfo" item="v">
+					<div class="col-sm-6 col-xs-6 babyBox">
+						<div class="babyList">
+							<div class="babyPic">
+								<img src="{$v.cover_path}">
+							</div>
+							<p class="babyName">{$v.nickname}</p>
+							<p class="babyPrice">￥{$v.bid_price}/{$v.charge_mode}</p>
+						</div>
+					</div>
+				</foreach>
+		    	<!-- 关注宝宝列表循环 end-->
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<!-- 内容主体 end-->
+
+
+<include file="Layout/footer" />

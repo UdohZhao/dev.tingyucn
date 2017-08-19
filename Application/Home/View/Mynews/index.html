@@ -1,0 +1,38 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Mynews/css/index.css">
+
+	<!-- 内容主体start -->
+	
+	<div class="container newsBox">
+		<div class="row">
+			<div class="col-md-12 newsTitle">
+				<p>系统消息</p>
+
+				<div class="newsBlist">
+					<div class="row">
+						<foreach name="newSys" item="sval">
+						<div class="col-md-6" style="margin-bottom: 10px;">
+							<a target="iframe4" href="__APP__/Mynews/newsDetails/id/{$sval.id}" class="newsSlist">
+								<p class="Ntitles">{$sval.title}<span>{$sval.ctime|date='Y-m-d H:i:s',###}</span></p>
+								<p class="Ncontent">{$sval.content}</p>
+							</a>
+						</div>
+						</foreach>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	<!-- 内容主体end -->
+
+<include file="./Application/Home/View/Layouts/footer.html" />
+<script type="text/javascript">
+$(function(){
+	var bodycolorH=$(".bodyColor").height();
+	var myselfH=bodycolorH-90-40-251;
+	$(".newsBox").css("min-height",myselfH+'px');
+})
+</script>

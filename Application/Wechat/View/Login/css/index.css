@@ -1,0 +1,19 @@
+.loginBtn a.loginPsw{
+	background-color: #fd908f;
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 16px;
+}
+label{
+	margin-top: 5px;
+}
+.loginBtn{
+	text-align:center;
+	margin-top: 30px;
+}
+.forgetPsw{
+	line-height: 35px;
+	font-size: 13px;
+	text-decoration: none;
+	color: #aaa;
+}

@@ -1,0 +1,120 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">首页顶部图片</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">添加图片信息</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="example">
+                    <form class="form-horizontal" id="frm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">上传图片: </label>
+                            <div class="input-group input-group-file">
+                                <input id="path" style="width:500px; margin-left:12px;" type="file"  onchange="javascript:imgread(this,this.name,this.nextSibling)" name="banner_path"  autocomplete="off"
+                                /><img style="height:100px;width:100px;display:none"  id="img" src=""/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">排序: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" name="sort"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="button" id="bt" class="btn btn-primary">确认添加</button>
+                                <button id="cbt" style="margin-left: 20px;" type="reset" class="btn btn-default btn-outline">取消添加</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    function imgread(obj,name,sobj){  //obj 当前选择器 当前选择器的name值 当前选择器的下一个兄弟节点
+        var datas=new FormData();
+        datas.append(name,$(obj)[0].files[0]);
+//判断是否更换
+        var pathname=$(sobj).attr("src");  //更换前的照片地址
+        if(pathname!=""){
+            datas.append('path',pathname);
+        }
+        $.ajax({
+            url:'imgread',//当前控制器的方法名
+            data:datas,
+            dataType:'json',
+            processData:false,//提示JQ库不处理发送的数据
+            contentType:false,//提示JQ库不设置Content-Type请求头
+            type:'post',
+            success:function (re) {
+                $(sobj).attr("src",re.msg);
+                $(sobj).show();
+            },
+            error:function () {
+                alert("系统崩溃")
+            }
+        });
+
+    }
+
+    $(function(){
+        $("#bt").click(function(){
+            var needpath=$("#img").attr("src");
+            if(needpath==""){
+                alert("请选择图片");
+            }else{
+                $.ajax({
+                    url:'save',
+                    data:$("#frm").serialize()+"&banner_path="+needpath,
+                    type:'post',
+                    dataType:'json',
+                    success:function(re){
+                        if(re.info===true){
+                            alert('信息上传成功');
+                            window.location.href='oper';
+                        }
+                    }
+                });
+            }
+        })
+
+        $("#cbt").click(function(){
+            var needpath=$("#img").attr("src");
+            if(needpath!=""){
+                $.ajax({
+                    url:'csave',
+                    data:"imgpath="+needpath,
+                    type:'post',
+                    dataType:'json',
+                    success:function(re){
+                        if(re.info===true){
+                            alert("取消成功");
+                            $("#img").attr("src","");
+                            $("#img").hide();
+                        }
+                    }
+                });
+            }
+        })
+    })
+</script>
+
+<!--<script type="text/javascript" src="/Application/Admin/View/Layouts/assets/readimg.js"></script>-->

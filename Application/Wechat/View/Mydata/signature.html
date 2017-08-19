@@ -1,0 +1,63 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Feedback/css/index.css">
+
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>签名</p>
+          </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="weui-cells weui-cells_form" style="margin-top: 0;">
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <textarea id="area" class="weui-textarea"  placeholder="请在这儿填写你的签名" rows="3"></textarea>
+		      <div class="weui-textarea-counter"><span id="text-count">0</span>/20</div>
+		    </div>
+		  </div>
+		</div>
+		<div class="col-sm-12 col-xs-12 Sbutton">
+			<a href="javascript:;" id="bt" class="weui-btn weui-btn_primary">确定</a>
+		</div>
+	</div>
+
+<include file="Layout/footer" />
+<script type="text/javascript">
+
+$(function(){
+
+	if(sessionStorage.getItem('signature')){
+		$('#area').val(sessionStorage.getItem('signature'))
+	}else{
+		$('#area').val('{$info.signature}')
+	}
+  $(".weui-btn_primary").click(function(){
+  	$(this).css("text-decoration","none");
+    $(this).css("background-color","#fd908f");
+    $(this).css("color","#ffffff");
+
+
+	  var name=$('#area').val();
+	  if(name==''){
+		  // alert('不能为空')
+		  $.toast("不能为空", "cancel");
+	  }else{
+	  	sessionStorage.setItem('signature',name);
+		  window.location.href='__APP__/Mydata/index';
+	  }
+  })
+})
+/*字数限制*/  
+    $("#area").on("input propertychange", function() {  
+        var $this = $(this),  
+            _val = $this.val(),  
+            count = "";  
+        if (_val.length > 20) {  
+            $this.val(_val.substring(0, 20));  
+        }  
+        count =$this.val().length;  
+        $("#text-count").html(count);  
+    });
+</script>

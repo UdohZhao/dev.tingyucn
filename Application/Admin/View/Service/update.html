@@ -1,0 +1,165 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">服务管理</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">添加服务类别</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="example">
+                    <form class="form-horizontal" id="frm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">服务名称: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" value="{$info.cname}" name="cname"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">数量单位: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" name="charge_mode" value="{$info.charge_mode}"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">排序: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" value="{$info.sort}" name="sort"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">服务类型: </label>
+                            <div class="col-sm-9">
+                                <input  type="radio"  name="type" value="0"
+                                />线上游戏&nbsp;&nbsp;
+                                <input  type="radio"  name="type" value="1"
+                                />线上娱乐&nbsp;&nbsp;
+                                <input  type="radio"  name="type" value="2"
+                                />线下娱乐&nbsp;&nbsp;
+                            </div>
+                            <script>
+                                var tobj=document.getElementsByName('type');
+                                for(var i=0;i<tobj.length;i++){
+                                    if('{$info.type}'==i){
+                                        tobj[i].setAttribute("checked",true);
+                                    }
+                                }
+                            </script>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">服务图标: </label>
+                            <div class="input-group input-group-file">
+                                <input id="path" style="width:500px; margin-left:12px;" type="file" name="icon_path"  autocomplete="off"
+                                /><img style="height:100px;width:100px;"  id="img" src="{$info.icon_path}"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="button" id="bt" class="btn btn-primary">确认修改</button>
+                                <button id="cbt" style="margin-left: 20px;" type="reset" class="btn btn-default btn-outline">取消修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    $(function(){
+
+        $("#path").change(function(){
+
+            var datas=new FormData();
+            datas.append("icon_path",$("#path")[0].files[0]);
+
+            var imgid='{$info.id}';//修改的id值
+            var pathname=$("#img").attr("src");  //更换前的照片地址
+
+            datas.append('icon_path',pathname);  //对比原图后再作替换删图处理
+            datas.append('id',imgid);
+
+            $.ajax({
+                url:'__APP__/Service/imgread',
+                data:datas,
+                dataType:'json',
+                processData:false,//提示JQ库不处理发送的数据
+                contentType:false,//提示JQ库不设置Content-Type请求头
+                type:'post',
+                success:function (re) {
+                        $("#img").attr("src",re.msg);
+                        $("#img").show();
+                },
+                error:function () {
+                    alert("系统崩溃")
+                }
+            });
+        })
+        $("#bt").click(function(){
+            var id='{$info.id}'
+            var needpath=$("#img").attr("src");
+            var pathname=$("#path").val();
+
+            var url='{$url}';//上个页面的URL地址
+            if(needpath==""){
+                alert("请选择图片");
+            }else{
+                $.ajax({
+                    url:'__APP__/Service/usave',
+                    data:$("#frm").serialize()+"&icon_path="+needpath+"&pathname="+pathname+"&id="+id,
+                    type:'post',
+                    dataType:'json',
+                    success:function(re){
+                        if(re.info===true){
+                            alert('信息上传成功');
+                            window.location.href=url;
+                        }
+                    }
+                });
+            }
+        })
+
+        $("#cbt").click(function(){
+
+            var id='{$info.id}';
+            var pathname=$("#path").val();
+            if(pathname!=""){
+                var needpath=$("#img").attr("src");
+            }else{
+                var needpath='';
+            }
+
+            if(needpath!=""){
+                $.ajax({
+                    url:'__APP__/Service/csave',
+                    data:"icoimg="+needpath+"&id="+id,
+                    type:'post',
+                    dataType:'json',
+                    success:function(re){
+                        if(re.info===true){
+                            alert("取消成功");
+                            $("#img").attr("src",re.img);
+                        }
+                    }
+                });
+            }
+        })
+    })
+</script>

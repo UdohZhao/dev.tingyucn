@@ -1,0 +1,53 @@
+.weui-navbar__item.weui-bar__item--on{
+	background-color: #ededed;
+	color: #fd908f;
+	text-decoration: none;
+}
+.weui-navbar__item{
+	color: #aaaaaa;
+	background-color: #ededed;
+	border: none;
+	font-size: 16px;
+	padding-bottom: 0;
+}
+.weui-navbar__item.weui-bar__item--on span{
+	padding: 10px 20px;
+	border-bottom: 2px solid #fd908f;
+}
+.weui-navbar__item:after,.weui-navbar:after{
+	border: none;
+}
+.weui-navbar+.weui-tab__bd{
+	padding-top: 45px;
+	padding-bottom: 20px;
+}
+
+
+/*tab1*/
+.babyList{
+	background-color: #ffffff;
+	width: 100%;
+	float: left;
+	display: block;
+}
+.babyList .babyPic{
+	width: 100%;
+	height: 140px;
+}
+.babyList .babyPic img{
+	width: 100%;
+	height: 100%;
+}
+.babyList p{
+	margin: 0;
+	line-height: 25px;
+	font-size: 14px;
+	margin-left: 10px;
+	color: #000;
+}
+.babyList .babyPrice{
+	color: #fd908f;
+}
+.babyBox{
+	margin-bottom: 10px;
+}

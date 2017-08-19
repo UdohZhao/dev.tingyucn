@@ -1,0 +1,522 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Babyinformation/css/index.css">
+
+	<!-- 内容主体start -->
+
+	<div class="row babyMsg" id="bakimg">
+		<a class="video_box">
+			<div class="sanjiao"></div>
+		</a>
+		<script>
+			var bobj=document.getElementById('bakimg');
+			var url='{$firstInfo.figure_path}';
+			bobj.style.backgroundImage='url('+url+')';
+		</script>
+		<div class="container">
+			<div class="babyDetails">
+				<if condition="$firstInfo.nickname neq null">
+					<p class="babyName">{$firstInfo.nickname}</p>
+					<else/>
+					<p class="babyName">{$firstInfo.real_name}</p>
+				</if>
+
+				<!-- 性别女start -->
+				<if condition='$firstInfo.sex eq 1'>
+				<a class="agenan">
+	              <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+	                  <use xlink:href="#icon-xingbienan"></use>
+	              </svg>
+	              <span style="display: none">22</span>
+					<span>{$firstInfo.age}</span>
+	              <input class="idNumber" id="Numid" value="{$firstInfo.id_card}" type="hidden" />
+	            </a>
+	            <else/>
+					<a class="agenv">
+		              <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+		                  <use xlink:href="#icon-xingbienv"></use>
+		              </svg>
+		              <span id="age" style="display: none">{$firstInfo.id_card}</span>
+						<span>{$firstInfo.age}</span>
+	            	</a>
+	            <input class="idNumber" id="Numid" value="{$firstInfo.id_card}" type="hidden" />
+	            </if>
+
+	            <!-- <a class="agenv">
+	              <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+	                  <use xlink:href="#icon-xingbienv"></use>
+	              </svg>
+	              <span id="age">{$firstInfo.id_card}</span>
+	            </a>
+	            <input class="idNumber" id="Numid" value="{$firstInfo.id_card}" type="hidden" /> -->
+	            <!-- 性别女end -->
+	            <!-- 性别男start -->
+	            <!-- <a class="agenan">
+	              <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+	                  <use xlink:href="#icon-xingbienan"></use>
+	              </svg>
+	              <span>22</span>
+	            </a> -->
+	            <!-- 性别男end -->
+	            <a class="agenan">
+	              <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+	                  <use xlink:href="#icon-1"></use>
+	              </svg>
+	              <span>认证</span>
+	            </a>
+			</div>
+
+			<if condition="$Think.session.userinfo.uid neq null">
+				<div class="attention" id='hasBlack' style="display: none">
+					<a class="attentionBox">
+						<svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+							<use xlink:href="#icon-lahei2"></use>
+						</svg>
+						<span>已拉黑</span>
+					</a>
+				</div>
+
+
+				<div class="attention" id='hasReview' style="display: none">
+					<a class="attentionBox">
+						<svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+							<use xlink:href="#icon-iconzhenghe69"></use>
+						</svg>
+						<span>已关注</span>
+					</a>
+				</div>
+
+				<div class="attention" id="reviewStatus" style="display: none">
+					<a class="attentionBox">
+						<svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+							<use xlink:href="#icon-iconzhenghe69"></use>
+						</svg>
+						<span id="reviews">关注</span>
+					</a>
+				</div>
+				<div class="attention"  id="blacklist" style="display: none">
+					<a class="attentionBox">
+						<svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+							<use xlink:href="#icon-lahei2"></use>
+						</svg>
+						<span id="blackStatus">拉黑</span>
+					</a>
+				</div>
+
+				<div class="attention"  id="reviewOut" style="display: none">
+				<a class="attentionBox">
+					<svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+						<use xlink:href="#icon-iconzhenghe69"></use>
+					</svg>
+					<span id="creview">取消关注</span>
+				</a>
+			</div>
+			</if>
+		</div>
+	</div>
+	<div class="row">
+		<div class="weui-cells" style="margin-top: 0;">
+		  <div class="weui-cell Taservise">
+		    <div class="weui-cell__bd">
+		      <p class="babyService">Ta的服务</p>
+		    </div>
+		  </div>
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+				<foreach name="twoInfo" item="val">
+					<div class="col-sm-4 col-xs-4 serviceList">
+						<a>{$val.cname}</a>
+					</div>
+				</foreach>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="weui-cells">
+		  <div class="weui-cell Taservise">
+		    <div class="weui-cell__bd">
+		      <p class="babyService">个人资料</p>
+		    </div>
+		  </div>
+		  <div class="weui-cell serviceOne">
+		    <div class="weui-cell__hd">
+		      <p>兴趣</p>
+		    </div>
+		    <div class="weui-cell__bd">
+		      <p>{$firstInfo.iid}</p>
+		    </div>
+		  </div>
+		  <div class="weui-cell serviceOne">
+		    <div class="weui-cell__hd">
+		      <p>职业</p>
+		    </div>
+		    <div class="weui-cell__bd">
+		      <p>{$firstInfo.pname}</p>
+		    </div>
+		  </div>
+		  <div class="weui-cell serviceOne">
+		    <div class="weui-cell__hd">
+		      <p>签名</p>
+		    </div>
+		    <div class="weui-cell__bd">
+		      <p>{$firstInfo.signature}</p>
+		    </div>
+		  </div>
+		  <div class="weui-cell serviceOne">
+		    <div class="weui-cell__hd">
+		      <p>语音</p>
+		    </div>
+		    <div class="weui-cell__bd audio_information">
+		    <a href="{$firstInfo.audio_path}">
+		    	<div class="audio_box" style="width: 150px;">
+            <div class="audio_img">
+              <img class="stop_img" src="/Application/Wechat/View/Babyinformation/img/index.png">
+              <img class="move_img" src="/Application/Wechat/View/Babyinformation/img/index.gif">
+              <i>点击播放</i>
+            </div>
+          </div>
+		    </a>
+		      	<!-- <video preload="auto" hidden="true" id='baby_audio' controls src="/Uploads/2017-07-07/595f996727b73.m4a">
+				</video> -->
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="weui-cells">
+		  <div class="weui-cell">
+	        <div class="weui-cell__bd serviseNum">
+	          <!-- <p class="babyService">评价</p> -->
+	          <span class="name1">评价</span>
+		      	<!-- <span class="numbers"><b>3.5</b>分</span> -->
+		      	<div class="starBox">
+
+					<!-- <svg class="icon categorie-icon" aria-hidden="true">
+	                    <use xlink:href="#icon-wuxing"></use>
+	                </svg>
+					<div class="starImg">
+						<svg class="icon categorie-icon" aria-hidden="true">
+		                    <use xlink:href="#icon-wuxing1"></use>
+		                </svg>
+					</div> -->
+				</div>
+	        </div>
+		  </div>
+			<foreach name="evaluate" item="eval">
+				<div class="weui-cell evaluation">
+					<div class="weui-cell__hd">
+						<if condition='$eval.head_portrait eq null'>
+          					<img src="/Application/Wechat/View/Mydata/img/未标题-1.png">
+				        <else/>
+				            <img src="{$eval.head_portrait}">
+				        </if>
+						<!-- <img src="{$eval.head_portrait}"> -->
+					</div>
+					<div class="weui-cell__bd">
+						<div class="peopleName">
+							<span style="font-size: 12px;" class="name1"><if condition='$eval.nickname eq null'>
+									{$eval.real_name}
+								<else/>
+								{$eval.nickname}
+							</if>
+
+							</span>
+							<!-- <span class="numbers"><b>4.0</b>分</span> -->
+							<div class="starBox">
+								<if condition="$eval.grade eq 0">
+									<span>好评</span>
+									<elseif condition="$eval.grade eq 1"/>
+									<span>中评</span>
+									<elseif condition="$eval.grade eq 2"/>
+									<span>差评</span>
+								</if>
+
+								<!-- <svg class="icon categorie-icon" aria-hidden="true">
+                                    <use xlink:href="#icon-wuxing"></use>
+                                </svg>
+                                <div class="starImg">
+                                    <svg class="icon categorie-icon" aria-hidden="true">
+                                        <use xlink:href="#icon-wuxing1"></use>
+                                    </svg>
+                                </div> -->
+							</div>
+						</div>
+						<p class="peopleCon">{$eval.estimate}</p>
+						<p class="peopleTime">{$eval.ctime|date='Y-m-d H:i:s',###}</p>
+					</div>
+				</div>
+			</foreach>
+		  <div class="weui-cell allEvaluat">
+		  	<a href="__APP__/Babyinformation/allEvaluation/sid/{$sid}">全部评价</a>
+		  </div>
+		</div>
+	</div>
+
+	<div class="row" style="margin-bottom: 30px;">
+		<div class="col-sm-12 col-xs-12 placeAnorder">
+				<a class="weui-btn weui-btn_primary" id="cblack">该用户已被拉黑</a>
+				<a id="shop" href="/Wechat/Placeanorder/index/id/{$firstInfo.uid}/scid/{$scid}" class="weui-btn weui-btn_primary">下单</a>
+		</div>
+	</div>
+	<!-- 内容主体end -->
+<div class="col-sm-12 col-xs-12 video_play">
+	<p class="close_vedio">关闭</p>
+	<p class="noUpload"></p>
+	<video controls src="{$firstInfo.video_path}"></video>
+</div>
+<include file="Layout/footer" />
+<script type="text/javascript" src="/Application/Wechat/View/Babyinformation/js/index.js"></script>
+<script type="text/javascript" src="http://mediaplayer.yahoo.com/js">
+</script>
+<script type="text/javascript">
+	sessionStorage.clear();
+	// $(function(){
+	// 	//音频播放
+	// 	if($("#baby_audio").attr("src")==''){
+	// 		$(".audio_box").css("display","none");
+	// 		$(".audio_information").html("<p>未上传</p>");
+	// 	}else{
+	// 	  $(".audio_box").css("display","block");
+	//       var Media = document.getElementById("baby_audio");
+	//         var miao=Media.duration;
+	//         if(isNaN(miao)){
+	//             Media.addEventListener("canplay", function(){
+	//                 var miao=Media.duration;
+	//                 var miaoZ=Math.round(miao);
+	//                 $(".audio_img i span").html(miaoZ);
+	//                 $(".audio_box").click(function(){
+	//                   Media.play();
+	//                   $(".stop_img").css("display","none");
+	//                   setTimeout(function(){
+	//                     $(".stop_img").css("display","block");
+	//                   },miaoZ*1000);
+	//                 })
+	//             });
+	//         }else{
+	//             var miao=Media.duration;
+	//             var miaoZ=Math.round(miao);
+	//             $(".audio_img i span").html(miaoZ);
+	//             $(".audio_box").click(function(){
+	//               Media.play();
+	//               $(".stop_img").css("display","none");
+	//               setTimeout(function(){
+	//                 $(".stop_img").css("display","block");
+	//               },miaoZ*1000);
+	//             })
+
+	//         }
+	//     }
+
+	// })
+	//点击下单判断用户是否登陆
+	$('#shop').click(function(){
+		if(!'{$Think.session.userinfo.uid}'){
+			//alert('请先登陆再下单');
+			$(".tanchu").css("display","block");
+			$("#myModal").css("display","block");
+			$('#shop').attr("href","");
+			$("#forgetthe_psw").click(function(){
+				$("#myModal").css("display","none");
+				$("#forgetPsw").css("display","block");
+			});
+			$(".shanchu").click(function(){
+				$(".tanchu").css("display","none");
+				$("#myModal").css("display","none");
+				$("#forgetPsw").css("display","none");
+			})
+			 return false;
+		}else{
+
+		}
+	})
+	$('#cblack').click(function(){
+		if(!'{$Think.session.userinfo.uid}'){
+			//alert('请先登陆再作操作');
+			$.toast("请先登陆再作操作");
+			return false;
+		}
+	})
+
+	if('{$firstInfo.blackStatus}'==1){
+		$('#cblack').show();
+		$('#shop').hide();
+
+	}else if('{$firstInfo.reviewsStatus}'==1){
+		$('#shop').show();
+		$('#cblack').hide();
+		$('#hasReview').show();
+		$('#reviewOut').show();
+		$('#hasReview').children('.attentionBox').addClass("attentionBox_active");
+		$('#hasReview').children('.attentionBox').css("border","#fd908f");
+	}else{
+		$('#reviewStatus').show();
+		$('#cblack').hide();
+		$('#blacklist').show();
+		$('#shop').show();
+	}
+$(function(){
+	$('.attentionBox').click(function(){
+		// $(this).children("svg").css("color","#fd908f");
+		// $(this).children("span").css("color","#ffffff");
+		$(this).css("text-decoration","none");
+	})
+	$(".weui-btn_primary").click(function(){
+	  	$(this).css("text-decoration","none");
+	    $(this).css("background-color","#fd908f");
+	    $(this).css("color","#ffffff");
+	  });
+	$('#cblack').click(function(){
+		$.confirm({
+		  title: '',
+		  text: '取消拉黑?',
+		  onOK: function () {
+		    //点击确认
+		    var bbId='{$firstInfo.uid}';//被拉黑的签约用户id
+			//alert(bbId)
+			$.ajax({
+				url:'__APP__/Babyinformation/cblack',
+				data:'bbId='+bbId,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					$('#cblack').hide();
+					$('#shop').show();
+					/*$('#blackStatus').html('拉黑')
+					$('#reviewStatus').show()*/
+					$('#blacklist').show()
+					$('#reviewOut').hide()
+
+					$('#reviewStatus').show()
+					$('#blackStatus').html('拉黑')
+					$('#reviews').html('关注')
+				}
+			})
+		  },
+		  onCancel: function () {
+		  }
+		});
+		// if(confirm('取消拉黑')){
+		// 	var bbId='{$firstInfo.uid}';//被拉黑的签约用户id
+		// 	//alert(bbId)
+		// 	$.ajax({
+		// 		url:'__APP__/Babyinformation/cblack',
+		// 		data:'bbId='+bbId,
+		// 		dataType:'json',
+		// 		type:'post',
+		// 		success:function(re){
+		// 			$('#cblack').hide();
+		// 			$('#shop').show();
+		// 			/*$('#blackStatus').html('拉黑')
+		// 			$('#reviewStatus').show()*/
+		// 			$('#blacklist').show()
+		// 			$('#reviewOut').hide()
+
+		// 			$('#reviewStatus').show()
+		// 			$('#blackStatus').html('拉黑')
+		// 			$('#reviews').html('关注')
+		// 		}
+		// 	})
+		// }
+	});
+	//取消关注
+	$('#reviewOut').click(function(){
+			var bbId='{$firstInfo.uid}';//被拉黑的签约用户id
+			//alert(bbId)
+			$.ajax({
+				url:'__APP__/Babyinformation/creview',
+				data:'bbId='+bbId,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					$('#blacklist').show()
+					$('#reviewOut').hide()
+					$('#hasReview').hide()
+					$('#reviewStatus').show()
+					$('#reviews').html('关注')
+					$('#reviewStatus').children('.attentionBox').removeClass("attentionBox_active")
+					$('#reviewStatus').children('.attentionBox').css("border","1px solid #fff")
+				}
+			})
+	});
+})
+</script>
+ <script type="text/javascript">
+	var dateStrA = $(".idNumber").val();
+    var year = dateStrA.substring(6,10);
+    var month = Number(dateStrA.substring(10,12));
+    var date = Number(dateStrA.substring(12,14));
+    var oDate = new Date(); //实例一个时间对象；
+    var nowyear=oDate.getFullYear();   //获取系统的年；
+    var nowmonth=oDate.getMonth()+1;   //获取系统月份，由于月份是从0开始计算，所以要加1
+    var nowdate=oDate.getDate(); // 获取系统日，
+    if(nowyear == year){
+        $("#age").html("0");//同年 则为0岁
+    }else{
+        var ageDiff = nowyear - year ; //年之差
+        if(ageDiff > 0){
+            if(nowmonth == month){
+                var dayDiff = nowdate - date;//日之差
+                if(dayDiff < 0){
+                    var returnAge = ageDiff - 1;
+                    $("#age").html(returnAge);
+                }else{
+                    var returnAge = ageDiff ;
+                    $("#age").html(returnAge);
+                }
+            }else{
+                var monthDiff = nowmonth - month;//月之差
+                if(monthDiff < 0){
+                    var returnAge = ageDiff - 1;
+                    $("#age").html(returnAge);
+                }else{
+                    var returnAge = ageDiff ;
+                    $("#age").html(returnAge);
+                }
+            }
+        }else{
+            $("#age").html("");//返回-1 表示出生日期输入错误 晚于今天
+        }
+    }
+</script>
+
+<script>
+	$(function(){
+
+		$('#blacklist').click(function(){
+			var bbId='{$firstInfo.uid}';//宝宝的id值
+			$.ajax({
+				url:'__APP__/Babyinformation/blackInto',
+				data:'bbUid='+bbId,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					$('#blackStatus').html('已拉黑')
+					$('#reviewStatus').hide()
+					$('#shop').hide()
+					$('#cblack').show();
+				}
+			})
+		})
+
+		$('#reviewStatus').click(function(){
+			var bbId='{$firstInfo.uid}';//宝宝的id值
+			$.ajax({
+				url:'__APP__/Babyinformation/reviewInto',
+				data:'bbUid='+bbId,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					$('#blacklist').hide()
+					$('#reviews').html('已关注')
+					$('#shop').show()
+					$('#reviewOut').show();
+					$('#cblack').hide();
+					$('#reviewStatus').children('.attentionBox').addClass("attentionBox_active");
+					$('#reviewStatus').children('.attentionBox').css("border","#fd908f");
+
+				}
+			})
+		})
+	})
+</script>

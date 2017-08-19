@@ -1,0 +1,179 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Name/css/index.css">
+<style type="text/css">
+	.error{
+		color: red;
+		font-size: 12px;
+	}
+</style>
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>身份证</p>
+          </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="weui-cells weui-cells_form">
+		  <div class="weui-cell">
+		    <div class="weui-cell__hd"><label class="weui-label">证件号</label></div>
+		    <div class="weui-cell__bd">
+		      <input class="weui-input" maxlength="18" type="text" id="card" placeholder="请输入身份证件号">
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12 col-xs-12">
+			<p class="error"></p>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 50%;">
+		<div class="col-sm-12 col-xs-12">
+			<a href="javascript:;" class="weui-btn weui-btn_primary">保存</a>
+		</div>
+	</div>
+
+<include file="Layout/footer" />
+<script type="text/javascript">
+$(function(){
+
+	if('{$info.id_card}'!=''){
+		$('#card').val('{$info.id_card}');
+	}
+
+  $(".weui-btn_primary").click(function(){
+  	$(this).css("text-decoration","none");
+    $(this).css("background-color","#fd908f");
+    $(this).css("color","#ffffff");
+	  // 身份证验证
+      var tex=$('#card');
+	  var cardinfo=$('#card').val();
+	  num = cardinfo.toUpperCase();  
+            //身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X。    
+            if (!(/(^\d{17}([0-9]|X)$)/.test(num))){  
+                $(".error").html('输入的身份证号长度不对，或者号码不符合规定！\n身份证号码为18位，末位可以为数字或X。'); 
+                tex.value=''; 
+                // tex.focus(); 
+                $("#card").click(function(){
+                	$(".error").html("");
+                })
+                return false;  
+            }  
+            //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。  
+            //下面分别分析出生日期和校验位  
+            var len, re;  
+            len = num.length;
+            //当身份证为15位时的验证出生日期。 
+            if (len == 15){  
+                re = new RegExp(/^(\d{6})(\d{2})(\d{2})(\d{2})(\d{3})$/);  
+                var arrSplit = num.match(re);  
+                //检查生日日期是否正确  
+                var dtmBirth = new Date('19' + arrSplit[2] + '/' + arrSplit[3] + '/' + arrSplit[4]);  
+                var bGoodDay;  
+                bGoodDay = (dtmBirth.getYear() == Number(arrSplit[2])) && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3])) && (dtmBirth.getDate() == Number(arrSplit[4]));  
+                if (!bGoodDay){  
+                    $(".error").html('输入的15位身份证号里出生日期不对！');    
+                    tex.value='';  
+	                $("#card").click(function(){
+	                	$(".error").html("");
+	                })
+                    // tex.focus(); 
+                    return false;  
+                }else{  
+                //将15位身份证转成18位  
+                //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。  
+                    //var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);  
+                    //var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');  
+                    //var nTemp = 0, i;    
+                    //num = num.substr(0, 6) + '19' + num.substr(6, num.length - 6);  
+                    //for(i = 0; i < 17; i ++){  
+                    //  nTemp += num.substr(i, 1) * arrInt[i];  
+                    //}  
+                    //num += arrCh[nTemp % 11];  
+                    //alert("该15位身份证对应的18位是：" + num); 
+                    //return num;    
+                }    
+            }  
+            //当身份证号为18位时，校验出生日期和校验位。 
+            if (len == 18){  
+                var year = num.substr(6,4); 
+                //alert("year是：" + year); 
+                var nowDate = new Date(); 
+                var nowYear = nowDate.getYear(); 
+                if((nowYear - year) > 112){ 
+                    $(".error").html("依照输入的身份证出生日期截止到当前，本人已经超过112岁！"); 
+                    tex.value='';
+                    $("#card").click(function(){
+	                	$(".error").html("");
+	                }) 
+                    // tex.focus(); 
+                    return false; 
+                } 
+                re = new RegExp(/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)$/);  
+                var arrSplit = num.match(re);  
+                //检查生日日期是否正确  
+                var dtmBirth = new Date(arrSplit[2] + "/" + arrSplit[3] + "/" + arrSplit[4]);  
+                var bGoodDay;  
+                bGoodDay = (dtmBirth.getFullYear() == Number(arrSplit[2])) && ((dtmBirth.getMonth() + 1) == Number(arrSplit[3])) && (dtmBirth.getDate() == Number(arrSplit[4]));  
+                if (!bGoodDay){  
+                    //alert(dtmBirth.getYear());  
+                    //alert(arrSplit[2]);  
+                    $(".error").html('输入的18位身份证号里出生日期不对！');  
+                    tex.value='';
+                    $("#card").click(function(){
+	                	$(".error").html("");
+	                }) 
+                    // tex.focus(); 
+                    return false;  
+                }else{  
+                    //检验18位身份证的校验码是否正确。  
+                    //校验位按照ISO 7064:1983.MOD 11-2的规定生成，X可以认为是数字10。  
+                    var valnum;  
+                    var arrInt = new Array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);  
+                    var arrCh = new Array('1', '0', 'X', '9', '8', '7', '6', '5', '4', '3', '2');  
+                    var nTemp = 0, i;  
+                    for(i = 0; i < 17; i ++){  
+                        nTemp += num.substr(i, 1) * arrInt[i];  
+                    }  
+                    valnum = arrCh[nTemp % 11];  
+                    if (valnum != num.substr(17, 1)){  
+                        $(".error").html('18位身份证的最后一位校验码不正确！'); //应该为：' + valnum 
+                        tex.value='';
+	                    $("#card").click(function(){
+		                	$(".error").html("");
+		                }) 
+                        // tex.focus(); 
+                        return false;  
+                    }  
+                    //return num;  
+                }  
+            }  
+            //验证地区是否有效 
+            var aCity={11:"北京",12:"天津",13:"河北",14:"山西",15:"内蒙古",21:"辽宁",22:"吉林",23:"黑龙江 ",31:"上海",32:"江苏",33:"浙江",34:"安徽",35:"福建",36:"江西",37:"山东",41:"河南",42:"湖北 ",43:"湖南",44:"广东",45:"广西",46:"海南",50:"重庆",51:"四川",52:"贵州",53:"云南",54:"西藏 ",61:"陕西",62:"甘肃",63:"青海",64:"宁夏",65:"新疆",71:"台湾",81:"香港",82:"澳门",91:"国外 "} 
+            if(aCity[parseInt(num.substr(0,2))] == null){ 
+                $(".error").html("输入的身份证号前两位地区不对！"); 
+                tex.value='';
+                $("#card").click(function(){
+                	$(".error").html("");
+                }) 
+                // tex.focus(); 
+                return false; 
+            } 
+                  
+	  $.ajax({
+		  url:'__APP__/Idcard/save',
+		  data:'idcard='+cardinfo,
+		  dataType:'json',
+		  type:'post',
+		  success:function(re){
+			  if(re===true){
+				  window.location.href='__APP__/Authentication/index'
+			  }
+		  }
+	  })
+  })
+
+})
+</script>

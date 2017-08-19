@@ -1,0 +1,64 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">提现列表</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-bordered">
+                    <caption>提现列表</caption>
+                    <thead>
+                    <tr>
+                        <th>用户电话</th>
+                        <th>用户支付宝账号</th>
+                        <th>提现金额</th>
+                        <th>申请时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach  name="arr" item="v">
+                        <tr>
+                            <td>{$v.username}</td>
+                            <td>{$v.alipay}</td>
+                            <td>{$v.money}</td>
+                            <td>{$v.ctime|date='Y-m-d H:i:s',###}</td>
+                            <td><button onclick="javascript:dele(this.value)" value="{$v.id}">处理完成</button></td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                {$page}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    function dele(id){
+        $.ajax({
+            url:'__APP__/Getmoney/del',
+            data:'id='+id,
+            dataType:'json',
+            type:'post',
+            success:function(re){
+                if(re==true){
+                    alert("已处理");
+                    location.reload();
+                };
+            }
+        })
+    }
+</script>

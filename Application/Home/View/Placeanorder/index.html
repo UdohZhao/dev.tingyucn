@@ -1,0 +1,704 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Placeanorder/css/index.css">
+
+	<div class="container plaorderBox">
+		<div class="row">
+			<div class="col-md-12 plaorderTitle">
+				<p>下单信息</p>
+			</div>
+			<div class="col-md-12 plaorderList">
+				<div class="plababyMsg">
+					<div style="height: 30px;"></div>
+					<div class="plababyMsgL">
+						<img src="{$arr.head_portrait}">
+					</div>
+					<div class="plababyMsgR">
+						<p>{$arr.nickname}</p>
+						<if condition="$arr.sex eq 1">
+							<a class="nan">
+								<svg class="icon categorie-icon" aria-hidden="true">
+									<use xlink:href="#icon-xingbienan"></use>
+								</svg>
+								<span class="age" style="display: none" id="age">{$arr.id_card}</span>
+								<span>{$arr.age}</span>
+								<input class="idNumber" value="{$arr.id_card}" type="hidden" />
+							</a>
+							<else/>
+							<a class="nv">
+								<svg class="icon categorie-icon" aria-hidden="true">
+									<use xlink:href="#icon-xingbienv"></use>
+								</svg>
+								<span class="age" style="display: none" id="age">{$arr.id_card}</span>
+								<span>{$arr.age}</span>
+								<input class="idNumber" value="{$arr.id_card}" type="hidden" />
+							</a>
+						</if>
+						<!-- 认证 start-->
+						<a class="nan">
+			              <svg class="icon categorie-icon" aria-hidden="true">
+			                  <use xlink:href="#icon-1"></use>
+			              </svg>
+			              <span>已认证</span>
+						</a>
+						<!-- 认证 end-->
+						<input class="idNumber" id="Numid" value="身份证" type="hidden" />
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12 plaorderList">
+				<div class="PserviceChioce">
+					<span>选择服务：</span>
+					<!-- <div class="PserviceList"> -->
+					<foreach name="serviceInfo" item="v" key="k">
+						<a name="serName" value="{$v.scid}" avg="{$v.id}" onclick="javascript:sel(this.getAttribute('avg'))">{$v.cname}</a>
+					</foreach>
+					<!--<a class="actives">约聊天</a>
+					<a>王者荣耀</a>
+					<a>线上LOL</a>
+					<a>约吃饭</a>-->
+					<!-- </div> -->
+				</div>
+			</div>
+			<script>
+				var sobj=document.getElementsByName('serName');
+				for(var i=0;i<sobj.length;i++){
+					if('{$scname.id}'==sobj[i].getAttribute('value')){
+						sobj[i].className='actives';//追加样式
+					}
+				}
+			</script>
+			<div class="col-md-12 piatimeChioce plaorderList">
+				<p>服务时间：<input id="appDateTime" placeholder="选择时间" /></p>
+			</div>
+			<div class="col-md-12 piatimeChioce plaorderList"  style="display: none" id="blockAddr">
+				<p>服务地点：<input id="selAddr" placeholder="输入地点" /></p>
+			</div>
+			<div class="col-md-12 plaorderList">
+				<div class="PquantityChioce" id="unitContent">
+					<span>选择数量：</span>
+					<!-- <div class="PserviceList"> -->
+						<!-- <a class="actives">1小时</a>
+						<a>2小时</a>
+						<a>3小时</a>
+						<a>4小时</a> -->
+						<input href="" data-toggle="modal" data-target="#myNumber" class="myNumber" value="请选择数量" readonly="readonly">
+					<!-- </div> -->
+				</div>
+			</div>
+			<!-- <div class="col-md-12 plaorderRequest">
+				<p>您的要求：</p>
+				<div class="requestCon">
+					<textarea id="area" resize="none" placeholder="要求内容"></textarea>
+					<div class="weui-textarea-counter"><span id="text-count">0</span>/50</div>
+				</div>
+			</div> -->
+			<div class="col-md-12 plaorderList">
+				<p class="priceNum">单价：<span id="siglePrice">{$scprice.bid_price}元/{$scname.charge_mode}</span></p>
+			</div>
+			<div class="col-md-12 plaorderList">
+				<p class="priceCoupon">优惠券：
+					<a href="" data-toggle="modal" value="{$CouponId}" id="coupon" data-target="#myCoupon" class="couponNum">有{$num}张优惠券</a>
+				</p>
+			</div>
+			<div class="col-md-12 plaorderList">
+				<p class="priceNum">总价：<span  id="allMoney">50.0元</span></p>
+			</div>
+			<div class="col-md-12 plaorderList" style="text-align: center;">
+				<a href="#" data-toggle="modal" data-target="#myPlaceanorder" id="xiadan" class="plaBtn">下单</a>
+			</div>
+		</div>
+		<div class="mybalance">
+			<p>我的余额：<span>{$userInfo.balance}元</span></p>
+			<a href="__APP__/Recharge/index">去充值</a>
+		</div>
+	</div>
+
+		<div class="modal fade myplaorder" id="myPlaceanorder" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="row">
+		      		<div class="col-sm-12">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        	<span aria-hidden="true">&times;</span>
+				        </button>
+			        </div>
+		        </div>
+		        <div class="modal-title" id="myModalLabel">
+					<div class="mytitle">平台条款</div>
+					<div class="mycontent">
+						<p>1. 互相尊重，遵守互联网络道德，遵守中华人民共和国的各项有关法律法规。</p><p>2. 承担一切因您的行为而直接或间接导致的民事、行政或刑事法律责任。</p><p>3、不断更新注册资料，符合及时、详尽准确的要求。所有原始键入的资料将引用为注册资料。</p><p>4、如果用户提供的资料不准确，不真实，不合法有效，本公司保留结束用户使用各项服务的权利。用户同意，用户提供的真实准确的个人资料作为认定用户与帐号的关联性以及用户身份的唯一证据。用户在享用各项服务的同时，同意接受本公司提供的各类信息服务。</p>
+					</div>
+					<div class="myBtn">
+						<a class="cancel" data-dismiss="modal" aria-label="Close">取消</a>
+						<a href="#" data-dismiss="modal" aria-label="Close" id="agreeOrder" data-toggle="modal" data-target="#myagree" class="agree">同意</a>
+					</div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="modal fade myagree" id="myagree" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="row">
+		      		<div class="col-sm-12">
+				        <button type="button" class="close closeTow" data-dismiss="modal" aria-label="Close">
+				        	<span data-dismiss='modal' aria-label='Close' aria-hidden="true" id="needBack">&times;</span>
+				        </button>
+			        </div>
+		        </div>
+		        <div class="modal-title" id="myModalLabel">
+		        	<p class="title">下单成功</p>
+					<div class="row">
+						<div class="col-sm-12 col-md-12" style="text-align: center;">
+							<p>订单信息</p>
+						</div>
+						<div class="col-md-3 col-sm-3">
+							<p>选择的服务：</p>
+						</div>
+						<div class="col-md-9 col-sm-9">
+							<span id="orderSelName"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-3">
+							<p>选择的时间：</p>
+						</div>
+						<div class="col-md-9 col-sm-9">
+							<span id="orderSelTime"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-3">
+							<p>选择的数量：</p>
+						</div>
+						<div class="col-md-9 col-sm-9">
+							<span id="orderSelNum"></span>
+						</div>
+					</div>
+					<!-- <div class="row">
+						<div class="col-md-3 col-sm-3">
+							<p>您的要求：</p>
+						</div>
+						<div class="col-md-9 col-sm-9">
+							<p>这是您的要求</p>
+						</div>
+					</div> -->
+					<div class="row">
+						<div class="col-md-3 col-sm-3">
+							<p>单价：</p>
+						</div>
+						<div class="col-md-9 col-sm-9">
+							<p id="orderSelPrice"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-3">
+							<p>优惠金额：</p>
+						</div>
+						<div class="col-md-9 col-sm-9">
+							<p id="orderSelFree"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-3">
+							<p>需付金额：</p>
+						</div>
+						<div class="col-md-9 col-sm-9">
+							<p id="orderSelAll"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 col-sm-12">
+							<a class="paynow">等待对方确认订单</a>
+						</div>
+					</div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="modal fade myagree" id="myCoupon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="row">
+		      		<div class="col-sm-12">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        	<span aria-hidden="true">&times;</span>
+				        </button>
+			        </div>
+		        </div>
+		        <div class="modal-title" id="myModalLabel">
+		        	<p class="title" id="couponList">优惠券列表</p>
+					<div id="allContent">
+										<!--装入遍历结果-->
+					</div>
+					<!--<foreach name="arrCoupon" item="v">
+						<div class="row" style="margin-bottom: 10px;">
+							<div class="col-xs-12 col-sm-12">
+								<div class="couponList">
+									<div class="couponL">
+										<span>￥{$v.price}</span>
+									</div>
+									<div class="couponC">
+										<p class="couponCt">{$v.cname}</p>
+										<p>{$v.explain}</p>
+										<p class="couponCyou">有效期至{$v.end_time|date='Y-m-d H:i:s',###}</p>
+									</div>
+									<div class="couponR">
+										<a data-dismiss="modal"  aria-label="Close" href="#">立即使用</a>
+									</div>
+									<div style="clear: both;"></div>
+								</div>
+							</div>
+						</div>
+					</foreach>-->
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="modal fade myagree" id="myNumber" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="row">
+		      		<div class="col-sm-12">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				        	<span aria-hidden="true">&times;</span>
+				        </button>
+			        </div>
+		        </div>
+		        <div class="modal-title" id="myModalLabel">
+		        	<p class="title" >数量选择</p>
+					<div id="numberList">
+										<!--装入遍历结果-->
+					</div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+<include file="./Application/Home/View/Layouts/footer.html" />
+<!-- mobiscroll 日期选择插件-->
+<script src="/Application/Wechat/View/Mydata/js/mobiscroll_002.js" type="text/javascript"></script>
+<script src="/Application/Wechat/View/Mydata/js/mobiscroll_004.js" type="text/javascript"></script>
+<link href="/Application/Wechat/View/Mydata/css/mobiscroll_002.css" rel="stylesheet" type="text/css">
+<link href="/Application/Wechat/View/Mydata/css/mobiscroll.css" rel="stylesheet" type="text/css">
+<script src="/Application/Wechat/View/Mydata/js/mobiscroll.js" type="text/javascript"></script>
+<script src="/Application/Wechat/View/Mydata/js/mobiscroll_003.js" type="text/javascript"></script>
+<script src="/Application/Wechat/View/Mydata/js/mobiscroll_005.js" type="text/javascript"></script>
+<link href="/Application/Wechat/View/Mydata/css/mobiscroll_003.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/Application/Home/View/Layouts/js/age.js"></script>
+<script type="text/javascript">
+	sessionStorage.clear();
+$(function(){
+	var bodycolorH=$(".bodyColor").height();
+	var myselfH=bodycolorH-90-40-251;
+	$(".plaorderBox").css("min-height",myselfH+'px');
+	$(".PserviceChioce>a").click(function(){
+		$(".PserviceChioce>a").removeClass("actives");
+		$(this).addClass("actives");
+	})
+	$(".PquantityChioce>a").click(function(){
+		$(".PquantityChioce>a").removeClass("actives");
+		$(this).addClass("actives");
+	})
+
+	//时间选择
+	var currYear = (new Date()).getFullYear();	
+    var currMonth = (new Date()).getMonth();  
+    var currDate = (new Date()).getDate();  
+    var currHours = (new Date()).getHours(); 
+    var currMinutes=(new Date()).getMinutes();
+	var opt={};
+	opt.date = {preset : 'date'};
+	opt.datetime = {preset : 'datetime'};
+	opt.time = {preset : 'time'};
+	opt.default = {
+		theme: 'android-ics light', //皮肤样式
+        display: 'modal', //显示方式 
+        mode: 'scroller', //日期选择模式
+		dateFormat: 'yyyy-mm-dd',
+		lang: 'zh',
+		showNow: true,
+		nowText: "今天",
+        startYear: currYear, //开始年份
+        endYear: currYear,//结束年份
+        startMonth: currMonth, //开始月份
+        endMonth: currMonth,//结束月份
+        startDate: currDate, //开始那天
+        endDate:currDate+2,//结束那天
+        startHours:currHours,//开始小时
+        starMinutes:currMinutes//开始分钟
+	};
+    var optDateTime = $.extend(opt['datetime'], opt['default']);
+    var optTime = $.extend(opt['time'], opt['default']);
+    $("#appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
+
+    /*字数限制*/  
+    $("#area").on("input propertychange", function() {  
+        var $this = $(this),  
+            _val = $this.val(),  
+            count = "";  
+        if (_val.length > 50) {  
+            $this.val(_val.substring(0, 50));  
+        }  
+        count =$this.val().length;  
+        $("#text-count").html(count);  
+    });
+
+    // $(".plaBtn").click(function(){
+    // 	$(".myplaorder").addClass("in");
+	   //  $(".myplaorder").css("opacity","1");
+    // 	$(".agree").click(function(){
+	   //  	$(".myplaorder").removeClass("in");
+	   //  	$(".closeTow").click(function(){
+	   //  		$(".myplaorder").addClass("in");
+	   //  	})
+	   //  });
+	   //  $(".cancel").click(function(){
+	   //  	$(".myplaorder").removeClass("in");
+	   //  	$(".myplaorder").css("opacity","0");
+	   //  })
+    // })
+    
+})
+
+</script>
+
+
+<script>
+	var is_need_addr;//申明是否需要地址变量
+	//订单初始服务名称
+	$('#orderSelName').html('{$scname.cname}')
+	//id服务表主键id值
+
+function sel(id){
+	sessionStorage.clear();
+	//根据id查询该项服务的详细情况
+	$.ajax({
+		url:'__APP__/Placeanorder/price',
+		data:'id='+id,
+		dataType:'json',
+		type:'post',
+		success:function(re){
+			if(re.info==1){
+				is_need_addr=re.sc_type;//给是否需要地址变量赋值
+				if(is_need_addr==2){
+					$('#blockAddr').css('display','block');
+				}else{
+					$('#blockAddr').css('display','none');
+				}
+				$('.myNumber').val('1'+re.mode)
+				$('#siglePrice').html(re.msg+'元/'+re.mode);
+				$('#coupon').html(re.num+'张优惠券可用');
+				//优惠券id字符串
+				$('#coupon').attr('value',re.id);
+				//换了项目要重新选择时间
+				//记数单位
+				var numUnit='';
+				for(var i=1;i<25;i++){
+					if(i==1){
+						var nuitContent="<a name='numNeed' onclick='javascript:dianji(this)' class='actives' data-dismiss='modal' aria-label='Close'>"+i+re.mode+"</a>"
+					}else{
+						var nuitContent="<a name='numNeed' onclick='javascript:dianji(this)' data-dismiss='modal' aria-label='Close'>"+i+re.mode+"</a>"
+					}
+					numUnit+=nuitContent;
+				}
+
+				//赋值给容器
+				$('#numberList').html(numUnit)
+
+				//计算当前总价，执行计算总价函数
+				heji()
+				//选择服务后的订单服务名称
+				$('#orderSelName').html(re.cname)
+			}
+		}
+	})
+}
+		//进来直接执行该函数选择对应的单位,进入页面选择的服务id值
+		sel('{$scprice.id}')
+	function dianji(obj){
+		var shuliang=$(obj).html();
+		$(".myNumber").val(shuliang);
+		$(obj).siblings('a').removeClass("actives");
+		$(obj).addClass("actives");
+		heji()
+	}
+
+$('#coupon').click(function(){
+	var id=$(this).attr('value');
+	$.ajax({
+		url:'__APP__/Placeanorder/coupon',
+		data:'couponId='+id,
+		dataType:'json',
+		type:'post',
+		success:function(re){
+				var finalContent='';
+				for(var i=0;i<re.length;i++){
+					var content="<div class='row' style='margin-bottom: 10px;'>" +
+					"<div class='col-xs-12 col-sm-12'>" +
+					"<div class='couponList'>" +
+					"<div class='couponL'>" +
+					"<span id='need1'>￥"+re[i].price+"</span>" +
+					"</div>"+
+					"<div class='couponC'>" +
+					"<p class='couponCt' id='need2'>"+re[i].cname+"</p>" +
+					"<p id='need3'>"+re[i].explain+"</p>" +
+					"<p class='couponCyou' id='need4'>有效期至"+re[i].end_time+"</p>" +
+					"</div>"+
+					"<div class='couponR'>"+
+					"<a data-dismiss='modal'  avg='"+re[i].id+"' aria-label='Close' class='useBtn'  id='need5' onclick='javascript:useIt(this)' value='"+re[i].price+"'>立即使用</a>"+
+					"</div>"+
+					"<div style='clear: both;'></div>" +
+					"</div>"+
+					"</div>"+
+					"</div>";
+
+					finalContent+=content;
+				}
+				if(re==''){
+					$('#couponList').html('暂无优惠券')
+				}else{
+					$('#allContent').html(finalContent);
+				}
+
+		}
+	})
+})
+	//使用优惠券
+	//obj 选择使用的当前优惠券选择器
+	function useIt(obj){
+		//获取价格
+		var price=obj.getAttribute('value')
+
+		sessionStorage.setItem('Coupon',price);
+		//赋值给页面优惠券
+		$('#coupon').html("￥"+sessionStorage.getItem('Coupon'))
+		//点击使用的优惠券id
+		var id=$(obj).attr('avg')
+		sessionStorage.setItem('useCouponId',id);
+		$('#myCoupon').css('display','none')
+		heji()
+	}
+</script>
+
+<script>
+	//合计计算
+	function heji(){
+			//获取需要服务的时间,数量
+		var nobj=document.getElementsByName('numNeed');
+
+		for(var i=0;i<nobj.length;i++){
+			if(nobj[i].getAttribute('class')=='actives'){
+				//正则匹配取得数字部分
+				var pattern=/^[0-9]+/g;
+				var stime=nobj[i].innerHTML.match(pattern);
+				stime=stime.toString();
+				//截出数量单位
+				var needUnit=nobj[i].innerHTML.substring(stime.length);
+				stime=parseFloat(stime) //服务时间
+			}
+		}
+
+		if(stime=='' || stime==undefined){
+			stime=parseFloat(1);//没有点击的时候，默认为一个数量单位
+		}
+		//将需要服务的时间或数量赋值给订单,带上截取的单位
+		$('#orderSelNum').html(stime+needUnit)
+
+		//优惠券
+		//获取优惠券
+		if(sessionStorage.getItem('Coupon')){
+			var pattern1=/^\d+(\.\d+)?/g;
+			var couponFee=sessionStorage.getItem('Coupon').match(pattern1);
+			//转为浮点型
+			couponFee=parseFloat(couponFee);
+		}else{
+			couponFee=parseFloat(0);
+		}
+		//将优惠赋给订单
+		$('#orderSelFree').html(couponFee+'元')
+		//单价
+
+		var thePrice=$('#siglePrice').html();
+			var pattern2=/^\d+(\.\d+)?/g;
+			var finalPrice=thePrice.match(pattern2);
+
+			//将选择的单价赋值给订单,带上计量单位
+		$('#orderSelPrice').html(finalPrice+'/'+needUnit)
+		//计算总价
+			finalPrice=parseFloat(finalPrice)
+			var finalMoney=finalPrice*stime-couponFee;
+			$('#allMoney').html(finalMoney+'元')
+		//将总价赋值给订单
+		$('#orderSelAll').html(finalMoney+'元')
+			//sessionStorage.setItem('hej',finalMoney);//最终合计
+	}
+	heji()
+</script>
+<script>
+	$(function(){
+
+		$('#xiadan').click(function(){
+			//审核未通过
+			if('{$identific.status}'!=2){
+				// alert('身份认证未通过，务必填写真实信息')
+				layer.alert("身份认证未通过，务必填写真实信息");
+				return false;
+			}
+			//获取订单时间，判断是否选择
+			var serTime=$('#appDateTime').val();
+			if(serTime==''){
+				// alert('选择服务时间')
+				layer.alert('选择服务时间');
+				return false;
+			}else{
+				//存在既赋给订单
+				$('#orderSelTime').html(serTime);
+			}
+		})
+	})
+</script>
+<script>
+	//同意订单
+	$(function(){
+		//点击同意，记入数据库
+		$('#agreeOrder').click(function(){
+			//获取被选择的服务的id
+			var sobj=document.getElementsByName('serName');
+			for(var i=0;i<sobj.length;i++){
+				if(sobj[i].className=='actives'){
+					//选中的服务id值
+					var needId=sobj[i].getAttribute('avg')
+				}
+			}
+			//其他信息从订单信息上获取
+			//支付金额
+			var pattern2=/^\d+(\.\d+)?/g;
+			var payMoney=$('#orderSelAll').html().match(pattern2);
+			payMoney=parseFloat(payMoney);
+
+			//计费方式
+			var payType=$('#orderSelNum').html();
+
+			//开始时间
+			var startTime=$('#orderSelTime').html();
+
+			//所选的优惠券id
+
+			if(sessionStorage.getItem('useCouponId')){
+				var cid=sessionStorage.getItem('useCouponId');
+			}else{
+				var cid='';
+			}
+
+			if(is_need_addr=='2'){
+				var address=$('#selAddr').val();
+				if(address.replace(/(^\s+)|(\s+$)/g, "")==''){
+					layer.alert('线下娱乐请输入详细地点');
+					return false;
+				}
+			}else{
+				var address='';
+			}
+			//ajax请求生成订单
+			var telPhone='{$arr.username}';//当前服务宝宝的电话
+			var realName='{$arr.real_name}';//当前服务宝宝的电话
+			$.ajax({
+				url:'__APP__/Placeanorder/order',
+				data:{
+					sid:needId,
+					charge_mode:payType,
+					payment_amount:payMoney,
+					start_time:startTime,
+					cid:cid,
+					telPhone:telPhone,
+					realName:realName,
+					address:address
+				},
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					//alert(re.result)
+					 if(re.info==1){
+					 	layer.alert('下单成功');
+					 }
+				}
+			})
+
+		})
+	})
+
+
+	$('#needBack').click(function(){
+		//刚才使用过的优惠券id
+		var hasUseCoupon=sessionStorage.getItem('useCouponId')
+
+		//获取优惠券上的id字符串
+		 var strId=$('#coupon').attr('value');
+
+		//若在第一个位置截取数字id加上后面的',' ，若不为第一个，截取','加上该id值
+		//位置全等于0即为第一个id
+		if(strId.indexOf(hasUseCoupon)===0){
+			if(hasUseCoupon && hasUseCoupon.length!=strId.length){
+				//剩下的优惠券id值,正则匹配去掉字符串
+				var pattern=hasUseCoupon;
+				var elseCouponId=strId.replace(new RegExp(pattern+","),'');
+			}else if(hasUseCoupon==strId){
+				var elseCouponId='';
+			}
+		}else{
+			//在其他位置时候
+			if(hasUseCoupon && hasUseCoupon.length!=strId.length){
+				//剩下的优惠券id值,正则匹配去掉字符串
+				var pattern=hasUseCoupon;
+				var elseCouponId=strId.replace(new RegExp(","+pattern),'');
+			}else if(hasUseCoupon==strId){
+				var elseCouponId='';
+			}
+		}
+
+		//若没有选择优惠券，还是为原来的优惠券id值
+		if(!hasUseCoupon){
+			var elseCouponId=strId;
+		}
+		//将剩下的优惠券id字符串赋值到优惠券链接上的value
+
+		$('#coupon').attr('value',elseCouponId);
+
+		//获取剩下id值的个数
+		//转为数组
+		if(elseCouponId){
+			var arr=elseCouponId.split(',');
+		}else{
+			var arr=[];
+		}
+		//优惠券链接显示个数
+		$('#coupon').html(arr.length+'张优惠券可用');
+		sessionStorage.clear()
+		heji()
+	})
+
+	$('#needBack').click(function(){
+		$('#myPlaceanorder').css('display','none');
+		$('#myagree').css('display','none');
+	})
+
+	// $('#needBack').click(function(){
+	// 	$('#myPlaceanorder').css('display','none');
+	// 	$('#myagree').css('display','none');
+	// })
+
+</script>

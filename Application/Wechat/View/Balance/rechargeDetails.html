@@ -1,0 +1,42 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Balance/css/rechargeDetails.css">
+
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>充值明细</p>
+          </div>
+        </div>
+	</div>
+<foreach name="info" item="v">
+	<div class="row">
+		<div class="col-sm-12 col-xs-12">
+			<div class="rechargeTime">
+				<a>{$v.ctime|date='Y-m-d',###}</a>
+			</div>
+		</div>
+		<div class="col-sm-12 col-xs-12">
+			<div class="rechargeDetails">
+				<p>微信支付凭证</p>
+				<p class="timeL">{$v.ctime|date='Y-m-d H:i:s',###}</p>
+				<div class="rechargeNum">
+					<p>充值金额</p>
+					<p class="moneyNum">￥{$v.money}</p>
+				</div>
+				<p class="lastP"><span>收款方：</span>常州听娱软件科技有限公司</p>
+				<p class="lastP">
+					<if condition="$v.status eq 1">
+						<span>充值成功</span>
+						<else/>
+						<span>充值失败</span>
+					</if>
+				</p>
+			</div>
+		</div>
+	</div>
+</foreach>
+
+	<div style="height: 30px;"></div>
+
+<include file="Layout/footer" />

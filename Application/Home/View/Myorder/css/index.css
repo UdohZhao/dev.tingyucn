@@ -1,0 +1,197 @@
+.oerderBox{
+	background-color: #fff;
+	padding: 10px 15px;
+	margin: 20px auto;
+}
+.orderAll>p{
+	line-height: 40px;
+	font-weight: bold;
+	border-bottom: 1px solid #aaa;
+}
+.orderTime p{
+	margin: 0;
+	line-height: 30px;
+	font-size: 14px;
+	color: #ccc;
+}
+.orderList{
+	background-color: #ededed;
+	border-radius: 8px;
+	padding: 0 10px;
+	margin-bottom: 10px;
+}
+.orderList>p{
+	line-height: 30px;
+	margin:0;
+	border-bottom: 1px solid #aaa;
+}
+.orderList .orderMsg{
+	padding: 10px 0;
+	display: block;
+	text-decoration: none;
+	color: #000;
+}
+.orderList .orderMsg .msgImg{
+	width: 80px;
+	height: 80px;
+	float: left;
+}
+.orderList .orderMsg .msgImg img{
+	width: 100%;
+	height: 100%;
+}
+.orderList .orderMsg .masDetails{
+	float: left;
+	padding-left: 10px;
+	padding-top: 15px;
+}
+.orderList .orderMsg .masDetails>p{
+	margin: 0;
+}
+.orderList .orderMsg .masDetails>p span,.orderList .orderMsg .masDetails>p svg{
+	font-size: 14px;
+	color: #ccc;
+}
+.orderList .orderMsg .orderRight{
+	float: right;
+	padding-top: 27px;
+}
+.orderList .orderMsg .orderRight svg{
+	font-size: 26px;
+	color: #aaa;
+	transition: all 0.5s;
+}
+.detailsBox{
+	margin-top: 10px;
+	padding-bottom: 10px;
+	padding-top: 5px;
+	border-top: 1px solid #aaa;
+	/*height: 0;*/
+	overflow: hidden;
+	box-sizing: border-box;
+	transition: all 2s;
+	cursor: pointer;
+	position: relative;
+}
+.detailsBox p{
+	margin: 0;
+	line-height: 24px;
+	font-size: 14px;
+}
+.detailsBox button{
+	border: none;
+	background-color: #fd908f;
+	color: #fff;
+	border-radius: 8px;
+	width: 100px;
+	height: 35px;
+	margin: 10px 0;
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+}
+#orderpaynow .mytitle{
+	font-size: 16px;
+	font-weight: bolder;
+	line-height: 30px;
+	text-align: center;
+}
+#orderpaynow .mycontent{
+	text-indent: 2em;
+}
+#orderpaynow .myBtn a{
+	display: inline-block;
+	width: 40%;
+	height: 35px;
+	background-color: #fd908f;
+	color: #fff;
+	margin: 10px 4%;
+	border-radius: 4px;
+	text-decoration: none;
+	text-align: center;
+	line-height: 35px;
+}
+#orderpaynow .myBtn a.cancel{
+	background-color: #ccc;
+}
+#myModalLabel .title{
+	text-align: center;
+	line-height: 40px;
+	font-weight: bolder;
+}
+#myModalLabel .col-md-3,#myModalLabel .col-sm-3{
+	text-align: right;
+}
+.evaluationCon select{
+	width: 200px;
+}
+.evaluationCon>p{
+	margin-bottom: 20px;
+}
+.evaluationWord{
+	position: relative;
+	width: 100%;
+	height: 150px;
+}
+.evaluationWord textarea{
+	border: 1px solid #ccc;
+	padding-bottom: 20px;
+	padding-left: 10px;
+	height: 118px;
+}
+.evaluationNum{
+	position: absolute;
+	bottom: 0;
+	right: 10px;
+}
+#evaluationsubmit{
+	width: 50%;
+	display: block;
+	padding: 5px 15px;
+	margin: 20px auto;
+	background-color: #fd908f;
+	color: #fff;
+	text-align: center;
+	border-radius: 5px;
+	text-decoration: none;
+	cursor: pointer;
+}
+#evaluationsubmit:hover{
+	text-decoration: none;
+}
+.order_list{
+	margin-bottom: 10px;
+}
+.comfirm_button,.cancel_button{
+	margin: 3px;
+	background-color: #fd908f;
+	color: #fff;
+	border-radius: 4px;
+	display: inline-block;
+	width: 100px;
+	line-height: 30px;
+	text-align: center;
+}
+.cancel_button{
+	background-color: #ccc;
+}
+.my_order ul li{
+	text-align: center;
+}
+.my_order ul li a{
+	color: #000000;
+	padding:10px 0;
+}
+.my_order .nav-tabs>li.active>a, .my_order .nav-tabs>li.active>a:focus, .my_order .nav-tabs>li.active>a:hover{
+	background-color: #fff;
+	border: none;
+	color: #fd908f;
+	border-bottom: 2px solid #fd908f;
+}
+.my_order .nav-tabs>li>a:hover{
+	background-color: #fff;
+}
+.tab-content{
+	padding: 0 10px;
+	padding-top: 20px;
+}

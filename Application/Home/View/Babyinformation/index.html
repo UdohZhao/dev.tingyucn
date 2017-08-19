@@ -1,0 +1,387 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Babyinformation/css/index.css">
+
+	<!-- 内容主体 start-->
+	<!-- 头像start -->
+	<div class="row" style="margin: 0;">
+		<div class="col-md-12 topBcg">
+			<div class="container">
+				<div class="babyImg">
+					<img src="{$firstInfo.figure_path}">
+				</div>
+				<p>{$firstInfo.nickname}</p>
+				<!-- 女strat -->
+				<if condition="$firstInfo.sex eq 1">
+					<a class="nan">
+						<svg class="icon categorie-icon" aria-hidden="true">
+							<use xlink:href="#icon-xingbienan"></use>
+						</svg>
+						<span style="display: none" class="age">{$firstInfo.id_card}</span>
+						<span >{$firstInfo.age}</span>
+						<input class="idNumber" value="{$firstInfo.id_card}" type="hidden" />
+					</a>
+					<else/>
+					<a class="nv">
+						<svg class="icon categorie-icon" aria-hidden="true">
+							<use xlink:href="#icon-xingbienv"></use>
+						</svg>
+						<span style="display: none"  class="age">{$firstInfo.id_card}</span>
+						<span >{$firstInfo.age}</span>
+						<input class="idNumber" value="{$firstInfo.id_card}" type="hidden" />
+					</a>
+				</if>
+				<!-- 女end -->
+				<!-- 男 start-->
+				<!-- 男 end-->
+				<!-- 认证 start-->
+				<a class="nan">
+	              <svg class="icon categorie-icon" aria-hidden="true">
+	                  <use xlink:href="#icon-1"></use>
+	              </svg>
+	              <span>已认证</span>
+				</a>
+				<!-- 认证 end-->
+				<!--用户登陆才显示拉黑或关注-->
+				<if condition="$Think.session.userinfo.uid neq null">
+				<p>
+					<a class="blackBtn" id="reviewStatus" style="display: none">
+		                <svg class="icon categorie-icon" aria-hidden="true">
+		                  <use xlink:href="#icon-guanzhu"></use>
+		                </svg>
+		                <span id="reviews">关注</span>
+					</a>
+					<a class="careBtn" id="blacklist" style="display: none">
+		                <svg class="icon categorie-icon" aria-hidden="true">
+		                  <use xlink:href="#icon-lahei2"></use>
+		                </svg>
+		                <span id="blackStatus">拉黑</span>
+					</a>
+					<a class="blackBtn" id='hasReview' style="display: none">
+						<svg class="icon categorie-icon" aria-hidden="true">
+							<use xlink:href="#icon-guanzhu"></use>
+						</svg>
+						<span>已关注</span>
+					</a>
+					<a class="blackBtn" id='hasBlack' style="display: none">
+						<svg class="icon categorie-icon" aria-hidden="true">
+							<use xlink:href="#icon-guanzhu"></use>
+						</svg>
+						<span>已拉黑</span>
+					</a>
+					<a class="blackBtn" id="reviewOut" style="display: none">
+						<svg class="icon categorie-icon" aria-hidden="true">
+							<use xlink:href="#icon-guanzhu"></use>
+						</svg>
+						<span id="creview">取消关注</span>
+					</a>
+
+				</p>
+				</if>
+			</div>
+		</div>
+	</div>
+	<!-- 头像end -->
+	<!-- Ta的服务start -->
+	<div class="container taService">
+		<div class="row">
+			<div class="col-md-12 title">
+				<p>Ta的服务</p>
+			</div>
+			<div class="col-md-9">
+				<div class="row" style="padding-top: 20px;">
+					<foreach name="twoInfo" item="vo">
+						<div class="col-md-3 col-sm-4 serviceList">
+							<span>{$vo.cname}</span>
+						</div>
+					</foreach>
+
+				</div>
+			</div>
+			<div class="col-md-3 rightBtn">
+				<div class="placeOrder">
+					<a id="cblack">该用户已被拉黑</a>
+					<a target="iframe2" id="shop" href="__APP__/Placeanorder/index/id/{$firstInfo.uid}/scid/{$scid}">下单</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Ta的服务end -->
+	<!-- 个人资料start -->
+	<div class="container selfMsg">
+		<div class="row">
+			<div class="col-md-12 title">
+				<p>个人资料</p>
+			</div>
+			<div class="col-md-12 informationCon">
+				<p>兴趣：{$firstInfo.iid}</p>
+				<p>签名：{$firstInfo.signature}</p>
+				<p>职业：{$firstInfo.pname}</p>
+				<if condition="$firstInfo.audio_path eq null">
+				<p>语音：未上传</p>
+					<else/>
+
+				<audio hidden="true" id='baby_audio' controls src="{$firstInfo.audio_path}">
+				</audio>
+				语音：
+                <div class="audio_box">
+                  <div class="audio_img">
+                    <img class="stop_img" src="/Application/Wechat/View/Babyinformation/img/index.png">
+                    <img class="move_img" src="/Application/Wechat/View/Babyinformation/img/index.gif">
+                    <i><span>5</span>秒</i>
+                  </div>
+                </div>
+                </if>
+			</div>
+			<if condition="$firstInfo.video_path eq null">
+					<p style="margin-left: 15px;">视频：未上传</p>
+					<else/>
+				<div class="col-md-12 col-sm-12 my_video">
+					<video width="300" height="300" controls src="{$firstInfo.video_path}"></video>
+				</div>
+				</if>
+
+		</div>
+	</div>
+	<!-- 个人资料end -->
+	<!-- 全部评价start -->
+	<div class="container allEvaluation">
+		<div class="row">
+			<div class="col-md-12 title">
+				<p>全部评价<span>({$num}次)</span>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<foreach name="evaluate" item="eval">
+				<div class="col-md-12 evaluationList" name="mylist">
+					<div>
+						<div class="EpeopleImg">
+							<if condition="$eval.head_portrait eq null">
+								<img src="/Application/Wechat/View/Mydata/img/未标题-1.png"/>
+								<else/>
+								<img src="{$eval.head_portrait}">
+							</if>
+						</div>
+						<div class="evaluationCenter">
+							<p class="peopleName">
+								<if condition='$eval.nickname eq null'>
+								{$eval.real_name}
+								<else/>
+								{$eval.nickname}
+								</if>
+							</p>
+							<p class="peopleCon">{$eval.estimate}！</p>
+							<p class="peopleTime">{$eval.ctime|date='Y-m-d H:i:s',###}</p>
+						</div>
+						<div class="evaluationRight starBox">
+							<if condition="$eval.grade eq 0">
+									<span>好评</span>
+									<elseif condition="$eval.grade eq 1"/>
+									<span>中评</span>
+									<elseif condition="$eval.grade eq 2"/>
+									<span>差评</span>
+								</if>
+							<!-- <div class="evaluationNum">
+                                <span>5.5</span>
+                                分
+                            </div>
+                            <div class="fiveStar">
+                                <svg class="icon categorie-icon" aria-hidden="true">
+                                    <use xlink:href="#icon-wuxing"></use>
+                                </svg>
+                                <div class="starImg">
+                                    <svg class="icon categorie-icon" aria-hidden="true">
+                                        <use xlink:href="#icon-wuxing1"></use>
+                                    </svg>
+                                </div>
+                            </div> -->
+						</div>
+						<div style="clear: both;"></div>
+					</div>
+				</div>
+			</foreach>
+			<div class="col-md-12">
+				<span id="loadingMore" class="loadingMore">加载更多</span>
+			</div>
+		</div>
+	</div>
+	<!-- 全部评价end -->
+	<!-- 内容主体 end-->
+<include file="./Application/Home/View/Layouts/footer.html" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Application/Home/View/Babyinformation/js/index.js"></script>
+<script type="text/javascript" src="/Application/Home/View/Layouts/js/age.js"></script>
+<script>
+	//点击下单判断用户是否登陆
+	$('#shop').click(function(){
+		if(!'{$Think.session.userinfo.uid}'){
+			// layer.open({
+	  //           type: 1,
+	  //           title: '',
+	  //           fix: false,
+	  //           maxmin: true,
+	  //           shadeClose: true,
+	  //           area: ['1100px', '600px'],
+	  //           content: '请先登录再下单',
+	  //       });
+			// // alert('请先登录再下单');
+			layer.alert('请先登录再下单');
+			return false;
+		}
+	})
+	$('#cblack').click(function(){
+		if(!'{$Think.session.userinfo.uid}'){
+			// alert('请先登录再操作');
+			layer.alert('请先登录再操作');
+			return false;
+		}
+	})
+
+	if('{$firstInfo.blackStatus}'==1){
+		$('#cblack').show();
+		$('#shop').hide();
+
+	}else if('{$firstInfo.reviewsStatus}'==1){
+		$('#shop').show();
+		$('#cblack').hide();
+		$('#hasReview').show();
+		$('#reviewOut').show();
+	}else{
+		$('#reviewStatus').show();
+		$('#cblack').hide();
+		$('#blacklist').show();
+		$('#shop').show();
+	}
+</script>
+
+<script>
+	$('#cblack').click(function() {
+
+		layer.confirm('取消拉黑？', {
+			btn: ['确定','取消'] //按钮
+		}, function(){
+			//layer.msg('的确很重要', {icon: 1});
+			var bbId = '{$firstInfo.uid}';//被拉黑的签约用户id
+			//alert(bbId)
+			$.ajax({
+				url: '__APP__/Babyinformation/cblack',
+				data: 'bbId=' + bbId,
+				dataType: 'json',
+				type: 'post',
+				success: function (re) {
+					$('#cblack').hide();
+					$('#shop').show();
+					/*$('#blackStatus').html('拉黑')
+					 $('#reviewStatus').show()*/
+					$('#blacklist').show()
+					$('#reviewOut').hide()
+
+					$('#reviewStatus').show()
+					$('#blackStatus').html('拉黑')
+					$('#reviews').html('关注')
+					layer.msg('操作成功', {icon: 1,time:2000});
+				}
+			})
+		}, function(){
+
+		});
+
+		/*if (confirm('取消拉黑')) {
+			var bbId = '{$firstInfo.uid}';//被拉黑的签约用户id
+			//alert(bbId)
+			$.ajax({
+				url: '__APP__/Babyinformation/cblack',
+				data: 'bbId=' + bbId,
+				dataType: 'json',
+				type: 'post',
+				success: function (re) {
+					$('#cblack').hide();
+					$('#shop').show();
+					/!*$('#blackStatus').html('拉黑')
+	 			$('#reviewStatus').show()*!/
+					$('#blacklist').show()
+					$('#reviewOut').hide()
+
+					$('#reviewStatus').show()
+					$('#blackStatus').html('拉黑')
+					$('#reviews').html('关注')
+				}
+			})
+		}*/
+	});
+	 //取消关注
+	 $('#reviewOut').click(function(){
+		 var bbId='{$firstInfo.uid}';//被拉黑的签约用户id
+		 //alert(bbId)
+		 $.ajax({
+			 url:'__APP__/Babyinformation/creview',
+			 data:'bbId='+bbId,
+			 dataType:'json',
+			 type:'post',
+			 success:function(re){
+				 $('#blacklist').show()
+				 $('#reviewOut').hide()
+				 $('#hasReview').hide()
+				 $('#reviewStatus').show()
+				 $('#reviews').html('关注')
+				 //$('#reviewStatus').children('.attentionBox').removeClass("attentionBox_active")
+				 //$('#reviewStatus').children('.attentionBox').css("border","1px solid #fff")
+			 }
+		 })
+	 });
+//拉黑
+	 $('#blacklist').click(function(){
+		 var bbId='{$firstInfo.uid}';//宝宝的id值
+		 $.ajax({
+			 url:'__APP__/Babyinformation/blackInto',
+			 data:'bbUid='+bbId,
+			 dataType:'json',
+			 type:'post',
+			 success:function(re){
+				 $('#blackStatus').html('已拉黑')
+				 $('#reviewStatus').hide()
+				 $('#shop').hide()
+				 $('#cblack').show();
+			 }
+		 })
+	 })
+//关注
+	 $('#reviewStatus').click(function(){
+		 var bbId='{$firstInfo.uid}';//宝宝的id值
+		 $.ajax({
+			 url:'__APP__/Babyinformation/reviewInto',
+			 data:'bbUid='+bbId,
+			 dataType:'json',
+			 type:'post',
+			 success:function(re){
+				 $('#blacklist').hide()
+				 $('#reviews').html('已关注')
+				 $('#shop').show()
+				 $('#reviewOut').show();
+				 $('#cblack').hide();
+				 //$('#reviewStatus').children('.attentionBox').addClass("attentionBox_active");
+				 //$('#reviewStatus').children('.attentionBox').css("border","#fd908f");
+
+			 }
+		 })
+	 })
+</script>
+<script type="text/javascript">
+
+$(function(){
+	var allObj=document.getElementsByName('mylist');
+	for(var j=0;j<3;j++){
+		$(allObj).eq(j).css('display','block');
+	}
+	var index=3;
+	$('#loadingMore').click(function(){
+		var num=index+3;
+			for(var i=index;i<num;i++){
+			$(allObj).eq(i).css('display','block');
+			index++;
+		}
+	})
+
+})
+</script>

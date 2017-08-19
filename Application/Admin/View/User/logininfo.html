@@ -1,0 +1,121 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">普通用户身份认证信息列表</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+            <div class="panel-body">
+
+                <form class="bs-example bs-example-form"  action="__APP__/User/logininfo" method="post">
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">搜索</button>
+                            </span>
+                            <input type="text" name="keyword" class="form-control" placeholder="输入手机号码搜索">
+                        </div><!-- /input-group -->
+                    </div><!-- /.col-lg-6 -->
+                </form>
+                <table class="table table-bordered">
+                    <caption>用户信息</caption>
+                    <thead>
+                    <tr>
+                        <th>用户名/手机号码</th>
+                        <th>类型</th>
+                        <th>状态</th>
+                        <th>真实姓名</th>
+                        <th>性别</th>
+                        <th>身份证号码</th>
+                        <th>身份证正面照</th>
+                        <th>身份证背面照</th>
+                        <th>个人形象照</th>
+                        <th>注册时间</th>
+                        <th>审核状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach  name="logininfo" item="v">
+                        <tr>
+                            <td>{$v.username}</td>
+                            <if condition="$v.type eq 0">
+                                <td>普通用户</td>
+                                <else/>
+                                <td>签约用户</td>
+                            </if>
+                            <if condition="$v.ustatus eq 0">
+                                <td>正常</td>
+                                <else/>
+                                <td>冻结</td>
+                            </if>
+                            <td>{$v.real_name}</td>
+                            <if condition="$v.sex eq 0">
+                                <td>女</td>
+                                <else/>
+                                <td>男</td>
+                            </if>
+                            <td>{$v.id_card}</td>
+                            <td><img src="{$v.front_path}" width="30" height="30"/></td>
+                            <td><img src="{$v.back_path}" width="30" height="30"/></td>
+                            <td><img src="{$v.figure_path}" width="30" height="30"/></td>
+                            <td>{$v.ctime|date='Y-m-d H:i:s',###}</td>
+
+                            <if condition="$v.status eq 0">
+                                <td>待审核</td>
+                                <elseif condition="$v.status eq 1"/>
+                                <td>审核失败</td>
+                                <else/>
+                                <td>审核成功</td>
+                            </if>
+                            <if condition="$v.perfect eq 4">
+                                <td><span style="color: #7F0055">信息不完善</span></td>
+                                <elseif condition="$v.status eq 0 && $v.ustatus eq 0"/>
+                                <td><a href="__APP__/User/reviews/id/{$v.id}"><button>审核</button></a> | <button onclick="javascript:dongjie(this.value,this.name,this)" name="1" value="{$v.id}">冻结</button></td>
+                                <elseif condition="$v.status eq 0 && $v.ustatus eq 1"/>
+                                <td><a href="__APP__/User/reviews/id/{$v.id}"><button>审核</button></a> | <button onclick="javascript:dongjie(this.value,this.name,this)" name="0" value="{$v.id}">解冻</button></td>
+                                <elseif condition="$v.status neq 0 && $v.ustatus eq 0"/>
+                                <td><a href="#"><button><span style="color:#1DC116">已审</span></button></a> | <button onclick="javascript:dongjie(this.value,this.name,this)" name="1" value="{$v.id}">冻结</button></td>
+                                <elseif condition="$v.status neq 0 && $v.ustatus eq 1"/>
+                                <td><a href="#"><button><span style="color:#1DC116">已审</span></button></a> | <button onclick="javascript:dongjie(this.value,this.name,this)" name="0" value="{$v.id}">解冻</button></td>
+                            </if>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                {$page}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    function dongjie(id,status,obj){    //status要改变的状态值   当前选择器
+        $.ajax({
+            url:'__APP__/User/dongjie',
+            data:'id='+id+'&status='+status,
+            dataType:'json',
+            type:'post',
+            success:function(re){
+                if(re.info==true){
+                    alert(re.status);
+                    $(obj).attr('name',re.name);
+                    $(obj).html(re.msg);
+                };
+            }
+        })
+    }
+</script>
+
+
+

@@ -1,0 +1,598 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Placeanorder/css/index.css">
+
+	<!-- 内容主体start -->
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>下单</p>
+          </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="weui-panel weui-panel_access">
+		  <div class="weui-panel__bd">
+		    <a class="weui-media-box weui-media-box_appmsg">
+		      <div class="weui-media-box__hd avatar">
+		        <img class="weui-media-box__thumb" src="{$arr.head_portrait}">
+		      </div>
+		      <div class="weui-media-box__bd">
+		        <h4 class="weui-media-box__title">{$arr.nickname}</h4>
+		        <p class="weui-media-box__desc">
+					<!-- 性别女start -->
+					<if condition="$arr.sex eq 1">
+						<u class="agenan">
+							<svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+								<use xlink:href="#icon-xingbienan"></use>
+							</svg>
+							<!-- <span>{$arr.id_card}</span> -->
+						<!-- </u> -->
+						<else/>
+						<u class="agenv">
+							<svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+								<use xlink:href="#icon-xingbienv"></use>
+							</svg>
+							<!-- <span>{$arr.id_card}</span> -->
+					</if>
+					<span id="age" style="display: none">{$arr.id_card}</span>
+					<span>{$arr.age}</span>
+						</u>
+	            	<input class="idNumber" id="Numid" value="{$arr.id_card}" type="hidden" />
+		            <!-- 性别女end -->
+		            <!-- 性别男start -->
+		            <!-- <u class="agenan">
+		              <svg class="icon categorie-icon avatarEdit" aria-hidden="true">
+		                  <use xlink:href="#icon-xingbienan"></use>
+		              </svg>
+		              <span>22</span>
+		            </u> -->
+		            <!-- 性别男end -->
+		        </p>
+		      </div>
+		    </a>
+		  </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="weui-cells">
+		  <a class="weui-cell weui-cell_access" href="javascript:;">
+		    <div class="weui-cell__bd">
+		      <p>品类</p>
+
+		    </div>
+		    <div class="weui-cell__ft">
+		    <input type="text" id="pickerClass" value="选择类别" />
+		    </div>
+		  </a>
+		  <a class="weui-cell weui-cell_access" href="javascript:;">
+		    <div class="weui-cell__bd">
+		      <p>开始时间</p>
+		    </div>
+		    <div class="weui-cell__ft">
+		    	<input type="text" class="timechioce" id="appDateTime" />
+		    </div>
+		  </a>
+			<a class="weui-cell weui-cell_access" id="a_address" href="javascript:;" style="display: none">
+				<div class="weui-cell__bd">
+					<p>服务地点</p>
+				</div>
+				<div class="weui-cell__ft">
+					<input type="text" placeholder="请填写地址" id="selAddress" />
+				</div>
+			</a>
+		  <a class="weui-cell weui-cell_access" href="javascript:;">
+		    <div class="weui-cell__bd">
+		      <p>数量</p>
+		    </div>
+		    <div class="weui-cell__ft">
+		    	<input type="text" id="pickerNumber" value="选择数量" />
+		    </div>
+		  </a>
+		</div>
+	</div>
+	<div class="row priceMsg">
+		<div class="weui-cells">
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>单价</p>
+		    </div>
+		    <div class="weui-cell__ft" id="price">{$scprice.bid_price}元/{$scname.charge_mode}</div>
+		  </div>
+				<a id="hrefNum" class="weui-cell weui-cell_access" href="__APP__/Coupon/index/couponId/{$CouponId}" value="{$CouponId}">
+
+		    <div class="weui-cell__bd">
+		      <p>优惠</p>
+		    </div>
+		    <div class="weui-cell__ft offerBox" id="coupon">
+				{$num}张可用优惠券
+		    </div>
+		  </a>
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <p>合计</p>
+		    </div>
+		    <div class="weui-cell__ft" id="hj">{$scprice.bid_price}元</div>
+		  </div>
+		</div>
+	</div>
+	<!-- <div class="row">
+		<div class="weui-cells weui-cells_form">
+		  <div class="weui-cell">
+		    <div class="weui-cell__bd">
+		      <textarea id="area" class="weui-textarea" placeholder="有什么要求，请描述~" rows="3"></textarea>
+		      <div class="weui-textarea-counter"><span id="text-count">0</span>/50</div>
+		    </div>
+		  </div>
+		</div>
+	</div> -->
+	<div class="row">
+		<div class="col-sm-12 col-xs-12" style="margin-top: 20px; margin-bottom: 30px;">
+			<a href="javascript:;" class="weui-btn weui-btn_primary" id="orderOne">下单</a>
+		</div>
+	</div>
+	<!-- 内容主体end -->
+<include file="Layout/footer" />
+<!-- mobiscroll 日期选择插件-->
+<script src="/Application/Wechat/View/Mydata/js/mobiscroll_002.js" type="text/javascript"></script>
+<script src="/Application/Wechat/View/Mydata/js/mobiscroll_004.js" type="text/javascript"></script>
+<link href="/Application/Wechat/View/Mydata/css/mobiscroll_002.css" rel="stylesheet" type="text/css">
+<link href="/Application/Wechat/View/Mydata/css/mobiscroll.css" rel="stylesheet" type="text/css">
+<script src="/Application/Wechat/View/Mydata/js/mobiscroll.js" type="text/javascript"></script>
+<script src="/Application/Wechat/View/Mydata/js/mobiscroll_003.js" type="text/javascript"></script>
+<script src="/Application/Wechat/View/Mydata/js/mobiscroll_005.js" type="text/javascript"></script>
+<link href="/Application/Wechat/View/Mydata/css/mobiscroll_003.css" rel="stylesheet" type="text/css">
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Application/Wechat/View/Placeanorder/js/index.js"></script>
+<script type="text/javascript">
+	var is_need_addr='{$scname.type}';//申明是否需要地址变量
+	if(is_need_addr=='2'){
+		$('#a_address').css('display','flex');
+	}
+$(function(){
+  $(".weui-btn_primary").click(function(){
+  	$(this).css("text-decoration","none");
+    $(this).css("background-color","#fd908f");
+    $(this).css("color","#ffffff");
+
+  })
+/*字数限制*/  
+    $("#area").on("input propertychange", function() {  
+        var $this = $(this),  
+            _val = $this.val(),  
+            count = "";  
+        if (_val.length > 50) {  
+            $this.val(_val.substring(0, 50));  
+        }  
+        count =$this.val().length;  
+        $("#text-count").html(count);  
+    });
+    // 选择品类
+	$("#pickerClass").picker({
+	  title: "请选择服务类型",
+	  cols: [
+	    {
+	      textAlign: 'center',
+	      values: [{$needStr}]
+	    }
+	  ]
+	});
+	// 选择时间
+	
+    // 选择数量
+
+		$("#pickerNumber").picker({
+			title: "请选择数量",
+			cols: [
+				{
+					textAlign: 'center',
+					values: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24']
+				}
+			]
+		});
+
+
+
+
+
+
+	//确认条款
+	$("#orderOne").click(function(){
+		//审核未通过
+		if('{$identific.status}'!=2){
+			// alert('身份认证未通过，务必填写真实信息')
+			$.toast("身份认证未通过，务必填写真实信息", "cancel");
+			return false;
+		}
+		var area=$('#area').val();//需求描述
+		var time=sessionStorage.getItem('time')//开始时间
+		if(sessionStorage.getItem('serverNum')){  //服务时间
+			var num=sessionStorage.getItem('serverNum');
+		}else{
+			var num=1;
+		}
+
+		if(sessionStorage.getItem('mode')){
+			var feetype=sessionStorage.getItem('mode');//计费方式
+		}else{
+			var feetype='{$scname.charge_mode}';
+		}
+
+		var allFee=sessionStorage.getItem('hej');//最终合计费用
+
+		if(sessionStorage.getItem('sid')){
+			var sid=sessionStorage.getItem('sid');//服务id
+		}else{
+			var sid='{$scprice.id}';//若没选择，则为默认id
+		}
+
+		if(sessionStorage.getItem('cid')){
+			var cid=sessionStorage.getItem('cid');//当前选择的优惠券id值
+		}else{
+			var cid='';//没有则为空
+		}
+
+		if(is_need_addr=='2'){
+			var address=$('#selAddress').val();
+			if(address.replace(/(^\s+)|(\s+$)/g, "")==''){
+				$.toast('线下娱乐请输入详细地点','cancel');
+				return false;
+			}
+		}else{
+			var address='';
+		}
+		var telPhone='{$arr.username}';//当前服务宝宝的电话
+		var realName='{$arr.real_name}';//当前服务宝宝的电话
+
+		if(sessionStorage.getItem('heji')==''){
+			$.toast('未选择服务','cancel')
+			return false
+		}else if(time=='' || time==null){
+			$.toast('未选择时间','cancel')
+			return false
+		}
+		// else if(area==''){
+		// 	// alert('描述需求')
+		// 	return false
+		// }
+		$.modal({
+		  title: "",
+		  text: "同意<span>《平台条款》</span>吗？",
+		  buttons: [
+		    { text: "同意", onClick: function(){ 
+		    	//点击确认
+				  $.ajax({
+				  	url:'__APP__/Placeanorder/order',
+					  data:{
+				  		starTime:time,//服务开始时间
+						 serverTime:num,//选择的数量
+						  needDesc:area,//需求描述
+						  feeType:feetype,//计费方式
+						  allFee:allFee,//总合计费用
+						  sid:sid,//服务表主键id
+						  cid:cid,//优惠券的id
+						  telPhone:telPhone,
+						  realName:realName,
+						  address:address
+					  },
+					  dataType:'json',
+					  type:'post',
+					  success:function(re){
+						  sessionStorage.clear();//请求成功清除session数据
+
+						if(re.info===1){
+							var hasUseCoupon=re.cid;
+							//处理优惠券
+							//获取优惠券上的id字符串
+							var strId=$('#hrefNum').attr('value');
+
+							//若在第一个位置截取数字id加上后面的',' ，若不为第一个，截取','加上该id值
+							//位置全等于0即为第一个id
+							if(strId.indexOf(hasUseCoupon)===0){
+								if(hasUseCoupon && hasUseCoupon.length!=strId.length){
+									//剩下的优惠券id值,正则匹配去掉字符串
+									var pattern=hasUseCoupon;
+									var elseCouponId=strId.replace(new RegExp(pattern+","),'');
+								}else if(hasUseCoupon==strId){
+									var elseCouponId='';
+								}
+							}else{
+								//在其他位置时候
+								if(hasUseCoupon && hasUseCoupon.length!=strId.length){
+									//剩下的优惠券id值,正则匹配去掉字符串
+									var pattern=hasUseCoupon;
+									var elseCouponId=strId.replace(new RegExp(","+pattern),'');
+								}else if(hasUseCoupon==strId){
+									var elseCouponId='';
+								}
+							}
+
+							//若没有选择优惠券，还是为原来的优惠券id值
+							if(!hasUseCoupon){
+								var elseCouponId=strId;
+							}
+							//将剩下的优惠券id字符串赋值到优惠券链接上的value
+
+							$('#hrefNum').attr('value',elseCouponId);
+							$('#hrefNum').attr('href',"__APP__/Coupon/index/couponId/"+elseCouponId);
+
+							//获取剩下id值的个数
+							//转为数组
+							if(elseCouponId){
+								var arr=elseCouponId.split(',');
+							}else{
+								var arr=[];
+							}
+							//优惠券链接显示个数
+							$('#coupon').html(arr.length+'张优惠券可用');
+							$.toast('下单成功,进入我的订单可查看订单信息','text');
+							//window.location.href='__APP__/Placeanorder/paynow/orderId/'+re.id;
+							setTimeout(function(){window.location.href='__APP__/Index/index';},2000)
+
+
+						}else if(re.info==2){
+							$.toast(re.msg);
+						}
+					  }
+				  })
+		    } },
+		    { text: "取消", className: "default", onClick: function(){ console.log(3)} },
+		  ]
+		});
+		$(".weui-dialog--visible span").click(function(){
+			$.alert({
+			  title: '平台条款',
+			  text: '<p>1. 互相尊重，遵守互联网络道德，遵守中华人民共和国的各项有关法律法规。</p><p>2. 承担一切因您的行为而直接或间接导致的民事、行政或刑事法律责任。</p><p>3、不断更新注册资料，符合及时、详尽准确的要求。所有原始键入的资料将引用为注册资料。</p><p>4、如果用户提供的资料不准确，不真实，不合法有效，本公司保留结束用户使用各项服务的权利。用户同意，用户提供的真实准确的个人资料作为认定用户与帐号的关联性以及用户身份的唯一证据。用户在享用各项服务的同时，同意接受本公司提供的各类信息服务。</p>',
+			  onOK: function () {
+			    //点击确认
+			    $(".weui-mask").eq(0).addClass("weui-mask--visible");
+			    $(".weui-dialog").eq(0).addClass("weui-dialog--visible");
+			  }
+			});
+		});
+	});
+})
+</script>
+<script type="text/javascript">
+    $(function () {
+		var currYear = (new Date()).getFullYear();	
+        var currMonth = (new Date()).getMonth();  
+        var currDate = (new Date()).getDate();  
+        var currHours = (new Date()).getHours(); 
+        var currMinutes=(new Date()).getMinutes();
+		var opt={};
+		opt.date = {preset : 'date'};
+		opt.datetime = {preset : 'datetime'};
+		opt.time = {preset : 'time'};
+		opt.default = {
+			theme: 'android-ics light', //皮肤样式
+	        display: 'modal', //显示方式 
+	        mode: 'scroller', //日期选择模式
+			dateFormat: 'yyyy-mm-dd',
+			lang: 'zh',
+			showNow: true,
+			nowText: "今天",
+	        startYear: currYear, //开始年份
+	        endYear: currYear,//结束年份
+            startMonth: currMonth, //开始月份
+            endMonth: currMonth,//结束月份
+            startDate: currDate, //开始那天
+            endDate:currDate+2,//结束那天
+            startHours:currHours,//开始小时
+            starMinutes:currMinutes//开始分钟
+		};
+        var optDateTime = $.extend(opt['datetime'], opt['default']);
+        var optTime = $.extend(opt['time'], opt['default']);
+        $("#appDateTime").mobiscroll(optDateTime).datetime(optDateTime);
+        
+    });
+
+</script>
+
+<script>
+	//单价请求
+	if(sessionStorage.getItem('price'))
+	{
+		if(sessionStorage.getItem('mode')){
+			$('#price').html(sessionStorage.getItem('price')+'元/'+sessionStorage.getItem('mode'));
+		}
+
+	}
+
+	if(sessionStorage.getItem('Coupon')){
+		$('#coupon').html(sessionStorage.getItem('Coupon')+'￥')//优惠券价格
+	}else if(sessionStorage.getItem('num'))
+	{
+		$('#coupon').html(sessionStorage.getItem('num')+'张优惠券可用');
+	}
+
+	if(sessionStorage.getItem('name'))//服务项目名称,判断是否才进入本页面
+	{
+		$('#pickerClass').val(sessionStorage.getItem('name'));
+	}else{
+		$("#pickerClass").val('{$scname.cname}')
+	}
+
+
+	if(sessionStorage.getItem('time'))//选择开始时间
+	{
+		$('#appDateTime').val(sessionStorage.getItem('time'));
+	}
+
+	if(sessionStorage.getItem('serverNum'))//选择服务时间
+	{
+		$('#pickerNumber').val(sessionStorage.getItem('serverNum'));
+	}
+		//请求后，返回页面地址
+	if(sessionStorage.getItem('num')){
+		$('#hrefNum').attr('href','__APP__/Coupon/index/couponId/'+sessionStorage.getItem('id'))
+	}
+
+	var uid='{$arr.uid}';//宝宝id值
+
+	$('#appDateTime').change(function(){  //选择时间
+		var time=$('#appDateTime').val();
+		sessionStorage.setItem('time',time);
+		heji()
+	})
+	$('#pickerNumber').change(function(){ //服务时间
+		var serverNum=$('#pickerNumber').val();
+		sessionStorage.setItem('serverNum',serverNum);
+		heji()
+	})
+
+	$('#pickerClass').change(function(){
+		sessionStorage.removeItem('cid');
+		var pri=$('#pickerClass').val();//选择的项目名称
+			$.ajax({
+				url:'__APP__/Placeanorder/price',
+				data:'pri='+pri+'&uid='+uid,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					if(re.info==1){
+						is_need_addr=re.sc_type;
+						if(re.sc_type=='2'){
+							$('#a_address').css('display','flex');
+						}else{
+							$('#a_address').css('display','none');
+						}
+						$('#price').html(re.msg+'元/'+re.mode)
+						$('#coupon').html(re.num+'张优惠券可用')
+						sessionStorage.setItem('num',re.num);
+						sessionStorage.setItem('id',re.id);
+						$('#hrefNum').attr('href','__APP__/Coupon/index/couponId/'+re.id)
+					sessionStorage.setItem('name',pri);//该项目单价
+					sessionStorage.setItem('price',re.msg);//该项目单价
+					sessionStorage.setItem('num',re.num);//优惠券数目
+					sessionStorage.setItem('sid',re.sid);//所选项目服务表的主键id
+						sessionStorage.removeItem('Coupon')
+						sessionStorage.removeItem('serverNum')
+						$('#pickerNumber').val('选择数量')
+						sessionStorage.setItem('mode',re.mode);
+						heji()//请求后计算分数
+					}
+				}
+			})
+	})
+
+	function sel_detail(){
+		var pri=$('#pickerClass').val();//选择的项目名称
+		var uid='{$arr.uid}';//宝宝id值
+		$.ajax({
+			url:'__APP__/Placeanorder/price',
+			data:'pri='+pri+'&uid='+uid,
+			dataType:'json',
+			type:'post',
+			success:function(re){
+				if(re.info==1){
+					is_need_addr=re.sc_type;
+					if(re.sc_type=='2'){
+						$('#a_address').css('display','flex');
+					}else{
+						$('#a_address').css('display','none');
+					}
+					$('#price').html(re.msg+'元/'+re.mode)
+					$('#coupon').html(re.num+'张优惠券可用')
+					sessionStorage.setItem('num',re.num);
+					sessionStorage.setItem('id',re.id);
+					$('#hrefNum').attr('href','__APP__/Coupon/index/couponId/'+re.id)
+					sessionStorage.setItem('name',pri);//该项目单价
+					sessionStorage.setItem('price',re.msg);//该项目单价
+					sessionStorage.setItem('num',re.num);//优惠券数目
+					sessionStorage.setItem('sid',re.sid);//所选项目服务表的主键id
+					sessionStorage.removeItem('Coupon')
+					sessionStorage.removeItem('serverNum')
+					$('#pickerNumber').val('选择数量')
+					sessionStorage.setItem('mode',re.mode);
+					heji()//请求后计算分数
+				}
+			}
+		})
+	}
+	if(sessionStorage.getItem('cid')){
+
+	}else{
+		sel_detail();
+	}
+	//合计计算
+	function heji(){
+
+		if(!sessionStorage.getItem('serverNum')){
+			var stime=parseFloat(1); //服务时间，默认时间
+		}else{
+			//正则匹配取得数字部分
+			var pattern=/^[0-9]+/g;
+			var stime=sessionStorage.getItem('serverNum').match(pattern);
+			 stime=parseFloat(stime) //服务时间
+		}
+
+		//优惠券
+		//var couponFee=parseFloat(sessionStorage.getItem('Coupon'))
+	if(sessionStorage.getItem('Coupon')){
+		var pattern1=/^\d+(\.\d+)?/g;
+		var couponFee=sessionStorage.getItem('Coupon').match(pattern1);
+		//转为浮点型
+		couponFee=parseFloat(couponFee);
+	}else{
+		var couponFee=parseFloat(0);
+	}
+
+		//单价
+		if(sessionStorage.getItem('price')){
+			var pattern2=/^\d+(\.\d+)?/g;
+			var finalPrice=sessionStorage.getItem('price').match(pattern2);
+			var heji=sessionStorage.setItem('heji',finalPrice);
+			finalPrice=parseFloat(finalPrice)
+			var finalMoney=finalPrice*stime-couponFee;
+			$('#hj').html(finalMoney+'元')
+			sessionStorage.setItem('hej',finalMoney);//最终合计
+		}else{
+			var singlprice='{$scprice.bid_price}';//默认服务项目的情况，用默认单价计算
+			var hej=parseFloat(singlprice)*stime-couponFee//默认一个数量
+			sessionStorage.setItem('hej',hej);//最终合计
+			$('#hj').html(hej+'元')
+		}
+
+	}
+		heji()//直接计算总价函数;
+
+</script>
+<script type="text/javascript">
+	var dateStrA = $(".idNumber").val();
+    var year = dateStrA.substring(6,10);
+    var month = Number(dateStrA.substring(10,12));
+    var date = Number(dateStrA.substring(12,14));
+    var oDate = new Date(); //实例一个时间对象；
+    var nowyear=oDate.getFullYear();   //获取系统的年；
+    var nowmonth=oDate.getMonth()+1;   //获取系统月份，由于月份是从0开始计算，所以要加1
+    var nowdate=oDate.getDate(); // 获取系统日，
+    if(nowyear == year){  
+        $("#age").html("0");//同年 则为0岁  
+    }else{  
+        var ageDiff = nowyear - year ; //年之差  
+        if(ageDiff > 0){  
+            if(nowmonth == month){  
+                var dayDiff = nowdate - date;//日之差  
+                if(dayDiff < 0){  
+                    var returnAge = ageDiff - 1;
+                    $("#age").html(returnAge);
+                }else{  
+                    var returnAge = ageDiff ;
+                    $("#age").html(returnAge);
+                }  
+            }else{  
+                var monthDiff = nowmonth - month;//月之差  
+                if(monthDiff < 0){  
+                    var returnAge = ageDiff - 1;
+                    $("#age").html(returnAge);
+                }else{  
+                    var returnAge = ageDiff ;
+                    $("#age").html(returnAge);
+                }  
+            }  
+        }else{  
+            $("#age").html("");//返回-1 表示出生日期输入错误 晚于今天  
+        }  
+    }
+</script>

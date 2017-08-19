@@ -1,0 +1,29 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Mynews/css/newsDetails.css">
+
+	<div class="container newsDetails">
+		<div class="row">
+			<div class="col-md-12 newsDTitle">
+				<p>消息详情</p>
+				<div class="newsDetailsCon">
+					<p class="newslistTitle">{$info.title}</p>
+					<p class="newslistCon">{$info.content}</p>
+				</div>
+			</div>
+		</div>
+		<div class="row newsTime">
+			<div class="col-md-12">
+				<p>{$info.ctime|date='Y-m-d H:i:s',###}</p>
+			</div>
+		</div>
+	</div>
+
+<include file="./Application/Home/View/Layouts/footer.html" />
+<script type="text/javascript">
+$(function(){
+	var bodycolorH=$(".bodyColor").height();
+	var myselfH=bodycolorH-90-40-251;
+	$(".newsDetails").css("min-height",myselfH+'px');
+})
+</script>

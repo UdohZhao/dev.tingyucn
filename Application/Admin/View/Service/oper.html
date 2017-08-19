@@ -1,0 +1,74 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">服务类型列表</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-bordered">
+                    <caption>边框表格布局</caption>
+                    <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>图标路径</th>
+                        <th>数量单位</th>
+                        <th>排序</th>
+                        <th>类型</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach  name="arr" item="v">
+                        <tr>
+
+                            <td>{$v.cname}</td>
+                            <td><img width="50" height="50" src="{$v.icon_path}"/></td>
+                            <td>{$v.charge_mode}</td>
+                            <td>{$v.sort}</td>
+                            <if condition="$v.type eq 0">
+                                <td>线上游戏</td>
+                                <elseif condition="$v.type eq 1"/>
+                                <td>线上娱乐</td>
+                                <elseif condition="$v.type eq 2"/>
+                                <td>线下娱乐</td>
+                            </if>
+                            <td><a href="__APP__/Service/update/id/{$v.id}"><button>修改</button></a> | <button onclick="javascript:dele(this.value)" value="{$v.id}">删除</button></td>
+                        </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                {$page}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+    function dele(id){
+
+        $.ajax({
+            url:'__APP__/Service/del',
+            data:'id='+id,
+            dataType:'json',
+            type:'post',
+            success:function(re){
+                if(re==true){
+                    alert("删除成功");
+                    location.reload();
+                };
+            }
+        })
+    }
+</script>

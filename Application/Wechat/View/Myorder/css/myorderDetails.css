@@ -1,0 +1,60 @@
+.pageName{
+	border-bottom: none;
+}
+.orderDetails .weui-cells{
+	margin-top:0;
+}
+.orderDetails p{
+	margin: 0;
+}
+.orderDetails .weui-cell__bd p{
+	font-size: 14px;
+}
+.orderDetails .weui-cell__ft{
+	font-size: 14px;
+	color: #fd908f;
+}
+.orderStatus{
+	text-align: center;
+}
+.orderStatus p{
+	line-height: 40px;
+	font-size: 14px;
+	color: #aaaaaa;
+}
+#bt{
+	background-color: #fd908f;
+	color: #fff;
+	width: 100px;
+	height: 35px;
+	border: 1px solid #fd908f;
+	border-radius: 4px;
+}
+#cbt{
+	background-color: #aaa;
+	color: #fff;
+	width: 100px;
+	height: 35px;
+	border: 1px solid #aaa;
+	border-radius: 4px;
+}
+#hasDone{
+	background-color: #fd908f;
+	color: #fff;
+	width: 100px;
+	height: 35px;
+	border: 1px solid #fd908f;
+	border-radius: 4px;
+}
+#gopay{
+	display: block;
+	width: 90%;
+	height: 46px;
+	line-height: 46px;
+	text-align: center;
+	color: #fff;
+	background-color: #fd908f;
+	border-radius: 4px;
+	margin: 10px auto;
+	font-size: 18px;
+}

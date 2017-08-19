@@ -1,0 +1,94 @@
+<include file="Layout/header" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Wechat/View/Gender/css/index.css">
+
+	<div class="row">
+		<div class="pageName">
+          <div class="container">
+            <p>性别选择</p>
+          </div>
+        </div>
+	</div>
+	<div class="row">
+		<div class="weui-cells weui-cells_radio">
+		  <label class="weui-cell weui-check__label" for="x11">
+		    <div class="weui-cell__bd">
+		      <p>男</p>
+		    </div>
+		    <div class="weui-cell__ft" id="man">
+		      <input type="radio" class="weui-check" name="radio1" id="x11">
+		      <span class="weui-icon-checked"></span>
+		    </div>
+		  </label>
+			<input type="hidden" id="sex" value="女"/>
+		  <label class="weui-cell weui-check__label" for="x12">
+
+		    <div class="weui-cell__bd">
+		      <p>女</p>
+		    </div>
+		    <div class="weui-cell__ft" id="women">
+		      <input type="radio" name="radio1" class="weui-check" id="x12" checked="checked">
+		      <span class="weui-icon-checked"></span>
+		    </div>
+		  </label>
+		</div>
+	</div>
+	<div class="row" style="margin-top: 50%;">
+		<div class="col-sm-12 col-xs-12">
+			<a href="javascript:;" class="weui-btn weui-btn_primary" id="confirmBtn">保存</a>
+		</div>
+	</div>
+
+<include file="Layout/footer" />
+<script type="text/javascript">
+	if(sessionStorage.getItem('sex')==1 || '{$info.sex}'==1) {
+		$('#x11').attr('checked', 'checked');
+		$('#x12').attr('checked', '');
+	}
+	/*if('{$info.sex}'==1){
+			$('#x11').attr('checked','checked');
+			$('#x12').attr('checked','');
+		}*/
+$(function(){
+  $(".weui-btn_primary").click(function(){
+  	$(this).css("text-decoration","none");
+    $(this).css("background-color","#fd908f");
+    $(this).css("color","#ffffff");
+  });
+
+	$('#man').click(function(){
+		$('#sex').val('男')
+	})
+	$('#women').click(function(){
+		$('#sex').val('女')
+	})
+  $("#confirmBtn").click(function(){
+  	var sex=$('#sex').val();
+	  if(sex=='女'){
+	  	sex=0;
+	  }else if(sex=='男'){
+	  	sex=1;
+	  }
+	  var url='{$url}';//判断是否是首页传的
+	  if(url!=''){
+
+		  sessionStorage.setItem('sex',sex);
+		  window.location.href='__APP__/Mydata/index'
+	  }else{
+		  data='sex='+sex,
+		  $.ajax({
+			  url:'__APP__/Gender/save',
+			  data:data,
+			  dataType:'json',
+			  type:'post',
+			  success:function(re){
+				  if(re.info===true){
+					  window.location.href='__APP__/'+re.msg+'/index'
+				  }
+			  }
+		  })
+	  }
+
+  })
+})
+</script>

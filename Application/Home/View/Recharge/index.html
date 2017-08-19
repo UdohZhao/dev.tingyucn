@@ -1,0 +1,189 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Recharge/css/index.css">
+
+	<!-- 内容主体 start-->
+	<div class="container rechargeBox">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="rechargeTitle">
+					<p class="rechargeName">账号充值</p>
+					<p class="rechargeNum" id="leiji">您已积累充值：{$allMoney}元</p>
+					<div style="clear: both;"></div>
+				</div>
+			</div>
+			<div class="col-md-12 Rbalance">
+			账户余额：<span id="myFinalMoney">{$userInfo.balance}元</span></div>
+			<div class="col-md-12 RpriceChioce">
+				<span>充值金额：</span>
+				<a class="rechargePrice">￥0.01</a><a class="rechargePrice">￥28</a><a class="rechargePrice">￥68</a><a class="rechargePrice">￥199</a><a class="rechargePrice">￥328</a><a class="rechargePrice">￥698</a>
+			</div>
+			<div class="col-md-12 rechargeWay">
+				<span>充值方式：</span>
+				<a>
+					<!--<svg class="icon categorie-icon" aria-hidden="true">
+	                    <use xlink:href="#icon-weixinzhifu"></use>
+		            </svg>
+		            <span>微信支付</span>-->
+					<input type="radio" name="alyType" value="1" checked/> 微信支付
+
+				</a>
+				<a style="margin-left: 15px">
+					<input type="radio" name="alyType" value="2"/> 支付宝支付
+				</a>
+			</div>
+			<div class="col-md-12 rechargeBtn">
+				<button id="bt">充值</button>
+			</div>
+			<div class="col-md-12 rechargeWay" style="display:none" id="lingqu">
+			<p>赠送优惠券选择</p>
+				<select name="scid" id="needScid">
+					<foreach name="TypeInfo" item="v">
+						<optgroup label="{$v.type}">
+							<foreach name="v['typeDetail']" item="vo">
+								<option value="{$vo.id}">{$vo.cname}</option>
+							</foreach>
+						</optgroup>
+					</foreach>
+				</select>
+				<button id="btGet">确认</button>
+			</div>
+		</div>
+	</div>
+	<!-- 二维码弹出框 -->
+	<div class="erweima">
+		<div class="erweima_box">
+			<div class="clear_ewm"  onclick="location.reload()">x</div>
+			<img width="200" height="200" src="" id="recharge_code"/>
+			<p>微信扫码支付</p>
+		</div>
+	</div>
+	<!-- 内容主体 end-->
+<input type="number" value="" id="shop" style="display: none"/>
+<include file="./Application/Home/View/Layouts/footer.html" />
+
+<script type="text/javascript">
+$(function(){
+	var bodycolorH=$(".bodyColor").height();
+	console.log(bodycolorH);
+	var myselfH=bodycolorH-90-40-251;
+	$(".rechargeBox").css("min-height",myselfH+'px');
+	$(".rechargePrice").click(function(){
+		$(".rechargePrice").removeClass("Aactive");
+		$(this).addClass("Aactive");
+
+
+		//正则匹配取得数字部分
+		var pattern=/\d+(\.\d+)?/g;
+		var money=parseFloat($(this).html().match(pattern)) ;
+		$('#shop').attr('value',money)
+	})
+
+	if('{$gift}'==1){
+		layer.open({
+			title: '充值提示'
+			,content: '充值成功，您充值满100,获取一次选择优惠券机会，价值20元,及时领取哦'
+		});
+
+		$('#lingqu').css('display','block');
+		//$.toast("充值成功");
+	}
+	$('#bt').click(function(){ 
+		var selType=$('input[name="alyType"]:checked').val();
+
+		var shopMoney=$('#shop').val();
+
+
+		if(shopMoney==''){
+			layer.open({
+				title: '充值提示',
+				content: '请选择金额'
+			});
+			//$.toast("请选择金额", "text");
+			return false
+		}else{
+			if(selType==2){
+				//进入支付宝支付
+				window.location.href='__APP__/Recharge/pc?money='+shopMoney;
+				return false;
+			}
+			var uid='{$uid}';
+			$('#recharge_code').attr('src','__APP__/Wechatpay/native?money='+shopMoney+'&uid='+uid+'&recharge=1');
+			// $('#recharge_code').css('display','block')
+			//window.location.href='__APP__/Wechatpay/native?money='+shopMoney+'&uid='+uid+'&recharge=1';
+			$(".erweima").css('display','block');
+			$(".clear_ewm").click(function(){
+				$(".erweima").css('display','none');
+			})
+			return false;
+			alert("11")
+			$.ajax({
+				url:'__APP__/Recharge/shop',
+				data:'money='+shopMoney,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					if(re.info===true && re.msg==1){
+						layer.open({
+							title: '充值提示'
+							,content: '充值成功，您充值满100,获取一次选择优惠券机会，价值20元,及时领取哦'
+						});
+						$('#myFinalMoney').html(re.finalMoney+'元');
+						//计算累计充值
+						var nowAdd=parseFloat(re.LjMoney);
+						var finalAdd=nowAdd+parseFloat(re.money);
+						$('#leiji').html('您已累计充值:'+finalAdd+'元')
+						$('#lingqu').css('display','block');
+
+						//$.toast("充值成功");
+					}else if(re.info===true){
+						layer.open({
+							title: '充值提示',
+							content: '充值成功'
+						});
+						$('#myFinalMoney').html(re.finalMoney+'元');
+						//计算累计充值
+						var nowAdd=parseFloat(re.LjMoney);
+						var finalAdd=nowAdd+parseFloat(re.money);
+						$('#leiji').html('您已累计充值:'+finalAdd+'元')
+					}else if(re===false){
+						layer.open({
+							title: '充值提示'
+							,content: '充值失败'
+						});
+						//$.toast("充值失败","cancel");
+					}
+				}
+			})
+		}
+	})
+
+//window.location.href=
+	var a=window.location.href;
+	var b=window.location.search;
+	a=a.replace(b,"")
+
+	$('#btGet').click(function(){
+		var scid=$('#needScid').val();
+		$.ajax({
+			url:'__APP__/Recharge/gift',
+			data:'scid='+scid,
+			dataType:'json',
+			type:'post',
+			success:function(re){
+				if(re===true){
+					layer.alert('领取成功',function(){
+						if('{$gift}'==1){
+							window.location.href=a;
+						}
+						$('#lingqu').css('display','none');
+					})
+				}
+			}
+		})
+	})
+})
+	
+</script>
+
+

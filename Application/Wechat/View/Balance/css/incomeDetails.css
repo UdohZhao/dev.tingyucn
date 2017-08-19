@@ -1,0 +1,37 @@
+.rechargeTime{
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.rechargeTime a{
+	font-size: 12px;
+	padding: 5px 10px;
+	background-color: #aaaaaa;
+	color: #ffffff;
+	border-radius: 5px;
+}
+.incomeDetails{
+	background-color: #ffffff;
+	border-radius: 10px;
+	padding: 5px 15px;
+	margin-bottom: 10px;
+}
+.incomeD{
+	float: left;
+}
+.incomeDetails p{
+	margin: 0;
+	font-size: 14px;
+}
+.incomeNum{
+	text-align: right;
+	padding-top: 25px;
+}
+.incomeNum span{
+	font-size: 18px;
+	font-weight: bold;
+	color: #fd908f;
+	margin-right: 15px;
+}

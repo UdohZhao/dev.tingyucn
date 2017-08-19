@@ -1,0 +1,312 @@
+<include file="./Application/Home/View/Layouts/header.html" />
+<script>
+	browserRedirect();
+	function browserRedirect() {
+
+		var sUserAgent= navigator.userAgent.toLowerCase();
+
+		var bIsIpad= sUserAgent.match(/ipad/i) == "ipad";
+
+		var bIsIphoneOs= sUserAgent.match(/iphone os/i) == "iphone os";
+
+		var bIsMidp= sUserAgent.match(/midp/i) == "midp";
+
+		var bIsUc7= sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+
+		var bIsUc= sUserAgent.match(/ucweb/i) == "ucweb";
+
+		var bIsAndroid= sUserAgent.match(/android/i) == "android";
+
+		var bIsCE= sUserAgent.match(/windows ce/i) == "windows ce";
+
+		var bIsWM= sUserAgent.match(/windows mobile/i) == "windows mobile";
+
+
+
+		if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+
+			/*window.location.href= '手机站链接';*/
+			window.location= '__ROOT__/Wechat';
+		}
+
+	}
+</script>
+<!-- 当前页面css -->
+<link rel="stylesheet" type="text/css" href="/Application/Home/View/Index/css/index.css">
+	<!-- 内容主体 start-->
+
+	<!-- banner图 start-->
+	<div class="row bannerBackimg">
+		<!-- <div class="container"> -->
+		  <div id="carousel-example-generic" class="carousel slide bannerBox" data-ride="carousel">
+		  <!-- Indicators -->
+			  <ol class="carousel-indicators">
+				  <foreach name="bannerImg" key="ko" item="v">
+					  <if condition="$ko eq 0">
+						  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+
+						  <else/>
+						  <li data-target="#carousel-example-generic" data-slide-to="{$ko}"></li>
+					  </if>
+				  </foreach>
+			  </ol>
+
+
+			  <!-- Wrapper for slides -->
+			  <div class="carousel-inner" role="listbox">
+				  <foreach name="bannerImg" key="k" item="v">
+					  <if condition="$k eq 0">
+						  <div class="item active">
+							  <img src="{$v.banner_path}" alt="...">
+						  </div>
+						  <else/>
+						  <div class="item">
+							  <img src="{$v.banner_path}" alt="...">
+						  </div>
+					  </if>
+				  </foreach>
+			  </div>
+
+			  <!-- Controls -->
+			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+			    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			    <span class="sr-only">Previous</span>
+			  </a>
+			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+			    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			    <span class="sr-only">Next</span>
+			  </a>
+			</div>
+		<!-- </div> -->
+	</div>
+	<!-- banner图 end-->
+	<!-- 最新热门 start-->
+	<div class="container hotting">
+		<div class="row recommendSer">
+			<img src="/Application/Home/View/Index/img/热门.jpg">
+		</div>
+		<div class="row">
+			<div class="tabHot">
+				<if condition="!($needInfo)">
+					暂无热门排行
+				</if>
+			  <!-- Nav tabs -->
+			  <ul class="nav nav-tabs" role="tablist">
+				  <foreach name="order" key="k" item="v">
+					  <if condition="$k eq 0">
+						  <li role="presentation" class="active"><a href="#home{$v.sid}" aria-controls="home{$v.sid}" role="tab" data-toggle="tab">{$v.cname}</a></li>
+						  <else/>
+						  <li role="presentation"><a href="#profile{$v.sid}" aria-controls="profile" role="tab" data-toggle="tab">{$v.cname}</a></li>
+					  </if>
+				  </foreach>
+			   <!-- <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">恋爱指导</a></li>
+			    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">约逛街</a></li>
+			    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">约吃饭</a></li>
+			    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">线上王者荣耀</a></li>
+			    <li role="presentation"><a href="#home1" aria-controls="home" role="tab" data-toggle="tab">恋爱指导</a></li>
+			    <li role="presentation"><a href="#profile1" aria-controls="profile" role="tab" data-toggle="tab">约唱歌</a></li>
+			    <li role="presentation"><a href="#messages1" aria-controls="messages" role="tab" data-toggle="tab">约看电影</a></li>
+			    <li role="presentation"><a href="#settings1" aria-controls="settings" role="tab" data-toggle="tab">旅游</a></li>
+			  --></ul>
+			  <!-- Tab panes -->
+			  <div class="tab-content">
+				  <foreach name="needInfo" item="vo" key="key">
+					  <if condition="$key eq 0">
+						  <div role="tabpanel" class="tab-pane active" id="home{$vo.sid}">
+							  <div class="row">
+								  <foreach name="vo['detail']" item="val">
+									  <div class="col-md-3 babyList">
+										  <a target="frame1" href="__APP__/Babyinformation/index/id/{$val.uid}/scid/{$val.scid}/sid/{$val.id}" class="babyBcg">
+											  <div class="babyImg">
+												  <img src="{$val.cover_path}">
+											  </div>
+											  <div class="babyMsg">
+												  <if condition="$val.nickname neq null">
+													  <p class="babyName">{$val.nickname}</p>
+													  <else/>
+													  <p class="babyName">{$val.real_name}</p>
+												  </if>
+
+												  <span class="babyPrice">￥{$val.bid_price}/{$val.charge_mode}</span>
+											  </div>
+										  </a>
+									  </div>
+								  </foreach>
+							  </div>
+							  <div class="row">
+								  <div class="col-md-12">
+									  <a href="__APP__/Index/morelist/sid/{$vo.sid}" class="moreBtn">更多</a>
+								  </div>
+							  </div>
+						  </div>
+						  <else/>
+						  <div role="tabpanel" class="tab-pane" id="profile{$vo.sid}">
+								  <div class="row">
+									  <foreach name="vo['detail']" item="val">
+										  <div class="col-md-3 babyList">
+											  <a target="frame1" href="__APP__/Babyinformation/index/id/{$val.uid}/scid/{$val.scid}/sid/{$val.id}" class="babyBcg">
+												  <div class="babyImg">
+													  <img src="{$val.cover_path}">
+												  </div>
+												  <div class="babyMsg">
+													  <p class="babyName">{$val.nickname}</p>
+													  <span class="babyPrice">￥{$val.bid_price}/{$val.charge_mode}</span>
+												  </div>
+											  </a>
+										  </div>
+									  </foreach>
+								  </div>
+							  <div class="row">
+								  <div class="col-md-12">
+									  <a href="__APP__/Index/morelist/sid/{$vo.sid}" class="moreBtn">更多</a>
+								  </div>
+							  </div>
+						  </div>
+					  </if>
+				  </foreach>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<!-- 最新热门 end-->
+	<!-- 排行榜start -->
+	<div class="container ranking">
+		<div class="row">
+			<img src="/Application/Home/View/Index/img/热榜.jpg">
+		</div>
+		<div class="row">
+			<div class="col-md-6 rangking_left_bcg">
+				<div class="rankingBox">
+					<div class="rankingTitle">
+		              <svg class="icon categorie-icon" aria-hidden="true">
+		                  <use xlink:href="#icon-shouru"></use>
+		              </svg>
+		              <span>收入榜</span>
+					</div>
+					<!-- 收入排行start -->
+					<foreach name="sortMoney" key="k" item="val">
+						<div class="rankingDown">
+							<div class="row">
+								<div class="col-md-12 rankingList">
+									<div class="listLeft">
+										<a class="listImg" href="__APP__/Babyinformation/index/id/{$val.uid}/scid/{$val.scid}/sid/{$val.need_id}"><img src="{$val.cover_path}"></a>
+										<div class="sanjiao"></div>
+										<a class="rankingNum">{$k+1}</a>
+									</div>
+									<div class="listCenter">
+										<if condition="$val.nickname neq null">
+											<p>{$val.nickname}</p>
+											<else/>
+											<p>昵称</p>
+										</if>
+
+										<!-- 男strat -->
+										<if condition="$val.sex eq 1">
+											<a class="nan">
+												<svg class="icon categorie-icon" aria-hidden="true">
+													<use xlink:href="#icon-xingbienan"></use>
+												</svg>
+												<span style="display: none" class="age">{$val.id_card}</span>
+												<span>{$val.age}</span>
+	              								<input class="idNumber" value="{$val.id_card}" type="hidden" />
+											</a>
+											<else/>
+											<a class="nv">
+												<svg class="icon categorie-icon" aria-hidden="true">
+													<use xlink:href="#icon-xingbienv"></use>
+												</svg>
+												<span style="display: none"  class="age">{$val.id_card}</span>
+												<span>{$val.age}</span>
+	              								<input class="idNumber" value="{$val.id_card}" type="hidden" />
+											</a>
+										</if>
+
+										<!-- 女end -->
+										<!-- 男 start-->
+
+										<!-- 男 end-->
+									</div>
+									<div class="rankingIncome">
+										<p>{$val.earning}</p>
+										<span>收入</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</foreach>
+					<!-- 收入排行end -->
+				</div>
+			</div>
+			<div class="col-md-6 rangking_right_bcg">
+				<div class="rankingBox">
+					<div class="rankingTitle">
+		              <svg class="icon categorie-icon" aria-hidden="true">
+		                  <use xlink:href="#icon-xinren"></use>
+		              </svg>
+		              <span>新人榜</span>
+					</div>
+					<!-- 新人排行start -->
+					<foreach name="newInfo" key="ko" item="valo">
+						<div class="rankingDown">
+							<div class="row">
+								<div class="col-md-12 rankingList">
+									<div class="listLeft">
+										<a class="listImg" href="__APP__/Babyinformation/index/id/{$valo.uid}/scid/{$valo.scid}/sid/{$valo.need_id}"><img src="{$valo.cover_path}"></a>
+										<div class="sanjiao"></div>
+										<a class="rankingNum">{$ko+1}</a>
+									</div>
+									<div class="listCenter">
+										<p>{$valo.nickname}</p>
+										<!-- 女strat -->
+										<if condition="$valo.sex eq 1">
+											<a class="nan">
+												<svg class="icon categorie-icon" aria-hidden="true">
+													<use xlink:href="#icon-xingbienan"></use>
+												</svg>
+												<span style="display: none" class="age">{$valo.id_card}</span>
+												<span >{$valo.age}</span>
+												<input class="idNumber" value="{$valo.id_card}" type="hidden" />
+											</a>
+											<else/>
+											<a class="nv">
+												<svg class="icon categorie-icon" aria-hidden="true">
+													<use xlink:href="#icon-xingbienv"></use>
+												</svg>
+												<span style="display: none" class="age">{$valo.id_card}</span>
+												<span >{$valo.age}</span>
+												<input class="idNumber" value="{$valo.id_card}" type="hidden" />
+											</a>
+										</if>
+
+										<!-- 女end -->
+										<!-- 男 start-->
+										<!-- 男 end-->
+									</div>
+									<div class="rankingIncome">
+										<p>{$valo.earning}</p>
+										<span>收入</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</foreach>
+
+					<!-- 新人排行end -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 排行榜end -->
+	<!-- 内容主体 end-->
+
+<include file="./Application/Home/View/Layouts/footer.html" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Application/Home/View/Index/js/index.js"></script>
+
+
+
+
+<!-- 年龄判断js -->
+<script type="text/javascript" src="/Application/Home/View/Layouts/js/age.js"></script>
+
+

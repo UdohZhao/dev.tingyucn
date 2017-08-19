@@ -1,0 +1,70 @@
+<include file='../Application/Admin/View/Layouts/header.html'/>
+<include file='../Application/Admin/View/Layouts/nav.html'/>
+
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">分成信息添加</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">分成</h3>
+            </div>
+            <div class="panel-body">
+
+                <div class="example">
+                    <form class="form-horizontal" id="frm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">平台分成: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" name="platform"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="color:black;">签约用户分成: </label>
+                            <div class="col-sm-9">
+                                <input style="width:500px;" type="text" class="form-control" name="sign_user"  autocomplete="off"
+                                />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="button" id="bt" class="btn btn-primary">添加配置</button>
+                                <button id="cbt1" style="margin-left: 20px;" type="reset" class="btn btn-default btn-outline">重置信息</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+
+
+<include file='../Application/Admin/View/Layouts/footer.html'/>
+
+<script>
+
+    $(function() {
+        $("#bt").click(function () {
+            $.ajax({
+                url: 'save',
+                data: $("#frm").serialize(),//兴趣添加
+                type: 'post',
+                dataType: 'json',
+                success: function (re) {
+                    if (re=== true) {
+                        alert('信息上传成功');
+                    }
+                }
+            });
+        })
+    })
+
+</script>
+
+<!--<script type="text/javascript" src="/Application/Admin/View/Layouts/assets/readimg.js"></script>-->
