@@ -41,6 +41,7 @@
                         <th>选择服务名</th>
                         <th>下单时间</th>
                         <th>订单编号</th>
+                        <th>订单金额</th>
                         <th>服务地点（选填）</th>
                         <th>订单状态</th>
                     </tr>
@@ -55,6 +56,7 @@
                             <td>{$v.cname}</td>
                             <td>{$v.ctime|date='Y-m-d H:i:s',###}</td>
                             <td>{$v.serial_number}</td>
+                            <td>{$v.payment_amount}</td>
                             <if condition="$v.address neq null">
                                 <td>{$v.address}</td>
                                 <else/>
